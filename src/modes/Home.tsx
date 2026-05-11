@@ -125,7 +125,7 @@ function Practice({ mistakesCount }: { mistakesCount: number }) {
   return (
     <section>
       <SectionHeader number="01" title="Practice" trailing="Mix it up" />
-      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-4 [&>*]:min-w-0">
         <PracticeCard
           to="/mock-test"
           big="Mock"
@@ -208,14 +208,14 @@ function PracticeCard({
       to={to}
       viewTransition
       onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
-      className={`relative ${bg} ${fg} border-0 rounded-[28px] p-6 text-left cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[240px] hover:-translate-y-1 transition-transform`}
+      className={`relative ${bg} ${fg} border-0 rounded-[28px] p-6 text-left cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[240px] hover:-translate-y-1 transition-transform overflow-hidden`}
     >
-      <div className="text-[11px] font-semibold opacity-70 uppercase tracking-[0.12em]">
+      <div className="text-[11px] font-semibold opacity-70 uppercase tracking-[0.12em] pr-10">
         {meta}
       </div>
       <div>
-        <div className="font-display text-4xl sm:text-5xl font-bold leading-[0.95] tracking-[-0.035em]">
-          {big}
+        <div className="font-display font-bold leading-[0.95] tracking-[-0.035em] text-[clamp(1.75rem,3.4vw,3rem)] [overflow-wrap:anywhere]">
+          {big}{' '}
           <span className={chipClass}>{accent}</span>
         </div>
         <div className="text-[13px] mt-2.5 opacity-80 leading-snug">{desc}</div>
