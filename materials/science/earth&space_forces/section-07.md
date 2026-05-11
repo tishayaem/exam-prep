@@ -15,7 +15,7 @@ We explored **gravity**, the force that pulls objects towards each other. **EVER
 - Gravity keeps **planets in orbit** around the Sun.
 - Gravity keeps the **Moon in orbit** around the Earth.
 - **Sir Isaac Newton** helped explain gravity.
-- *Mr Hutchings insists that Isaac Newton **INVENTED** gravity…!* *(class in-joke)*
+- *Our teacher likes to insist that Isaac Newton **INVENTED** gravity…!* *(class in-joke — Newton explained it, he didn't invent it!)*
 
 ## Vocabulary
 

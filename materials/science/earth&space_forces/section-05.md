@@ -3,7 +3,7 @@
 - **Pack:** Term 2 — Year 5 Science Revision Pack (Earth & Space + Forces)
 - **Source photo:** `PXL_20260510_200305981.jpg`
 - **Page:** 5
-- **Supplementary visual:** `PXL_20260510_200340304.jpg` — a clean "The Solar System" reference poster (page 6 of the pack) showing all planets in order from the Sun.
+- **Note:** Page 6 of the pack is a clean "The Solar System" reference poster showing all planets in order from the Sun. The photo of it was removed from this repo because it contained handwriting in the margin.
 
 ## What we learned
 
@@ -45,7 +45,7 @@ Jupiter · Saturn · Uranus · Neptune
 
 ## Notes / flags for Phase 2 enrichment
 
-- **Highest-value Label-the-Diagram target:** the solar system poster (PXL_20260510_200340304.jpg). Drag planet names onto silhouettes — also exercises spelling.
+- **Highest-value Label-the-Diagram target:** the solar system poster (rebuild as an SVG rather than embedding the original photo). Drag planet names onto silhouettes — also exercises spelling.
 - **Order recall is a perfect "sequence" question type**: shuffle 8 planet names, ask son to put them back in order.
 - **Mnemonic worth surfacing in Study mode:** *My Very Eager Mother Just Served Us Noodles*.
 - Vocabulary → 4 bidirectional flashcards.

@@ -109,7 +109,7 @@ Gravity also:
       ],
       answer: 'No — gravity was always there; he just explained it',
       explanation:
-        'Common trick question! Newton **explained** gravity — he worked out the rules. But gravity was pulling apples off trees long before Newton was born.',
+        'Trick question! Newton **explained** gravity — he worked out the rules. But gravity was pulling apples off trees long before Newton was born. (Your teacher may try to convince you otherwise — they\'re joking!)',
       difficulty: 2,
       source: 'Term 2 Section 7 — MCQ variant',
     },
