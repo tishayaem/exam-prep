@@ -4,6 +4,8 @@ import { findSection } from '../data/science';
 import { grade, type GradeResult } from '../lib/grading';
 import { useProgress } from '../lib/storage';
 import type { Question } from '../data/types';
+import { FeedbackPanel, firstAnswer } from '../components/QuestionRunner';
+import { burstFromEvent } from '../lib/confetti';
 
 type Verdict = 'correct' | 'wrong' | null;
 
@@ -22,38 +24,48 @@ export function Quiz() {
   const [verdict, setVerdict] = useState<Verdict>(null);
   const [borderline, setBorderline] = useState(false);
   const [score, setScore] = useState(0);
+  const [done, setDone] = useState(false);
 
-  if (!section) return <div className="card">Section not found.</div>;
-
-  const total = order.length;
-  if (index >= total) {
+  if (!section) {
     return (
-      <div className="card text-center space-y-4">
-        <h2 className="text-2xl font-bold">Done! 🎉</h2>
-        <p className="text-ink/70">
-          You got <strong>{score}</strong> out of <strong>{total}</strong>.
-        </p>
-        <div className="flex gap-3 justify-center pt-2">
-          <Link to={`/quiz/${section.id}`} className="tap bg-accent text-white font-bold" reloadDocument>
-            Try again
-          </Link>
-          <Link to="/" viewTransition className="tap bg-ink/5 font-bold">
-            Home
-          </Link>
-        </div>
+      <div className="border border-rule rounded-3xl p-8 text-center">
+        Section not found.
       </div>
     );
   }
 
-  const q = order[index];
+  const total = order.length;
 
-  function submit() {
-    if (verdict !== null) return;
+  if (done || index >= total) {
+    return (
+      <ResultScreen
+        score={score}
+        total={total}
+        sectionId={section.id}
+        onRetry={() => {
+          setDone(false);
+          setIndex(0);
+          setScore(0);
+          setVerdict(null);
+          setBorderline(false);
+          setInput('');
+        }}
+      />
+    );
+  }
+
+  const q = order[index];
+  const locked = verdict !== null || borderline;
+
+  function submit(value?: string) {
+    if (locked) return;
+    const v = (value ?? input).trim();
+    if (!v) return;
     if (q.type === 'mcq' || q.type === 'truefalse') {
-      handleChoice(input);
+      handleChoice(v);
       return;
     }
-    const result: GradeResult = grade(input, q.answer, q.acceptable);
+    const result: GradeResult = grade(v, q.answer, q.acceptable);
     if (result === 'borderline') {
       setBorderline(true);
       return;
@@ -63,8 +75,8 @@ export function Quiz() {
 
   function handleChoice(choice: string) {
     setInput(choice);
-    const canonical = Array.isArray(q.answer) ? q.answer[0] : q.answer;
-    finalise(normalise(choice) === normalise(canonical));
+    const canonical = firstAnswer(q.answer);
+    finalise(choice.trim().toLowerCase() === canonical.trim().toLowerCase());
   }
 
   function finalise(correct: boolean) {
@@ -74,7 +86,16 @@ export function Quiz() {
     recordAttempt(q.id, correct, q.difficulty);
   }
 
-  function next() {
+  function next(e: React.MouseEvent<HTMLButtonElement>) {
+    if (verdict === 'correct') {
+      burstFromEvent(e);
+    }
+    if (index + 1 >= total) {
+      setDone(true);
+      // Bigger pop on the last "See result" press.
+      burstFromEvent(e);
+      return;
+    }
     setIndex((i) => i + 1);
     setInput('');
     setVerdict(null);
@@ -82,106 +103,163 @@ export function Quiz() {
   }
 
   return (
-    <div className="space-y-5">
-      <ProgressBar value={index} max={total} />
+    <div className="space-y-7">
+      <div className="flex items-baseline justify-between">
+        <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
+          Question {index + 1}{' '}
+          <span className="text-inkSoft">/ {total}</span>
+        </div>
+        <div className="text-[13px] font-semibold">
+          <span className="text-inkSoft">Score </span>
+          <span className="bg-neon-green px-2 py-0.5 font-bold text-ink">
+            {score}
+          </span>
+        </div>
+      </div>
 
-      <div className="card space-y-4">
-        <p className="text-xs uppercase tracking-wide text-ink/50">
-          {section.title} · Question {index + 1} of {total}
-        </p>
+      <DotProgress current={index} total={total} />
 
-        <h2 className="text-xl font-bold leading-snug">{q.prompt}</h2>
+      <div className="grid gap-8 lg:gap-12 lg:grid-cols-[1.3fr_1fr] items-start">
+        {/* Left: question + answer */}
+        <div>
+          <h2 className="font-display text-3xl sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.05] mb-7">
+            {q.prompt}
+          </h2>
+          <ChoiceOrInput
+            question={q}
+            input={input}
+            setInput={setInput}
+            verdict={verdict}
+            locked={locked}
+            onPick={handleChoice}
+            onSubmit={() => submit()}
+          />
+        </div>
 
-        <AnswerArea
-          question={q}
-          input={input}
-          setInput={setInput}
-          locked={verdict !== null || borderline}
-          onChoice={handleChoice}
-          onSubmit={submit}
-        />
-
-        {borderline && verdict === null && (
-          <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3 animate-feedback-in">
-            <p className="font-bold">Close! Were you right?</p>
-            <p className="text-sm text-ink/70">
-              Expected answer: <em>{firstAnswer(q.answer)}</em>
-            </p>
-            <div className="flex gap-3">
-              <button onClick={() => finalise(true)} className="tap bg-emerald-500 text-white font-bold flex-1">
-                Yes ✓
-              </button>
-              <button onClick={() => finalise(false)} className="tap bg-rose-400 text-white font-bold flex-1">
-                No ✗
-              </button>
+        {/* Right: feedback / hint */}
+        <div className="lg:sticky lg:top-24">
+          {borderline && (
+            <div className="border border-dashed border-neon-yellow rounded-[22px] p-7 bg-neon-yellow/15 flex flex-col gap-4">
+              <div>
+                <div className="text-[13px] font-bold text-ink uppercase tracking-[0.14em]">
+                  Close call
+                </div>
+                <div className="font-display text-[22px] font-bold tracking-[-0.02em] mt-2 leading-snug">
+                  Were you right?
+                </div>
+                <p className="text-[14px] text-ink mt-2">
+                  Expected answer:{' '}
+                  <em className="font-semibold">{firstAnswer(q.answer)}</em>
+                </p>
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => finalise(true)}
+                  className="flex-1 bg-neon-green text-ink rounded-full px-5 py-3 font-bold"
+                >
+                  Yes ✓
+                </button>
+                <button
+                  onClick={() => finalise(false)}
+                  className="flex-1 bg-neon-pink text-paper rounded-full px-5 py-3 font-bold"
+                >
+                  No ✗
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {verdict && (
-          <div className="space-y-3 animate-feedback-in">
-            <div
-              className={`rounded-2xl p-4 ${
-                verdict === 'correct'
-                  ? 'bg-emerald-50 border border-emerald-200 animate-emphasis-pop'
-                  : 'bg-rose-50 border border-rose-200'
-              }`}
-            >
-              <p className="font-bold mb-1">
-                {verdict === 'correct' ? 'Correct! 🎉' : 'Not quite.'}
+          {!verdict && !borderline && (
+            <div className="border border-dashed border-rule rounded-[22px] p-7 min-h-[280px] flex flex-col justify-center text-inkSoft">
+              <div className="text-[11px] font-bold uppercase tracking-[0.16em] mb-2.5">
+                Hint
+              </div>
+              <p className="text-[15px] leading-relaxed">
+                Take your time. There are no time penalties. Pick what feels
+                right — you'll see the answer and a quick explanation either
+                way.
               </p>
-              <p className="text-sm text-ink/70 mb-2">
-                <strong>Answer:</strong> {firstAnswer(q.answer)}
-              </p>
-              <p className="text-sm">{q.explanation}</p>
             </div>
-            <button
-              onClick={next}
-              className="tap bg-ink text-paper font-bold w-full text-lg"
-            >
-              {index + 1 < total ? 'Next →' : 'Finish'}
-            </button>
-          </div>
-        )}
+          )}
+
+          {verdict && (
+            <FeedbackPanel
+              verdict={verdict}
+              answer={firstAnswer(q.answer)}
+              explanation={q.explanation}
+              onNext={next}
+              nextLabel={index + 1 < total ? 'Next question ›' : 'See result ›'}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-function AnswerArea({
+// ─── Pieces ─────────────────────────────────────────────────────────────────
+
+function DotProgress({ current, total }: { current: number; total: number }) {
+  return (
+    <div className="flex gap-2">
+      {Array.from({ length: total }).map((_, i) => {
+        const cls =
+          i < current ? 'bg-neon-green' : i === current ? 'bg-ink' : 'bg-rule';
+        return <div key={i} className={`flex-1 h-1.5 ${cls} rounded-full`} />;
+      })}
+    </div>
+  );
+}
+
+function ChoiceOrInput({
   question,
   input,
   setInput,
+  verdict,
   locked,
-  onChoice,
+  onPick,
   onSubmit,
 }: {
   question: Question;
   input: string;
   setInput: (v: string) => void;
+  verdict: Verdict;
   locked: boolean;
-  onChoice: (c: string) => void;
+  onPick: (c: string) => void;
   onSubmit: () => void;
 }) {
   if (question.type === 'mcq' || question.type === 'truefalse') {
     const choices =
-      question.choices ?? (question.type === 'truefalse' ? ['True', 'False'] : []);
+      question.choices ??
+      (question.type === 'truefalse' ? ['True', 'False'] : []);
+    const canonical = firstAnswer(question.answer).trim().toLowerCase();
     return (
-      <div className="grid gap-2">
-        {choices.map((c) => (
-          <button
-            key={c}
-            disabled={locked}
-            onClick={() => onChoice(c)}
-            className={`tap text-left font-medium ${
-              input === c
-                ? 'bg-accent text-white'
-                : 'bg-ink/5 hover:bg-ink/10'
-            } ${locked && input !== c ? 'opacity-50' : ''}`}
-          >
-            {c}
-          </button>
-        ))}
+      <div className="grid gap-3">
+        {choices.map((c) => {
+          const isPicked = input === c;
+          const isAnswer = c.trim().toLowerCase() === canonical;
+          let cls =
+            'bg-paper text-ink border-[1.5px] border-rule hover:border-ink';
+          if (verdict) {
+            if (isAnswer)
+              cls = 'bg-neon-green text-ink border-[1.5px] border-neon-green';
+            else if (isPicked)
+              cls = 'bg-neon-pink text-paper border-[1.5px] border-neon-pink';
+            else cls = 'bg-paper text-inkSoft border-[1.5px] border-rule';
+          } else if (isPicked) {
+            cls = 'bg-ink text-paper border-[1.5px] border-ink';
+          }
+          return (
+            <button
+              key={c}
+              disabled={locked}
+              onClick={() => onPick(c)}
+              className={`rounded-2xl px-5 py-4 text-left text-[17px] font-medium transition-colors ${cls}`}
+            >
+              {c}
+            </button>
+          );
+        })}
       </div>
     );
   }
@@ -192,7 +270,7 @@ function AnswerArea({
         e.preventDefault();
         onSubmit();
       }}
-      className="space-y-3"
+      className="flex flex-col sm:flex-row gap-3"
     >
       <input
         type="text"
@@ -204,35 +282,95 @@ function AnswerArea({
         disabled={locked}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
         placeholder="Type your answer…"
+        className={`flex-1 rounded-2xl px-5 py-4 text-lg font-medium outline-none border-[1.5px] disabled:bg-off ${
+          locked ? 'border-rule text-inkSoft' : 'border-ink focus:border-neon-blue'
+        }`}
       />
       {!locked && (
         <button
           type="submit"
           disabled={!input.trim()}
-          className="tap bg-accent text-white font-bold w-full text-lg disabled:opacity-30"
+          className="bg-ink text-paper rounded-2xl px-7 py-4 font-bold disabled:opacity-30"
         >
-          Check
+          Check ›
         </button>
       )}
     </form>
   );
 }
 
-function ProgressBar({ value, max }: { value: number; max: number }) {
-  const pct = max === 0 ? 0 : (value / max) * 100;
+// ─── Result ─────────────────────────────────────────────────────────────────
+
+function ResultScreen({
+  score,
+  total,
+  sectionId,
+  onRetry,
+}: {
+  score: number;
+  total: number;
+  sectionId: string;
+  onRetry: () => void;
+}) {
+  const perfect = score === total;
+  const strong = !perfect && score >= total - 1;
+
   return (
-    <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div className="h-full bg-accent progress-fill" style={{ width: `${pct}%` }} />
+    <div className="max-w-[760px] mx-auto text-center py-6 sm:py-12">
+      <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] mb-3.5">
+        Quiz complete
+      </div>
+      <div className="font-display text-[clamp(4rem,18vw,6rem)] font-bold tracking-[-0.045em] leading-[0.95]">
+        {score}
+        <span className="text-inkSoft">/{total}</span>
+      </div>
+      <div className="font-display text-[20px] sm:text-[22px] font-semibold mt-3.5">
+        {perfect && (
+          <>
+            Flawless.{' '}
+            <span className="bg-neon-green px-2">Top of the class.</span>
+          </>
+        )}
+        {strong && (
+          <>
+            Strong.{' '}
+            <span className="bg-neon-yellow px-2">
+              One more pass and it's locked in.
+            </span>
+          </>
+        )}
+        {!perfect && !strong && (
+          <>
+            Good go.{' '}
+            <span className="bg-neon-pink text-paper px-2">
+              Practise the misses on the Mistakes page.
+            </span>
+          </>
+        )}
+      </div>
+      <div className="flex flex-wrap gap-3 justify-center mt-7">
+        <button
+          onClick={onRetry}
+          className="bg-paper text-ink border-[1.5px] border-ink rounded-full px-6 py-3.5 font-semibold"
+        >
+          Try again
+        </button>
+        <Link
+          to="/mistakes"
+          viewTransition
+          className="bg-ink text-paper rounded-full px-6 py-3.5 font-semibold"
+        >
+          Review mistakes ›
+        </Link>
+        <Link
+          to={`/study/${sectionId}`}
+          viewTransition
+          className="bg-paper text-ink border-[1.5px] border-rule rounded-full px-6 py-3.5 font-semibold"
+        >
+          Back to study
+        </Link>
+      </div>
     </div>
   );
-}
-
-function firstAnswer(a: string | string[]): string {
-  return Array.isArray(a) ? a[0] : a;
-}
-
-function normalise(s: string): string {
-  return s.trim().toLowerCase();
 }

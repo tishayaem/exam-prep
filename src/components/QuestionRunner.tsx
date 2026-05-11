@@ -6,7 +6,8 @@ type Verdict = 'correct' | 'wrong' | null;
 
 interface Props {
   question: Question;
-  /** When false (e.g. Mock Test), hide the explanation and "Next" button — the parent drives the flow. */
+  /** When false (e.g. Mock Test), hide the explanation panel — the parent
+   *  drives the flow via onResolved + onNext. */
   showFeedback?: boolean;
   /** Called once a verdict is locked in (after self-grade if needed). */
   onResolved: (correct: boolean) => void;
@@ -19,7 +20,7 @@ export function QuestionRunner({
   question,
   showFeedback = true,
   onResolved,
-  nextLabel = 'Next →',
+  nextLabel = 'Next ›',
   onNext,
 }: Props) {
   const [input, setInput] = useState('');
@@ -55,29 +56,38 @@ export function QuestionRunner({
   }
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-bold leading-snug">{question.prompt}</h2>
+    <div className="space-y-6">
+      <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.025em] leading-tight">
+        {question.prompt}
+      </h2>
 
       <AnswerArea
         question={question}
         input={input}
         setInput={setInput}
         locked={locked}
+        verdict={verdict}
         onChoice={handleChoice}
         onSubmit={submit}
       />
 
       {borderline && verdict === null && (
-        <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3 animate-feedback-in">
+        <div className="border border-dashed border-neon-yellow rounded-2xl p-5 space-y-3 animate-feedback-in bg-neon-yellow/15">
           <p className="font-bold">Close! Were you right?</p>
-          <p className="text-sm text-ink/70">
+          <p className="text-sm text-inkSoft">
             Expected answer: <em>{firstAnswer(question.answer)}</em>
           </p>
           <div className="flex gap-3">
-            <button onClick={() => finalise(true)} className="tap bg-emerald-500 text-white font-bold flex-1">
+            <button
+              onClick={() => finalise(true)}
+              className="flex-1 bg-neon-green text-ink rounded-full px-5 py-3 font-bold hover:opacity-90"
+            >
               Yes ✓
             </button>
-            <button onClick={() => finalise(false)} className="tap bg-rose-400 text-white font-bold flex-1">
+            <button
+              onClick={() => finalise(false)}
+              className="flex-1 bg-neon-pink text-paper rounded-full px-5 py-3 font-bold hover:opacity-90"
+            >
               No ✗
             </button>
           </div>
@@ -85,32 +95,20 @@ export function QuestionRunner({
       )}
 
       {verdict && showFeedback && (
-        <div className="space-y-3 animate-feedback-in">
-          <div
-            className={`rounded-2xl p-4 ${
-              verdict === 'correct'
-                ? 'bg-emerald-50 border border-emerald-200 animate-emphasis-pop'
-                : 'bg-rose-50 border border-rose-200'
-            }`}
-          >
-            <p className="font-bold mb-1">
-              {verdict === 'correct' ? 'Correct! 🎉' : 'Not quite.'}
-            </p>
-            <p className="text-sm text-ink/70 mb-2">
-              <strong>Answer:</strong> {firstAnswer(question.answer)}
-            </p>
-            <p className="text-sm">{question.explanation}</p>
-          </div>
-          {onNext && (
-            <button onClick={onNext} className="tap bg-ink text-paper font-bold w-full text-lg">
-              {nextLabel}
-            </button>
-          )}
-        </div>
+        <FeedbackPanel
+          verdict={verdict}
+          answer={firstAnswer(question.answer)}
+          explanation={question.explanation}
+          onNext={onNext}
+          nextLabel={nextLabel}
+        />
       )}
 
       {verdict && !showFeedback && onNext && (
-        <button onClick={onNext} className="tap bg-ink text-paper font-bold w-full text-lg">
+        <button
+          onClick={onNext}
+          className="bg-ink text-paper rounded-full px-6 py-4 font-bold text-base w-full hover:bg-neon-pink transition-colors"
+        >
           {nextLabel}
         </button>
       )}
@@ -123,6 +121,7 @@ function AnswerArea({
   input,
   setInput,
   locked,
+  verdict,
   onChoice,
   onSubmit,
 }: {
@@ -130,26 +129,39 @@ function AnswerArea({
   input: string;
   setInput: (v: string) => void;
   locked: boolean;
+  verdict: Verdict;
   onChoice: (c: string) => void;
   onSubmit: () => void;
 }) {
   if (question.type === 'mcq' || question.type === 'truefalse') {
     const choices =
       question.choices ?? (question.type === 'truefalse' ? ['True', 'False'] : []);
+    const canonical = firstAnswer(question.answer).trim().toLowerCase();
     return (
-      <div className="grid gap-2">
-        {choices.map((c) => (
-          <button
-            key={c}
-            disabled={locked}
-            onClick={() => onChoice(c)}
-            className={`tap text-left font-medium ${
-              input === c ? 'bg-accent text-white' : 'bg-ink/5 hover:bg-ink/10'
-            } ${locked && input !== c ? 'opacity-50' : ''}`}
-          >
-            {c}
-          </button>
-        ))}
+      <div className="grid gap-3">
+        {choices.map((c) => {
+          const isPicked = input === c;
+          const isAnswer = c.trim().toLowerCase() === canonical;
+          let cls =
+            'bg-paper text-ink border-[1.5px] border-rule hover:border-ink';
+          if (verdict) {
+            if (isAnswer) cls = 'bg-neon-green text-ink border-[1.5px] border-neon-green';
+            else if (isPicked) cls = 'bg-neon-pink text-paper border-[1.5px] border-neon-pink';
+            else cls = 'bg-paper text-inkSoft border-[1.5px] border-rule';
+          } else if (isPicked) {
+            cls = 'bg-ink text-paper border-[1.5px] border-ink';
+          }
+          return (
+            <button
+              key={c}
+              disabled={locked}
+              onClick={() => onChoice(c)}
+              className={`rounded-2xl px-5 py-4 text-left text-[17px] font-medium transition-colors ${cls}`}
+            >
+              {c}
+            </button>
+          );
+        })}
       </div>
     );
   }
@@ -160,7 +172,7 @@ function AnswerArea({
         e.preventDefault();
         onSubmit();
       }}
-      className="space-y-3"
+      className="flex flex-col sm:flex-row gap-3"
     >
       <input
         type="text"
@@ -172,19 +184,82 @@ function AnswerArea({
         disabled={locked}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-50"
         placeholder="Type your answer…"
+        className={`flex-1 rounded-2xl px-5 py-4 text-lg font-medium outline-none border-[1.5px] disabled:bg-off ${
+          locked ? 'border-rule text-inkSoft' : 'border-ink focus:border-neon-blue'
+        }`}
       />
       {!locked && (
         <button
           type="submit"
           disabled={!input.trim()}
-          className="tap bg-accent text-white font-bold w-full text-lg disabled:opacity-30"
+          className="bg-ink text-paper rounded-2xl px-7 py-4 font-bold disabled:opacity-30"
         >
-          Check
+          Check ›
         </button>
       )}
     </form>
+  );
+}
+
+interface FeedbackPanelProps {
+  verdict: Exclude<Verdict, null>;
+  answer: string;
+  explanation: string;
+  /** Receives the mouse event so callers can position confetti at the click. */
+  onNext?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  nextLabel: string;
+}
+
+/**
+ * Coloured panel that follows a question. Same layout for embedded use (under
+ * the question on phones) and for Quiz's right-column desktop layout.
+ */
+export function FeedbackPanel({
+  verdict,
+  answer,
+  explanation,
+  onNext,
+  nextLabel,
+}: FeedbackPanelProps) {
+  const ok = verdict === 'correct';
+  return (
+    <div
+      className={`rounded-[22px] p-6 sm:p-7 border-[1.5px] flex flex-col gap-4 animate-feedback-in ${
+        ok
+          ? 'border-neon-green bg-[#f1fff5]'
+          : 'border-neon-pink bg-[#fff1f8]'
+      }`}
+    >
+      <div>
+        <div
+          className={`text-[13px] font-bold uppercase tracking-[0.14em] ${
+            ok ? 'text-[#048a3a]' : 'text-[#b30474]'
+          }`}
+        >
+          {ok ? 'Correct' : 'Not quite'}
+        </div>
+        <div className="font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em] leading-tight mt-2">
+          {ok ? (
+            "That's it."
+          ) : (
+            <>
+              The answer is{' '}
+              <span className="bg-neon-yellow px-1.5 text-ink">{answer}</span>.
+            </>
+          )}
+        </div>
+        <p className="text-[15px] text-ink mt-3 leading-relaxed">{explanation}</p>
+      </div>
+      {onNext && (
+        <button
+          onClick={onNext}
+          className="self-start bg-ink text-paper rounded-full px-6 py-3.5 font-bold hover:bg-neon-pink transition-colors"
+        >
+          {nextLabel}
+        </button>
+      )}
+    </div>
   );
 }
 

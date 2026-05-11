@@ -7,6 +7,9 @@ interface FlipCardProps {
   onClick?: () => void;
   ariaLabel?: string;
   minHeight?: string;
+  /** Tailwind classes applied to each face. Defaults to the `.card` style. */
+  frontClassName?: string;
+  backClassName?: string;
 }
 
 /**
@@ -20,6 +23,8 @@ export function FlipCard({
   onClick,
   ariaLabel,
   minHeight = '18rem',
+  frontClassName = 'card',
+  backClassName = 'card',
 }: FlipCardProps) {
   const containerStyle: CSSProperties = {
     perspective: '1200px',
@@ -54,11 +59,11 @@ export function FlipCard({
       style={containerStyle}
     >
       <div style={innerStyle}>
-        <div className="card" style={faceBase} aria-hidden={revealed}>
+        <div className={frontClassName} style={faceBase} aria-hidden={revealed}>
           {front}
         </div>
         <div
-          className="card"
+          className={backClassName}
           style={{ ...faceBase, transform: 'rotateY(180deg)' }}
           aria-hidden={!revealed}
         >
