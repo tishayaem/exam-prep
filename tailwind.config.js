@@ -4,13 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0f172a',
-        paper: '#fefdfb',
+        ink: '#0A0A0A',
+        inkSoft: '#6B6B6B',
+        paper: '#FFFFFF',
+        off: '#F5F5F2',
+        rule: '#E6E6E6',
         accent: '#f59e0b',
+        // Editorial palette — used as accent punctuation, not as fills.
+        neon: {
+          green: '#0cf35c',
+          pink: '#f50aa2',
+          yellow: '#fff000',
+          blue: '#0185fd',
+        },
       },
       fontFamily: {
-        display: ['"Fraunces"', 'Georgia', 'serif'],
-        body: ['"Inter"', 'system-ui', 'sans-serif'],
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        body: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        serif: ['"Fraunces"', 'Georgia', 'serif'],
       },
       keyframes: {
         'feedback-in': {

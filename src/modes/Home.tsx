@@ -1,7 +1,16 @@
+import type { MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { scienceSections } from '../data/science';
+import type { Section } from '../data/types';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
+import { burstFromEvent } from '../lib/confetti';
+import { getSectionProgress, pickResume } from '../lib/sectionProgress';
+
+const DAY_NAMES = [
+  'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+  'Thursday', 'Friday', 'Saturday',
+];
 
 export function Home() {
   const { state } = useProgress();
@@ -11,103 +20,338 @@ export function Home() {
   const earthSpace = scienceSections.filter(
     (s) => s.pack === 'earth-space-forces',
   );
+  const resume = pickResume(state, scienceSections);
+  const today = DAY_NAMES[new Date().getDay()];
 
   return (
-    <div className="space-y-8">
-      <section className="card">
-        <h1 className="text-3xl font-bold mb-2">Hey 👋</h1>
-        <p className="text-ink/70">
-          Pick a topic to study or quiz yourself. Maths and English will appear
-          here when their materials are added.
-        </p>
-      </section>
+    <div className="space-y-14">
+      <Hero today={today} resume={resume} />
 
-      <section>
-        <h2 className="text-xl font-bold mb-3 px-1">🎯 Quick practice</h2>
-        <div className="grid grid-cols-2 gap-3">
-          <PracticeTile to="/mock-test" emoji="📝" label="Mock Test" sub="20 Qs · 15 min" />
-          <PracticeTile to="/flashcards" emoji="🃏" label="Flashcards" sub="All sections" />
-          <PracticeTile to="/vocab-sprint" emoji="⚡" label="Vocab Sprint" sub="45-second drill" />
-          <PracticeTile
-            to="/mistakes"
-            emoji="🎯"
-            label="Mistakes"
-            sub={mistakesCount === 0 ? 'Empty — nice' : `${mistakesCount} to review`}
-            urgent={mistakesCount > 0}
-          />
-        </div>
-      </section>
+      <Practice mistakesCount={mistakesCount} />
 
-      <SubjectGroup title="🌱 Plants & Living Things" sections={plants} />
-      <SubjectGroup title="🌍 Earth, Space & Forces" sections={earthSpace} />
+      <Pack
+        number="02"
+        title="Plants & Living Things"
+        trailing={`${plants.length} topics`}
+        sections={plants}
+      />
+      <Pack
+        number="03"
+        title="Earth, Space & Forces"
+        trailing={`${earthSpace.length} topics`}
+        sections={earthSpace}
+      />
     </div>
   );
 }
 
-function PracticeTile({
+// ─── Hero ────────────────────────────────────────────────────────────────────
+
+function Hero({
+  today,
+  resume,
+}: {
+  today: string;
+  resume: ReturnType<typeof pickResume>;
+}) {
+  return (
+    <section className="relative grid items-end gap-8 md:gap-10 md:grid-cols-[1.4fr_1fr] mb-4">
+      <div>
+        <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.18em] mb-3.5">
+          Today · {today}
+        </div>
+        <h1 className="font-display font-bold leading-[0.92] tracking-[-0.045em] m-0 text-[clamp(2.5rem,8vw,5.5rem)]">
+          Pick up where
+          <br />
+          you left off,{' '}
+          <span className="relative inline-block">
+            Tisha.
+            <span
+              aria-hidden
+              className="absolute left-[-2%] right-[-2%] bottom-[8%] h-[20%] bg-neon-yellow -z-10 -skew-x-6"
+            />
+          </span>
+        </h1>
+
+        <div className="flex flex-wrap items-center gap-5 mt-7">
+          {resume ? (
+            <Link
+              to={`/quiz/${resume.section.id}`}
+              viewTransition
+              className="bg-ink text-paper border-0 px-6 py-4 font-semibold text-base rounded-full active:scale-[0.98] transition-transform hover:bg-neon-pink"
+            >
+              Resume — {resume.section.title} ›
+            </Link>
+          ) : (
+            <Link
+              to="/mock-test"
+              viewTransition
+              className="bg-ink text-paper border-0 px-6 py-4 font-semibold text-base rounded-full active:scale-[0.98] transition-transform hover:bg-neon-pink"
+            >
+              Start a mock test ›
+            </Link>
+          )}
+          {resume && (
+            <span className="text-sm text-inkSoft">{resume.meta}</span>
+          )}
+        </div>
+      </div>
+
+      {/* Geometric punctuation — pure shapes that anchor the four-colour palette
+          without an illustration. Tucked behind the hero on small screens. */}
+      <HeroShapes />
+    </section>
+  );
+}
+
+function HeroShapes() {
+  return (
+    <div
+      aria-hidden
+      className="relative h-[180px] md:h-[280px] hidden sm:block pointer-events-none"
+    >
+      <div className="absolute right-5 top-0 w-[120px] h-[120px] rounded-full bg-neon-pink" />
+      <div className="absolute right-[140px] top-[70px] w-20 h-40 rounded-full bg-neon-blue" />
+      <div className="absolute right-0 bottom-0 w-[120px] h-[120px] bg-neon-green" />
+      <div className="absolute right-20 bottom-[60px] w-[60px] h-[60px] bg-neon-yellow rotate-45" />
+      <div className="absolute right-[240px] top-5 w-[50px] h-[50px] bg-ink rounded-full" />
+    </div>
+  );
+}
+
+// ─── Practice ───────────────────────────────────────────────────────────────
+
+function Practice({ mistakesCount }: { mistakesCount: number }) {
+  return (
+    <section>
+      <SectionHeader number="01" title="Practice" trailing="Mix it up" />
+      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-4">
+        <PracticeCard
+          to="/mock-test"
+          big="Mock"
+          accent="Test"
+          meta="20 questions · 15 min"
+          desc="Random questions from every topic. Like the real thing."
+          bg="bg-ink"
+          fg="text-paper"
+          chipClass="text-neon-green"
+          chipBgClass="bg-neon-green"
+        />
+        <PracticeCard
+          to="/flashcards"
+          big="Flash"
+          accent="cards"
+          meta="Smart shuffle"
+          desc="Tap to flip. Hard ones come back."
+          bg="bg-neon-green"
+          fg="text-ink"
+          chipClass="text-ink"
+          chipBgClass="bg-ink"
+        />
+        <PracticeCard
+          to="/vocab-sprint"
+          big="Vocab"
+          accent="Sprint"
+          meta="45 second drill"
+          desc="How many words before the buzzer?"
+          bg="bg-neon-yellow"
+          fg="text-ink"
+          chipClass="text-neon-pink"
+          chipBgClass="bg-neon-pink"
+        />
+        <PracticeCard
+          to="/mistakes"
+          big="Fix"
+          accent="ups"
+          meta={
+            mistakesCount === 0
+              ? 'Empty — nice'
+              : `${mistakesCount} waiting · do first`
+          }
+          desc="The ones you got wrong. Beat them twice to graduate."
+          bg="bg-neon-pink"
+          fg="text-paper"
+          chipClass="text-neon-yellow"
+          chipBgClass="bg-neon-yellow"
+          badge={mistakesCount > 0 ? String(mistakesCount) : undefined}
+        />
+      </div>
+    </section>
+  );
+}
+
+function PracticeCard({
   to,
-  emoji,
-  label,
-  sub,
-  urgent,
+  big,
+  accent,
+  meta,
+  desc,
+  bg,
+  fg,
+  chipClass,
+  chipBgClass,
+  badge,
 }: {
   to: string;
-  emoji: string;
-  label: string;
-  sub: string;
-  urgent?: boolean;
+  big: string;
+  accent: string;
+  meta: string;
+  desc: string;
+  bg: string;
+  fg: string;
+  chipClass: string;
+  chipBgClass: string;
+  badge?: string;
 }) {
   return (
     <Link
       to={to}
       viewTransition
-      className={`card flex flex-col gap-1 active:scale-[0.98] transition-transform ${
-        urgent ? 'ring-2 ring-rose-400 bg-rose-50' : ''
-      }`}
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
+      className={`relative ${bg} ${fg} border-0 rounded-[28px] p-6 text-left cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[240px] hover:-translate-y-1 transition-transform`}
     >
-      <span aria-hidden className="text-2xl">{emoji}</span>
-      <span className="font-bold">{label}</span>
-      <span className="text-xs text-ink/60">{sub}</span>
+      <div className="text-[11px] font-semibold opacity-70 uppercase tracking-[0.12em]">
+        {meta}
+      </div>
+      <div>
+        <div className="font-display text-4xl sm:text-5xl font-bold leading-[0.95] tracking-[-0.035em]">
+          {big}
+          <span className={chipClass}>{accent}</span>
+        </div>
+        <div className="text-[13px] mt-2.5 opacity-80 leading-snug">{desc}</div>
+      </div>
+      {badge && (
+        <div
+          className={`absolute top-5 right-5 ${chipBgClass} ${bg.replace('bg-', 'text-')} w-9 h-9 rounded-full font-bold text-[15px] grid place-items-center`}
+        >
+          {badge}
+        </div>
+      )}
+      <div className="absolute bottom-5 right-[22px] text-[22px] font-bold">
+        ›
+      </div>
     </Link>
   );
 }
 
-function SubjectGroup({
+// ─── Pack (a group of TopicRows) ────────────────────────────────────────────
+
+function Pack({
+  number,
   title,
+  trailing,
   sections,
 }: {
+  number: string;
   title: string;
-  sections: typeof scienceSections;
+  trailing: string;
+  sections: Section[];
 }) {
   return (
     <section>
-      <h2 className="text-xl font-bold mb-3 px-1">{title}</h2>
-      <div className="grid gap-3">
-        {sections.map((s) => (
-          <div key={s.id} className="card flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <p className="text-sm text-ink/60">Section {s.number}</p>
-              <h3 className="font-bold truncate">{s.title}</h3>
-            </div>
-            <div className="flex gap-2 shrink-0">
-              <Link
-                to={`/study/${s.id}`}
-                viewTransition
-                className="tap bg-ink/5 hover:bg-ink/10 text-sm font-bold"
-              >
-                Study
-              </Link>
-              <Link
-                to={`/quiz/${s.id}`}
-                viewTransition
-                className="tap bg-accent text-white text-sm font-bold"
-              >
-                Quiz
-              </Link>
-            </div>
-          </div>
+      <SectionHeader number={number} title={title} trailing={trailing} />
+      <div className="flex flex-col">
+        {sections.map((s, i) => (
+          <TopicRow key={s.id} section={s} last={i === sections.length - 1} />
         ))}
       </div>
     </section>
+  );
+}
+
+function SectionHeader({
+  number,
+  title,
+  trailing,
+}: {
+  number: string;
+  title: string;
+  trailing: ReactNode;
+}) {
+  return (
+    <div className="flex items-end justify-between pb-4 border-b border-rule mb-5">
+      <div className="flex items-baseline gap-4 sm:gap-[18px] min-w-0">
+        <span className="text-sm font-bold text-inkSoft tabular-nums">
+          {number}
+        </span>
+        <h2 className="m-0 font-display text-2xl sm:text-[36px] font-bold tracking-[-0.025em] truncate">
+          {title}
+        </h2>
+      </div>
+      <span className="hidden sm:inline text-xs text-inkSoft font-medium uppercase tracking-[0.08em] shrink-0">
+        {trailing}
+      </span>
+    </div>
+  );
+}
+
+function TopicRow({ section, last }: { section: Section; last: boolean }) {
+  const { state } = useProgress();
+  const p = getSectionProgress(section, state.attempts);
+  const stateClass = p.mastered
+    ? 'bg-neon-green'
+    : p.started
+      ? 'bg-neon-blue'
+      : 'bg-rule';
+  const numColor = p.started ? 'text-ink' : 'text-inkSoft';
+  const fillClass = p.mastered
+    ? 'bg-neon-green'
+    : p.started
+      ? 'bg-neon-blue'
+      : 'bg-transparent';
+  const ctaLabel = p.mastered ? 'Review' : p.started ? 'Continue' : 'Start';
+
+  return (
+    <div
+      className={`grid items-center gap-4 sm:gap-6 py-4 sm:py-5 px-2 group hover:bg-off transition-colors ${
+        last ? '' : 'border-b border-rule'
+      } grid-cols-[40px_1fr_auto] sm:grid-cols-[64px_1fr_220px_auto_auto]`}
+    >
+      <div
+        className={`font-display text-2xl sm:text-[32px] font-bold tabular-nums tracking-[-0.04em] ${numColor} group-hover:text-neon-pink transition-colors`}
+      >
+        {String(section.number).padStart(2, '0')}
+      </div>
+
+      <div className="min-w-0">
+        <div className="text-base sm:text-[19px] font-semibold tracking-[-0.012em] truncate">
+          {section.title}
+        </div>
+        <div className="text-[13px] text-inkSoft mt-1 flex items-center gap-2">
+          <span className={`block w-1.5 h-1.5 rounded-full ${stateClass}`} />
+          {p.mastered
+            ? 'Mastered'
+            : p.started
+              ? `${p.correct}/${p.total} answered`
+              : 'Not started'}
+        </div>
+      </div>
+
+      {/* progress bar — desktop only */}
+      <div className="hidden sm:block">
+        <div className="h-1.5 bg-off rounded-full overflow-hidden">
+          <div
+            className={`h-full ${fillClass} rounded-full progress-fill`}
+            style={{ width: `${p.pct}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Study + CTA — Study hidden on phone to keep the row tappable */}
+      <Link
+        to={`/study/${section.id}`}
+        viewTransition
+        className="hidden sm:inline-flex items-center bg-transparent border border-ink text-ink px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-ink hover:text-paper transition-colors"
+      >
+        Study ›
+      </Link>
+      <Link
+        to={`/quiz/${section.id}`}
+        viewTransition
+        className="inline-flex items-center bg-ink text-paper border border-ink px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-neon-pink hover:border-neon-pink transition-colors"
+      >
+        {ctaLabel} ›
+      </Link>
+    </div>
   );
 }
