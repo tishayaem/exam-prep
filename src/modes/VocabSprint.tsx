@@ -171,11 +171,14 @@ export function VocabSprint() {
   function pick(option: string) {
     if (picked) return;
     setPickedAt(option);
-    if (option === card.meaning) setScore((s) => s + 1);
+    const correct = option === card.meaning;
+    if (correct) setScore((s) => s + 1);
+    // Asymmetric: snap forward on correct, linger on wrong so she has time to
+    // read the right meaning (which is flashing green alongside her pink pick).
     window.setTimeout(() => {
       setPickedAt(null);
       setIndex((i) => i + 1);
-    }, 350);
+    }, correct ? 450 : 1000);
   }
 
   const lowTime = secondsLeft <= 10;
