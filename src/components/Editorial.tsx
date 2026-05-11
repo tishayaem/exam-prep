@@ -2,23 +2,32 @@ import type { ReactNode } from 'react';
 
 /**
  * Inline markdown helper used by lesson copy and feedback panels:
- * `**text**` becomes a yellow-highlighted strong span. Built by splitting +
- * mapping to `<strong>` so we never inject raw HTML.
+ * `**text**` becomes a yellow-highlighted strong span; `*text*` becomes italic.
+ * Order matters in the alternation — bold first so `**x**` doesn't get
+ * misparsed as italic. Built by splitting + mapping rather than injecting HTML.
  */
 export function renderInline(text: string): ReactNode[] {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) =>
-    part.startsWith('**') && part.endsWith('**') ? (
-      <strong
-        key={i}
-        className="bg-neon-yellow px-1 font-semibold text-ink"
-      >
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      <span key={i}>{part}</span>
-    ),
-  );
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+      return (
+        <strong
+          key={i}
+          className="bg-neon-yellow px-1 font-semibold text-ink"
+        >
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+      return (
+        <em key={i} className="italic">
+          {part.slice(1, -1)}
+        </em>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
 }
 
 interface HeadlineProps {

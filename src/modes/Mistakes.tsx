@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { scienceQuestions } from '../data/science';
+import { scienceQuestions, scienceSections } from '../data/science';
 import type { AttemptLog } from '../lib/storage';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
@@ -62,17 +62,18 @@ export function Mistakes() {
     : null;
 
   if (active) {
+    const breadcrumb = sectionBreadcrumb(active);
     return (
       <div className="space-y-7">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <button
             onClick={() => setActiveId(null)}
-            className="text-[13px] font-semibold text-inkSoft hover:text-ink"
+            className="text-[13px] font-semibold text-inkSoft hover:text-ink shrink-0"
           >
             ← Back to mistakes
           </button>
-          <span className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
-            Redo · {active.id}
+          <span className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] truncate text-right">
+            Redo {breadcrumb && <>· {breadcrumb}</>}
           </span>
         </div>
         <QuestionRunner
@@ -231,4 +232,15 @@ function lastWrongAnswer(_question: Question): string | null {
   // an honest "—" is better than fabricating one. If we ever start logging
   // the chosen answer, surface it here.
   return null;
+}
+
+/**
+ * Friendly overline for the focused-redo view: "Section title · Q3" instead of
+ * the raw question id. Falls back to null if we can't find the section.
+ */
+function sectionBreadcrumb(question: Question): string | null {
+  const section = scienceSections.find((s) => s.id === question.sectionId);
+  if (!section) return null;
+  const idx = section.questions.findIndex((q) => q.id === question.id);
+  return idx >= 0 ? `${section.title} · Q${idx + 1}` : section.title;
 }

@@ -45,93 +45,175 @@ export function MockTest() {
 
   if (phase === 'pre') {
     return (
-      <div className="card text-center space-y-4">
-        <div className="text-5xl">📝</div>
-        <h2 className="text-2xl font-bold">Mock Test</h2>
-        <ul className="text-ink/70 text-left mx-auto inline-block space-y-1">
-          <li>• {TEST_QUESTIONS} random questions from all sections</li>
-          <li>• {TEST_MINUTES} minutes on the clock</li>
-          <li>• No feedback until the end</li>
-          <li>• You can’t go back to change answers</li>
-        </ul>
-        <button onClick={start} className="tap bg-accent text-white font-bold text-lg w-full mt-2">
-          Start the test →
-        </button>
+      <div className="space-y-9">
+        <header>
+          <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] mb-3">
+            Practice · Under exam conditions
+          </div>
+          <h1 className="font-display text-[clamp(2.25rem,6.4vw,4.75rem)] font-bold tracking-[-0.04em] leading-[0.95] m-0">
+            Mock{' '}
+            <span className="relative inline-block">
+              Test.
+              <span
+                aria-hidden
+                className="absolute left-[-2%] right-[-2%] bottom-[8%] h-[18%] bg-neon-green -z-10 -skew-x-6"
+              />
+            </span>
+          </h1>
+          <p className="text-[15px] text-inkSoft mt-4 max-w-xl leading-relaxed">
+            Like the real thing — random questions from every topic, a clock,
+            no feedback until the end.
+          </p>
+        </header>
+
+        <div className="grid gap-3.5 sm:grid-cols-2">
+          <RuleCard label="Questions" value={String(TEST_QUESTIONS)} sub="random from every topic" color="bg-neon-green" />
+          <RuleCard label="Time limit" value={`${TEST_MINUTES} min`} sub="clock starts on tap" color="bg-neon-yellow" />
+          <RuleCard label="Feedback" value="At the end" sub="not after each question" color="bg-neon-blue" />
+          <RuleCard label="Going back" value="Locked" sub="can't change earlier answers" color="bg-neon-pink" />
+        </div>
+
+        <div className="bg-ink text-paper rounded-[28px] p-7 sm:p-9 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+          <div>
+            <div className="text-[12px] font-bold text-neon-green uppercase tracking-[0.14em]">
+              Ready?
+            </div>
+            <div className="font-display text-2xl sm:text-[32px] font-bold tracking-[-0.025em] mt-2 leading-tight">
+              Take a breath. Then go.
+            </div>
+          </div>
+          <button
+            onClick={start}
+            className="bg-neon-green text-ink rounded-full px-7 py-4 font-bold text-[15px] hover:opacity-90 transition-opacity justify-self-start"
+          >
+            Start the test ›
+          </button>
+        </div>
       </div>
     );
   }
 
   if (phase === 'review') {
     const correct = answers.filter((a) => a.correct).length;
+    const pct = Math.round((correct / paper.length) * 100);
     const byTopic = breakdownByTopic(paper, answers);
+    const tagline = pct === 100
+      ? { text: 'Top of the class.', bg: 'bg-neon-green text-ink' }
+      : pct >= 80
+        ? { text: "One more pass and it's locked in.", bg: 'bg-neon-yellow text-ink' }
+        : pct >= 50
+          ? { text: 'Solid go — review the misses.', bg: 'bg-neon-blue text-paper' }
+          : { text: 'Take it back to Study and try again.', bg: 'bg-neon-pink text-paper' };
 
     return (
-      <div className="space-y-5 animate-feedback-in">
-        <div className="card text-center space-y-2">
-          <h2 className="text-2xl font-bold">Test complete</h2>
-          <p className="text-5xl font-bold tabular-nums">
-            {correct} / {paper.length}
-          </p>
-          <p className="text-ink/60">
-            ({Math.round((correct / paper.length) * 100)}% correct)
-          </p>
-        </div>
+      <div className="space-y-10 pb-8">
+        <header className="text-center max-w-[760px] mx-auto">
+          <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] mb-3.5">
+            Test complete
+          </div>
+          <div className="font-display text-[clamp(4rem,18vw,6rem)] font-bold tracking-[-0.045em] leading-[0.95]">
+            {correct}
+            <span className="text-inkSoft">/{paper.length}</span>
+          </div>
+          <div className="font-display text-[20px] sm:text-[22px] font-semibold mt-3.5">
+            {pct}% correct ·{' '}
+            <span className={`${tagline.bg} px-2`}>{tagline.text}</span>
+          </div>
+        </header>
 
-        <div className="card">
-          <h3 className="font-bold mb-3">By topic</h3>
-          <ul className="space-y-2">
-            {byTopic.map((row) => (
-              <li key={row.title} className="flex items-center justify-between gap-3">
-                <span className="truncate text-sm">{row.title}</span>
-                <span
-                  className={`text-sm font-bold tabular-nums ${
-                    row.correct === row.total
-                      ? 'text-emerald-600'
-                      : row.correct === 0
-                        ? 'text-rose-600'
-                        : 'text-ink'
-                  }`}
+        <section>
+          <div className="flex items-end justify-between pb-3.5 border-b border-rule mb-5">
+            <div className="flex items-baseline gap-3 sm:gap-[18px]">
+              <span className="text-[13px] font-bold text-inkSoft tabular-nums">
+                01
+              </span>
+              <h2 className="m-0 font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em]">
+                By topic
+              </h2>
+            </div>
+          </div>
+          <div className="grid gap-2">
+            {byTopic.map((row) => {
+              const allRight = row.correct === row.total;
+              const allWrong = row.correct === 0;
+              const tone = allRight
+                ? 'text-neon-green'
+                : allWrong
+                  ? 'text-neon-pink'
+                  : 'text-ink';
+              return (
+                <div
+                  key={row.title}
+                  className="flex items-center justify-between gap-3 py-2.5 border-b border-rule last:border-b-0"
                 >
-                  {row.correct}/{row.total}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  <span className="truncate text-[15px]">{row.title}</span>
+                  <span className={`text-[15px] font-bold tabular-nums shrink-0 ${tone}`}>
+                    {row.correct}/{row.total}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
-        <div className="card">
-          <h3 className="font-bold mb-3">Review answers</h3>
-          <ul className="space-y-3">
+        <section>
+          <div className="flex items-end justify-between pb-3.5 border-b border-rule mb-5">
+            <div className="flex items-baseline gap-3 sm:gap-[18px]">
+              <span className="text-[13px] font-bold text-inkSoft tabular-nums">
+                02
+              </span>
+              <h2 className="m-0 font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em]">
+                Review answers
+              </h2>
+            </div>
+          </div>
+          <ul className="grid gap-3">
             {paper.map((q, i) => {
               const a = answers.find((x) => x.questionId === q.id);
+              const ok = a?.correct;
               return (
                 <li
                   key={q.id}
-                  className={`rounded-2xl p-3 border ${
-                    a?.correct
-                      ? 'bg-emerald-50 border-emerald-200'
-                      : 'bg-rose-50 border-rose-200'
+                  className={`rounded-[22px] p-5 border-[1.5px] ${
+                    ok
+                      ? 'border-neon-green bg-[#f1fff5]'
+                      : 'border-neon-pink bg-[#fff1f8]'
                   }`}
                 >
-                  <p className="text-sm font-bold">
-                    {i + 1}. {q.prompt}
+                  <p className="text-[15px] font-semibold leading-snug">
+                    <span className="text-inkSoft tabular-nums mr-2">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {q.prompt}
                   </p>
-                  <p className="text-sm text-ink/70 mt-1">
-                    Answer: <em>{firstAnswer(q.answer)}</em>
+                  <p className="text-[13px] mt-2.5">
+                    Answer:{' '}
+                    <span className="bg-neon-yellow px-1.5 font-semibold">
+                      {firstAnswer(q.answer)}
+                    </span>
                   </p>
-                  <p className="text-sm mt-1">{q.explanation}</p>
+                  <p className="text-[13px] text-ink mt-2 leading-relaxed">
+                    {q.explanation}
+                  </p>
                 </li>
               );
             })}
           </ul>
-        </div>
+        </section>
 
-        <div className="flex gap-3">
-          <button onClick={start} className="tap bg-accent text-white font-bold flex-1">
+        <div className="flex flex-wrap gap-3 justify-center">
+          <button
+            onClick={start}
+            className="bg-paper text-ink border-[1.5px] border-ink rounded-full px-6 py-3.5 font-semibold"
+          >
             New test
           </button>
-          <Link to="/" viewTransition className="tap bg-ink/5 font-bold flex-1 text-center">
-            Home
+          <Link
+            to="/mistakes"
+            viewTransition
+            className="bg-ink text-paper rounded-full px-6 py-3.5 font-semibold"
+          >
+            Review mistakes ›
           </Link>
         </div>
       </div>
@@ -149,36 +231,74 @@ export function MockTest() {
   const lowTime = secondsLeft <= 60;
 
   return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between px-1">
-        <span className="text-sm text-ink/60 tabular-nums">
-          Q{index + 1} / {paper.length}
-        </span>
-        <span
+    <div className="space-y-7">
+      <div className="flex items-baseline justify-between">
+        <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
+          Question {index + 1}{' '}
+          <span className="text-inkSoft">/ {paper.length}</span>
+        </div>
+        <div
           key={lowTime ? 'low' : 'normal'}
-          className={`text-sm font-bold tabular-nums inline-block ${
-            lowTime ? 'text-rose-600 animate-emphasis-pop' : 'text-ink'
+          className={`text-[13px] font-bold tabular-nums inline-block ${
+            lowTime ? 'text-neon-pink animate-emphasis-pop' : 'text-ink'
           }`}
         >
           ⏱ {minutes}:{seconds.toString().padStart(2, '0')}
+        </div>
+      </div>
+
+      <DotProgress current={index} total={paper.length} />
+
+      <QuestionRunner
+        key={q.id}
+        question={q}
+        showFeedback={false}
+        onResolved={(correct) => {
+          setAnswers((arr) => [...arr, { questionId: q.id, correct }]);
+          recordAttempt(q.id, correct, q.difficulty);
+        }}
+        onNext={() => setIndex((i) => i + 1)}
+        nextLabel={index + 1 < paper.length ? 'Next ›' : 'Finish test ›'}
+      />
+    </div>
+  );
+}
+
+function RuleCard({
+  label,
+  value,
+  sub,
+  color,
+}: {
+  label: string;
+  value: string;
+  sub: string;
+  color: string;
+}) {
+  return (
+    <div className="border border-rule rounded-[22px] p-5 sm:p-6">
+      <div className="flex items-center gap-2.5">
+        <span className={`block w-2.5 h-2.5 rounded-full ${color}`} />
+        <span className="text-[11px] font-bold text-inkSoft uppercase tracking-[0.14em]">
+          {label}
         </span>
       </div>
-
-      <ProgressBar value={index} max={paper.length} />
-
-      <div className="card">
-        <QuestionRunner
-          key={q.id}
-          question={q}
-          showFeedback={false}
-          onResolved={(correct) => {
-            setAnswers((arr) => [...arr, { questionId: q.id, correct }]);
-            recordAttempt(q.id, correct, q.difficulty);
-          }}
-          onNext={() => setIndex((i) => i + 1)}
-          nextLabel={index + 1 < paper.length ? 'Next →' : 'Finish test'}
-        />
+      <div className="font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em] mt-2 leading-tight">
+        {value}
       </div>
+      <div className="text-[13px] text-inkSoft mt-1">{sub}</div>
+    </div>
+  );
+}
+
+function DotProgress({ current, total }: { current: number; total: number }) {
+  return (
+    <div className="flex gap-1">
+      {Array.from({ length: total }).map((_, i) => {
+        const cls =
+          i < current ? 'bg-neon-green' : i === current ? 'bg-ink' : 'bg-rule';
+        return <div key={i} className={`flex-1 h-1.5 ${cls} rounded-full`} />;
+      })}
     </div>
   );
 }
@@ -195,13 +315,4 @@ function breakdownByTopic(paper: Question[], answers: AnswerLog[]) {
     byId.set(q.sectionId, row);
   }
   return [...byId.values()].sort((a, b) => a.title.localeCompare(b.title));
-}
-
-function ProgressBar({ value, max }: { value: number; max: number }) {
-  const pct = max === 0 ? 0 : (value / max) * 100;
-  return (
-    <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div className="h-full bg-accent progress-fill" style={{ width: `${pct}%` }} />
-    </div>
-  );
 }
