@@ -1,0 +1,138 @@
+import type { Section } from '../types';
+
+export const earth10Friction: Section = {
+  id: 'earth-10-friction',
+  subject: 'science',
+  pack: 'earth-space-forces',
+  number: 10,
+  title: 'Friction, Air Resistance and Water Resistance',
+  lesson: `Some forces **slow things down**:
+
+- **Friction** — when two surfaces rub against each other. Rough surfaces give more friction; smooth ones give less. Friction is what stops a ball rolling forever and lets your shoes grip the floor.
+- **Air resistance** — air pushing against a moving object. The faster you move, or the bigger your front-facing area, the more air resistance you feel. (Try sticking your hand out of a moving car — you can *feel* it.)
+- **Water resistance** — water pushing against an object moving through it. Water is much denser than air, so water resistance is much stronger.
+
+These forces aren\'t always bad — without friction we couldn\'t walk, and without air resistance parachutes wouldn\'t work.`,
+  vocabulary: [
+    { term: 'Friction', meaning: 'A force between two surfaces' },
+    { term: 'Air resistance', meaning: 'A force caused by air' },
+    { term: 'Water resistance', meaning: 'A force caused by water' },
+  ],
+  questions: [
+    {
+      id: 'earth-10-q1',
+      sectionId: 'earth-10-friction',
+      type: 'short',
+      prompt: 'What is friction?',
+      answer: 'A force that happens when two surfaces rub together',
+      acceptable: [
+        'a force between two surfaces',
+        'when two surfaces rub together',
+        'a force when surfaces rub',
+        'a force caused by two surfaces touching',
+        'force between surfaces that touch',
+      ],
+      explanation:
+        'Friction is the force between two surfaces that touch each other. It always opposes movement — it slows things down (or stops them moving in the first place).',
+      difficulty: 1,
+      source: 'Term 2 Section 10 Q1',
+    },
+    {
+      id: 'earth-10-q2',
+      sectionId: 'earth-10-friction',
+      type: 'short',
+      prompt: 'What force slows down falling objects?',
+      answer: 'Air resistance',
+      acceptable: [
+        'air resistance',
+        'air',
+        'resistance of the air',
+        'the air',
+        'air pushing against the object',
+      ],
+      explanation:
+        'Air resistance pushes up against falling objects. (Gravity is also acting, pulling them down — but gravity makes them fall, air resistance slows the fall.)',
+      difficulty: 2,
+      source: 'Term 2 Section 10 Q2',
+    },
+    {
+      id: 'earth-10-q3',
+      sectionId: 'earth-10-friction',
+      type: 'short',
+      prompt: 'Why do swimmers wear smooth, tight-fitting suits?',
+      answer: 'To reduce water resistance so they can swim faster',
+      acceptable: [
+        'to reduce water resistance',
+        'to reduce drag',
+        'less water resistance',
+        'so they can swim faster',
+        'less resistance so they move faster',
+        'to slip through the water more easily',
+        'so water doesn\'t slow them down as much',
+      ],
+      explanation:
+        'A baggy, rough swimsuit creates more water resistance — water has to push past extra fabric. Sleek suits let swimmers cut through the water more easily, so they can go faster.',
+      difficulty: 2,
+      reasoning: true,
+      source: 'Term 2 Section 10 Q3',
+    },
+    {
+      id: 'earth-10-q4',
+      sectionId: 'earth-10-friction',
+      type: 'short',
+      prompt: 'What force slows boats down?',
+      answer: 'Water resistance',
+      acceptable: [
+        'water resistance',
+        'water',
+        'water pushing against them',
+        'drag from the water',
+        'friction with the water',
+      ],
+      explanation:
+        'Water resistance pushes back against the boat as it moves. That\'s why boats have streamlined (pointy) hulls — to cut through with less resistance.',
+      difficulty: 1,
+      source: 'Term 2 Section 10 Q4',
+    },
+    {
+      id: 'earth-10-q5',
+      sectionId: 'earth-10-friction',
+      type: 'mcq',
+      prompt: 'Why do cars have rounded, streamlined shapes?',
+      choices: [
+        'It looks nicer',
+        'To reduce air resistance and save fuel',
+        'To be lighter',
+        'To make them quieter',
+      ],
+      answer: 'To reduce air resistance and save fuel',
+      explanation:
+        'A streamlined shape lets air flow smoothly around the car rather than crashing into it. Less resistance = less fuel needed to keep moving.',
+      difficulty: 2,
+      reasoning: true,
+      source: 'Term 2 Section 10 — reasoning variant',
+    },
+    {
+      id: 'earth-10-q6',
+      sectionId: 'earth-10-friction',
+      type: 'mcq',
+      prompt: 'Why is it hard to walk on ice?',
+      choices: [
+        'Ice is too cold',
+        'Ice has very little friction',
+        'Ice is too thin',
+        'Air resistance is higher on ice',
+      ],
+      answer: 'Ice has very little friction',
+      explanation:
+        'Ice is very smooth, so there\'s hardly any friction between it and your shoes. Friction is what your feet normally push back against to walk forwards. No friction → slipping.',
+      difficulty: 2,
+      source: 'Term 2 Section 10 — MCQ variant',
+    },
+  ],
+  deeper: `**Without friction you couldn\'t walk.** Every step you take, your shoe is gripping the floor by friction and pushing back. On a frictionless surface (like wet ice), you\'d just slip in place forever.
+
+**A parachute uses air resistance on purpose.** It has a huge front-facing area, which means *lots* of air has to push out of the way as it falls — so it falls slowly enough for the skydiver to land safely instead of going splat.
+
+**Dolphins evolved skin that reduces water resistance.** Tiny ridges on their skin help water flow smoothly along their bodies. Engineers have copied the pattern for high-tech swimsuits and even for ship hulls.`,
+};

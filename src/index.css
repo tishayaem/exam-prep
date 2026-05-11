@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .tap {
+    @apply rounded-2xl px-5 py-4 select-none active:scale-[0.98] transition-transform;
+    min-height: 56px;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white shadow-sm border border-black/5 p-6;
+  }
+}
