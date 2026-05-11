@@ -42,7 +42,7 @@ export function VocabSprint() {
       <div className="card text-center space-y-2">
         <h2 className="text-xl font-bold">Not enough vocabulary</h2>
         <p className="text-ink/60">Vocab Sprint needs at least 4 terms.</p>
-        <Link to="/" className="tap bg-ink/5 font-bold inline-block mt-2">
+        <Link to="/" viewTransition className="tap bg-ink/5 font-bold inline-block mt-2">
           Back home
         </Link>
       </div>
@@ -97,7 +97,7 @@ export function VocabSprint() {
           >
             Go again
           </button>
-          <Link to="/" className="tap bg-ink/5 font-bold">
+          <Link to="/" viewTransition className="tap bg-ink/5 font-bold">
             Home
           </Link>
         </div>
@@ -147,7 +147,7 @@ export function VocabSprint() {
               disabled={picked}
               className={`tap text-left font-medium ${
                 state === 'right'
-                  ? 'bg-emerald-500 text-white'
+                  ? 'bg-emerald-500 text-white animate-emphasis-pop'
                   : state === 'wrong'
                     ? 'bg-rose-400 text-white'
                     : 'bg-ink/5 hover:bg-ink/10'

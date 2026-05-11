@@ -68,7 +68,7 @@ export function QuestionRunner({
       />
 
       {borderline && verdict === null && (
-        <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3">
+        <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3 animate-feedback-in">
           <p className="font-bold">Close! Were you right?</p>
           <p className="text-sm text-ink/70">
             Expected answer: <em>{firstAnswer(question.answer)}</em>
@@ -85,11 +85,11 @@ export function QuestionRunner({
       )}
 
       {verdict && showFeedback && (
-        <div className="space-y-3">
+        <div className="space-y-3 animate-feedback-in">
           <div
             className={`rounded-2xl p-4 ${
               verdict === 'correct'
-                ? 'bg-emerald-50 border border-emerald-200'
+                ? 'bg-emerald-50 border border-emerald-200 animate-emphasis-pop'
                 : 'bg-rose-50 border border-rose-200'
             }`}
           >

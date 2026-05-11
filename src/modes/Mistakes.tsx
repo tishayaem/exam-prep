@@ -26,7 +26,7 @@ export function Mistakes() {
           Get any quiz question wrong and it'll appear here until you've answered
           it correctly twice in a row.
         </p>
-        <Link to="/" className="tap bg-ink/5 font-bold inline-block">
+        <Link to="/" viewTransition className="tap bg-ink/5 font-bold inline-block">
           Back home
         </Link>
       </div>
@@ -52,7 +52,7 @@ export function Mistakes() {
           >
             Go again
           </button>
-          <Link to="/" className="tap bg-ink/5 font-bold">
+          <Link to="/" viewTransition className="tap bg-ink/5 font-bold">
             Home
           </Link>
         </div>
@@ -86,10 +86,7 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
   const pct = max === 0 ? 0 : (value / max) * 100;
   return (
     <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-rose-500 transition-all duration-300"
-        style={{ width: `${pct}%` }}
-      />
+      <div className="h-full bg-rose-500 progress-fill" style={{ width: `${pct}%` }} />
     </div>
   );
 }

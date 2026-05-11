@@ -60,6 +60,7 @@ function PracticeTile({
   return (
     <Link
       to={to}
+      viewTransition
       className={`card flex flex-col gap-1 active:scale-[0.98] transition-transform ${
         urgent ? 'ring-2 ring-rose-400 bg-rose-50' : ''
       }`}
@@ -91,12 +92,14 @@ function SubjectGroup({
             <div className="flex gap-2 shrink-0">
               <Link
                 to={`/study/${s.id}`}
+                viewTransition
                 className="tap bg-ink/5 hover:bg-ink/10 text-sm font-bold"
               >
                 Study
               </Link>
               <Link
                 to={`/quiz/${s.id}`}
+                viewTransition
                 className="tap bg-accent text-white text-sm font-bold"
               >
                 Quiz

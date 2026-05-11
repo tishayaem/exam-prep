@@ -66,7 +66,7 @@ export function MockTest() {
     const byTopic = breakdownByTopic(paper, answers);
 
     return (
-      <div className="space-y-5">
+      <div className="space-y-5 animate-feedback-in">
         <div className="card text-center space-y-2">
           <h2 className="text-2xl font-bold">Test complete</h2>
           <p className="text-5xl font-bold tabular-nums">
@@ -130,7 +130,7 @@ export function MockTest() {
           <button onClick={start} className="tap bg-accent text-white font-bold flex-1">
             New test
           </button>
-          <Link to="/" className="tap bg-ink/5 font-bold flex-1 text-center">
+          <Link to="/" viewTransition className="tap bg-ink/5 font-bold flex-1 text-center">
             Home
           </Link>
         </div>
@@ -155,7 +155,10 @@ export function MockTest() {
           Q{index + 1} / {paper.length}
         </span>
         <span
-          className={`text-sm font-bold tabular-nums ${lowTime ? 'text-rose-600' : 'text-ink'}`}
+          key={lowTime ? 'low' : 'normal'}
+          className={`text-sm font-bold tabular-nums inline-block ${
+            lowTime ? 'text-rose-600 animate-emphasis-pop' : 'text-ink'
+          }`}
         >
           ⏱ {minutes}:{seconds.toString().padStart(2, '0')}
         </span>
@@ -198,10 +201,7 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
   const pct = max === 0 ? 0 : (value / max) * 100;
   return (
     <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-accent transition-all duration-300"
-        style={{ width: `${pct}%` }}
-      />
+      <div className="h-full bg-accent progress-fill" style={{ width: `${pct}%` }} />
     </div>
   );
 }

@@ -51,22 +51,33 @@ export function Study() {
                 (not in the test — just cool stuff)
               </span>
             </span>
-            <span aria-hidden className="text-accent text-xl">
-              {deeperOpen ? '−' : '+'}
+            <span
+              aria-hidden
+              className="text-accent text-xl inline-block leading-none"
+              style={{
+                transition:
+                  'transform var(--motion-duration-normal) var(--ease-emphasis)',
+                transform: deeperOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+              }}
+            >
+              +
             </span>
           </button>
-          {deeperOpen && (
-            <div className="px-6 pb-6 space-y-3 leading-relaxed">
-              {section.deeper.split('\n\n').map((para, i) => (
-                <p key={i}>{renderInline(para)}</p>
-              ))}
+          <div className="collapse" data-open={deeperOpen}>
+            <div className="collapse-inner">
+              <div className="px-6 pb-6 space-y-3 leading-relaxed">
+                {section.deeper.split('\n\n').map((para, i) => (
+                  <p key={i}>{renderInline(para)}</p>
+                ))}
+              </div>
             </div>
-          )}
+          </div>
         </section>
       )}
 
       <Link
         to={`/quiz/${section.id}`}
+        viewTransition
         className="tap bg-accent text-white font-bold flex items-center justify-center w-full text-lg"
       >
         I'm ready — quiz me →

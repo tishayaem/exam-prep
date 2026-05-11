@@ -37,7 +37,7 @@ export function Quiz() {
           <Link to={`/quiz/${section.id}`} className="tap bg-accent text-white font-bold" reloadDocument>
             Try again
           </Link>
-          <Link to="/" className="tap bg-ink/5 font-bold">
+          <Link to="/" viewTransition className="tap bg-ink/5 font-bold">
             Home
           </Link>
         </div>
@@ -102,7 +102,7 @@ export function Quiz() {
         />
 
         {borderline && verdict === null && (
-          <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3">
+          <div className="rounded-2xl bg-amber-50 border border-amber-200 p-4 space-y-3 animate-feedback-in">
             <p className="font-bold">Close! Were you right?</p>
             <p className="text-sm text-ink/70">
               Expected answer: <em>{firstAnswer(q.answer)}</em>
@@ -119,11 +119,11 @@ export function Quiz() {
         )}
 
         {verdict && (
-          <div className="space-y-3">
+          <div className="space-y-3 animate-feedback-in">
             <div
               className={`rounded-2xl p-4 ${
                 verdict === 'correct'
-                  ? 'bg-emerald-50 border border-emerald-200'
+                  ? 'bg-emerald-50 border border-emerald-200 animate-emphasis-pop'
                   : 'bg-rose-50 border border-rose-200'
               }`}
             >
@@ -224,10 +224,7 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
   const pct = max === 0 ? 0 : (value / max) * 100;
   return (
     <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-accent transition-all duration-300"
-        style={{ width: `${pct}%` }}
-      />
+      <div className="h-full bg-accent progress-fill" style={{ width: `${pct}%` }} />
     </div>
   );
 }

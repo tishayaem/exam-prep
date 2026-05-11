@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { findSection, scienceSections } from '../data/science';
 import { useProgress } from '../lib/storage';
 import { firstAnswer } from '../components/QuestionRunner';
+import { FlipCard } from '../components/FlipCard';
 import type { Question } from '../data/types';
 import { shuffle } from '../lib/shuffle';
 
@@ -46,7 +47,7 @@ export function Flashcards() {
           >
             Go again
           </button>
-          <Link to="/" className="tap bg-ink/5 font-bold">
+          <Link to="/" viewTransition className="tap bg-ink/5 font-bold">
             Home
           </Link>
         </div>
@@ -65,38 +66,45 @@ export function Flashcards() {
     setIndex((i) => i + 1);
   }
 
+  const meta = (
+    <div className="flex items-center justify-between text-xs uppercase tracking-wide text-ink/50 mb-3">
+      <span>Card {index + 1} of {deck.length}</span>
+      <span>Level {level}/5</span>
+    </div>
+  );
+
   return (
     <div className="space-y-5">
       <ProgressBar value={index} max={deck.length} />
 
-      <button
-        type="button"
+      <FlipCard
+        revealed={revealed}
         onClick={() => setRevealed((v) => !v)}
-        className="w-full card text-left active:scale-[0.99] transition-transform min-h-[18rem]"
-        aria-label={revealed ? 'Hide answer' : 'Reveal answer'}
-      >
-        <div className="flex items-center justify-between text-xs uppercase tracking-wide text-ink/50 mb-3">
-          <span>Card {index + 1} of {deck.length}</span>
-          <span>Level {level}/5</span>
-        </div>
-
-        <h2 className="text-2xl font-bold leading-snug">{q.prompt}</h2>
-
-        {revealed ? (
-          <div className="mt-6 space-y-3">
-            <div className="rounded-2xl bg-accent/10 border border-accent/30 p-4">
-              <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Answer</p>
-              <p className="font-bold text-lg">{firstAnswer(q.answer)}</p>
+        ariaLabel={revealed ? 'Hide answer' : 'Reveal answer'}
+        front={
+          <>
+            {meta}
+            <h2 className="text-2xl font-bold leading-snug">{q.prompt}</h2>
+            <p className="mt-8 text-center text-ink/40 italic">Tap to reveal</p>
+          </>
+        }
+        back={
+          <>
+            {meta}
+            <h2 className="text-2xl font-bold leading-snug">{q.prompt}</h2>
+            <div className="mt-6 space-y-3">
+              <div className="rounded-2xl bg-accent/10 border border-accent/30 p-4">
+                <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Answer</p>
+                <p className="font-bold text-lg">{firstAnswer(q.answer)}</p>
+              </div>
+              <p className="text-sm leading-relaxed">{q.explanation}</p>
             </div>
-            <p className="text-sm leading-relaxed">{q.explanation}</p>
-          </div>
-        ) : (
-          <p className="mt-8 text-center text-ink/40 italic">Tap to reveal</p>
-        )}
-      </button>
+          </>
+        }
+      />
 
       {revealed ? (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-2 animate-feedback-in">
           <button onClick={() => rate('nope')} className="tap bg-rose-400 text-white font-bold">
             Nope ✗
           </button>
@@ -128,10 +136,7 @@ function ProgressBar({ value, max }: { value: number; max: number }) {
   const pct = max === 0 ? 0 : (value / max) * 100;
   return (
     <div className="h-2 bg-ink/10 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-accent transition-all duration-300"
-        style={{ width: `${pct}%` }}
-      />
+      <div className="h-full bg-accent progress-fill" style={{ width: `${pct}%` }} />
     </div>
   );
 }
