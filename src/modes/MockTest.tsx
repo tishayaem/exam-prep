@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { scienceQuestions, scienceSections } from '../data/science';
 import { useProgress } from '../lib/storage';
