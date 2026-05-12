@@ -303,9 +303,9 @@ function TopicRow({ section, last }: { section: Section; last: boolean }) {
 
   return (
     <div
-      className={`grid items-center gap-4 sm:gap-6 py-4 sm:py-5 px-2 group hover:bg-off transition-colors ${
+      className={`grid items-center gap-2 sm:gap-6 py-4 sm:py-5 px-2 group hover:bg-off transition-colors ${
         last ? '' : 'border-b border-rule'
-      } grid-cols-[40px_1fr_auto] sm:grid-cols-[64px_1fr_220px_auto_auto]`}
+      } grid-cols-[36px_1fr_auto_auto] sm:grid-cols-[64px_1fr_220px_auto_auto]`}
     >
       <div
         className={`font-display text-2xl sm:text-[32px] font-bold tabular-nums tracking-[-0.04em] ${numColor} group-hover:text-neon-pink transition-colors`}
@@ -337,18 +337,17 @@ function TopicRow({ section, last }: { section: Section; last: boolean }) {
         </div>
       </div>
 
-      {/* Study + CTA — Study hidden on phone to keep the row tappable */}
       <Link
         to={`/study/${section.id}`}
         viewTransition
-        className="hidden sm:inline-flex items-center bg-transparent border border-ink text-ink px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-ink hover:text-paper transition-colors"
+        className="inline-flex items-center bg-transparent border border-ink text-ink px-3 sm:px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-ink hover:text-paper transition-colors"
       >
-        Study ›
+        Study
       </Link>
       <Link
         to={`/quiz/${section.id}`}
         viewTransition
-        className="inline-flex items-center bg-ink text-paper border border-ink px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-neon-pink hover:border-neon-pink transition-colors"
+        className="inline-flex items-center bg-ink text-paper border border-ink px-3 sm:px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-neon-pink hover:border-neon-pink transition-colors"
       >
         {ctaLabel} ›
       </Link>
