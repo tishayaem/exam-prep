@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { PlantsFlowerDissectionDiagram } from '../../diagrams/plants-03-flower-dissection';
 
 export const plants03FlowerDissection: Section = {
   id: 'plants-03-flower-dissection',
@@ -6,6 +7,7 @@ export const plants03FlowerDissection: Section = {
   pack: 'plants',
   number: 3,
   title: 'Flower Dissection',
+  diagram: PlantsFlowerDissectionDiagram,
   lesson: `A flower is a plant's reproductive organ — and every part has a job.
 
 The **stamen** is the male part. It has an **anther** that makes **pollen**, held up on a thin stalk called the **filament**.

@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 export type Subject = 'science' | 'maths' | 'english';
 export type Pack = 'plants' | 'earth-space-forces' | string;
 export type QuestionType =
@@ -52,6 +54,12 @@ export interface Section {
    * in Study mode. Never used for grading.
    */
   examples?: Example[];
+  /**
+   * Optional inline React SVG component rendered between Lesson and Examples.
+   * Hand-coded per section in src/diagrams/<section-id>.tsx so labels and
+   * colours stay in the editorial palette.
+   */
+  diagram?: ComponentType;
   /**
    * Optional "Want to know more?" extension content rendered in Study mode only.
    * Never used for grading or quizzes — extras are for curiosity, not testing.

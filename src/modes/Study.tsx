@@ -29,6 +29,7 @@ export function Study() {
   const hasExamples = !!section.examples && section.examples.length > 0;
   const vocabNum = hasExamples ? '03' : '02';
   const ctaStepLabel = hasExamples ? 'Step 04' : 'Step 03';
+  const Diagram = section.diagram;
 
   return (
     <article className="space-y-14 pb-8">
@@ -50,6 +51,15 @@ export function Study() {
           ))}
         </div>
       </section>
+
+      {/* Diagram — optional visual anchor between lesson and examples */}
+      {Diagram && (
+        <section>
+          <div className="rounded-[22px] border border-rule bg-off p-4 sm:p-8 flex justify-center overflow-hidden">
+            <Diagram />
+          </div>
+        </section>
+      )}
 
       {/* Examples — concrete real-world hooks, optional */}
       {hasExamples && (
