@@ -17,6 +17,8 @@ export interface ProgressState {
   streak: { count: number; lastDay: string | null };
   badges: string[];
   settings: { sound: boolean };
+  /** Whoever is using the app. Undefined until the child sets it. */
+  childName?: string;
 }
 
 const initial: ProgressState = {
@@ -109,5 +111,11 @@ export function useProgress() {
     set(() => ({ ...initial }));
   }, []);
 
-  return { state, recordAttempt, resetAll };
+  const setChildName = useCallback((name: string) => {
+    const trimmed = name.trim().slice(0, 20);
+    if (!trimmed) return;
+    set((s) => ({ ...s, childName: trimmed }));
+  }, []);
+
+  return { state, recordAttempt, resetAll, setChildName };
 }

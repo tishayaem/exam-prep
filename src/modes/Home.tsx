@@ -1,4 +1,5 @@
-import type { MouseEvent, ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { FormEvent, MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { scienceSections } from '../data/science';
 import type { Section } from '../data/types';
@@ -54,6 +55,16 @@ function Hero({
   today: string;
   resume: ReturnType<typeof pickResume>;
 }) {
+  const { state, setChildName } = useProgress();
+  const [nameModalOpen, setNameModalOpen] = useState(false);
+  const isFirstTime = !state.childName;
+  const displayName = state.childName ?? 'friend';
+
+  // Auto-open the modal on first visit so the kid sets a name immediately.
+  useEffect(() => {
+    if (isFirstTime) setNameModalOpen(true);
+  }, [isFirstTime]);
+
   return (
     <section className="relative grid items-end gap-8 md:gap-10 md:grid-cols-[1.4fr_1fr] mb-4">
       <div>
@@ -64,13 +75,18 @@ function Hero({
           Pick up where
           <br />
           you left off,{' '}
-          <span className="relative inline-block">
-            Tisha.
+          <button
+            type="button"
+            onClick={() => setNameModalOpen(true)}
+            aria-label={`Change name (currently ${displayName})`}
+            className="relative inline-block bg-transparent border-0 p-0 cursor-pointer font-display font-bold leading-[0.92] tracking-[-0.045em] text-[clamp(2.5rem,8vw,5.5rem)] hover:opacity-80 transition-opacity"
+          >
+            {displayName}.
             <span
               aria-hidden
               className="absolute left-[-2%] right-[-2%] bottom-[8%] h-[20%] bg-neon-yellow -z-10 -skew-x-6"
             />
-          </span>
+          </button>
         </h1>
 
         <div className="flex flex-wrap items-center gap-5 mt-7">
@@ -100,7 +116,119 @@ function Hero({
       {/* Geometric punctuation — pure shapes that anchor the four-colour palette
           without an illustration. Tucked behind the hero on small screens. */}
       <HeroShapes />
+
+      <NameModal
+        open={nameModalOpen}
+        defaultValue={state.childName ?? ''}
+        isFirstTime={isFirstTime}
+        onSave={(name) => {
+          setChildName(name);
+          setNameModalOpen(false);
+        }}
+        onCancel={() => {
+          // First-timers can't cancel — they have to enter a name to proceed.
+          if (!isFirstTime) setNameModalOpen(false);
+        }}
+      />
     </section>
+  );
+}
+
+function NameModal({
+  open,
+  defaultValue,
+  isFirstTime,
+  onSave,
+  onCancel,
+}: {
+  open: boolean;
+  defaultValue: string;
+  isFirstTime: boolean;
+  onSave: (name: string) => void;
+  onCancel: () => void;
+}) {
+  const [value, setValue] = useState(defaultValue);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      setValue(defaultValue);
+      const id = setTimeout(() => inputRef.current?.focus(), 30);
+      return () => clearTimeout(id);
+    }
+  }, [open, defaultValue]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !isFirstTime) onCancel();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, isFirstTime, onCancel]);
+
+  if (!open) return null;
+
+  const submit = (e?: FormEvent) => {
+    e?.preventDefault();
+    const trimmed = value.trim();
+    if (trimmed) onSave(trimmed);
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-50 bg-ink/60 flex items-center justify-center p-6"
+      onClick={isFirstTime ? undefined : onCancel}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="name-modal-title"
+    >
+      <form
+        className="bg-paper rounded-[28px] p-7 sm:p-8 w-full max-w-md shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={submit}
+      >
+        <h2
+          id="name-modal-title"
+          className="font-display text-3xl sm:text-4xl font-bold mb-2 tracking-tight"
+        >
+          {isFirstTime ? 'Hi there!' : 'Change your name'}
+        </h2>
+        <p className="text-base text-inkSoft mb-5">
+          {isFirstTime
+            ? 'What should we call you?'
+            : 'Type a new name and we’ll save it.'}
+        </p>
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          maxLength={20}
+          autoComplete="given-name"
+          placeholder="Your name"
+          className="w-full bg-off border-2 border-rule rounded-2xl px-4 py-3 text-2xl font-display font-bold mb-6 focus:outline-none focus:border-neon-pink"
+        />
+        <div className="flex justify-end gap-3">
+          {!isFirstTime && (
+            <button
+              type="button"
+              onClick={onCancel}
+              className="px-5 py-3 rounded-full text-inkSoft font-semibold border border-rule hover:bg-off transition-colors"
+            >
+              Cancel
+            </button>
+          )}
+          <button
+            type="submit"
+            disabled={!value.trim()}
+            className="px-6 py-3 rounded-full bg-ink text-paper font-semibold disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neon-pink transition-colors"
+          >
+            {isFirstTime ? "Let's go ›" : 'Save'}
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
