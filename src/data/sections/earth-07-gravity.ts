@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthGravityDiagram } from '../../diagrams/earth-07-gravity';
 
 export const earth07Gravity: Section = {
   id: 'earth-07-gravity',
@@ -6,6 +7,7 @@ export const earth07Gravity: Section = {
   pack: 'earth-space-forces',
   number: 7,
   title: 'Gravity and Planetary Motion',
+  diagram: EarthGravityDiagram,
   lesson: `**Gravity** is the force that pulls objects towards each other. *Everything* has gravity — even you! But the Earth is **much** bigger than you, so its gravity is much stronger. That\'s why things fall *down* — towards the Earth\'s centre.
 
 Gravity also:
