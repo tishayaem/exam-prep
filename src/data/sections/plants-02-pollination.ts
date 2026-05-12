@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { PlantsPollinationDiagram } from '../../diagrams/plants-02-pollination';
 
 export const plants02Pollination: Section = {
   id: 'plants-02-pollination',
@@ -6,6 +7,7 @@ export const plants02Pollination: Section = {
   pack: 'plants',
   number: 2,
   title: 'Pollination and Plant Reproduction',
+  diagram: PlantsPollinationDiagram,
   lesson: `Flowering plants make new plants through **pollination, fertilisation, and seed formation**.
 
 **Pollination** is when pollen moves from one flower to another. Pollen sticks to a visiting bee while it drinks **nectar**, then rubs off on the next flower the bee visits. Wind, water, birds and bats can also move pollen.
