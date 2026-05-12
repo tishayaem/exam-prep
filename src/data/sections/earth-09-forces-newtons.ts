@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthForcesNewtonsDiagram } from '../../diagrams/earth-09-forces-newtons';
 
 export const earth09ForcesNewtons: Section = {
   id: 'earth-09-forces-newtons',
@@ -6,6 +7,7 @@ export const earth09ForcesNewtons: Section = {
   pack: 'earth-space-forces',
   number: 9,
   title: 'Forces and Newtons',
+  diagram: EarthForcesNewtonsDiagram,
   lesson: `A **force** is simply a **push** or a **pull**. We measure forces in **newtons** (symbol: **N**), named after Isaac Newton. The tool we use is a **force meter** (also called a spring balance or a newton meter).
 
 **Types of forces:**
