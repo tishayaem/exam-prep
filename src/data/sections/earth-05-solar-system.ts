@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthSolarSystemDiagram } from '../../diagrams/earth-05-solar-system';
 
 export const earth05SolarSystem: Section = {
   id: 'earth-05-solar-system',
@@ -6,6 +7,7 @@ export const earth05SolarSystem: Section = {
   pack: 'earth-space-forces',
   number: 5,
   title: 'The Solar System',
+  diagram: EarthSolarSystemDiagram,
   lesson: `Our **Solar System** has the **Sun** in the middle and 8 planets orbiting it.
 
 **Order from the Sun:**
