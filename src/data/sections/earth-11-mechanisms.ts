@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthMechanismsDiagram } from '../../diagrams/earth-11-mechanisms';
 
 export const earth11Mechanisms: Section = {
   id: 'earth-11-mechanisms',
@@ -6,6 +7,7 @@ export const earth11Mechanisms: Section = {
   pack: 'earth-space-forces',
   number: 11,
   title: 'Marvellous Mechanisms (Levers, Pulleys and Gears)',
+  diagram: EarthMechanismsDiagram,
   lesson: `**Mechanisms** let us use **small forces to move big loads**. The three big ones:
 
 - **Lever** — a bar that pivots on a point called a **fulcrum**. Examples: seesaw, scissors, crowbar. Push down hard on the long end → big force lifts the load on the short end.
