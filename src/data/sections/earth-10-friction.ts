@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthFrictionDiagram } from '../../diagrams/earth-10-friction';
 
 export const earth10Friction: Section = {
   id: 'earth-10-friction',
@@ -6,6 +7,7 @@ export const earth10Friction: Section = {
   pack: 'earth-space-forces',
   number: 10,
   title: 'Friction, Air Resistance and Water Resistance',
+  diagram: EarthFrictionDiagram,
   lesson: `Some forces **slow things down**:
 
 - **Friction** — when two surfaces rub against each other. Rough surfaces give more friction; smooth ones give less. Friction is what stops a ball rolling forever and lets your shoes grip the floor.
