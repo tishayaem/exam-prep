@@ -157,8 +157,8 @@ export function Study() {
               +
             </span>
           </button>
-          <div className="collapse" data-open={deeperOpen}>
-            <div className="collapse-inner">
+          <div className="collapsible" data-open={deeperOpen}>
+            <div className="collapsible-inner">
               <div className="px-6 pb-6 space-y-3 text-[16px] leading-relaxed">
                 {section.deeper.split('\n\n').map((para, i) => (
                   <p key={i}>{renderInline(para)}</p>

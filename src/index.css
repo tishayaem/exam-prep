@@ -45,16 +45,18 @@
   }
 
   /* Auto-height collapsible — pure CSS via grid-template-rows 0fr → 1fr.
-     Parent toggles data-open. Child wraps the actual content. */
-  .collapse {
+     Parent toggles data-open. Child wraps the actual content.
+     NOTE: do NOT name this class "collapse" — Tailwind has a `collapse`
+     utility that sets `visibility: collapse` and would hide the content. */
+  .collapsible {
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows var(--motion-duration-normal) var(--ease-linear-soft);
   }
-  .collapse[data-open="true"] {
+  .collapsible[data-open="true"] {
     grid-template-rows: 1fr;
   }
-  .collapse > .collapse-inner {
+  .collapsible > .collapsible-inner {
     min-height: 0;
     overflow: hidden;
   }
