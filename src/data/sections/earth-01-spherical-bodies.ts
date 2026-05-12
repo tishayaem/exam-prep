@@ -18,6 +18,24 @@ export const earth01SphericalBodies: Section = {
     { term: 'Horizon', meaning: 'Where the sky seems to meet the Earth' },
     { term: 'Evidence', meaning: 'Information that shows something is true' },
   ],
+  examples: [
+    {
+      title: 'Ships disappear into Plymouth Sound',
+      body: `Stand on Plymouth Hoe on a clear day, watch a ferry sail out, and you'll see it lose the bottom first — hull, then waterline, then deck, then funnel — as the curve of the sea bends down between you and the **horizon**. If the Earth were flat, the whole ship would just shrink as one. The bottom-first disappearance is the curve made visible.`,
+    },
+    {
+      title: 'Eratosthenes and a shadow',
+      body: `In **240 BC** the Greek scientist **Eratosthenes** noticed that at noon on midsummer's day, a stick in Aswan cast no shadow but the same stick 800 km north in Alexandria cast a clear one. From the shadow angle, he worked out Earth's full circumference. His answer was within **5%** of the modern value — done with sticks, sun and arithmetic.`,
+    },
+    {
+      title: "Earth isn't a perfect sphere",
+      body: `Earth spins fast enough that it bulges slightly at the equator and flattens at the poles. The shape has a name: an **oblate spheroid**. The bulge is small — only about 21 km of difference across 12,700 km of diameter — but it's why Mount Chimborazo in Ecuador, sitting on the equator, reaches further from Earth's centre than Everest does.`,
+    },
+    {
+      title: 'Try this: a beach-ball eclipse',
+      body: `Take a torch, a tennis ball (the Moon) and a football (Earth). In a dark room shine the torch on the football so it casts a shadow on the wall. Now move the tennis ball into that shadow. Notice the shadow on the ball is **curved**. That's what astronomers see during a real lunar eclipse — Earth's shadow on the Moon is always round.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-01-q1',

@@ -17,6 +17,24 @@ export const earth11Mechanisms: Section = {
     { term: 'Gear', meaning: 'A toothed wheel that transfers force' },
     { term: 'Fulcrum', meaning: 'The pivot point of a lever' },
   ],
+  examples: [
+    {
+      title: 'A wheelbarrow is a lever',
+      body: `A loaded wheelbarrow is much easier to lift by the handles than to lift by the load itself. That's because it's a **lever**: the wheel is the **fulcrum**, the load sits between you and the wheel, and you lift at the long end. You can shift a heavy pile of bricks without straining — the wheelbarrow's whole job is to multiply your lifting strength.`,
+    },
+    {
+      title: 'Bike gears trade speed for force',
+      body: `A bike has many **gear** combinations. Low gear (small front chainring, big rear cog) means the pedals turn the back wheel only a little per pedal-stroke, but with more turning **force** — perfect for steep hills. High gear is the opposite: easy spinning legs and a fast wheel for flat roads. **Gears** let you trade speed for force or back again, depending on the road.`,
+    },
+    {
+      title: 'Cranes hide huge pulley systems',
+      body: `A construction crane uses several **pulleys** stacked together inside its hook. A small motor can lift several tonnes — but the cable has to travel a much longer distance than the load. Look at a crane on a building site: the cable rolls in fast at the top, but the hook itself rises slowly. That's the pulley trade-off in action: easier *or* faster, not both.`,
+    },
+    {
+      title: 'Try this: scissor lever',
+      body: `A pair of scissors is actually two **levers** joined at one **fulcrum** (the screw in the middle). Hold a pair open and look closely: each handle is a long arm; each blade is a short arm. Push the handles together and the blades come together with *more* force — enough to cut paper or fabric that you'd struggle to tear apart with your fingers.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-11-q1',

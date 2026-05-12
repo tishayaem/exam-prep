@@ -21,6 +21,24 @@ The seasons are NOT caused by the Earth being closer or further from the Sun. Th
     { term: 'Tilt', meaning: 'A slanted position' },
     { term: 'Hemisphere', meaning: 'Half of the Earth (Northern or Southern)' },
   ],
+  examples: [
+    {
+      title: 'Christmas Day on Bondi Beach',
+      body: `While Britain huddles indoors in cold December, Australians eat Christmas dinner on the beach. Same Earth, same day — but the Southern **Hemisphere** is tilted *towards* the Sun while the north is tilted *away*. So Sydney has long bright days and 30°C heat while London has short grey days and freezing nights. Six months later, the two countries swap.`,
+    },
+    {
+      title: "Closer to the Sun doesn't mean warmer",
+      body: `Surprisingly, Earth is actually slightly **closer** to the Sun in January than in July — about 5 million km closer. So why is January cold in Britain? Because closeness barely matters. The **tilt** matters. In January the Northern Hemisphere is tilted away from the Sun and the rays hit at a low angle, spreading their heat thinly across the ground.`,
+    },
+    {
+      title: 'Solstices and equinoxes',
+      body: `Twice a year (March 20-21 and September 22-23) the **tilt** is sideways and day equals night everywhere — the **equinoxes**. Twice a year (June 21 and December 21) the tilt is fullest in one direction — the **solstices**, the longest and shortest days. Ancient calendars were built around these four dates and they're still printed on most modern ones.`,
+    },
+    {
+      title: 'Try this: tilted apple demo',
+      body: `Hold an apple at an angle and walk it slowly around a table lamp in a dark room. Watch the lit side: the top half catches more light when the apple's stalk tilts *towards* the lamp (summer in the top **hemisphere**), and less when it tilts *away* (winter). Keep the tilt fixed as you orbit — that's exactly what Earth does as it loops the Sun.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-03-q1',

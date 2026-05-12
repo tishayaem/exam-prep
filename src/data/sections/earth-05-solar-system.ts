@@ -28,6 +28,24 @@ export const earth05SolarSystem: Section = {
     { term: 'Gas giant', meaning: 'A large planet made mostly of gas' },
     { term: 'Rocky planet', meaning: 'A planet with a solid surface' },
   ],
+  examples: [
+    {
+      title: 'Mercury: lead-melting day, freezing night',
+      body: `**Mercury** has almost no atmosphere to trap heat. The Sun-facing side reaches about **430°C** — hot enough to melt lead. The night side plunges to about **−180°C**. The same patch of ground freezes and boils within hours. With no air to even out the temperature, Mercury is the most extreme **rocky planet** in the Solar System for daily change.`,
+    },
+    {
+      title: 'Olympus Mons: tallest mountain anywhere',
+      body: `Mars has a volcano called **Olympus Mons** that rises about **22 km** above the surrounding plains — almost three times taller than Mount Everest. It covers an area roughly the size of France. Mars has weaker gravity than Earth and no shifting plates, so its volcanoes can grow far bigger than ours before collapsing under their own weight.`,
+    },
+    {
+      title: 'Saturn could float in a bathtub',
+      body: `Saturn is mostly hydrogen and helium **gas**, which makes it less dense than water. So if you could find a bathtub big enough — about 120,000 km across — Saturn would actually float in it. Earth would sink straight to the bottom. Saturn looks enormous and solid, but it's basically a giant lightweight gas ball with rings.`,
+    },
+    {
+      title: "Neptune's diamond rain",
+      body: `Deep inside Neptune, scientists think the pressure is so extreme that carbon atoms get squeezed together into **diamonds**. These tiny diamond crystals are believed to fall like rain through the lower atmosphere. It's a real treasure planet — but visiting would be fatal: minus 200°C, hurricane-force winds, and crushing pressure. The diamonds aren't worth the trip.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-05-q1',

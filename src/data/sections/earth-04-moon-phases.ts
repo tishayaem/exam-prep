@@ -24,6 +24,24 @@ One full cycle = about 28 days = one **lunar month**.`,
     { term: 'Crescent', meaning: 'A thin curved shape' },
     { term: 'Gibbous', meaning: 'More than half lit' },
   ],
+  examples: [
+    {
+      title: 'We only ever see one side',
+      body: `The Moon spins on its own axis at *exactly* the right rate to keep the same face pointing at Earth always. This is called **tidal locking** — Earth's gravity slowed the Moon's spin to match its **orbit** over billions of years. The "far side" of the Moon was first photographed in 1959 by a Soviet probe and turned out to be much more cratered than the side we see.`,
+    },
+    {
+      title: 'A new moon looks like no moon',
+      body: `A **new moon** isn't dark — it's hiding. The Moon is between Earth and the Sun, so the lit half faces away from us and the unlit half points our way. The sky looks moonless that night — and astronomers love it because dark skies let them see galaxies and faint stars without lunar glare washing them out.`,
+    },
+    {
+      title: 'The Moon is drifting away',
+      body: `Each year the Moon edges about **3.8 cm** further from Earth — roughly the rate fingernails grow. In a few hundred million years it'll be too far away to fully cover the Sun, and total solar eclipses will stop happening on Earth. Many generations from now, only partial eclipses will be possible — and the people alive then won't know what a total eclipse looked like.`,
+    },
+    {
+      title: 'Try this: orange and torch demo',
+      body: `In a dark room, hold an orange (the Moon) at arm's length. Have someone shine a torch (the Sun) at it from one side. Slowly turn yourself in a circle, keeping the orange in front of your face. Watch how the lit side tilts in and out of view: full → **gibbous** → half → **crescent** → new → and back. That's exactly what the real Moon does each month.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-04-q1',

@@ -23,6 +23,24 @@ We also tried it with distances: if Earth is **1 metre** from the Sun, then Nept
     { term: 'Diameter', meaning: 'The width of a sphere' },
     { term: 'Distance', meaning: 'How far apart objects are' },
   ],
+  examples: [
+    {
+      title: 'The Sun a football, Earth a peppercorn',
+      body: `Shrink the Sun to the size of a football on the centre spot of a pitch. To scale, **Earth** would be a single **peppercorn** sitting near the goal line. **Jupiter** would be a chestnut at the edge of the car park. **Neptune** would be a marble several streets away. Almost everything in the Solar System is empty **distance**.`,
+    },
+    {
+      title: 'Sunlight takes 8 minutes to arrive',
+      body: `When you look at the Sun (don't look directly!), you're seeing it as it was **8 minutes ago** — that's how long light takes to travel the 150 million km from the Sun to Earth. Light from Neptune takes about **4 hours**. Light from the next nearest star, Proxima Centauri, takes **over 4 years**. Space is mostly distance, and even light needs time to cross it.`,
+    },
+    {
+      title: 'Voyager probes are still going',
+      body: `**Voyager 1** and **Voyager 2** were launched in **1977**. Both are still travelling. Voyager 1 is now over 24 billion km away — the most distant human-made object in existence — and has crossed into interstellar space, the gap between the stars. Each carries a golden record of Earth's sounds and music in case anyone else out there ever finds it.`,
+    },
+    {
+      title: 'Try this: scale model on the playing field',
+      body: `On the school playing field, use a small ball for the Sun. Step out **5 paces** for Mercury, **10** for Venus, **14** for Earth. Mars is **21 paces**. Jupiter is **75 paces** away, Saturn **140**, and Neptune is **over 400 paces** — usually further than the field is wide. Most groups never finish, which is exactly the lesson: space is mostly nothing.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-06-q1',

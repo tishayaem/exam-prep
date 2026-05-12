@@ -18,6 +18,24 @@ These forces aren\'t always bad — without friction we couldn\'t walk, and with
     { term: 'Air resistance', meaning: 'A force caused by air' },
     { term: 'Water resistance', meaning: 'A force caused by water' },
   ],
+  examples: [
+    {
+      title: 'Why ice is slippery',
+      body: `Ice is slippery because pressure from your weight melts a microscopically thin layer of water on the surface — and water lubricates. Less **friction** means your shoe doesn't grip, so it slides. Ice skaters use this on purpose: their thin blades concentrate all their weight onto a sliver of ice, melting a guide track they then glide along.`,
+    },
+    {
+      title: 'Penguins toboggan on their bellies',
+      body: `A walking penguin wastes energy with every waddling step. So on flat snow or ice, emperor penguins flop onto their bellies and push with their flippers — a slide called **tobogganing**. The smooth belly has less **friction** with ice than two stumpy legs, and it covers ground much faster. Adaptation built around using physics.`,
+    },
+    {
+      title: 'Parachutes love air resistance',
+      body: `Most aerodynamic engineering tries to *reduce* **air resistance**. A parachute does the opposite: it has a massive front-facing area on purpose, forcing huge amounts of air to push back as it falls. The skydiver still falls — but slowly enough to land safely. Without that wall of air pushing up, parachutes wouldn't work at all.`,
+    },
+    {
+      title: 'Dolphins inspired modern swimsuits',
+      body: `A dolphin's skin has microscopic grooves that let water flow smoothly along its body, cutting **water resistance**. Engineers studied them and made swimsuits with similar surface patterns — fast enough that some were eventually banned from Olympic competition. Sharks use a similar trick: rough-but-streamlined skin that controls how water flows down their length.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-10-q1',

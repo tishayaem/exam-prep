@@ -22,6 +22,24 @@ Quick rule of thumb: **1 newton ≈ the weight of a small apple** (about 100 g).
     { term: 'Newton (N)', meaning: 'The unit used to measure force' },
     { term: 'Force meter', meaning: 'A tool used to measure force' },
   ],
+  examples: [
+    {
+      title: '1 newton ≈ a small apple',
+      body: `A small apple weighs about **100 g**, which gravity pulls on with a force of roughly **1 newton**. The unit was chosen so the apple — Newton's most famous fruit — comes out as a tidy single newton. Hold a small apple on your palm and you're feeling exactly the force the textbook means when it says "1 N".`,
+    },
+    {
+      title: 'Ants lift 50 times their weight',
+      body: `A leafcutter ant can carry a leaf fragment **50 times** its own body weight — like a 10-year-old shouldering a small car. Their legs and jaws are built for it. Bigger animals can't pull this off because muscle strength scales slower than body weight: ant-sized creatures end up with the strongest **force**-per-kilo on the planet.`,
+    },
+    {
+      title: 'Magnets pull without touching',
+      body: `Most **forces** need contact — pushing, pulling, **friction**. Magnets prove you can have force at a distance. Hold one near a paperclip and the clip jumps to it through empty air. The force is real and measurable in **newtons**. Earth's gravity acts the same way — pulling on the Moon across 384,000 km of empty space without touching it.`,
+    },
+    {
+      title: 'Try this: weigh an apple',
+      body: `Hang an apple from a kitchen scale or a school **force meter**. Read the weight. Now hold the same apple in your hand. That heaviness you feel is the **force** of gravity — about **1 newton** per 100 g. The scale isn't measuring "weight" in some loose sense; it's literally counting the newtons pulling the apple down towards the ground.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-09-q1',

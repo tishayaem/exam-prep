@@ -17,6 +17,24 @@ To **illuminate** = to light up.`,
     { term: 'Reflect', meaning: 'To bounce light off a surface' },
     { term: 'Illuminate', meaning: 'To light up' },
   ],
+  examples: [
+    {
+      title: 'Cat eyes shine in headlights',
+      body: `A cat's eyes glow when caught in a torch beam — but the cat isn't making its own light. Behind the retina is a mirror-like layer called the **tapetum** that bounces light back through the eye, giving the cat a second chance to see by it. The leftover light comes back out of the eye as the shine you notice. The same trick makes deer eyes glow on country roads.`,
+    },
+    {
+      title: 'Glowing animals of the deep sea',
+      body: `In the ocean below 1,000 metres, where no sunlight reaches, animals make their own light — a trick called **bioluminescence**. Anglerfish dangle a glowing lure to attract prey. Some squid puff out clouds of glowing ink to confuse hunters. Even a few shark species glow. It's the deep sea's solution to being a **light source** where the Sun can't reach.`,
+    },
+    {
+      title: "Stars twinkle, planets don't",
+      body: `Want a quick way to tell a star from a planet? Stars **twinkle** — they look like a single point of light, and Earth's wobbly atmosphere bends that point so it flickers. Planets are close enough to look like tiny discs, which smooths the twinkling out. If it twinkles, it's a star. If it's a steady bright dot, it's almost certainly a planet.`,
+    },
+    {
+      title: 'Try this: source vs reflector',
+      body: `In a dark room, switch on a torch and aim it at a mirror. The mirror flares bright. Now point the torch at a sheet of black paper. Same torch, much less brightness coming back. The mirror is a good **reflector** but not a **light source**. The torch bulb is the actual source. Most things you see are reflectors — the Moon, the page of a book, your hand. Sources are rarer.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-08-q1',

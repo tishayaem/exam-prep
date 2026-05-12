@@ -18,6 +18,24 @@ export const earth02DayNight: Section = {
     { term: 'Shadow', meaning: 'A dark shape made when an object blocks light' },
     { term: 'Sunrise / Sunset', meaning: 'When the Sun appears or disappears at the horizon' },
   ],
+  examples: [
+    {
+      title: 'Stonehenge points at the rising Sun',
+      body: `**Stonehenge** in Wiltshire was built around 5,000 years ago. The stones are arranged so that on midsummer's morning the rising Sun lines up perfectly with the main axis through the circle. The builders knew exactly where the Sun would appear on that one day each year — without any clock, calendar or telescope. They watched the sky carefully for generations to figure it out.`,
+    },
+    {
+      title: 'Sundials are 5,000-year-old clocks',
+      body: `Before mechanical clocks, people told the time with **sundials** — a stick or pillar whose **shadow** swept across marked lines as the Sun moved. The Egyptians had quite accurate ones over 5,000 years ago. The shadow always points away from the Sun, so as the Earth spins, the shadow swings — and the time can be read from where it falls.`,
+    },
+    {
+      title: 'You move at 1,670 km/h right now',
+      body: `You feel still, but at the equator the surface of the Earth is whipping along at about **1,670 km/h** — faster than a jet plane. In London the speed is a bit slower (around 1,000 km/h) because the circle round the **axis** is smaller this far north. You don't feel it because everything around you — air, ground, people — is moving with you at the same rate.`,
+    },
+    {
+      title: 'Try this: shadow stick at school',
+      body: `On a sunny morning, push a stick straight up into a patch of garden or playground. Mark where the tip of its **shadow** falls. Come back at midday: the shadow will be much shorter and pointing in a different direction. Come back at sunset: long again, opposite side. The stick stays still — the Sun appears to move because the Earth is **rotating** under it.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-02-q1',

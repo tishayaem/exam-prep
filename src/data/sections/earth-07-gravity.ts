@@ -22,6 +22,24 @@ Gravity also:
     { term: 'Weight', meaning: 'The force of gravity on an object' },
     { term: 'Orbit', meaning: 'A curved path caused by gravity' },
   ],
+  examples: [
+    {
+      title: "Newton's apple actually happened",
+      body: `The famous story of an apple falling on **Isaac Newton's** head is mostly legend, but Newton himself told friends it was the *sight* of an apple falling — at his mother's farm in 1666 — that started him thinking about **gravity**. The apple didn't bonk him. It just got him asking the right question: why do things fall straight down rather than sideways or upwards?`,
+    },
+    {
+      title: 'Astronauts are constantly falling',
+      body: `Astronauts on the **International Space Station** look like they're floating, but they're actually **falling** around the Earth at **28,000 km/h**. The Earth's curve drops away beneath them at the same rate they fall, so they never hit the ground. Inside the station, everyone falls at exactly the same speed — and that shared falling feels exactly like floating.`,
+    },
+    {
+      title: 'Your weight on different planets',
+      body: `A child weighing 30 kg on Earth would weigh about **5 kg** on the Moon, **11 kg** on Mars, and **76 kg** on Jupiter. Same body, same **mass** — different **weight**, because gravity is different in each place. You'd jump six times higher on the Moon. On Jupiter you'd barely manage to lift your arms above your head.`,
+    },
+    {
+      title: 'Hammer and feather on the Moon',
+      body: `In **1971**, Apollo 15 astronaut David Scott stood on the Moon and dropped a **hammer and a feather** at the same height. With no air to slow the feather down, both hit the ground together — exactly as Galileo had predicted nearly 350 years earlier. The video is on YouTube. It's probably the cleanest physics experiment ever recorded.`,
+    },
+  ],
   questions: [
     {
       id: 'earth-07-q1',
