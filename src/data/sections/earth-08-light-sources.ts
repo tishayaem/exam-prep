@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthLightSourcesDiagram } from '../../diagrams/earth-08-light-sources';
 
 export const earth08LightSources: Section = {
   id: 'earth-08-light-sources',
@@ -6,6 +7,7 @@ export const earth08LightSources: Section = {
   pack: 'earth-space-forces',
   number: 8,
   title: 'Light Sources and Reflected Light',
+  diagram: EarthLightSourcesDiagram,
   lesson: `Some things make their own light — they are **light sources**. The **Sun** and **stars** are natural light sources. So are candles, light bulbs and torches (those are man-made).
 
 Other things only look bright because they **reflect** light from somewhere else. The **Moon** and the **planets** don\'t make any light of their own. We see them because sunlight bounces off them and reaches our eyes. Mirrors do the same trick — they bounce light back.
