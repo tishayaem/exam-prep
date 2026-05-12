@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { PlantsSeedDispersalDiagram } from '../../diagrams/plants-04-seed-dispersal';
 
 export const plants04SeedDispersal: Section = {
   id: 'plants-04-seed-dispersal',
@@ -6,6 +7,7 @@ export const plants04SeedDispersal: Section = {
   pack: 'plants',
   number: 4,
   title: 'Seed Dispersal',
+  diagram: PlantsSeedDispersalDiagram,
   lesson: `Plants can't move, so they use clever tricks to **spread their seeds** away from the parent plant. This helps the seeds find space, light, water and nutrients — without competing with their parent.
 
 There are four main methods:
