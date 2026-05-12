@@ -17,6 +17,24 @@ The **flesh** is the soft, juicy part around the seed. It's there to tempt anima
     { term: 'Flesh', meaning: 'The soft part of the fruit' },
     { term: 'Stone', meaning: 'A single large seed (e.g. peach)' },
   ],
+  examples: [
+    {
+      title: 'Strawberries wear seeds outside',
+      body: `A strawberry isn't really a single **fruit** — it's a swollen flower base with the actual **seeds** (those tiny yellow dots) studded all over its skin. Most fruits hide their seeds inside; strawberries put them on display. Count the dots on one half: usually around 200 tiny fruits, each holding one seed. Botanists sometimes argue strawberries aren't *technically* fruits at all.`,
+    },
+    {
+      title: "The world's biggest seed",
+      body: `The **coco-de-mer**, a palm tree found only on two islands in the Seychelles, makes the heaviest seed on Earth — a giant double coconut weighing up to **25 kg**. One seed can weigh more than a Year 5 child and takes seven years to ripen. So few of these trees survive in the wild that each seed is registered like a passport before anyone is allowed to keep one.`,
+    },
+    {
+      title: 'Why shop bananas have no seeds',
+      body: `Wild bananas are nearly all seed — hard black pellets that crunch like gravel between your teeth. The yellow bananas in supermarkets are a special variety bred over thousands of years to grow *without* seeds, reproduced by planting cuttings instead. The downside: every Cavendish banana is basically a clone, which is why a single banana disease could threaten the whole world's supply.`,
+    },
+    {
+      title: 'Try this: count fruit by seeds',
+      body: `Cut a tomato, a kiwi and a peach in half on a chopping board. Tomato: dozens of tiny seeds in jelly. Kiwi: hundreds of black flecks. Peach: one big **stone**. Each fruit has chosen a different strategy — flood the area with seeds, or pour everything into one big strong one. Both work, just differently. Plants think in trade-offs.`,
+    },
+  ],
   deeper: `Seeds are one of nature's wildest engineering tricks. They're tiny survival pods — each one carries a baby plant and a packed lunch of nutrients to feed it until its first leaves can make food from sunlight.
 
 **Seeds come in *crazy* different sizes.** The smallest seed in the world belongs to an orchid — it's so small that a million of them weigh less than a paperclip. The biggest seed in the world is the **coco-de-mer**, a giant coconut that can weigh **25 kg** — more than most 5-year-olds!

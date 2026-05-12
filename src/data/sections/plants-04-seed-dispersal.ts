@@ -21,6 +21,24 @@ There are four main methods:
     { term: 'Water dispersal', meaning: 'Seeds that float' },
     { term: 'Explosion', meaning: 'Pods burst open and scatter seeds' },
   ],
+  examples: [
+    {
+      title: 'Sycamore helicopters in autumn',
+      body: `Sycamore seeds — those papery winged "helicopters" you see spinning down from trees in October — are one of the most studied seed shapes in physics. The wing creates a low-pressure spiral of air above it as it spins, slowing the fall and letting the **wind** carry it sideways. Children drop them for fun; engineers copy them when designing parachutes and drones.`,
+    },
+    {
+      title: 'Burdock burrs cling to dog walks',
+      body: `Walk a dog past a **burdock** plant in late summer and you'll see **animal dispersal** happen live: rounded burrs covered in tiny hooks latch onto fur and trousers. The plant doesn't care which species moves it — every creature that walks past becomes a delivery service. It was these very burrs that gave a Swiss engineer the idea for Velcro.`,
+    },
+    {
+      title: 'Squirrels are forgetful gardeners',
+      body: `A grey squirrel buries hundreds of acorns each autumn — and forgets where many of them are. Those forgotten acorns then sprout into oak trees. So the squirrel is, accidentally, the oak's main planter. Britain's oak woodlands are partly there because of generations of squirrels with bad memories. The plant turns animal forgetfulness into free gardening.`,
+    },
+    {
+      title: 'Coconuts can sail an ocean',
+      body: `A coconut can float for several months on salt water and still sprout when it washes ashore. That's how coconut palms ended up on tropical islands all over the world — long before humans, the seeds were island-hopping by sea. Some have travelled thousands of kilometres in deep-ocean currents and still grown into trees after landing.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-04-q1',

@@ -21,6 +21,24 @@ A **predator** hunts other animals. **Prey** is what gets hunted. Both predator 
     { term: 'Predator', meaning: 'An animal that hunts others' },
     { term: 'Prey', meaning: 'An animal that is hunted' },
   ],
+  examples: [
+    {
+      title: 'Camel humps store fat, not water',
+      body: `A common myth says camels carry water in their humps. They don't — humps are fat reserves, used like packed lunches when food is scarce. The actual water-saving **adaptation** is in the camel's blood and kidneys, which can concentrate waste to recover almost every drop. A camel can lose 25% of its body water and still walk — humans collapse at about 10%.`,
+    },
+    {
+      title: 'Owls fly without a whoosh',
+      body: `Most birds make a "whoosh" when they fly. Owls don't, and their **adaptation** is in the feathers: comb-like edges break the air into many tiny streams instead of one loud rush. Their **prey** — mice and voles — never hear them coming. Aircraft engineers have copied the owl-wing pattern when designing quieter aeroplane and drone blades.`,
+    },
+    {
+      title: 'Stick insects stand still on purpose',
+      body: `A stick insect's **camouflage** isn't just shape — it's behaviour too. If touched, it sways gently as if it were a twig in the wind. If grabbed, it can drop a leg and grow a new one later. Body shape, plus the swaying behaviour, plus the sacrificial leg — three layers of adaptation in one small insect.`,
+    },
+    {
+      title: 'Cactus spines are leaves',
+      body: `Look closely at a cactus and you can see the **spines** grow from points along the trunk — exactly where leaves would grow on a normal plant. That's because they *are* leaves, shrunk over millions of years to stop desert sun stealing the cactus's water. The fat green trunk now does the photosynthesis the leaves used to do.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-06-q1',

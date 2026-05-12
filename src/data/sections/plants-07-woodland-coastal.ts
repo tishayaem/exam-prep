@@ -18,6 +18,24 @@ export const plants07WoodlandCoastal: Section = {
     { term: 'Understorey', meaning: 'Plants growing beneath the trees' },
     { term: 'Shelter', meaning: 'Protection from weather or predators' },
   ],
+  examples: [
+    {
+      title: 'Bluebells flower before the trees',
+      body: `An English **woodland** floor in late April is carpeted blue — but only for a few weeks. Bluebells rush to flower before the oak and beech leaves above grow back, grabbing every bit of sunlight while the **canopy** is still bare. By June the leaves close overhead, light vanishes, and the bluebells fade and disappear until the next spring.`,
+    },
+    {
+      title: 'Marram grass builds sand dunes',
+      body: `**Marram grass** has tangled roots that go metres deep through shifting sand. As wind blows sand against the leaves, the plant traps grains and the dune slowly grows higher around it. Without marram, much of Britain's **coastal** edge would just blow inland. The plant doesn't only survive the dune — it builds the dune.`,
+    },
+    {
+      title: 'Limpets have the strongest teeth',
+      body: `Limpets, those small cone-shaped shells stuck to seaside rocks, have teeth made of iron-stiffened protein — measured as the **strongest natural material known**, stronger than spider silk or even Kevlar. They use them to scrape algae off the rock. Their famous grip strength is partly down to suction, partly to those incredible teeth chewing into the rock surface.`,
+    },
+    {
+      title: 'Deer ears built for the woods',
+      body: `A roe deer's tall, mobile ears can swivel independently — one forward, one back — to track sounds in cluttered **woodland** where you can't see far. Pair that with a brown-flecked coat that vanishes against tree trunks and leaf litter, and the deer is built specifically for British woods: hearing, **camouflage** and a small body for narrow paths.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-07-q1',

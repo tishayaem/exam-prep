@@ -21,6 +21,24 @@ Frogs and butterflies go through **metamorphosis** — a *big* change in body sh
     { term: 'Pupa', meaning: 'A resting stage where transformation happens' },
     { term: 'Juvenile', meaning: 'A young animal that looks like a smaller adult' },
   ],
+  examples: [
+    {
+      title: 'Frogspawn jelly in February',
+      body: `In late winter, British ponds fill with **frogspawn** — clusters of black dots in clear jelly. The jelly tastes terrible to fish and warms slightly in the sun, like a tadpole greenhouse. From those black dots come tadpoles within two weeks, back legs in eight weeks, front legs by ten. By summer the same pond is full of tiny froglets hopping onto land for the first time.`,
+    },
+    {
+      title: 'Caterpillars eat their own weight daily',
+      body: `A young caterpillar can eat several times its own body weight in leaves each day — the entire **larva** stage is basically a moving stomach, stockpiling fuel. Then it stops, attaches to a twig, and goes still for two weeks as a **pupa**. Inside the chrysalis, those leaves get re-used to build wings, eyes and legs from scratch.`,
+    },
+    {
+      title: 'Robins fledge in three weeks',
+      body: `A robin egg hatches into a featherless **hatchling**, totally dependent on its parents. Two weeks later it has feathers and opens its eyes. At three weeks it leaves the nest as a **fledgling**. Robins go from helpless to flying in less time than it takes a human baby to learn to roll over. Speed matters: every extra day in the nest is another day for predators to find it.`,
+    },
+    {
+      title: 'Tadpoles eat their own tail',
+      body: `As a tadpole grows legs, its tail doesn't drop off — it gets resorbed back into the body for nutrients. So during the change into a froglet, the animal is partly eating itself, using the tail as raw material to build new organs. Nature wastes nothing. The frog barely needs food during the most dramatic part of its **metamorphosis**.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-05-q1',

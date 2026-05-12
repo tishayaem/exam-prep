@@ -17,6 +17,24 @@ After pollination, **fertilisation** happens inside the flower — pollen joins 
     { term: 'Nectar', meaning: 'Sweet liquid that attracts insects' },
     { term: 'Fertilisation', meaning: 'When pollen joins with an ovule to make a seed' },
   ],
+  examples: [
+    {
+      title: 'Bees see in invisible colour',
+      body: `Bees can see **ultraviolet light** that humans can't. To a bee, many flowers have glowing "landing strips" painted on them in UV — bright arrows pointing straight at the **nectar**. The flower has effectively put up an advert that only its **pollinators** can read. Photograph a dandelion under a UV filter and you'll see the secret pattern.`,
+    },
+    {
+      title: 'Hummingbirds drink while hovering',
+      body: `Not all pollinators are insects. In the Americas, **hummingbirds** hover in front of red, tubular flowers and lap up nectar with tongues that flick up to 20 times a second. The flower's shape only fits a long thin beak — keeping the nectar safe from short-tongued thieves. The bird gets fed; the flower gets pollinated. Trade complete.`,
+    },
+    {
+      title: 'Hay fever is wind pollination',
+      body: `Some plants don't bother with insects at all. Grasses, oak, birch and pine dump huge amounts of light, dry **pollen** into the wind and hope some of it lands on the right flower. Most lands in the wrong place — including up human noses. That itchy sneezing every June is your immune system overreacting to plant baby-making.`,
+    },
+    {
+      title: 'Try this: watch a bee at work',
+      body: `Find a lavender bush or a patch of clover on a sunny day. Watch one bee for a full minute. Count how many flowers it visits. You'll see it brush against the anthers, get dusted with yellow, then carry that dust to the next flower. Each visit is one tiny act of **pollination** — done by accident, while the bee is just out for a meal.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-02-q1',

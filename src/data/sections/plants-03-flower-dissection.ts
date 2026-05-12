@@ -24,6 +24,24 @@ Around the outside: **petals** to attract insects, and **sepals** which protecte
     { term: 'Ovary', meaning: 'Contains ovules' },
     { term: 'Ovule', meaning: 'Becomes a seed after fertilisation' },
   ],
+  examples: [
+    {
+      title: 'Lily pollen stains everything',
+      body: `Florists usually snip the **anthers** out of cut lilies because their pollen leaves bright orange stains on clothes, tablecloths and even the lily's own petals. That's how much pollen one **stamen** can carry. If you ever see a lily in a shop with its anthers cut off, it's not damaged — it's just been protected from itself.`,
+    },
+    {
+      title: 'Snapdragons need bee weight',
+      body: `A snapdragon's mouth-shaped flower stays clamped shut unless a heavy enough bee lands on its lip. Smaller insects can't open it. This is the flower being picky: it only opens for bees big enough to actually carry pollen between flowers. Press the sides of a snapdragon yourself and you can pop it open — that's the trick the right bee performs.`,
+    },
+    {
+      title: 'Try this: dissect a lily',
+      body: `A supermarket lily is the easiest flower to take apart. Peel off the **petals**, then the green **sepals** underneath. The thin filaments standing up are the **stamens** — touch an **anther** for a fingerful of pollen. In the middle is one tall stalk, the **carpel**, with the sticky **stigma** on top. Inside the swollen base lives the **ovary** and the future seeds.`,
+    },
+    {
+      title: 'Carpel sounds like carry',
+      body: `A useful trick for remembering flower parts: **carpel** ends in the same letter as **female** (and "carry" — it carries the ovules). **Stamen** ends with the same letter as **male**. The flower's anatomy follows the same letter pattern. Year 5 papers love testing whether you can name the male part vs the female part.`,
+    },
+  ],
   questions: [
     {
       id: 'plants-03-q1',
