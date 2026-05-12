@@ -7,3 +7,5 @@ dist
 
 # Playwright MCP debug artifacts
 .playwright-mcp/
+/*.png
+

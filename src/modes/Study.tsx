@@ -55,8 +55,10 @@ export function Study() {
       {/* Diagram — optional visual anchor between lesson and examples */}
       {Diagram && (
         <section>
-          <div className="rounded-[22px] border border-rule bg-off p-4 sm:p-8 flex justify-center overflow-hidden">
-            <Diagram />
+          <div className="rounded-[22px] border border-rule bg-off py-4 sm:p-8 px-2 sm:px-8 overflow-x-auto">
+            <div className="flex justify-center min-w-[500px]">
+              <Diagram />
+            </div>
           </div>
         </section>
       )}
