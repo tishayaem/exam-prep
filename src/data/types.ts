@@ -14,6 +14,11 @@ export interface VocabularyTerm {
   meaning: string;
 }
 
+export interface Example {
+  title: string;
+  body: string;
+}
+
 export interface Question {
   id: string;
   sectionId: string;
@@ -41,6 +46,12 @@ export interface Section {
   lesson: string;
   vocabulary: VocabularyTerm[];
   questions: Question[];
+  /**
+   * Real-world examples, analogies, fun facts, or "try this" prompts that
+   * bring the lesson to life. Rendered as cards between Lesson and Vocabulary
+   * in Study mode. Never used for grading.
+   */
+  examples?: Example[];
   /**
    * Optional "Want to know more?" extension content rendered in Study mode only.
    * Never used for grading or quizzes — extras are for curiosity, not testing.

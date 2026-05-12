@@ -26,6 +26,9 @@ export function Study() {
   }
 
   const sectionNum = String(section.number).padStart(2, '0');
+  const hasExamples = !!section.examples && section.examples.length > 0;
+  const vocabNum = hasExamples ? '03' : '02';
+  const ctaStepLabel = hasExamples ? 'Step 04' : 'Step 03';
 
   return (
     <article className="space-y-14 pb-8">
@@ -48,10 +51,43 @@ export function Study() {
         </div>
       </section>
 
+      {/* Examples — concrete real-world hooks, optional */}
+      {hasExamples && (
+        <section>
+          <SectionHeader
+            number="02"
+            title="In the world"
+            trailing={`${section.examples!.length} example${section.examples!.length === 1 ? '' : 's'}`}
+          />
+          <div className="grid gap-4">
+            {section.examples!.map((ex, i) => {
+              const tag = VOCAB_TAGS[i % VOCAB_TAGS.length];
+              return (
+                <div
+                  key={i}
+                  className="border border-rule rounded-[22px] p-5 sm:p-6"
+                >
+                  <div
+                    className={`${TAG_BG[tag]} text-[13px] font-bold px-3 py-1.5 rounded-full inline-block mb-3`}
+                  >
+                    {ex.title}
+                  </div>
+                  <div className="text-[15px] sm:text-[16px] leading-relaxed text-ink space-y-3">
+                    {ex.body.split('\n\n').map((para, j) => (
+                      <p key={j}>{renderInline(para)}</p>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {/* Vocab */}
       <section>
         <SectionHeader
-          number="02"
+          number={vocabNum}
           title="Words to know"
           trailing={`${section.vocabulary.length} terms`}
         />
@@ -125,7 +161,7 @@ export function Study() {
       <section className="bg-ink text-paper rounded-[28px] p-7 sm:p-10 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
         <div>
           <div className="text-[12px] font-bold text-neon-green uppercase tracking-[0.14em]">
-            Step 03
+            {ctaStepLabel}
           </div>
           <div className="font-display text-2xl sm:text-[36px] font-bold tracking-[-0.025em] mt-2 leading-tight">
             Reckon you've got it?
