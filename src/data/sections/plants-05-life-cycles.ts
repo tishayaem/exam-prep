@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { PlantsLifeCyclesDiagram } from '../../diagrams/plants-05-life-cycles';
 
 export const plants05LifeCycles: Section = {
   id: 'plants-05-life-cycles',
@@ -6,6 +7,7 @@ export const plants05LifeCycles: Section = {
   pack: 'plants',
   number: 5,
   title: 'Life Cycles of Animals',
+  diagram: PlantsLifeCyclesDiagram,
   lesson: `Every animal has a **life cycle** — the stages it goes through from birth to adult. Different groups of animals have very different cycles.
 
 - **Frog** (amphibian): egg → tadpole → tadpole with legs → froglet → adult frog
