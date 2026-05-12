@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthDayNightDiagram } from '../../diagrams/earth-02-day-night';
 
 export const earth02DayNight: Section = {
   id: 'earth-02-day-night',
@@ -6,6 +7,7 @@ export const earth02DayNight: Section = {
   pack: 'earth-space-forces',
   number: 2,
   title: 'Day, Night and Shadows',
+  diagram: EarthDayNightDiagram,
   lesson: `The **Earth spins on its axis** once every 24 hours. The side facing the Sun gets daytime; the side facing away gets nighttime. The **Sun isn't really moving across the sky** — the Earth is rotating.
 
 **Shadows change during the day** because the angle of sunlight changes:
