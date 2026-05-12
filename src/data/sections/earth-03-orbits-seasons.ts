@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthOrbitsSeasonsDiagram } from '../../diagrams/earth-03-orbits-seasons';
 
 export const earth03OrbitsSeasons: Section = {
   id: 'earth-03-orbits-seasons',
@@ -6,6 +7,7 @@ export const earth03OrbitsSeasons: Section = {
   pack: 'earth-space-forces',
   number: 3,
   title: 'Orbits, Seasons and the Tilt of the Earth',
+  diagram: EarthOrbitsSeasonsDiagram,
   lesson: `Three big facts:
 
 - The **Earth orbits the Sun** once every **year** (about 365 days).
