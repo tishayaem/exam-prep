@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthMoonPhasesDiagram } from '../../diagrams/earth-04-moon-phases';
 
 export const earth04MoonPhases: Section = {
   id: 'earth-04-moon-phases',
@@ -6,6 +7,7 @@ export const earth04MoonPhases: Section = {
   pack: 'earth-space-forces',
   number: 4,
   title: 'Phases of the Moon',
+  diagram: EarthMoonPhasesDiagram,
   lesson: `The Moon **doesn\'t actually change shape** — it just *looks* like it does, because we see different amounts of its **lit side** as it orbits Earth.
 
 Half of the Moon is always lit by the Sun (the half facing the Sun). As the Moon orbits Earth, we see more or less of that lit half:
