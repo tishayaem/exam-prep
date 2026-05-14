@@ -128,6 +128,23 @@ Around the outside: **petals** to attract insects, and **sepals** which protecte
       difficulty: 2,
       source: 'Term 1 Section 3 — cloze variant',
     },
+    {
+      id: 'plants-03-q7',
+      sectionId: 'plants-03-flower-dissection',
+      type: 'match',
+      prompt: 'Match each flower part to its job.',
+      pairs: [
+        { left: 'Anther', right: 'Makes pollen' },
+        { left: 'Stigma', right: 'Catches pollen' },
+        { left: 'Petal', right: 'Attracts insects' },
+        { left: 'Sepal', right: 'Protects the bud' },
+      ],
+      answer: '',
+      explanation:
+        'Each flower part has one specific job. The **anther** (sitting on the stamen) makes pollen; the **stigma** at the top of the carpel is sticky and catches it; **petals** draw insects in with colour and scent; **sepals** were the green wrapping that protected the bud before it opened.',
+      difficulty: 2,
+      source: 'Term 1 Section 3 — match variant',
+    },
   ],
   deeper: `Some flowers cheat. The **bee orchid** has petals shaped — and coloured — to look *exactly* like a female bee, and it even gives off the same scent. Male bees try to mate with it, fail, get covered in pollen, and fly off frustrated to try the next "female". The orchid never had to make any nectar at all. Sneaky.
 

@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { EarthSphericalBodiesDiagram } from '../../diagrams/earth-01-spherical-bodies';
 
 export const earth01SphericalBodies: Section = {
   id: 'earth-01-spherical-bodies',
@@ -6,6 +7,7 @@ export const earth01SphericalBodies: Section = {
   pack: 'earth-space-forces',
   number: 1,
   title: 'Earth, Sun and Moon: Spherical Bodies',
+  diagram: EarthSphericalBodiesDiagram,
   lesson: `The Earth, Sun and Moon are all **spherical** — roughly perfect round 3D shapes. People once thought the Earth was flat, but we have lots of evidence it isn't:
 
 - **Photographs from space** show curved surfaces.

@@ -296,7 +296,7 @@ function Practice({ mistakesCount }: { mistakesCount: number }) {
               ? 'Empty — nice'
               : `${mistakesCount} waiting · do first`
           }
-          desc="The ones you got wrong. Beat them twice to graduate."
+          desc="The ones you got wrong. Beat each one twice in a row and it's gone."
           bg="bg-neon-pink"
           fg="text-paper"
           chipClass="text-neon-yellow"

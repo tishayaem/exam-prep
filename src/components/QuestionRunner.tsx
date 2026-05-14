@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { grade, type GradeResult } from '../lib/grading';
+import { grade, gradeMatch, gradeSequence, type GradeResult } from '../lib/grading';
 import type { Question } from '../data/types';
+import { MatchAnswer } from './MatchAnswer';
+import { SequenceAnswer } from './SequenceAnswer';
 
 type Verdict = 'correct' | 'wrong' | null;
 
@@ -9,8 +11,12 @@ interface Props {
   /** When false (e.g. Mock Test), hide the explanation panel — the parent
    *  drives the flow via onResolved + onNext. */
   showFeedback?: boolean;
-  /** Called once a verdict is locked in (after self-grade if needed). */
-  onResolved: (correct: boolean) => void;
+  /**
+   * Called once a verdict is locked in (after self-grade if needed). `chosen`
+   * is a pre-formatted human-readable string of what the user picked or typed,
+   * suitable for the Mistakes "You said X" chip. Undefined when not applicable.
+   */
+  onResolved: (correct: boolean, chosen?: string) => void;
   /** Optional "Next" button label (Quiz / Mistakes / Mock Test all vary). */
   nextLabel?: string;
   onNext?: () => void;
@@ -24,6 +30,8 @@ export function QuestionRunner({
   onNext,
 }: Props) {
   const [input, setInput] = useState('');
+  const [userPairs, setUserPairs] = useState<Record<string, string>>({});
+  const [userOrder, setUserOrder] = useState<string[]>([]);
   const [verdict, setVerdict] = useState<Verdict>(null);
   const [borderline, setBorderline] = useState(false);
 
@@ -35,24 +43,36 @@ export function QuestionRunner({
       handleChoice(input);
       return;
     }
+    if (question.type === 'match' && question.pairs) {
+      finalise(gradeMatch(userPairs, question.pairs), formatPairsChosen(userPairs));
+      return;
+    }
+    if (question.type === 'sequence' && question.sequence) {
+      finalise(
+        gradeSequence(userOrder, question.sequence),
+        userOrder.length > 0 ? userOrder.join(' → ') : undefined,
+      );
+      return;
+    }
+    const typed = input.trim() || undefined;
     const result: GradeResult = grade(input, question.answer, question.acceptable);
     if (result === 'borderline') {
       setBorderline(true);
       return;
     }
-    finalise(result === 'correct');
+    finalise(result === 'correct', typed);
   }
 
   function handleChoice(choice: string) {
     setInput(choice);
     const canonical = firstAnswer(question.answer);
-    finalise(choice.trim().toLowerCase() === canonical.trim().toLowerCase());
+    finalise(choice.trim().toLowerCase() === canonical.trim().toLowerCase(), choice);
   }
 
-  function finalise(correct: boolean) {
+  function finalise(correct: boolean, chosen?: string) {
     setVerdict(correct ? 'correct' : 'wrong');
     setBorderline(false);
-    onResolved(correct);
+    onResolved(correct, chosen);
   }
 
   return (
@@ -65,6 +85,10 @@ export function QuestionRunner({
         question={question}
         input={input}
         setInput={setInput}
+        userPairs={userPairs}
+        setUserPairs={setUserPairs}
+        userOrder={userOrder}
+        setUserOrder={setUserOrder}
         locked={locked}
         verdict={verdict}
         onChoice={handleChoice}
@@ -72,21 +96,30 @@ export function QuestionRunner({
       />
 
       {borderline && verdict === null && (
-        <div className="border border-dashed border-neon-yellow rounded-2xl p-5 space-y-3 animate-feedback-in bg-neon-yellow/15">
-          <p className="font-bold">Close! Were you right?</p>
-          <p className="text-sm text-inkSoft">
-            Expected answer: <em>{firstAnswer(question.answer)}</em>
+        <div className="border border-dashed border-neon-yellow rounded-2xl p-5 sm:p-6 space-y-4 animate-feedback-in bg-neon-yellow/15">
+          <div className="text-[12px] font-bold uppercase tracking-[0.14em] text-inkSoft">
+            The answer is
+          </div>
+          <div className="font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em] leading-tight">
+            <span className="bg-neon-yellow px-1.5 text-ink">
+              {firstAnswer(question.answer)}
+            </span>
+          </div>
+          <p className="text-[14px] text-ink leading-relaxed">
+            Did you mean that? If it's just a spelling slip, tap{' '}
+            <strong>Yes</strong>. If you wrote a different word, tap{' '}
+            <strong>No</strong>.
           </p>
           <div className="flex gap-3">
             <button
-              onClick={() => finalise(true)}
-              className="flex-1 bg-neon-green text-ink rounded-full px-5 py-3 font-bold hover:opacity-90"
+              onClick={() => finalise(true, input.trim() || undefined)}
+              className="flex-1 bg-neon-green text-ink rounded-full px-6 py-4 font-bold text-[16px] hover:opacity-90"
             >
               Yes ✓
             </button>
             <button
-              onClick={() => finalise(false)}
-              className="flex-1 bg-neon-pink text-paper rounded-full px-5 py-3 font-bold hover:opacity-90"
+              onClick={() => finalise(false, input.trim() || undefined)}
+              className="flex-1 bg-neon-pink text-paper rounded-full px-6 py-4 font-bold text-[16px] hover:opacity-90"
             >
               No ✗
             </button>
@@ -97,7 +130,7 @@ export function QuestionRunner({
       {verdict && showFeedback && (
         <FeedbackPanel
           verdict={verdict}
-          answer={firstAnswer(question.answer)}
+          answer={formatAnswer(question)}
           explanation={question.explanation}
           onNext={onNext}
           nextLabel={nextLabel}
@@ -120,6 +153,10 @@ function AnswerArea({
   question,
   input,
   setInput,
+  userPairs,
+  setUserPairs,
+  userOrder,
+  setUserOrder,
   locked,
   verdict,
   onChoice,
@@ -128,11 +165,41 @@ function AnswerArea({
   question: Question;
   input: string;
   setInput: (v: string) => void;
+  userPairs: Record<string, string>;
+  setUserPairs: (next: Record<string, string>) => void;
+  userOrder: string[];
+  setUserOrder: (next: string[]) => void;
   locked: boolean;
   verdict: Verdict;
   onChoice: (c: string) => void;
   onSubmit: () => void;
 }) {
+  if (question.type === 'match' && question.pairs) {
+    return (
+      <MatchAnswer
+        pairs={question.pairs}
+        userPairs={userPairs}
+        setUserPairs={setUserPairs}
+        locked={locked}
+        verdict={verdict}
+        onSubmit={onSubmit}
+      />
+    );
+  }
+
+  if (question.type === 'sequence' && question.sequence) {
+    return (
+      <SequenceAnswer
+        items={question.sequence}
+        userOrder={userOrder}
+        setUserOrder={setUserOrder}
+        locked={locked}
+        verdict={verdict}
+        onSubmit={onSubmit}
+      />
+    );
+  }
+
   if (question.type === 'mcq' || question.type === 'truefalse') {
     const choices =
       question.choices ?? (question.type === 'truefalse' ? ['True', 'False'] : []);
@@ -265,4 +332,25 @@ export function FeedbackPanel({
 
 export function firstAnswer(a: string | string[]): string {
   return Array.isArray(a) ? a[0] : a;
+}
+
+function formatPairsChosen(userPairs: Record<string, string>): string | undefined {
+  const entries = Object.entries(userPairs);
+  if (entries.length === 0) return undefined;
+  return entries.map(([l, r]) => `${l} → ${r}`).join('; ');
+}
+
+/**
+ * Canonical answer rendered for the kid in feedback panels and the Mistakes
+ * list. For match/sequence, the structured fields are the source of truth and
+ * `question.answer` is empty — render them as readable arrow strings.
+ */
+export function formatAnswer(question: Question): string {
+  if (question.type === 'match' && question.pairs) {
+    return question.pairs.map((p) => `${p.left} → ${p.right}`).join('; ');
+  }
+  if (question.type === 'sequence' && question.sequence) {
+    return question.sequence.join(' → ');
+  }
+  return firstAnswer(question.answer);
 }

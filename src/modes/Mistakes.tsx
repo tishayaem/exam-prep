@@ -4,7 +4,7 @@ import { scienceQuestions, scienceSections } from '../data/science';
 import type { AttemptLog } from '../lib/storage';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
-import { QuestionRunner, firstAnswer } from '../components/QuestionRunner';
+import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
 import { SectionHeader } from '../components/Editorial';
 import type { Question } from '../data/types';
 
@@ -79,7 +79,9 @@ export function Mistakes() {
         <QuestionRunner
           key={`${active.id}-${redoKey}`}
           question={active}
-          onResolved={(correct) => recordAttempt(active.id, correct, active.difficulty)}
+          onResolved={(correct, chosen) =>
+            recordAttempt(active.id, correct, active.difficulty, chosen)
+          }
           onNext={() => {
             // Re-mount so the user can answer it again to build the streak.
             setRedoKey((k) => k + 1);
@@ -109,8 +111,8 @@ export function Mistakes() {
           in a row.
         </h1>
         <p className="text-[15px] text-inkSoft mt-4 max-w-xl leading-relaxed">
-          Get a question right twice in a row and it graduates out of this
-          list. Get it wrong and the counter resets.
+          Get a question right twice in a row and it leaves this list. Get it
+          wrong and the counter starts over.
         </p>
       </header>
 
@@ -126,6 +128,7 @@ export function Mistakes() {
               index={i}
               question={q}
               streak={correctStreak(q.id, state.attempts)}
+              yourAnswer={lastWrongAnswer(q.id, state.attempts)}
               onRedo={() => setActiveId(q.id)}
             />
           ))}
@@ -156,18 +159,15 @@ function MistakeRow({
   index,
   question,
   streak,
+  yourAnswer,
   onRedo,
 }: {
   index: number;
   question: Question;
   streak: number;
+  yourAnswer: string | null;
   onRedo: () => void;
 }) {
-  // Last wrong answer the user gave for this question, if we can recover it
-  // — only MCQ/truefalse store the user's actual choice; for free text we
-  // just say "Not the right one".
-  const yourAnswer = lastWrongAnswer(question);
-
   return (
     <div className="border border-rule rounded-[22px] p-5 sm:p-6 grid gap-4 sm:gap-6 grid-cols-[40px_1fr] sm:grid-cols-[40px_1fr_180px_auto] items-center">
       <div className="font-display text-2xl font-bold text-inkSoft tabular-nums self-start sm:self-center">
@@ -190,7 +190,7 @@ function MistakeRow({
           <span>
             Answer is{' '}
             <span className="bg-neon-green text-ink px-1.5 py-0.5">
-              {firstAnswer(question.answer)}
+              {formatAnswer(question)}
             </span>
           </span>
         </div>
@@ -198,7 +198,7 @@ function MistakeRow({
 
       <div className="flex flex-col gap-2 col-span-2 sm:col-span-1">
         <div className="text-[10px] text-inkSoft font-bold uppercase tracking-[0.1em] whitespace-nowrap">
-          Streak to graduate
+          Right 2 in a row
         </div>
         <div className="flex gap-1.5">
           {[0, 1].map((p) => (
@@ -214,7 +214,7 @@ function MistakeRow({
 
       <button
         onClick={onRedo}
-        className="bg-ink text-paper rounded-full px-5 py-2.5 font-bold text-[13px] hover:bg-neon-pink transition-colors col-span-2 sm:col-span-1 justify-self-stretch sm:justify-self-end"
+        className="bg-ink text-paper rounded-full px-7 py-3.5 font-bold text-[14px] hover:bg-neon-pink transition-colors col-span-2 sm:col-span-1 justify-self-stretch sm:justify-self-end"
       >
         Redo ›
       </button>
@@ -223,14 +223,18 @@ function MistakeRow({
 }
 
 /**
- * For MCQ-style questions, we don't currently log the user's *chosen* wrong
- * answer — only the boolean correctness — so we omit the "You said X" chip
- * unless we can derive a sensible fallback. Returns null when we can't.
+ * Walks back through the attempts log to find the most recent *wrong* attempt
+ * for this question and returns the answer the user gave then. Older entries
+ * (pre-`chosen`-field) won't have one — we return null so the chip stays
+ * hidden rather than showing a misleading placeholder.
  */
-function lastWrongAnswer(_question: Question): string | null {
-  // The attempt log stores correctness only, not the chosen option. Showing
-  // an honest "—" is better than fabricating one. If we ever start logging
-  // the chosen answer, surface it here.
+function lastWrongAnswer(id: string, attempts: readonly AttemptLog[]): string | null {
+  for (let i = attempts.length - 1; i >= 0; i--) {
+    const a = attempts[i];
+    if (a.id !== id) continue;
+    if (a.correct) continue;
+    return a.chosen ?? null;
+  }
   return null;
 }
 

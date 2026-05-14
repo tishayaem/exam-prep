@@ -55,3 +55,19 @@ export function grade(
   if (best >= 0.4) return 'borderline';
   return 'wrong';
 }
+
+export function gradeMatch(
+  userPairs: Record<string, string>,
+  canonical: { left: string; right: string }[],
+): boolean {
+  if (Object.keys(userPairs).length !== canonical.length) return false;
+  return canonical.every((p) => userPairs[p.left] === p.right);
+}
+
+export function gradeSequence(
+  userOrder: readonly string[],
+  canonical: readonly string[],
+): boolean {
+  if (userOrder.length !== canonical.length) return false;
+  return userOrder.every((item, i) => item === canonical[i]);
+}

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useBlocker } from 'react-router-dom';
 import { scienceQuestions, scienceSections } from '../data/science';
 import { useProgress } from '../lib/storage';
-import { QuestionRunner, firstAnswer } from '../components/QuestionRunner';
+import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
 import { sample } from '../lib/shuffle';
 import type { Question } from '../data/types';
 
@@ -33,6 +33,40 @@ export function MockTest() {
     const id = window.setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => window.clearTimeout(id);
   }, [phase, secondsLeft]);
+
+  // Only block once she's actually invested an answer — losing a freshly
+  // started, untouched run isn't worth the warning friction. Per-question
+  // attempts are already saved by `recordAttempt`; what gets lost on quit is
+  // the review screen (score, topic breakdown), not the underlying progress.
+  const inProgress = phase === 'running' && answers.length > 0;
+
+  // Intercept in-app navigation (← Home button, browser back, any <Link>).
+  // beforeunload only catches tab close / refresh, so we need both.
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      inProgress && currentLocation.pathname !== nextLocation.pathname,
+  );
+
+  useEffect(() => {
+    if (!inProgress) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      // Some older Chromium needs returnValue set; modern browsers ignore the
+      // string but show a generic "Leave site?" prompt as long as preventDefault
+      // ran during the event.
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [inProgress]);
+
+  // If the timer expires while the quit modal is open, drop the block so she
+  // can see her result instead of being stuck on the prompt.
+  useEffect(() => {
+    if (blocker.state === 'blocked' && !inProgress) {
+      blocker.reset?.();
+    }
+  }, [blocker, inProgress]);
 
   function start() {
     const picked = sample(scienceQuestions, TEST_QUESTIONS);
@@ -189,7 +223,7 @@ export function MockTest() {
                   <p className="text-[13px] mt-2.5">
                     Answer:{' '}
                     <span className="bg-neon-yellow px-1.5 font-semibold">
-                      {firstAnswer(q.answer)}
+                      {formatAnswer(q)}
                     </span>
                   </p>
                   <p className="text-[13px] text-ink mt-2 leading-relaxed">
@@ -253,13 +287,78 @@ export function MockTest() {
         key={q.id}
         question={q}
         showFeedback={false}
-        onResolved={(correct) => {
+        onResolved={(correct, chosen) => {
           setAnswers((arr) => [...arr, { questionId: q.id, correct }]);
-          recordAttempt(q.id, correct, q.difficulty);
+          recordAttempt(q.id, correct, q.difficulty, chosen);
         }}
         onNext={() => setIndex((i) => i + 1)}
         nextLabel={index + 1 < paper.length ? 'Next ›' : 'Finish test ›'}
       />
+
+      {blocker.state === 'blocked' && (
+        <QuitConfirm
+          answered={answers.length}
+          total={paper.length}
+          onKeepGoing={() => blocker.reset?.()}
+          onQuit={() => blocker.proceed?.()}
+        />
+      )}
+    </div>
+  );
+}
+
+function QuitConfirm({
+  answered,
+  total,
+  onKeepGoing,
+  onQuit,
+}: {
+  answered: number;
+  total: number;
+  onKeepGoing: () => void;
+  onQuit: () => void;
+}) {
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="quit-confirm-title"
+      className="fixed inset-0 z-50 bg-ink/60 flex items-center justify-center p-5 animate-feedback-in"
+    >
+      <div className="bg-paper rounded-[28px] max-w-[460px] w-full p-7 sm:p-8 space-y-5 border-[1.5px] border-ink">
+        <div>
+          <div className="text-[12px] font-bold text-neon-pink uppercase tracking-[0.14em]">
+            Quit the test?
+          </div>
+          <h2
+            id="quit-confirm-title"
+            className="font-display text-2xl sm:text-[28px] font-bold tracking-[-0.022em] mt-2 leading-tight"
+          >
+            You've answered {answered} of {total}.
+          </h2>
+          <p className="text-[14px] text-ink mt-3 leading-relaxed">
+            If you quit now, you won't see your test result. Your answers are
+            still saved either way.
+          </p>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button
+            type="button"
+            autoFocus
+            onClick={onKeepGoing}
+            className="flex-1 bg-ink text-paper rounded-full px-6 py-4 font-bold text-[16px] hover:bg-neon-pink transition-colors"
+          >
+            Keep going
+          </button>
+          <button
+            type="button"
+            onClick={onQuit}
+            className="flex-1 bg-paper text-inkSoft border-[1.5px] border-rule rounded-full px-6 py-4 font-bold text-[16px] hover:border-ink hover:text-ink transition-colors"
+          >
+            Quit anyway
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

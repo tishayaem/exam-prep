@@ -8,6 +8,12 @@ export interface AttemptLog {
   id: string;
   correct: boolean;
   ts: number;
+  /**
+   * Pre-formatted human-readable string of what the user chose / typed,
+   * used by the Mistakes list to show "You said X". Optional because old
+   * entries (and contexts where it's not meaningful) won't have it.
+   */
+  chosen?: string;
 }
 
 export interface ProgressState {
@@ -15,8 +21,6 @@ export interface ProgressState {
   attempts: AttemptLog[];
   xp: number;
   streak: { count: number; lastDay: string | null };
-  badges: string[];
-  settings: { sound: boolean };
   /** Whoever is using the app. Undefined until the child sets it. */
   childName?: string;
 }
@@ -26,8 +30,6 @@ const initial: ProgressState = {
   attempts: [],
   xp: 0,
   streak: { count: 0, lastDay: null },
-  badges: [],
-  settings: { sound: true },
 };
 
 function load(): ProgressState {
@@ -88,7 +90,7 @@ export function useProgress() {
   const state = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
   const recordAttempt = useCallback(
-    (id: string, correct: boolean, difficulty: 1 | 2 | 3) => {
+    (id: string, correct: boolean, difficulty: 1 | 2 | 3, chosen?: string) => {
       set((s) => {
         const prevLevel = (s.box[id] ?? 1) as LeitnerLevel;
         const nextLevel = correct
@@ -96,10 +98,14 @@ export function useProgress() {
           : (Math.max(1, prevLevel - 1) as LeitnerLevel);
         const xpGained = correct ? difficulty * 2 + 1 : 0;
         const withStreak = recordStreak(s);
+        const entry: AttemptLog =
+          chosen !== undefined
+            ? { id, correct, ts: Date.now(), chosen }
+            : { id, correct, ts: Date.now() };
         return {
           ...withStreak,
           box: { ...s.box, [id]: nextLevel },
-          attempts: [...s.attempts, { id, correct, ts: Date.now() }].slice(-2000),
+          attempts: [...s.attempts, entry].slice(-2000),
           xp: withStreak.xp + xpGained,
         };
       });

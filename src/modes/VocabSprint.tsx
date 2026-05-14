@@ -2,22 +2,55 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findSection, scienceSections } from '../data/science';
 import { shuffle, sample } from '../lib/shuffle';
-import type { VocabularyTerm } from '../data/types';
+import { useProgress } from '../lib/storage';
+import type { Section } from '../data/types';
 
 const SPRINT_SECONDS = 45;
 
 type Card = {
+  /** Stable Leitner-tracked ID per vocab term, e.g. "vocab:plants-03-flower-dissection:stigma". */
+  id: string;
   term: string;
   meaning: string;
   distractors: string[];
 };
 
+type SourceTerm = { id: string; term: string; meaning: string };
+
+function vocabId(sectionId: string, term: string): string {
+  const slug = term
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+  return `vocab:${sectionId}:${slug}`;
+}
+
+function expand(s: Section): SourceTerm[] {
+  return s.vocabulary.map((v) => ({
+    id: vocabId(s.id, v.term),
+    term: v.term,
+    meaning: v.meaning,
+  }));
+}
+
 export function VocabSprint() {
   const { sectionId } = useParams();
+  // Key by sectionId so switching scope (between sections or to/from
+  // all-sections) re-mounts the inner body and resets phase / score / timer.
+  return <VocabSprintBody key={sectionId ?? '__all__'} sectionId={sectionId} />;
+}
 
-  const allVocab = useMemo(() => {
-    if (sectionId) return findSection(sectionId)?.vocabulary ?? [];
-    return scienceSections.flatMap((s) => s.vocabulary);
+function VocabSprintBody({ sectionId }: { sectionId: string | undefined }) {
+  const { recordAttempt } = useProgress();
+
+  const allVocab = useMemo<SourceTerm[]>(() => {
+    if (sectionId) {
+      const s = findSection(sectionId);
+      return s ? expand(s) : [];
+    }
+    return scienceSections.flatMap(expand);
   }, [sectionId]);
 
   const [cards, setCards] = useState<Card[]>(() => buildCards(allVocab));
@@ -173,6 +206,10 @@ export function VocabSprint() {
     setPickedAt(option);
     const correct = option === card.meaning;
     if (correct) setScore((s) => s + 1);
+    // Sprint counts as a difficulty-1 attempt: each tap nudges the term's
+    // Leitner box up or down and adds to the global attempt log, so progress
+    // earned here shows up in XP, streak, and (eventually) Flashcards.
+    recordAttempt(card.id, correct, 1, option);
     // Asymmetric: snap forward on correct, linger on wrong so she has time to
     // read the right meaning (which is flashing green alongside her pink pick).
     window.setTimeout(() => {
@@ -248,12 +285,12 @@ export function VocabSprint() {
   );
 }
 
-function buildCards(vocab: VocabularyTerm[]): Card[] {
+function buildCards(vocab: SourceTerm[]): Card[] {
   if (vocab.length < 4) return [];
   return shuffle(vocab).map((v) => {
     const pool = vocab.filter((other) => other.meaning !== v.meaning);
     const distractors = sample(pool, 3).map((d) => d.meaning);
-    return { term: v.term, meaning: v.meaning, distractors };
+    return { id: v.id, term: v.term, meaning: v.meaning, distractors };
   });
 }
 

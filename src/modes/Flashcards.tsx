@@ -2,16 +2,22 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findSection, scienceSections } from '../data/science';
 import { useProgress } from '../lib/storage';
-import { firstAnswer } from '../components/QuestionRunner';
+import { formatAnswer } from '../components/QuestionRunner';
 import { FlipCard } from '../components/FlipCard';
 import type { Question } from '../data/types';
 import { shuffle } from '../lib/shuffle';
 import { burstFromEvent } from '../lib/confetti';
 
-type Recall = 'got-it' | 'almost' | 'nope';
+type Recall = 'got-it' | 'nope';
 
 export function Flashcards() {
   const { sectionId } = useParams();
+  // Key by sectionId so jumping from one deck to another (or to/from
+  // all-sections) re-mounts FlashcardsBody and resets index/revealed/stats.
+  return <FlashcardsBody key={sectionId ?? '__all__'} sectionId={sectionId} />;
+}
+
+function FlashcardsBody({ sectionId }: { sectionId: string | undefined }) {
   const { state, recordAttempt } = useProgress();
 
   const pool = useMemo(() => {
@@ -25,7 +31,7 @@ export function Flashcards() {
 
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [stats, setStats] = useState({ got: 0, almost: 0, nope: 0 });
+  const [stats, setStats] = useState({ got: 0, nope: 0 });
 
   if (deck.length === 0) {
     return (
@@ -42,16 +48,13 @@ export function Flashcards() {
   const q = deck[index];
 
   function rate(recall: Recall, e: React.MouseEvent<HTMLButtonElement>) {
-    if (recall === 'got-it') {
-      recordAttempt(q.id, true, q.difficulty);
+    const correct = recall === 'got-it';
+    recordAttempt(q.id, correct, q.difficulty);
+    if (correct) {
       burstFromEvent(e);
       setStats((s) => ({ ...s, got: s.got + 1 }));
-    } else if (recall === 'nope') {
-      recordAttempt(q.id, false, q.difficulty);
-      setStats((s) => ({ ...s, nope: s.nope + 1 }));
     } else {
-      // 'almost' — same Leitner level, no XP, just track the count
-      setStats((s) => ({ ...s, almost: s.almost + 1 }));
+      setStats((s) => ({ ...s, nope: s.nope + 1 }));
     }
     setRevealed(false);
     setIndex((i) => i + 1);
@@ -60,7 +63,7 @@ export function Flashcards() {
   function resetRun() {
     setIndex(0);
     setRevealed(false);
-    setStats({ got: 0, almost: 0, nope: 0 });
+    setStats({ got: 0, nope: 0 });
   }
 
   return (
@@ -73,7 +76,6 @@ export function Flashcards() {
         </div>
         <div className="flex gap-3 text-xs text-inkSoft">
           <Pip color="bg-neon-green" value={stats.got} />
-          <Pip color="bg-neon-yellow" value={stats.almost} />
           <Pip color="bg-neon-pink" value={stats.nope} />
         </div>
       </div>
@@ -113,7 +115,7 @@ export function Flashcards() {
             <div className="max-w-[760px]">
               <div className="font-display text-4xl sm:text-[52px] font-bold tracking-[-0.03em] text-paper leading-[1.05]">
                 <span className="bg-neon-green text-ink px-2.5">
-                  {firstAnswer(q.answer)}
+                  {formatAnswer(q)}
                 </span>
               </div>
               <div className="text-[15px] sm:text-[16px] text-[#C5C5CC] mt-4 leading-relaxed max-w-[600px]">
@@ -128,16 +130,11 @@ export function Flashcards() {
       />
 
       {revealed ? (
-        <div className="grid grid-cols-3 gap-3 animate-feedback-in">
+        <div className="grid grid-cols-2 gap-3 animate-feedback-in">
           <RateButton
             color="bg-neon-pink text-paper"
             label="Nope"
             onClick={(e) => rate('nope', e)}
-          />
-          <RateButton
-            color="bg-neon-yellow text-ink"
-            label="Almost"
-            onClick={(e) => rate('almost', e)}
           />
           <RateButton
             color="bg-neon-green text-ink"
@@ -200,7 +197,7 @@ function DoneScreen({
   onAgain,
 }: {
   deck: Question[];
-  stats: { got: number; almost: number; nope: number };
+  stats: { got: number; nope: number };
   onAgain: () => void;
 }) {
   return (
@@ -221,7 +218,6 @@ function DoneScreen({
 
       <div className="flex flex-wrap gap-3 justify-center mt-8">
         <BigStat color="bg-neon-green" label="Got it" value={stats.got} />
-        <BigStat color="bg-neon-yellow" label="Almost" value={stats.almost} />
         <BigStat color="bg-neon-pink" label="Nope" value={stats.nope} />
       </div>
 

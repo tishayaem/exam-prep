@@ -136,6 +136,18 @@ Frogs and butterflies go through **metamorphosis** — a *big* change in body sh
       difficulty: 1,
       source: 'Term 1 Section 5 — cloze variant',
     },
+    {
+      id: 'plants-05-q7',
+      sectionId: 'plants-05-life-cycles',
+      type: 'sequence',
+      prompt: "Put a butterfly's life cycle stages in order.",
+      sequence: ['Egg', 'Caterpillar', 'Chrysalis', 'Adult butterfly'],
+      answer: '',
+      explanation:
+        'Egg → caterpillar (the eating/larva stage) → chrysalis (the resting/pupa stage where it rebuilds itself) → adult butterfly that flies away to lay the next eggs.',
+      difficulty: 1,
+      source: 'Term 1 Section 5 — sequence variant',
+    },
   ],
   deeper: `Inside the chrysalis, **the caterpillar literally dissolves**. Most of its body turns into a kind of soup. Special groups of cells called *imaginal discs* survive — and rebuild the soup into a butterfly with wings, eyes and a tongue. It's one of the strangest things in nature.
 
