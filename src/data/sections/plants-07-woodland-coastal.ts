@@ -142,9 +142,9 @@ export const plants07WoodlandCoastal: Section = {
       source: 'Term 1 Section 7 — cloze variant',
     },
   ],
-  deeper: `**Marram grass builds sand dunes.** Its tangled underground roots trap blowing sand, slowly building the dune higher. Without marram grass, a lot of UK coastline would just blow away.
+  deeper: `**Trees talk to each other underground.** Beneath a woodland floor, fungi weave a vast web that connects tree roots — sometimes called the **wood wide web**. Big "mother" trees use it to send sugar to their saplings, and old trees can warn neighbours about insect attacks with chemical signals. A wood is more like a city than a collection of separate plants.
 
-**Bluebell carpets** that cover woodland floors in spring are doing something clever — they flower fast, before the trees grow leaves, so they can grab sunlight while it's still reaching the ground. Once the canopy closes overhead, the bluebells fade and disappear until next year.
+**Squirrels accidentally plant forests.** A grey squirrel buries thousands of acorns each autumn to dig up later — and forgets where most of them are. Many of the forgotten acorns sprout into new oak trees. Whole woods owe their existence to squirrels with bad memories.
 
-**Limpets are tiny tanks.** A small limpet can grip a rock with a force equivalent to a *human* hanging off it. Their teeth are made of the strongest natural material known — stronger than spider silk and Kevlar.`,
+**A rock pool is its own tiny world.** When the tide goes out, a few buckets of water trapped in a rocky crevice hold an entire ecosystem — anemones, hermit crabs, gobies, prawns, seaweed. Twice a day the ocean rushes back and refreshes it. Anything living in there has to survive heat, cold, no rain and a flood, all between breakfast and tea.`,
 };

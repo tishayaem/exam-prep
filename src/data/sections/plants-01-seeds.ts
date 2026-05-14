@@ -37,11 +37,11 @@ The **flesh** is the soft, juicy part around the seed. It's there to tempt anima
   ],
   deeper: `Seeds are one of nature's wildest engineering tricks. They're tiny survival pods — each one carries a baby plant and a packed lunch of nutrients to feed it until its first leaves can make food from sunlight.
 
-**Seeds come in *crazy* different sizes.** The smallest seed in the world belongs to an orchid — it's so small that a million of them weigh less than a paperclip. The biggest seed in the world is the **coco-de-mer**, a giant coconut that can weigh **25 kg** — more than most 5-year-olds!
+**The smallest seed is an orchid's** — so tiny that a million of them weigh less than a paperclip. They contain almost no food, so they can only sprout if they happen to land next to a particular fungus that feeds them. Their plan is "make millions and hope".
 
-**Why do some fruits taste bad when they're unripe?** Because the seeds aren't ready yet. The plant doesn't want animals eating the seeds before they can grow. Once the seeds are ready, the fruit turns sweet and colourful to *invite* animals to eat it — so the seeds get carried somewhere new.
+**Some seeds wait thousands of years.** In Israel, scientists successfully germinated a date-palm seed found in an ancient fortress that was **2,000 years old**. Other seeds need fire to wake them up — eucalyptus and certain pines stay sealed shut on the branch until a wildfire passes through, then drop into the cleared, ash-fertilised ground.
 
-**Did you know?** A coconut can float across an entire ocean and still sprout into a tree when it washes ashore. That's how coconut palms ended up on tropical islands all over the world — they basically went on holiday and never came back.`,
+**Why do some fruits taste bad when they're unripe?** Because the seeds aren't ready yet. The plant doesn't want animals eating the seeds before they can grow. Once the seeds are ready, the fruit turns sweet and colourful to *invite* animals to eat it — so the seeds get carried somewhere new.`,
   questions: [
     {
       id: 'plants-01-q1',

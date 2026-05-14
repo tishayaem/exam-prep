@@ -138,9 +138,9 @@ export const earth02DayNight: Section = {
       source: 'Term 2 Section 2 — cloze variant',
     },
   ],
-  deeper: `In the **Arctic Circle in summer**, the Sun doesn't set for weeks. The Earth\'s tilt keeps the North Pole pointing at the Sun day and night — it\'s called the **midnight sun**. In winter, the opposite happens: 24 hours of darkness for weeks at a time.
+  deeper: `In the **Arctic Circle in summer**, the Sun doesn't set for weeks. The Earth's tilt keeps the North Pole pointing at the Sun day and night — it's called the **midnight sun**. In winter, the opposite happens: 24 hours of darkness for weeks at a time.
 
-**Sundials are the oldest clocks.** People used the shifting shadow of a stick or pillar to tell time over 5,000 years before mechanical clocks were invented. The Egyptians had quite accurate ones.
+**A day on Venus is longer than a year on Venus.** Venus spins so slowly that it takes **243 Earth-days** to rotate once, but it only takes **225 Earth-days** to orbit the Sun. So if you stood on Venus, the Sun would crawl across the sky for months — and a Venusian year would finish before a Venusian day did. Bonus weirdness: Venus spins backwards compared to Earth.
 
-**You feel the Earth spinning when you fly east.** At the equator the Earth rotates at about **1,670 km/h** — faster than most jet planes. You\'re moving that fast right now and you don\'t even notice, because everything around you is moving with you.`,
+**Twilight has three official stages.** Just after sunset comes *civil twilight* — bright enough to read outside without a torch. Then *nautical twilight*, where sailors can still see the horizon. Then *astronomical twilight*, when the sky is dark enough to spot the faintest stars. Only after all three does proper night begin. The whole transition takes roughly an hour and a half in the UK.`,
 };

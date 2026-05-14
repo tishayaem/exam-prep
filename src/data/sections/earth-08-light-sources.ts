@@ -133,9 +133,9 @@ To **illuminate** = to light up.`,
       source: 'Term 2 Section 8 — cloze variant',
     },
   ],
-  deeper: `**Some animals make their own light.** This is called **bioluminescence**. Fireflies use it to attract mates. Deep-sea anglerfish dangle a glowing lure in front of their faces. Some species of fungi glow in the dark to attract insects that spread their spores. Even some sharks glow.
+  deeper: `**The aurora is sunlight, sort of.** When charged particles streaming from the Sun smash into atoms in Earth's upper atmosphere, the atoms briefly *glow* — green from oxygen, red from rare oxygen, purple from nitrogen. The light is *made* by air, but the energy came from the Sun. The dancing curtains of the northern lights are basically a giant TV screen lit up by solar wind.
 
-**Stars twinkle but planets don\'t.** Stars are *so* far away that they appear as single points of light, and Earth\'s atmosphere bends that pinprick around as it moves — making them twinkle. Planets are close enough to look like tiny discs, which smooths out the twinkling. Tip: if it twinkles, it\'s a star; if it\'s steady, it\'s probably a planet.
+**The sky is blue because of how white sunlight scatters.** Sunlight is a mix of every colour. When it enters our atmosphere, blue light bounces off air molecules in every direction more than red light does — so the sky around the Sun fills with scattered blue. At sunset, light travels through far more atmosphere, the blue gets scattered away early, and only the red and orange make it through to your eyes. Same Sun, same air, different angle.
 
-**The Moon would be invisible if the Sun went out.** Even though we never think of it that way, every glimpse you\'ve ever had of the Moon was actually a glimpse of bounced-off sunlight.`,
+**The Moon would be invisible if the Sun went out.** Even though we never think of it that way, every glimpse you've ever had of the Moon was actually a glimpse of bounced-off sunlight.`,
 };

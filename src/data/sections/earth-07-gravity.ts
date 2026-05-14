@@ -146,9 +146,9 @@ Gravity also:
       source: 'Term 2 Section 7 — true/false variant',
     },
   ],
-  deeper: `**On Jupiter, you\'d weigh about 2.5 times more than on Earth.** If you weigh 30 kg here, you\'d weigh 75 kg there. (You couldn\'t actually stand on Jupiter though — it has no solid surface and the pressure would crush you.)
+  deeper: `**Time runs slower in stronger gravity.** A clock at the bottom of a mountain ticks ever-so-slightly slower than the same clock at the top. Astronauts on the ISS age fractions of a second less than people on the ground per six months in space. GPS satellites have to correct for this every day, otherwise your phone's directions would drift by kilometres within hours.
 
-**Astronauts on the ISS aren\'t actually weightless** — they\'re *falling*. They\'re orbiting Earth at 28,000 km/h, so they keep falling around the planet without hitting it. Inside the station, everything is falling at the same rate together, which feels like floating.
+**Most of the universe's gravity comes from invisible stuff.** Galaxies spin so fast they should fly apart — but they don't, because *something* with mass is holding them together. Astronomers can map where this **dark matter** is by its gravitational pull, but no one has ever directly seen or detected it in a lab. Whatever it turns out to be, there's about five times more of it than ordinary matter.
 
-**Black holes** are objects with so much gravity that not even light can escape. If you got close enough, you\'d be stretched into a thin noodle by the difference in gravity between your head and your feet. Scientists actually call this **"spaghettification"**.`,
+**Black holes** are objects with so much gravity that not even light can escape. If you got close enough, you'd be stretched into a thin noodle by the difference in gravity between your head and your feet. Scientists actually call this **"spaghettification"**.`,
 };

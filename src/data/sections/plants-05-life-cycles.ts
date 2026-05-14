@@ -153,5 +153,5 @@ Frogs and butterflies go through **metamorphosis** — a *big* change in body sh
 
 Even weirder: **the butterfly remembers being a caterpillar**. Experiments have shown that if you teach a caterpillar to avoid a certain smell, the adult butterfly avoids it too — even though most of its brain was rebuilt. Some memories survive the soup.
 
-**Tadpoles eat their own tails.** As the frog grows legs, it slowly resorbs the tail back into its body for nutrients — the tail doesn't fall off, it gets recycled into food.`,
+**Some cicadas wait 17 years underground.** Periodical cicadas hatch as tiny nymphs, burrow into the soil, and quietly suck juice from tree roots for **seventeen years** before clawing their way up all at once in vast swarms. They moult into winged adults, mate, lay eggs, and die in a few weeks. Their entire above-ground life is shorter than a school summer holiday.`,
 };

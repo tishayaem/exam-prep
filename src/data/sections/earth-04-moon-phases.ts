@@ -150,9 +150,9 @@ One full cycle = about 28 days = one **lunar month**.`,
       source: 'Term 2 Section 4 — true/false variant',
     },
   ],
-  deeper: `**The same side of the Moon always faces Earth.** This is called **tidal locking** — over billions of years, Earth\'s gravity slowed the Moon\'s spin until one face was permanently locked towards us. We never saw the "far side" of the Moon until a Soviet spacecraft photographed it in 1959. (Spoiler: it\'s much more cratered.)
+  deeper: `**The Moon was born from a giant smash.** About **4.5 billion years ago**, a Mars-sized planet called Theia slammed into the young Earth. The collision flung a huge cloud of debris into orbit, which clumped together over millions of years to form the Moon. Earth was molten for ages afterwards. The Moon is, in a way, a piece of the early Earth that never came home.
 
-**Supermoons** happen when a full moon lines up with the closest part of its orbit. It can look up to **14% bigger and 30% brighter** than usual. Your phone camera probably won\'t pick it up — but with your eyes it\'s spectacular.
+**Supermoons** happen when a full moon lines up with the closest part of its orbit. It can look up to **14% bigger and 30% brighter** than usual. Your phone camera probably won't pick it up — but with your eyes it's spectacular.
 
-**The Moon is slowly moving away from Earth** — about **3.8 cm a year**, roughly the rate your fingernails grow. In about 600 million years, total solar eclipses will stop happening because the Moon will be too far away to fully cover the Sun.`,
+**Two high tides every day, thanks to the Moon.** Moon gravity tugs the ocean nearest it into a bulge — high tide. There's a second bulge on the **opposite side of Earth** at the same time, because the Earth itself is being pulled away from the water on the far side. As Earth spins, every coast passes through both bulges each day. Sea creatures everywhere live by this clock.`,
 };

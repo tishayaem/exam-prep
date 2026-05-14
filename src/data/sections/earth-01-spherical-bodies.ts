@@ -119,9 +119,9 @@ export const earth01SphericalBodies: Section = {
       source: 'Term 2 Section 1 — MCQ variant',
     },
   ],
-  deeper: `**Eratosthenes worked out the size of the Earth in 240 BC** — over 2,200 years ago, with no maths machines, no satellites, no rockets. He just compared the shadow of a stick in one Egyptian city with no shadow in another. From that, he calculated the Earth's circumference. His answer was within 5% of the right one. Pretty incredible.
+  deeper: `**Big things in space are always round.** Gravity pulls equally in all directions, so once a rocky body grows past about **600 km wide** it crushes itself into a sphere. Anything smaller stays lumpy because rock is strong enough to hold a weird shape. That's why the Moon, Earth and Sun are spheres while small asteroids look like potatoes.
 
-**The Earth isn't a *perfect* sphere.** It bulges slightly at the equator because it's spinning. (Spin a wet tennis ball really fast and it would do the same.) Scientists call this shape an "oblate spheroid". But for Y5 purposes, "sphere" is right.
+**Saturn's moon Mimas looks like the Death Star.** It has a giant impact crater taking up almost a third of one face, left from a hit so violent it nearly shattered the moon. Look up the photo — *Star Wars* came out two years before Mimas was photographed up close, but the resemblance is uncanny.
 
 **You can see the curve yourself.** From a tall building or a plane, on a clear day, you can actually see the horizon dip down at the edges. Astronauts always say the curve is the first thing that hits them in space.`,
 };

@@ -150,9 +150,9 @@ These forces aren\'t always bad — without friction we couldn\'t walk, and with
       source: 'Term 2 Section 10 — MCQ variant',
     },
   ],
-  deeper: `**Without friction you couldn\'t walk.** Every step you take, your shoe is gripping the floor by friction and pushing back. On a frictionless surface (like wet ice), you\'d just slip in place forever.
+  deeper: `**Without friction you couldn't walk.** Every step you take, your shoe is gripping the floor by friction and pushing back. On a frictionless surface (like wet ice), you'd just slip in place forever.
 
-**A parachute uses air resistance on purpose.** It has a huge front-facing area, which means *lots* of air has to push out of the way as it falls — so it falls slowly enough for the skydiver to land safely instead of going splat.
+**Re-entering spacecraft glow because of friction.** Coming back from orbit at **28,000 km/h**, a capsule slams into the upper atmosphere — and the friction with all that air heats the heat shield to over **1,600 °C**. Astronauts inside watch a fireball outside the window. Without a properly engineered shield, the spacecraft would burn up like a meteor.
 
-**Dolphins evolved skin that reduces water resistance.** Tiny ridges on their skin help water flow smoothly along their bodies. Engineers have copied the pattern for high-tech swimsuits and even for ship hulls.`,
+**Bicycle brakes turn movement into heat.** Squeeze the brake lever and a rubber pad presses on the wheel — friction slows the wheel down, and the pad gets hot. All the energy you had as you raced downhill ends up as warmth in the brake pad. Stop too suddenly on a long descent and the pads can actually start to smoke.`,
 };

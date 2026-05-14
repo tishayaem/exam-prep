@@ -151,7 +151,7 @@ After pollination, **fertilisation** happens inside the flower — pollen joins 
       source: 'Term 1 Section 2 — cloze variant',
     },
   ],
-  deeper: `Bees see colours we can't. To them, lots of flowers have glowing "landing strip" patterns in **ultraviolet light** — invisible to us, but bright as a runway for them. The flower has basically painted "EAT HERE" in a colour we can't see.
+  deeper: `**Bats pollinate at night.** Many tropical flowers — including the agave that gives us tequila and several wild bananas — only open after dark and use pale petals and strong sweet smells to attract bats instead of bees. The bat shoves its face into the flower for nectar and flies off dusted with pollen. Without bats, there'd be no tequila.
 
 Not all flowers play nice. The **corpse flower** smells like rotting meat to attract flies for pollination — and it can grow taller than a person. Imagine that walking into your living room!
 

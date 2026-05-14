@@ -148,7 +148,7 @@ A **predator** hunts other animals. **Prey** is what gets hunted. Both predator 
   ],
   deeper: `The **arctic fox** is a master of seasonal adaptation. In summer its fur is **brown** to blend with the rocks and grass; in winter it turns **pure white** to match the snow. Same fox, two camouflages — and it switches twice a year automatically.
 
-**Cactus spines are leaves.** Yes, really. Over millions of years, the cactus shrank its leaves down to spines so they wouldn't lose water in the desert. The fat green "trunk" is doing the photosynthesis. It's the body part you'd expect to be leaves… and the leaves are now defence weapons.
+**Wood frogs freeze solid every winter.** Their hearts stop, ice fills the spaces between their cells, and the frog goes completely rigid for months. In spring it thaws out, the heart starts back up, and the frog hops away. Sugars in their blood act like antifreeze — the same idea as scattering salt on icy roads, but built into the body.
 
 The **giraffe's neck** isn't just for reaching tall trees — male giraffes use them to *fight*, swinging their heads like clubs. So the long neck is both a feeding adaptation *and* a fighting adaptation. Evolution gets two for one.`,
 };

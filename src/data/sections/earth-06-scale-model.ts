@@ -132,9 +132,9 @@ We also tried it with distances: if Earth is **1 metre** from the Sun, then Nept
       source: 'Term 2 Section 6 — cloze variant',
     },
   ],
-  deeper: `**Light from the Sun takes 8 minutes to reach Earth.** So when you look up at the sky, you\'re seeing the Sun as it was 8 minutes ago. Light from Neptune takes about **4 hours** to reach us. Light from the next nearest star (Proxima Centauri) takes **4 years**.
+  deeper: `**The asteroid belt is mostly empty.** In films, spaceships dodge a hailstorm of rocks between Mars and Jupiter. In reality, NASA flew probes straight through it without aiming for anything and didn't come close to a single asteroid. The "belt" is millions of rocks spread thinly over an area larger than the entire orbit of Earth. Hollywood lied.
 
-**Voyager 1 and 2** — two probes NASA launched in **1977** — are *still* flying. Voyager 1 is now over 24 billion km away and is the first human object to enter interstellar space (the space between stars). It\'ll keep drifting for millions of years.
+**The Sun loses 4 million tons of itself every second.** That's nuclear fusion in its core: hydrogen turns into helium, and a tiny fraction of the mass becomes pure energy — light, heat, all of it. The Sun has been doing this for **4.6 billion years** and still has fuel for another **5 billion**. Don't worry.
 
-If you shrank the Sun to the size of a **football** in a stadium, Earth would be a **peppercorn** at the edge of the pitch and Neptune would be a **marble** in the car park.`,
+**A teaspoon of neutron-star material would weigh a billion tons.** Neutron stars are what's left when a giant star dies and its core collapses — atoms get crushed so tightly that one teaspoonful of the stuff weighs more than every car, ship and skyscraper on Earth combined. The whole star is only about **20 km wide** but holds more mass than the Sun.`,
 };

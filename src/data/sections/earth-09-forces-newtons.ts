@@ -147,9 +147,9 @@ Quick rule of thumb: **1 newton ≈ the weight of a small apple** (about 100 g).
       source: 'Term 2 Section 9 — cloze variant',
     },
   ],
-  deeper: `**1 newton is roughly the weight of an apple.** That\'s not an accident — Newton was supposedly inspired by a falling apple. So it\'s nicely poetic that "1 apple = 1 newton".
+  deeper: `**Rockets push down to go up.** Newton's third law: every push has an equal push the other way. A rocket flings burning gas downward at huge speed, and the gas pushes back upward on the rocket with exactly the same force. The same trick works in space, where there's no air or ground to push *against* — the rocket is pushing against its own exhaust.
 
-**Ants are incredibly strong relative to their size.** A leafcutter ant can carry leaves **50 times its own body weight** — like a 10-year-old carrying a small car. If we had ant-strength, we\'d be able to throw lorries around.
+**Skydivers stop accelerating partway down.** Gravity pulls them faster and faster, but air resistance grows with speed too — until the two forces balance. After about 12 seconds in free fall, a skydiver is moving at roughly **200 km/h** and stays at that speed all the way down. Spread out flat for less speed, dive head-first for more. You can choose your own terminal velocity.
 
-**Sumo wrestlers use force science.** They lower their centre of gravity and push horizontally — making it physically much harder to push them out of the ring. It\'s not just muscle; it\'s physics.`,
+**Sumo wrestlers use force science.** They lower their centre of gravity and push horizontally — making it physically much harder to push them out of the ring. It's not just muscle; it's physics.`,
 };
