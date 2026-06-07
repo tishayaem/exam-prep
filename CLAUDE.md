@@ -21,6 +21,8 @@ npm run dev          # vite dev server at http://localhost:5173/exam-prep/
 npm run build        # tsc -b && vite build  (run this locally before pushing — CI is stricter than tsc --noEmit)
 npm run preview      # serve dist locally
 npm run typecheck    # tsc -b --noEmit
+npm test             # vitest run — grading logic + content-integrity suite
+npm run test:watch   # vitest in watch mode
 ```
 
 **Important:** `tsc -b --noEmit` does NOT catch `noUnusedLocals` errors that `tsc -b` (without `--noEmit`) does. Always run `npm run build` before pushing or CI will fail.
@@ -30,45 +32,53 @@ npm run typecheck    # tsc -b --noEmit
 ```
 src/
 ├── data/
-│   ├── types.ts                       Section, Question, VocabularyTerm
-│   ├── science.ts                     Aggregates all 18 sections + exports flat question array
-│   └── sections/                      One file per section. Format is stable; copy an existing file when adding new ones.
+│   ├── types.ts                       Section, Question (types incl. 'numeric'), VocabularyTerm
+│   ├── index.ts                       Subject-agnostic aggregator: allSections / allQuestions / findSection / questionsBySubject. MODES IMPORT FROM HERE, not from a subject file.
+│   ├── packs.ts                       Pack→subject registry (PACKS, SUBJECTS). Drives Home grouping + the Study overline. Add a pack/subject here.
+│   ├── science.ts                     scienceSections array (18 sections)
+│   ├── maths.ts                       mathsSections array (14 sections across 5 packs)
+│   ├── data.test.ts                   Content-integrity suite (no dup ids, MCQ answers in choices, numeric self-grade…)
+│   └── sections/                      One file per section. Copy an existing file when adding new ones.
+├── diagrams/                          One hand-coded SVG component per section (src/diagrams/<section-id>.tsx), wired via Section.diagram. Rendered in Study between lesson and examples. Optional — not every section has one.
 ├── modes/
-│   ├── Home.tsx                       Lists practice tiles + sections per subject
-│   ├── Study.tsx                      Lesson + vocab + "Want to know more?" deeper content
+│   ├── Home.tsx                       Practice tiles + packs grouped by subject (driven by packs.ts)
+│   ├── Study.tsx                      Lesson + optional diagram + vocab + "Want to know more?"
 │   ├── Quiz.tsx                       Per-section quiz with immediate feedback
 │   ├── Flashcards.tsx                 Tap-to-reveal cards with Leitner self-grade
 │   ├── VocabSprint.tsx                45s timed vocabulary MCQ
-│   ├── MockTest.tsx                   20 random Qs / 15 min / no feedback until end
+│   ├── MockTest.tsx                   Pick a subject → 20 random Qs / 15 min / no feedback until end
 │   └── Mistakes.tsx                   Wrong answers, graduate after 2 consecutive corrects
 ├── components/
-│   └── QuestionRunner.tsx             Shared question UI used by Quiz / Mistakes / Mock Test
+│   └── QuestionRunner.tsx             Shared question UI (short/mcq/cloze/truefalse/match/sequence/numeric)
 ├── lib/
 │   ├── storage.ts                     localStorage progress + Leitner box + streak
-│   ├── grading.ts                     Fuzzy short-answer match (normalise → token-set → borderline self-grade)
+│   ├── grading.ts                     Fuzzy short-answer match + gradeNumeric (exact, unit-aware) + match/sequence
+│   ├── grading.test.ts                Unit tests for all four graders
 │   ├── mistakes.ts                    Build mistakes queue from attempt log
 │   └── shuffle.ts                     Fisher-Yates + sample
 ├── router.tsx                         HashRouter routes
 ├── AppShell.tsx                       Outer layout (header with streak/XP, content slot, back button)
 └── main.tsx
-materials/                             Source-of-truth photos + .md transcriptions of school sheets
-public/                                Static assets (currently empty; SVG diagrams to go here when added)
+materials/                             Source-of-truth photos, .md transcriptions, and 11+ research (materials/11plus-research/)
+public/                                Static assets (diagrams are inline React components in src/diagrams/, NOT here)
 ```
 
 ## Adding a new section
 
-1. Drop the photo(s) under `materials/{subject}/{topic}/`.
-2. Create a `section-NN.md` next to them with the same format as existing ones (lesson, vocab, original Qs, Phase-2 notes).
-3. Create `src/data/sections/{prefix}-NN-slug.ts` that exports a typed `Section`.
-4. Import + add it to the `scienceSections` array in `src/data/science.ts`.
-5. The Home screen, all routes, and all modes pick it up automatically — no code changes needed.
+1. (Science) Drop photo(s) under `materials/{subject}/{topic}/` and write a `section-NN.md` transcription. (Maths/reasoning content comes from `materials/11plus-research/`.)
+2. Create `src/data/sections/{pack}-NN-slug.ts` exporting a typed `Section`. Its `pack` must match a slug registered in `src/data/packs.ts`.
+3. Import + add it to that subject's array (`scienceSections` in `science.ts`, `mathsSections` in `maths.ts`).
+4. Home, all routes, and all modes pick it up automatically — no mode changes needed.
+5. (Optional) Add a diagram: create `src/diagrams/<section-id>.tsx` and set `diagram:` on the section.
+6. Run `npm test` — the content-integrity suite checks ids, MCQ answers, and numeric self-grading for free.
 
-## Adding a new subject (maths / english)
+## Adding a new subject (e.g. english)
 
-Largely the same as adding a section, plus:
-
-- Add a new `pack` slug (e.g. `'maths-arithmetic'`) and group on Home.
-- For new question types, extend `QuestionType` in `src/data/types.ts` and handle in `QuestionRunner.tsx`.
+1. Add the subject to `Subject` in `src/data/types.ts` and to `SUBJECTS` in `src/data/packs.ts`.
+2. Register its packs in the `PACKS` array (`{ slug, subject, title }`).
+3. Create `src/data/<subject>.ts` exporting a `<subject>Sections` array, and concatenate it into `allSections` in `src/data/index.ts`.
+4. Home (subject-grouped), the Study overline, and the Mock Test subject chooser all derive from the registry — no per-subject UI branching.
+5. For new question types, extend `QuestionType` in `types.ts`, handle in `QuestionRunner.tsx` (and add a grader to `grading.ts` if needed — see how `numeric` uses `gradeNumeric`).
 
 ## Conventions / quirks
 
@@ -91,5 +101,6 @@ Both have been encountered in this repo. Even *documenting* them in a file will 
 ## Verification before claiming done
 
 - `npm run build` clean (catches `noUnusedLocals` that `tsc --noEmit` misses)
+- `npm test` green — the content-integrity suite catches mistyped MCQ answers, duplicate ids, and numeric answers that can't self-grade across **all** sections.
 - For UI changes: dev server boots and the affected route renders. **Visual verification** requires opening it in a browser — say so explicitly when you haven't.
 - For grading/data changes: pick one question per affected section, run it through Quiz, confirm correct/wrong/borderline flow.
