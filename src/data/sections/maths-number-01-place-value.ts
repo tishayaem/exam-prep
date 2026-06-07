@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsPlaceValueDiagram } from '../../diagrams/maths-number-01-place-value';
 
 export const mathsNumber01PlaceValue: Section = {
   id: 'maths-number-01-place-value',
@@ -6,6 +7,7 @@ export const mathsNumber01PlaceValue: Section = {
   pack: 'maths-number',
   number: 1,
   title: 'Place Value & Negative Numbers',
+  diagram: MathsPlaceValueDiagram,
   lesson: `Our number system runs on **place value** — *where* a digit sits decides what it's worth. In **3,425,718** the **4** isn't just "four": it sits in the hundred-thousands column, so it's really worth **400,000**.
 
 **Rounding** swaps a number for a tidier nearby one. To round to the nearest 10,000, look at the digit *one place to the right* — the thousands. If it's 5 or more, round up; 4 or less, round down.

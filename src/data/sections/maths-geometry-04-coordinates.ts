@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsCoordinatesDiagram } from '../../diagrams/maths-geometry-04-coordinates';
 
 export const mathsGeometry04Coordinates: Section = {
   id: 'maths-geometry-04-coordinates',
@@ -6,6 +7,7 @@ export const mathsGeometry04Coordinates: Section = {
   pack: 'maths-geometry',
   number: 4,
   title: 'Coordinates & Transformations',
+  diagram: MathsCoordinatesDiagram,
   lesson: `A **coordinate** is written (x, y) — *along* the corridor first, then *up* the stairs. The grid has four quadrants, so coordinates can be negative.
 
 To **translate** a point, slide it: 3 right means x + 3, 5 down means y − 5. So (4, 2) becomes (7, −3).

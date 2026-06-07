@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsFractionsDiagram } from '../../diagrams/maths-fractions-01-fractions';
 
 export const mathsFractions01Fractions: Section = {
   id: 'maths-fractions-01-fractions',
@@ -6,6 +7,7 @@ export const mathsFractions01Fractions: Section = {
   pack: 'maths-fractions',
   number: 1,
   title: 'Fractions',
+  diagram: MathsFractionsDiagram,
   lesson: `A fraction has two parts. The **denominator** (bottom) says how many equal pieces the whole is split into; the **numerator** (top) says how many you have.
 
 **Equivalent fractions** are the same amount written differently — 2⁄3 and 4⁄6 are equal because you multiplied top and bottom by 2. To **simplify**, divide both by the same number until you can't go further: 18⁄24 → 3⁄4.

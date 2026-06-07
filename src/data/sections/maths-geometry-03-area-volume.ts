@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsAreaVolumeDiagram } from '../../diagrams/maths-geometry-03-area-volume';
 
 export const mathsGeometry03AreaVolume: Section = {
   id: 'maths-geometry-03-area-volume',
@@ -6,6 +7,7 @@ export const mathsGeometry03AreaVolume: Section = {
   pack: 'maths-geometry',
   number: 3,
   title: 'Perimeter, Area & Volume',
+  diagram: MathsAreaVolumeDiagram,
   lesson: `**Perimeter** is the distance all the way round (just add the sides). **Area** is the space inside, measured in square units. **Volume** is the space a solid fills, in cubic units.
 
 - Rectangle: area = length × width; perimeter = 2 × (length + width).

@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsStatisticsDiagram } from '../../diagrams/maths-data-01-statistics';
 
 export const mathsData01Statistics: Section = {
   id: 'maths-data-01-statistics',
@@ -6,6 +7,7 @@ export const mathsData01Statistics: Section = {
   pack: 'maths-data',
   number: 1,
   title: 'Statistics & Averages',
+  diagram: MathsStatisticsDiagram,
   lesson: `Four "averages" describe a set of numbers:
 
 - **Mean** — add them all up, divide by how many there are.

@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsRatioDiagram } from '../../diagrams/maths-ratio-01-ratio';
 
 export const mathsRatio01Ratio: Section = {
   id: 'maths-ratio-01-ratio',
@@ -6,6 +7,7 @@ export const mathsRatio01Ratio: Section = {
   pack: 'maths-ratio',
   number: 1,
   title: 'Ratio & Proportion',
+  diagram: MathsRatioDiagram,
   lesson: `A **ratio** compares amounts. To **share in a ratio**, add the parts to find how big one part is. Share £60 in the ratio 2 : 3 → that's 5 parts, so one part = £12, giving £24 and £36.
 
 The trap is mixing up a *part* with the *total*. If counters are blue : red = 2 : 3 and there are 35 in total, there are 5 parts, so each part is 7 — not dividing 35 by 2 or 3.

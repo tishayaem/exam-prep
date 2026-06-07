@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsPercentagesDiagram } from '../../diagrams/maths-fractions-03-percentages';
 
 export const mathsFractions03Percentages: Section = {
   id: 'maths-fractions-03-percentages',
@@ -6,6 +7,7 @@ export const mathsFractions03Percentages: Section = {
   pack: 'maths-fractions',
   number: 3,
   title: 'Percentages',
+  diagram: MathsPercentagesDiagram,
   lesson: `**Per cent** means "out of 100". So 30% = 30⁄100 = 3⁄10. The easy building blocks are 10% (divide by 10), 5% (half of 10%) and 1% (divide by 100).
 
 To find **15% of 240**: 10% = 24, 5% = 12, so 15% = 36.

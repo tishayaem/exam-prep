@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsShapesAnglesDiagram } from '../../diagrams/maths-geometry-02-shapes-angles';
 
 export const mathsGeometry02ShapesAngles: Section = {
   id: 'maths-geometry-02-shapes-angles',
@@ -6,6 +7,7 @@ export const mathsGeometry02ShapesAngles: Section = {
   pack: 'maths-geometry',
   number: 2,
   title: 'Shapes & Angles',
+  diagram: MathsShapesAnglesDiagram,
   lesson: `A few angle facts unlock most questions: angles **on a straight line** add to **180°**, angles **around a point** add to **360°**, and angles **in a triangle** add to **180°**.
 
 So if two angles of a triangle are 65° and 72°, the third is 180 − 65 − 72 = 43°.

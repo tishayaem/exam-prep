@@ -1,4 +1,5 @@
 import type { Section } from '../types';
+import { MathsAlgebraDiagram } from '../../diagrams/maths-ratio-02-algebra';
 
 export const mathsRatio02Algebra: Section = {
   id: 'maths-ratio-02-algebra',
@@ -6,6 +7,7 @@ export const mathsRatio02Algebra: Section = {
   pack: 'maths-ratio',
   number: 2,
   title: 'Algebra & Sequences',
+  diagram: MathsAlgebraDiagram,
   lesson: `In algebra a letter stands for a number. To **substitute**, swap the letter for its value: 4a − 3 when a = 6 is 24 − 3 = 21.
 
 To **solve an equation**, undo the steps in reverse. 3x + 7 = 22 → take 7 off (15), then divide by 3 → x = 5.
