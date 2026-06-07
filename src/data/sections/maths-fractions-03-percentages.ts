@@ -37,7 +37,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       sectionId: 'maths-fractions-03-percentages',
       type: 'mcq',
       prompt: 'What is 30% written as a fraction in its simplest form?',
-      choices: ['3⁄10', '30⁄100', '1⁄3', '3⁄100'],
+      choices: ['3⁄10', '3⁄30', '1⁄3', '3⁄100'],
       answer: '3⁄10',
       explanation: '30% = 30⁄100, and dividing top and bottom by 10 gives 3⁄10.',
       difficulty: 1,

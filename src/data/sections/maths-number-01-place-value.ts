@@ -103,7 +103,7 @@ export const mathsNumber01PlaceValue: Section = {
       prompt: 'Which of these numbers is the largest?',
       choices: ['2,099,899', '2,100,001', '2,098,999', '2,099,999'],
       answer: '2,100,001',
-      explanation: 'Compare column by column from the left. All start 2,0…, but 2,100,001 reaches into the hundred-thousands first, so it is biggest.',
+      explanation: 'Compare column by column from the left. They all begin with 2, but 2,100,001 has a 1 in the hundred-thousands column where the others have 0 — so it is the biggest.',
       difficulty: 2,
       source: 'GL Maths · Place value',
     },
