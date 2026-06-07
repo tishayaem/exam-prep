@@ -8,7 +8,8 @@ export type QuestionType =
   | 'cloze'
   | 'truefalse'
   | 'match'
-  | 'sequence';
+  | 'sequence'
+  | 'numeric';
 export type Difficulty = 1 | 2 | 3;
 
 export interface VocabularyTerm {

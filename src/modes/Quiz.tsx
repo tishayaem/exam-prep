@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { findSection } from '../data/science';
+import { findSection } from '../data';
 import { grade, gradeMatch, gradeSequence, type GradeResult } from '../lib/grading';
 import { useProgress } from '../lib/storage';
 import type { Question } from '../data/types';

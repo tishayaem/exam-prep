@@ -1,0 +1,106 @@
+import type { Section } from '../types';
+
+export const mathsFractions02Decimals: Section = {
+  id: 'maths-fractions-02-decimals',
+  subject: 'maths',
+  pack: 'maths-fractions',
+  number: 2,
+  title: 'Decimals',
+  lesson: `Digits after the **decimal point** keep place value going: the first is **tenths**, the next **hundredths**, then thousandths.
+
+To **add or subtract**, line up the decimal points so the columns match. To **multiply by 10, 100, 1000**, the digits shift left one place per zero: 7.5 × 100 = 750.
+
+When you **multiply two decimals**, count the decimal places: 0.6 × 0.4 — that's 6 × 4 = 24, and two decimal places, so **0.24**. To **divide by a decimal**, scale both up first: 4.8 ÷ 0.6 = 48 ÷ 6 = **8**.
+
+Decimals, fractions and percentages are three costumes for the same number: 0.125 = 1⁄8, and 3⁄5 = 0.6.`,
+  vocabulary: [
+    { term: 'Decimal point', meaning: 'The dot separating whole numbers from parts of a whole.' },
+    { term: 'Tenths', meaning: 'The first place after the decimal point (0.1 = one tenth).' },
+    { term: 'Hundredths', meaning: 'The second place after the decimal point (0.01 = one hundredth).' },
+    { term: 'Convert', meaning: 'Rewrite a number in another form (decimal ↔ fraction ↔ percentage).' },
+  ],
+  questions: [
+    {
+      id: 'maths-fractions-02-q1',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'Work out 3.4 + 12.75 + 0.6.',
+      answer: '16.75',
+      explanation: 'Line up the decimal points and add: 3.40 + 12.75 + 0.60 = 16.75.',
+      difficulty: 1,
+      source: 'GL Maths · Adding decimals',
+    },
+    {
+      id: 'maths-fractions-02-q2',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'What is 7.5 × 100?',
+      answer: '750',
+      explanation: 'Multiplying by 100 shifts every digit two places left: 7.5 becomes 750.',
+      difficulty: 1,
+      source: 'GL Maths · Multiplying by 10/100/1000',
+    },
+    {
+      id: 'maths-fractions-02-q3',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'Work out 0.6 × 0.4.',
+      answer: '0.24',
+      explanation: '6 × 4 = 24, and there are two decimal places altogether, so the answer is 0.24.',
+      difficulty: 2,
+      source: 'GL Maths · Multiplying decimals',
+    },
+    {
+      id: 'maths-fractions-02-q4',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'Work out 4.8 ÷ 0.6.',
+      answer: '8',
+      explanation: 'Scale both up by 10: 48 ÷ 6 = 8.',
+      difficulty: 2,
+      source: 'GL Maths · Dividing decimals',
+    },
+    {
+      id: 'maths-fractions-02-q5',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'mcq',
+      prompt: 'Write 0.125 as a fraction in its simplest form.',
+      choices: ['1⁄8', '1⁄4', '1⁄5', '125⁄100'],
+      answer: '1⁄8',
+      explanation: '0.125 = 125⁄1000, and dividing top and bottom by 125 gives 1⁄8.',
+      difficulty: 2,
+      source: 'GL Maths · Decimal ↔ fraction',
+    },
+    {
+      id: 'maths-fractions-02-q6',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'mcq',
+      prompt: 'Which of these decimals is the largest?',
+      choices: ['0.3', '0.29', '0.099', '0.205'],
+      answer: '0.3',
+      explanation: 'Compare tenths first: 0.3 has 3 tenths, the others have 2, 0 and 2. So 0.3 is biggest — even though 0.29 looks longer.',
+      difficulty: 1,
+      source: 'GL Maths · Comparing decimals',
+    },
+    {
+      id: 'maths-fractions-02-q7',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'Write 3⁄5 as a decimal.',
+      answer: '0.6',
+      explanation: '3 ÷ 5 = 0.6.',
+      difficulty: 2,
+      source: 'GL Maths · Fraction ↔ decimal',
+    },
+    {
+      id: 'maths-fractions-02-q8',
+      sectionId: 'maths-fractions-02-decimals',
+      type: 'numeric',
+      prompt: 'A 2.5 m ribbon is cut into 0.4 m pieces. How many WHOLE pieces can be cut?',
+      answer: '6',
+      explanation: '2.5 ÷ 0.4 = 6.25, so only 6 whole pieces fit (with 0.1 m left over).',
+      difficulty: 3,
+      source: 'GL Maths · Dividing decimals',
+    },
+  ],
+};

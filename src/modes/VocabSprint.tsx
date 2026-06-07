@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { findSection, scienceSections } from '../data/science';
+import { findSection, allSections } from '../data';
 import { shuffle, sample } from '../lib/shuffle';
 import { useProgress } from '../lib/storage';
 import type { Section } from '../data/types';
@@ -50,7 +50,7 @@ function VocabSprintBody({ sectionId }: { sectionId: string | undefined }) {
       const s = findSection(sectionId);
       return s ? expand(s) : [];
     }
-    return scienceSections.flatMap(expand);
+    return allSections.flatMap(expand);
   }, [sectionId]);
 
   const [cards, setCards] = useState<Card[]>(() => buildCards(allVocab));

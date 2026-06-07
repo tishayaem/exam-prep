@@ -1,0 +1,107 @@
+import type { Section } from '../types';
+
+export const mathsData02WordProblems: Section = {
+  id: 'maths-data-02-word-problems',
+  subject: 'maths',
+  pack: 'maths-data',
+  number: 2,
+  title: 'Multi-step Word Problems',
+  lesson: `The hardest questions hide the maths inside words. The trick is to do **one step at a time** and keep asking "what does the question actually want?"
+
+**Remainders** need thought. "127 children, buses hold 30" → 127 ÷ 30 = 4 remainder 7. You can't leave 7 children behind, so you round **up** to 5 buses. But "how many boxes can you fill" would round **down**.
+
+Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → that's 4 equal parts, so Tom is 8 and Sam is 24 — and the question asked for *Sam*.
+
+**Consecutive numbers** that add to 72: the middle one is 72 ÷ 3 = 24, so they are 23, 24, 25.`,
+  vocabulary: [
+    { term: 'Remainder', meaning: 'What is left over after a division that does not go exactly.' },
+    { term: 'Consecutive', meaning: 'Numbers that follow one after another, like 23, 24, 25.' },
+    { term: 'Multi-step', meaning: 'A problem that needs two or more calculations in order.' },
+    { term: 'Estimate', meaning: 'A sensible rough answer, useful for checking your working.' },
+  ],
+  questions: [
+    {
+      id: 'maths-data-02-q1',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'mcq',
+      prompt: '127 children go on a trip. Each bus holds 30 children. How many buses are needed?',
+      choices: ['4', '5', '4.2', '6'],
+      answer: '5',
+      explanation: '127 ÷ 30 = 4 remainder 7. Those 7 children still need a bus, so round up to 5.',
+      difficulty: 2,
+      source: 'GL Maths · Remainders',
+    },
+    {
+      id: 'maths-data-02-q2',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'mcq',
+      prompt: 'Eggs come in boxes of 6. Mrs Patel needs 40 eggs. How many boxes must she buy?',
+      choices: ['6', '7', '6.7', '8'],
+      answer: '7',
+      explanation: '40 ÷ 6 = 6 remainder 4. Six boxes give only 36 eggs, so she needs a 7th box.',
+      difficulty: 1,
+      source: 'GL Maths · Remainders',
+    },
+    {
+      id: 'maths-data-02-q3',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'Sam has £15. He spends 1⁄3 of it on a book and £2.50 on sweets. How much does he have left, in pounds?',
+      answer: '7.50',
+      acceptable: ['7.5', '£7.50'],
+      explanation: '1⁄3 of £15 is £5. So 15 − 5 − 2.50 = £7.50 left.',
+      difficulty: 2,
+      source: 'GL Maths · Multi-step',
+    },
+    {
+      id: 'maths-data-02-q4',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'Sam is 3 times as old as Tom. Together they are 32. How old is Sam?',
+      answer: '24',
+      explanation: 'Together they are 4 equal parts (1 for Tom, 3 for Sam). One part is 32 ÷ 4 = 8, so Sam is 3 × 8 = 24.',
+      difficulty: 2,
+      source: 'GL Maths · Age problems',
+    },
+    {
+      id: 'maths-data-02-q5',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'Three consecutive numbers add up to 72. What is the largest?',
+      answer: '25',
+      explanation: 'The middle number is 72 ÷ 3 = 24, so the numbers are 23, 24, 25. The largest is 25.',
+      difficulty: 3,
+      source: 'GL Maths · Consecutive numbers',
+    },
+    {
+      id: 'maths-data-02-q6',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'A book has 250 pages. Mia reads 35 pages a day. After 6 days, how many pages are left?',
+      answer: '40',
+      explanation: 'In 6 days she reads 35 × 6 = 210 pages. Pages left: 250 − 210 = 40.',
+      difficulty: 2,
+      source: 'GL Maths · Multi-step',
+    },
+    {
+      id: 'maths-data-02-q7',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'A tap fills 2 litres every 5 minutes. How long will it take to fill a 30-litre tank, in minutes?',
+      answer: '75',
+      explanation: '30 ÷ 2 = 15 lots of 2 litres, and each takes 5 minutes: 15 × 5 = 75 minutes.',
+      difficulty: 2,
+      source: 'GL Maths · Rate problems',
+    },
+    {
+      id: 'maths-data-02-q8',
+      sectionId: 'maths-data-02-word-problems',
+      type: 'numeric',
+      prompt: 'Pens cost 45p each. How many whole pens can you buy with £5?',
+      answer: '11',
+      explanation: '£5 is 500p. 500 ÷ 45 = 11 remainder 5, so you can buy 11 pens.',
+      difficulty: 2,
+      source: 'GL Maths · Money & remainders',
+    },
+  ],
+};

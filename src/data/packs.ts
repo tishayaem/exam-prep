@@ -1,0 +1,55 @@
+import type { Pack, Subject } from './types';
+
+/**
+ * The single source of truth for how packs group under subjects and what they're
+ * called. Home, Study and the Mock Test subject chooser all read from here, so
+ * adding a pack (or a whole subject) is a data change — no `pack === 'plants'`
+ * style branching scattered across the modes.
+ *
+ * Order matters: it's the display order on Home (within each subject) and the
+ * numbering of the pack headers.
+ */
+export interface PackDef {
+  slug: Pack;
+  subject: Subject;
+  title: string;
+}
+
+export interface SubjectDef {
+  id: Subject;
+  title: string;
+}
+
+/** Subjects in the order they appear on Home. */
+export const SUBJECTS: SubjectDef[] = [
+  { id: 'science', title: 'Science' },
+  { id: 'maths', title: 'Maths' },
+];
+
+export const PACKS: PackDef[] = [
+  // Science
+  { slug: 'plants', subject: 'science', title: 'Plants & Living Things' },
+  { slug: 'earth-space-forces', subject: 'science', title: 'Earth, Space & Forces' },
+
+  // Maths
+  { slug: 'maths-number', subject: 'maths', title: 'Number & Calculation' },
+  { slug: 'maths-fractions', subject: 'maths', title: 'Fractions, Decimals & Percentages' },
+  { slug: 'maths-ratio', subject: 'maths', title: 'Ratio, Proportion & Algebra' },
+  { slug: 'maths-geometry', subject: 'maths', title: 'Measurement & Geometry' },
+  { slug: 'maths-data', subject: 'maths', title: 'Data & Problem Solving' },
+];
+
+/** Human-readable pack title for a slug, falling back to the slug itself. */
+export function packTitle(slug: Pack): string {
+  return PACKS.find((p) => p.slug === slug)?.title ?? slug;
+}
+
+/** Subject a pack belongs to (used for the Study overline). */
+export function packSubject(slug: Pack): Subject | undefined {
+  return PACKS.find((p) => p.slug === slug)?.subject;
+}
+
+/** Human-readable subject title for an id. */
+export function subjectTitle(id: Subject): string {
+  return SUBJECTS.find((s) => s.id === id)?.title ?? id;
+}

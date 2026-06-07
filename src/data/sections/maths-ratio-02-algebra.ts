@@ -1,0 +1,106 @@
+import type { Section } from '../types';
+
+export const mathsRatio02Algebra: Section = {
+  id: 'maths-ratio-02-algebra',
+  subject: 'maths',
+  pack: 'maths-ratio',
+  number: 2,
+  title: 'Algebra & Sequences',
+  lesson: `In algebra a letter stands for a number. To **substitute**, swap the letter for its value: 4a − 3 when a = 6 is 24 − 3 = 21.
+
+To **solve an equation**, undo the steps in reverse. 3x + 7 = 22 → take 7 off (15), then divide by 3 → x = 5.
+
+A **function machine** is the same idea in a box. "× 2 then + 5" with output 23: run it backwards, undoing the *last* step first → (23 − 5) ÷ 2 = 9.
+
+A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the **nth-term** rule is 3n + 1 — so the 10th term is 3 × 10 + 1 = 31.`,
+  vocabulary: [
+    { term: 'Expression', meaning: 'A mix of numbers and letters with no equals sign, like 4a − 3.' },
+    { term: 'Equation', meaning: 'A statement that two things are equal, like 3x + 7 = 22.' },
+    { term: 'Sequence', meaning: 'A list of numbers that follows a rule.' },
+    { term: 'nth term', meaning: 'A rule that gives any term from its position number, like 3n + 1.' },
+  ],
+  questions: [
+    {
+      id: 'maths-ratio-02-q1',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'Find the value of 4a − 3 when a = 6.',
+      answer: '21',
+      explanation: 'Substitute a = 6: 4 × 6 = 24, then 24 − 3 = 21.',
+      difficulty: 1,
+      source: 'GL Maths · Substitution',
+    },
+    {
+      id: 'maths-ratio-02-q2',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'Solve 3x + 7 = 22. What is x?',
+      answer: '5',
+      explanation: 'Take 7 from both sides: 3x = 15. Then divide by 3: x = 5.',
+      difficulty: 2,
+      source: 'GL Maths · Solving equations',
+    },
+    {
+      id: 'maths-ratio-02-q3',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'A number machine does "× 2 then + 5". The output is 23. What was the input?',
+      answer: '9',
+      explanation: 'Work backwards, undoing the last step first: 23 − 5 = 18, then 18 ÷ 2 = 9.',
+      difficulty: 2,
+      source: 'GL Maths · Function machines',
+    },
+    {
+      id: 'maths-ratio-02-q4',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'If p = 5 and q = 2, work out 3p − 2q.',
+      answer: '11',
+      explanation: '3 × 5 = 15 and 2 × 2 = 4, so 15 − 4 = 11.',
+      difficulty: 2,
+      source: 'GL Maths · Substitution',
+    },
+    {
+      id: 'maths-ratio-02-q5',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'mcq',
+      prompt: 'Here is a sequence: 4, 7, 10, 13, … What is the rule for the nth term?',
+      choices: ['3n + 1', 'n + 3', '4n', '3n − 1'],
+      answer: '3n + 1',
+      explanation: 'It goes up 3 each time, so the rule starts 3n. Checking n = 1: 3 × 1 + 1 = 4. ✓',
+      difficulty: 3,
+      source: 'GL Maths · nth term',
+    },
+    {
+      id: 'maths-ratio-02-q6',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'Using the rule 3n + 1, what is the 10th term of the sequence?',
+      answer: '31',
+      explanation: 'Put n = 10: 3 × 10 + 1 = 31.',
+      difficulty: 2,
+      source: 'GL Maths · nth term',
+    },
+    {
+      id: 'maths-ratio-02-q7',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'numeric',
+      prompt: 'Solve 5y − 4 = 3y + 10. What is y?',
+      answer: '7',
+      explanation: 'Take 3y from both sides: 2y − 4 = 10. Add 4: 2y = 14. Divide by 2: y = 7.',
+      difficulty: 3,
+      source: 'GL Maths · Equations with unknowns on both sides',
+    },
+    {
+      id: 'maths-ratio-02-q8',
+      sectionId: 'maths-ratio-02-algebra',
+      type: 'mcq',
+      prompt: 'What are the next two numbers? 2, 5, 11, 23, …',
+      choices: ['47, 95', '35, 47', '46, 92', '34, 45'],
+      answer: '47, 95',
+      explanation: 'The rule is "× 2 then + 1": 23 × 2 + 1 = 47, then 47 × 2 + 1 = 95.',
+      difficulty: 3,
+      source: 'GL Maths · Sequences',
+    },
+  ],
+};

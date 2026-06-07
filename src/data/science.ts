@@ -1,4 +1,4 @@
-import type { Section, Question } from './types';
+import type { Section } from './types';
 
 import { plants01Seeds } from './sections/plants-01-seeds';
 import { plants02Pollination } from './sections/plants-02-pollination';
@@ -41,11 +41,3 @@ export const scienceSections: Section[] = [
   earth10Friction,
   earth11Mechanisms,
 ];
-
-export const scienceQuestions: Question[] = scienceSections.flatMap(
-  (s) => s.questions,
-);
-
-export function findSection(id: string): Section | undefined {
-  return scienceSections.find((s) => s.id === id);
-}

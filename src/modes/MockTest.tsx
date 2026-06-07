@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useBlocker } from 'react-router-dom';
-import { scienceQuestions, scienceSections } from '../data/science';
+import { allSections, questionsBySubject } from '../data';
+import { SUBJECTS } from '../data/packs';
 import { useProgress } from '../lib/storage';
 import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
 import { sample } from '../lib/shuffle';
-import type { Question } from '../data/types';
+import type { Question, Subject } from '../data/types';
 
 const TEST_QUESTIONS = 20;
 const TEST_MINUTES = 15;
@@ -23,6 +24,7 @@ export function MockTest() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswerLog[]>([]);
   const [secondsLeft, setSecondsLeft] = useState(TEST_MINUTES * 60);
+  const [subject, setSubject] = useState<Subject | null>(null);
 
   useEffect(() => {
     if (phase !== 'running') return;
@@ -68,8 +70,9 @@ export function MockTest() {
     }
   }, [blocker, inProgress]);
 
-  function start() {
-    const picked = sample(scienceQuestions, TEST_QUESTIONS);
+  function start(subj: Subject) {
+    const picked = sample(questionsBySubject(subj), TEST_QUESTIONS);
+    setSubject(subj);
     setPaper(picked);
     setIndex(0);
     setAnswers([]);
@@ -95,34 +98,19 @@ export function MockTest() {
             </span>
           </h1>
           <p className="text-[15px] text-inkSoft mt-4 max-w-xl leading-relaxed">
-            Like the real thing — random questions from every topic, a clock,
-            no feedback until the end.
+            Like the real thing — pick a subject, then random questions, a clock,
+            and no feedback until the end.
           </p>
         </header>
 
         <div className="grid gap-3.5 sm:grid-cols-2">
-          <RuleCard label="Questions" value={String(TEST_QUESTIONS)} sub="random from every topic" color="bg-neon-green" />
+          <RuleCard label="Questions" value={String(TEST_QUESTIONS)} sub="random from one subject" color="bg-neon-green" />
           <RuleCard label="Time limit" value={`${TEST_MINUTES} min`} sub="clock starts on tap" color="bg-neon-yellow" />
           <RuleCard label="Feedback" value="At the end" sub="not after each question" color="bg-neon-blue" />
           <RuleCard label="Going back" value="Locked" sub="can't change earlier answers" color="bg-neon-pink" />
         </div>
 
-        <div className="bg-ink text-paper rounded-[28px] p-7 sm:p-9 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
-          <div>
-            <div className="text-[12px] font-bold text-neon-green uppercase tracking-[0.14em]">
-              Ready?
-            </div>
-            <div className="font-display text-2xl sm:text-[32px] font-bold tracking-[-0.025em] mt-2 leading-tight">
-              Take a breath. Then go.
-            </div>
-          </div>
-          <button
-            onClick={start}
-            className="bg-neon-green text-ink rounded-full px-7 py-4 font-bold text-[15px] hover:opacity-90 transition-opacity justify-self-start"
-          >
-            Start the test ›
-          </button>
-        </div>
+        <SubjectChooser onPick={start} />
       </div>
     );
   }
@@ -237,7 +225,7 @@ export function MockTest() {
 
         <div className="flex flex-wrap gap-3 justify-center">
           <button
-            onClick={start}
+            onClick={() => start(subject ?? SUBJECTS[0].id)}
             className="bg-paper text-ink border-[1.5px] border-ink rounded-full px-6 py-3.5 font-semibold"
           >
             New test
@@ -363,6 +351,49 @@ function QuitConfirm({
   );
 }
 
+const SUBJECT_BTN = [
+  'bg-neon-green text-ink',
+  'bg-neon-yellow text-ink',
+  'bg-neon-blue text-paper',
+];
+
+function SubjectChooser({ onPick }: { onPick: (s: Subject) => void }) {
+  // Only offer subjects that actually have questions, so an un-authored subject
+  // never produces an empty paper.
+  const available = SUBJECTS.filter((s) => questionsBySubject(s.id).length > 0);
+  return (
+    <div className="bg-ink text-paper rounded-[28px] p-7 sm:p-9 space-y-5">
+      <div>
+        <div className="text-[12px] font-bold text-neon-green uppercase tracking-[0.14em]">
+          Choose a subject
+        </div>
+        <div className="font-display text-2xl sm:text-[32px] font-bold tracking-[-0.025em] mt-2 leading-tight">
+          Which paper today?
+        </div>
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {available.map((s, i) => {
+          const count = Math.min(questionsBySubject(s.id).length, TEST_QUESTIONS);
+          return (
+            <button
+              key={s.id}
+              onClick={() => onPick(s.id)}
+              className={`${SUBJECT_BTN[i % SUBJECT_BTN.length]} rounded-2xl px-6 py-5 text-left hover:opacity-90 transition-opacity`}
+            >
+              <div className="font-display text-xl sm:text-2xl font-bold tracking-tight">
+                {s.title}
+              </div>
+              <div className="text-[12px] font-semibold opacity-70 mt-1">
+                {count} questions · go ›
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function RuleCard({
   label,
   value,
@@ -405,7 +436,7 @@ function DotProgress({ current, total }: { current: number; total: number }) {
 function breakdownByTopic(paper: Question[], answers: AnswerLog[]) {
   const byId = new Map<string, { title: string; total: number; correct: number }>();
   for (const q of paper) {
-    const section = scienceSections.find((s) => s.id === q.sectionId);
+    const section = allSections.find((s) => s.id === q.sectionId);
     const title = section?.title ?? q.sectionId;
     const row = byId.get(q.sectionId) ?? { title, total: 0, correct: 0 };
     row.total += 1;

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { findSection, scienceSections } from '../data/science';
+import { findSection, allSections } from '../data';
 import { useProgress } from '../lib/storage';
 import { formatAnswer } from '../components/QuestionRunner';
 import { FlipCard } from '../components/FlipCard';
@@ -23,7 +23,7 @@ function FlashcardsBody({ sectionId }: { sectionId: string | undefined }) {
   const pool = useMemo(() => {
     const all = sectionId
       ? findSection(sectionId)?.questions ?? []
-      : scienceSections.flatMap((s) => s.questions);
+      : allSections.flatMap((s) => s.questions);
     return prioritise(all, state.box);
   }, [sectionId, state.box]);
 

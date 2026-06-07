@@ -1,0 +1,107 @@
+import type { Section } from '../types';
+
+export const mathsNumber03FactorsPrimes: Section = {
+  id: 'maths-number-03-factors-primes',
+  subject: 'maths',
+  pack: 'maths-number',
+  number: 3,
+  title: 'Factors, Multiples & Primes',
+  lesson: `A **factor** divides into a number exactly. A **multiple** is what you get in the times-table. So 6 is a *factor* of 24, and 24 is a *multiple* of 6.
+
+A **prime number** has exactly two factors — 1 and itself. 2, 3, 5, 7, 11… are prime. Watch out: **1 is not prime** (it has only one factor), and **2 is the only even prime**.
+
+A **square number** comes from multiplying a number by itself: 9² = 9 × 9 = **81**. A **cube** multiplies three times: 4³ = 4 × 4 × 4 = **64**. The square root works backwards — √196 = 14, because 14 × 14 = 196.
+
+When something happens "at the same time" again — bells ringing, lights flashing — you usually want the **lowest common multiple (LCM)**.`,
+  vocabulary: [
+    { term: 'Factor', meaning: 'A number that divides exactly into another (6 is a factor of 24).' },
+    { term: 'Multiple', meaning: 'A number in another number’s times-table (24 is a multiple of 6).' },
+    { term: 'Prime number', meaning: 'A number with exactly two factors: 1 and itself.' },
+    { term: 'Square number', meaning: 'A number times itself: 1, 4, 9, 16, 25…' },
+  ],
+  questions: [
+    {
+      id: 'maths-number-03-q1',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'mcq',
+      prompt: 'Which list shows the first three multiples of 7?',
+      choices: ['1, 7, 14', '7, 14, 21', '7, 17, 27', '14, 21, 28'],
+      answer: '7, 14, 21',
+      explanation: 'Multiples are the times-table: 7 × 1, 7 × 2, 7 × 3 = 7, 14, 21.',
+      difficulty: 1,
+      source: 'GL Maths · Multiples',
+    },
+    {
+      id: 'maths-number-03-q2',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'mcq',
+      prompt: 'Which of these is NOT a factor of 24?',
+      choices: ['3', '6', '9', '12'],
+      answer: '9',
+      explanation: '24 ÷ 9 does not divide exactly (it gives 2 remainder 6), so 9 is not a factor. 3, 6 and 12 all divide 24 exactly.',
+      difficulty: 1,
+      source: 'GL Maths · Factors',
+    },
+    {
+      id: 'maths-number-03-q3',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'numeric',
+      prompt: 'How many factors does 36 have altogether?',
+      answer: '9',
+      explanation: 'The factors are 1, 2, 3, 4, 6, 9, 12, 18 and 36 — nine in total. (6 only counts once, even though 6 × 6 = 36.)',
+      difficulty: 2,
+      source: 'GL Maths · Factors',
+    },
+    {
+      id: 'maths-number-03-q4',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'mcq',
+      prompt: 'Which of these is a prime number?',
+      choices: ['51', '57', '37', '91'],
+      answer: '37',
+      explanation: '37 has only the factors 1 and 37. The others hide a factor: 51 = 3 × 17, 57 = 3 × 19, 91 = 7 × 13.',
+      difficulty: 2,
+      source: 'GL Maths · Primes',
+    },
+    {
+      id: 'maths-number-03-q5',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'numeric',
+      prompt: 'What is the highest common factor (HCF) of 24 and 36?',
+      answer: '12',
+      explanation: '12 is the biggest number that divides into both 24 and 36 exactly (24 = 12 × 2, 36 = 12 × 3).',
+      difficulty: 2,
+      source: 'GL Maths · HCF',
+    },
+    {
+      id: 'maths-number-03-q6',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'numeric',
+      prompt: 'What is 9 squared (9²)?',
+      answer: '81',
+      explanation: '9 squared means 9 × 9 = 81.',
+      difficulty: 1,
+      source: 'GL Maths · Square numbers',
+    },
+    {
+      id: 'maths-number-03-q7',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'numeric',
+      prompt: 'Work out the square root of 196, then add 4 cubed (4³).',
+      answer: '78',
+      explanation: '√196 = 14 (because 14 × 14 = 196) and 4³ = 64, so 14 + 64 = 78.',
+      difficulty: 3,
+      source: 'GL Maths · Squares & cubes',
+    },
+    {
+      id: 'maths-number-03-q8',
+      sectionId: 'maths-number-03-factors-primes',
+      type: 'numeric',
+      prompt: 'Three bells ring every 6, 8 and 10 seconds. After how many seconds do they next ring together?',
+      answer: '120',
+      explanation: 'This is the lowest common multiple of 6, 8 and 10, which is 120 seconds — the first number all three divide into.',
+      difficulty: 3,
+      source: 'GL Maths · LCM',
+    },
+  ],
+};

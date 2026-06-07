@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { grade, gradeMatch, gradeSequence, type GradeResult } from '../lib/grading';
+import {
+  grade,
+  gradeMatch,
+  gradeNumeric,
+  gradeSequence,
+  type GradeResult,
+} from '../lib/grading';
 import type { Question } from '../data/types';
 import { MatchAnswer } from './MatchAnswer';
 import { SequenceAnswer } from './SequenceAnswer';
@@ -55,6 +61,11 @@ export function QuestionRunner({
       return;
     }
     const typed = input.trim() || undefined;
+    if (question.type === 'numeric') {
+      // Numbers are right or wrong — no borderline "did you mean?" step.
+      finalise(gradeNumeric(input, question.answer, question.acceptable), typed);
+      return;
+    }
     const result: GradeResult = grade(input, question.answer, question.acceptable);
     if (result === 'borderline') {
       setBorderline(true);

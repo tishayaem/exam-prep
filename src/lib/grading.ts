@@ -56,6 +56,46 @@ export function grade(
   return 'wrong';
 }
 
+/**
+ * Strict grader for numeric / short-symbolic answers (the `numeric` question
+ * type). Unlike `grade`, there is no fuzzy token matching — `120` must never
+ * count as `20`. We compare two ways:
+ *   1. as parsed numbers, so `42` === `42.00` and `7` === `7`;
+ *   2. as normalised strings, so non-decimal forms like `16:55` or `7/24` work.
+ *
+ * Authoring rule: keep the answer a bare value and put units in the prompt
+ * ("…in degrees?"). Currency (£/$), thousands commas, %, ° and whitespace are
+ * tolerated; anything else unusual should be listed in `acceptable`.
+ */
+export function gradeNumeric(
+  userInput: string,
+  canonical: string | string[],
+  acceptable: string[] = [],
+): boolean {
+  const user = normaliseNum(userInput);
+  if (!user) return false;
+
+  const candidates = [
+    ...(Array.isArray(canonical) ? canonical : [canonical]),
+    ...acceptable,
+  ].map(normaliseNum);
+
+  for (const c of candidates) {
+    if (user === c) return true;
+    const un = Number(user);
+    const cn = Number(c);
+    if (Number.isFinite(un) && Number.isFinite(cn) && un === cn) return true;
+  }
+  return false;
+}
+
+function normaliseNum(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/[£$,%°\s]/g, '')
+    .trim();
+}
+
 export function gradeMatch(
   userPairs: Record<string, string>,
   canonical: { left: string; right: string }[],

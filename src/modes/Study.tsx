@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { findSection } from '../data/science';
+import { findSection } from '../data';
+import { packTitle } from '../data/packs';
 import { Headline, SectionHeader, renderInline } from '../components/Editorial';
 
 const VOCAB_TAGS = ['green', 'pink', 'yellow', 'blue'] as const;
@@ -35,7 +36,7 @@ export function Study() {
     <article className="space-y-14 pb-8">
       {/* Hero */}
       <Headline
-        overline={`Section ${sectionNum} · ${section.pack === 'plants' ? 'Plants & Living Things' : 'Earth, Space & Forces'}`}
+        overline={`Section ${sectionNum} · ${packTitle(section.pack)}`}
         lead={titleLead(section.title)}
         accent={titleAccent(section.title)}
         accentColor="blue"

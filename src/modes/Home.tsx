@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { scienceSections } from '../data/science';
+import { allSections } from '../data';
+import { PACKS, SUBJECTS } from '../data/packs';
 import type { Section } from '../data/types';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
@@ -17,12 +18,23 @@ export function Home() {
   const { state } = useProgress();
   const mistakesCount = mistakesQueue(state.attempts).length;
 
-  const plants = scienceSections.filter((s) => s.pack === 'plants');
-  const earthSpace = scienceSections.filter(
-    (s) => s.pack === 'earth-space-forces',
-  );
-  const resume = pickResume(state, scienceSections);
+  const resume = pickResume(state, allSections);
   const today = DAY_NAMES[new Date().getDay()];
+
+  // Build subject → packs from the registry. Packs are numbered sequentially
+  // after the Practice section (01); empty packs (a subject not authored yet)
+  // are skipped so they simply don't appear.
+  let packNumber = 1;
+  const groups = SUBJECTS.map((subject) => {
+    const packs = PACKS.filter((p) => p.subject === subject.id)
+      .map((pack) => ({
+        pack,
+        sections: allSections.filter((s) => s.pack === pack.slug),
+      }))
+      .filter((g) => g.sections.length > 0)
+      .map((g) => ({ ...g, number: String(++packNumber).padStart(2, '0') }));
+    return { subject, packs };
+  }).filter((g) => g.packs.length > 0);
 
   return (
     <div className="space-y-14">
@@ -30,18 +42,31 @@ export function Home() {
 
       <Practice mistakesCount={mistakesCount} />
 
-      <Pack
-        number="02"
-        title="Plants & Living Things"
-        trailing={`${plants.length} topics`}
-        sections={plants}
-      />
-      <Pack
-        number="03"
-        title="Earth, Space & Forces"
-        trailing={`${earthSpace.length} topics`}
-        sections={earthSpace}
-      />
+      {groups.flatMap((group) => [
+        <SubjectDivider key={`subject-${group.subject.id}`} title={group.subject.title} />,
+        ...group.packs.map((g) => (
+          <Pack
+            key={g.pack.slug}
+            number={g.number}
+            title={g.pack.title}
+            trailing={`${g.sections.length} topic${g.sections.length === 1 ? '' : 's'}`}
+            sections={g.sections}
+          />
+        )),
+      ])}
+    </div>
+  );
+}
+
+// ─── SubjectDivider ─────────────────────────────────────────────────────────
+
+function SubjectDivider({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-4 pt-2">
+      <span className="font-display text-[13px] font-bold uppercase tracking-[0.2em] text-neon-pink shrink-0">
+        {title}
+      </span>
+      <span className="flex-1 h-px bg-rule" />
     </div>
   );
 }

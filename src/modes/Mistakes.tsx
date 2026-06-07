@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { scienceQuestions, scienceSections } from '../data/science';
+import { allQuestions, allSections } from '../data';
 import type { AttemptLog } from '../lib/storage';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
@@ -18,7 +18,7 @@ export function Mistakes() {
   const queue = useMemo(
     () =>
       queueIds
-        .map((id) => scienceQuestions.find((q) => q.id === id))
+        .map((id) => allQuestions.find((q) => q.id === id))
         .filter(Boolean) as Question[],
     [queueIds],
   );
@@ -243,7 +243,7 @@ function lastWrongAnswer(id: string, attempts: readonly AttemptLog[]): string | 
  * the raw question id. Falls back to null if we can't find the section.
  */
 function sectionBreadcrumb(question: Question): string | null {
-  const section = scienceSections.find((s) => s.id === question.sectionId);
+  const section = allSections.find((s) => s.id === question.sectionId);
   if (!section) return null;
   const idx = section.questions.findIndex((q) => q.id === question.id);
   return idx >= 0 ? `${section.title} · Q${idx + 1}` : section.title;

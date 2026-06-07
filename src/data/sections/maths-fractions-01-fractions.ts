@@ -1,0 +1,108 @@
+import type { Section } from '../types';
+
+export const mathsFractions01Fractions: Section = {
+  id: 'maths-fractions-01-fractions',
+  subject: 'maths',
+  pack: 'maths-fractions',
+  number: 1,
+  title: 'Fractions',
+  lesson: `A fraction has two parts. The **denominator** (bottom) says how many equal pieces the whole is split into; the **numerator** (top) says how many you have.
+
+**Equivalent fractions** are the same amount written differently — 2⁄3 and 4⁄6 are equal because you multiplied top and bottom by 2. To **simplify**, divide both by the same number until you can't go further: 18⁄24 → 3⁄4.
+
+To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 + 3⁄4 → 8⁄12 + 9⁄12 = 17⁄12 = 1 5⁄12. Never add the bottoms.
+
+"**of**" means multiply. 3⁄4 of 60 = 60 ÷ 4 × 3 = 45. And a fraction *of* a fraction multiplies too: 1⁄3 of 3⁄4 = 1⁄4.`,
+  vocabulary: [
+    { term: 'Numerator', meaning: 'The top number — how many parts you have.' },
+    { term: 'Denominator', meaning: 'The bottom number — how many equal parts the whole is split into.' },
+    { term: 'Equivalent fractions', meaning: 'Different-looking fractions worth the same amount (2⁄3 = 4⁄6).' },
+    { term: 'Simplify', meaning: 'Divide top and bottom by the same number to get the smallest form.' },
+  ],
+  questions: [
+    {
+      id: 'maths-fractions-01-q1',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'numeric',
+      prompt: 'What is 3⁄4 of 60?',
+      answer: '45',
+      explanation: 'Find one quarter (60 ÷ 4 = 15), then take three of them: 15 × 3 = 45.',
+      difficulty: 1,
+      source: 'GL Maths · Fraction of an amount',
+    },
+    {
+      id: 'maths-fractions-01-q2',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'mcq',
+      prompt: 'Which of these fractions is equivalent to 2⁄3?',
+      choices: ['3⁄4', '4⁄6', '2⁄6', '6⁄8'],
+      answer: '4⁄6',
+      explanation: 'Multiply top and bottom of 2⁄3 by 2 to get 4⁄6 — the same amount, written differently.',
+      difficulty: 1,
+      source: 'GL Maths · Equivalent fractions',
+    },
+    {
+      id: 'maths-fractions-01-q3',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'numeric',
+      prompt: 'Simplify 18⁄24 to its simplest form. Write it like 3/4.',
+      answer: '3/4',
+      explanation: 'Both 18 and 24 divide by 6: 18 ÷ 6 = 3 and 24 ÷ 6 = 4, giving 3⁄4.',
+      difficulty: 2,
+      source: 'GL Maths · Simplifying',
+    },
+    {
+      id: 'maths-fractions-01-q4',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'mcq',
+      prompt: 'Work out 2⁄3 + 3⁄4.',
+      choices: ['5⁄7', '1 1⁄12', '1 5⁄12', '2 1⁄12'],
+      answer: '1 5⁄12',
+      explanation: 'Same denominator first: 8⁄12 + 9⁄12 = 17⁄12, which is 1 whole and 5⁄12. (Adding the bottoms to get 5⁄7 is the classic mistake.)',
+      difficulty: 2,
+      source: 'GL Maths · Adding fractions',
+    },
+    {
+      id: 'maths-fractions-01-q5',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'numeric',
+      prompt: 'Work out 5⁄8 − 1⁄3. Write your answer as a fraction like 7/24.',
+      answer: '7/24',
+      explanation: 'Common denominator 24: 5⁄8 = 15⁄24 and 1⁄3 = 8⁄24, so 15⁄24 − 8⁄24 = 7⁄24.',
+      difficulty: 3,
+      source: 'GL Maths · Subtracting fractions',
+    },
+    {
+      id: 'maths-fractions-01-q6',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'mcq',
+      prompt: 'A cake is 3⁄4 full. Tom eats 1⁄3 of what is there. What fraction of the WHOLE cake did he eat?',
+      choices: ['1⁄4', '1⁄3', '3⁄7', '1⁄12'],
+      answer: '1⁄4',
+      explanation: '"1⁄3 of 3⁄4" means multiply: 1⁄3 × 3⁄4 = 3⁄12 = 1⁄4 of the whole cake.',
+      difficulty: 3,
+      source: 'GL Maths · Fraction of a fraction',
+    },
+    {
+      id: 'maths-fractions-01-q7',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'mcq',
+      prompt: 'Which of these fractions is the largest?',
+      choices: ['1⁄2', '2⁄5', '3⁄8', '4⁄9'],
+      answer: '1⁄2',
+      explanation: 'As decimals: 1⁄2 = 0.5, 2⁄5 = 0.4, 3⁄8 = 0.375, 4⁄9 ≈ 0.44. So 1⁄2 is biggest.',
+      difficulty: 2,
+      source: 'GL Maths · Comparing fractions',
+    },
+    {
+      id: 'maths-fractions-01-q8',
+      sectionId: 'maths-fractions-01-fractions',
+      type: 'numeric',
+      prompt: 'What is 3⁄5 of 45?',
+      answer: '27',
+      explanation: 'One fifth of 45 is 9, and three fifths is 9 × 3 = 27.',
+      difficulty: 1,
+      source: 'GL Maths · Fraction of an amount',
+    },
+  ],
+};

@@ -1,0 +1,108 @@
+import type { Section } from '../types';
+
+export const mathsFractions03Percentages: Section = {
+  id: 'maths-fractions-03-percentages',
+  subject: 'maths',
+  pack: 'maths-fractions',
+  number: 3,
+  title: 'Percentages',
+  lesson: `**Per cent** means "out of 100". So 30% = 30⁄100 = 3⁄10. The easy building blocks are 10% (divide by 10), 5% (half of 10%) and 1% (divide by 100).
+
+To find **15% of 240**: 10% = 24, 5% = 12, so 15% = 36.
+
+For a **percentage increase**, add it on: £80 up 25% = 80 × 1.25 = £100. For a **discount**, take it off: £60 reduced by 30% = 60 × 0.70 = £42.
+
+A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 — what was the original price?" The £48 is *80%* of the original, so original = 48 ÷ 0.8 = £60.`,
+  vocabulary: [
+    { term: 'Per cent', meaning: 'Out of 100. 30% means 30 out of every 100.' },
+    { term: 'Percentage increase', meaning: 'Adding a percentage on top (25% increase = × 1.25).' },
+    { term: 'Discount', meaning: 'An amount taken off a price, given as a percentage.' },
+    { term: 'Reverse percentage', meaning: 'Finding the original amount after a percentage change.' },
+  ],
+  questions: [
+    {
+      id: 'maths-fractions-03-q1',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: 'What is 15% of 240?',
+      answer: '36',
+      explanation: '10% of 240 is 24 and 5% is 12, so 15% = 24 + 12 = 36.',
+      difficulty: 1,
+      source: 'GL Maths · Percentage of an amount',
+    },
+    {
+      id: 'maths-fractions-03-q2',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'mcq',
+      prompt: 'What is 30% written as a fraction in its simplest form?',
+      choices: ['3⁄10', '30⁄100', '1⁄3', '3⁄100'],
+      answer: '3⁄10',
+      explanation: '30% = 30⁄100, and dividing top and bottom by 10 gives 3⁄10.',
+      difficulty: 1,
+      source: 'GL Maths · Percentage ↔ fraction',
+    },
+    {
+      id: 'maths-fractions-03-q3',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: 'A coat costs £80 and its price rises by 25%. What is the new price, in pounds?',
+      answer: '100',
+      acceptable: ['£100'],
+      explanation: '25% of £80 is £20, so the new price is 80 + 20 = £100.',
+      difficulty: 2,
+      source: 'GL Maths · Percentage increase',
+    },
+    {
+      id: 'maths-fractions-03-q4',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: 'A £60 game is reduced by 30%. What is the sale price, in pounds?',
+      answer: '42',
+      acceptable: ['£42'],
+      explanation: '30% of £60 is £18, so the sale price is 60 − 18 = £42.',
+      difficulty: 2,
+      source: 'GL Maths · Discount',
+    },
+    {
+      id: 'maths-fractions-03-q5',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: 'A school has 840 students. 45% of them are boys. How many girls are there?',
+      answer: '462',
+      explanation: 'If 45% are boys, 55% are girls. 55% of 840 = 840 × 0.55 = 462.',
+      difficulty: 2,
+      source: 'GL Maths · Percentage of an amount',
+    },
+    {
+      id: 'maths-fractions-03-q6',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'mcq',
+      prompt: 'After a 20% discount, a jacket costs £48. What was the original price?',
+      choices: ['£60', '£57.60', '£68', '£96'],
+      answer: '£60',
+      explanation: '£48 is 80% of the original. So 1% is 48 ÷ 80 = £0.60, and 100% is £60. (Taking 20% of £48 is the trap.)',
+      difficulty: 3,
+      source: 'GL Maths · Reverse percentage',
+    },
+    {
+      id: 'maths-fractions-03-q7',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: '12 is what percentage of 48?',
+      answer: '25',
+      explanation: '12 out of 48 = 12⁄48 = 1⁄4 = 25%.',
+      difficulty: 2,
+      source: 'GL Maths · One number as a % of another',
+    },
+    {
+      id: 'maths-fractions-03-q8',
+      sectionId: 'maths-fractions-03-percentages',
+      type: 'numeric',
+      prompt: 'Increase 200 by 35%.',
+      answer: '270',
+      explanation: '35% of 200 is 70, so 200 + 70 = 270.',
+      difficulty: 2,
+      source: 'GL Maths · Percentage increase',
+    },
+  ],
+};
