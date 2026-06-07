@@ -83,4 +83,22 @@ describe('answerability (every question can actually be marked correct)', () => 
       .map((q) => q.id);
     expect(bad).toEqual([]);
   });
+
+  it('every NVR question has figures and an in-range answer index', () => {
+    const bad: string[] = [];
+    for (const q of allQuestions.filter((q) => q.type === 'nvr')) {
+      const nvr = q.nvr;
+      if (!nvr) {
+        bad.push(`${q.id}: missing nvr payload`);
+        continue;
+      }
+      const choices = nvr.kind === 'odd-one-out' ? nvr.stem : nvr.options ?? [];
+      if (choices.length < 2) bad.push(`${q.id}: needs at least 2 choices`);
+      const idx = Number(first(q.answer));
+      if (!Number.isInteger(idx) || idx < 0 || idx >= choices.length) {
+        bad.push(`${q.id}: answer index "${first(q.answer)}" out of range`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
 });

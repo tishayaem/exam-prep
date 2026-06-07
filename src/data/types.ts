@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 
-export type Subject = 'science' | 'maths' | 'english';
+export type Subject = 'science' | 'maths' | 'english' | 'non-verbal';
 export type Pack = 'plants' | 'earth-space-forces' | string;
 export type QuestionType =
   | 'short'
@@ -9,12 +9,49 @@ export type QuestionType =
   | 'truefalse'
   | 'match'
   | 'sequence'
-  | 'numeric';
+  | 'numeric'
+  | 'nvr';
 export type Difficulty = 1 | 2 | 3;
 
 export interface VocabularyTerm {
   term: string;
   meaning: string;
+}
+
+/**
+ * A single non-verbal-reasoning figure, described declaratively so one
+ * `<NvrFigure>` renderer can draw any of them. The attributes are exactly the
+ * axes GL examiners vary: shape, shading, rotation, size and count.
+ */
+export interface NvrFigure {
+  shape:
+    | 'circle'
+    | 'square'
+    | 'triangle'
+    | 'pentagon'
+    | 'hexagon'
+    | 'star'
+    | 'arrow'
+    | 'diamond';
+  fill?: 'white' | 'black' | 'grey' | 'striped';
+  rotation?: 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315;
+  size?: 'sm' | 'md' | 'lg';
+  /** Number of small dots drawn inside the shape (0 = none). */
+  dots?: number;
+}
+
+/**
+ * Payload for a `type: 'nvr'` question. For `odd-one-out`, `stem` holds the
+ * tappable figures and the answer index points into `stem`. For the others,
+ * `stem` is the question prompt (the sequence / pair / grid) and `options`
+ * holds the tappable choices that the answer index points into. The correct
+ * index is stored in `Question.answer` (as a string) so grading and feedback
+ * reuse the shared machinery.
+ */
+export interface NvrQuestion {
+  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix';
+  stem: NvrFigure[];
+  options?: NvrFigure[];
 }
 
 export interface Example {
@@ -38,6 +75,8 @@ export interface Question {
   reasoning?: boolean;
   source: string;
   variantOf?: string;
+  /** Present only for `type: 'nvr'` — the figures to render. */
+  nvr?: NvrQuestion;
 }
 
 export interface Section {

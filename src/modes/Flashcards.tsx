@@ -21,9 +21,11 @@ function FlashcardsBody({ sectionId }: { sectionId: string | undefined }) {
   const { state, recordAttempt } = useProgress();
 
   const pool = useMemo(() => {
-    const all = sectionId
-      ? findSection(sectionId)?.questions ?? []
-      : allSections.flatMap((s) => s.questions);
+    const all = (
+      sectionId
+        ? findSection(sectionId)?.questions ?? []
+        : allSections.flatMap((s) => s.questions)
+    ).filter((q) => q.type !== 'nvr'); // NVR needs rendered figures; flip-cards can't show them
     return prioritise(all, state.box);
   }, [sectionId, state.box]);
 

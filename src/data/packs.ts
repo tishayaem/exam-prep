@@ -24,6 +24,7 @@ export interface SubjectDef {
 export const SUBJECTS: SubjectDef[] = [
   { id: 'science', title: 'Science' },
   { id: 'maths', title: 'Maths' },
+  { id: 'non-verbal', title: 'Non-Verbal Reasoning' },
 ];
 
 export const PACKS: PackDef[] = [
@@ -37,6 +38,9 @@ export const PACKS: PackDef[] = [
   { slug: 'maths-ratio', subject: 'maths', title: 'Ratio, Proportion & Algebra' },
   { slug: 'maths-geometry', subject: 'maths', title: 'Measurement & Geometry' },
   { slug: 'maths-data', subject: 'maths', title: 'Data & Problem Solving' },
+
+  // Non-Verbal Reasoning
+  { slug: 'nvr-core', subject: 'non-verbal', title: 'Figures & Patterns' },
 ];
 
 /** Human-readable pack title for a slug, falling back to the slug itself. */

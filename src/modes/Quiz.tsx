@@ -1,12 +1,19 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findSection } from '../data';
-import { grade, gradeMatch, gradeSequence, type GradeResult } from '../lib/grading';
+import {
+  grade,
+  gradeMatch,
+  gradeNumeric,
+  gradeSequence,
+  type GradeResult,
+} from '../lib/grading';
 import { useProgress } from '../lib/storage';
 import type { Question } from '../data/types';
 import { FeedbackPanel, firstAnswer, formatAnswer } from '../components/QuestionRunner';
 import { MatchAnswer } from '../components/MatchAnswer';
 import { SequenceAnswer } from '../components/SequenceAnswer';
+import { NvrAnswer } from '../components/NvrAnswer';
 import { burstFromEvent } from '../lib/confetti';
 
 type Verdict = 'correct' | 'wrong' | null;
@@ -37,6 +44,7 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
   const [input, setInput] = useState('');
   const [userPairs, setUserPairs] = useState<Record<string, string>>({});
   const [userOrder, setUserOrder] = useState<string[]>([]);
+  const [pickedIndex, setPickedIndex] = useState<number | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
   const [borderline, setBorderline] = useState(false);
   const [score, setScore] = useState(0);
@@ -65,6 +73,7 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
           setVerdict(null);
           setBorderline(false);
           setInput('');
+          setPickedIndex(null);
         }}
       />
     );
@@ -97,6 +106,10 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
       handleChoice(v);
       return;
     }
+    if (q.type === 'numeric') {
+      finalise(gradeNumeric(v, q.answer, q.acceptable), v);
+      return;
+    }
     const result: GradeResult = grade(v, q.answer, q.acceptable);
     if (result === 'borderline') {
       setBorderline(true);
@@ -109,6 +122,12 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
     setInput(choice);
     const canonical = firstAnswer(q.answer);
     finalise(choice.trim().toLowerCase() === canonical.trim().toLowerCase(), choice);
+  }
+
+  function handleNvrPick(idx: number) {
+    if (locked) return;
+    setPickedIndex(idx);
+    finalise(idx === Number(firstAnswer(q.answer)), `Shape ${String.fromCharCode(65 + idx)}`);
   }
 
   function finalise(correct: boolean, chosen?: string) {
@@ -132,6 +151,7 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
     setInput('');
     setUserPairs({});
     setUserOrder([]);
+    setPickedIndex(null);
     setVerdict(null);
     setBorderline(false);
   }
@@ -167,9 +187,11 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
             setUserPairs={setUserPairs}
             userOrder={userOrder}
             setUserOrder={setUserOrder}
+            pickedIndex={pickedIndex}
             verdict={verdict}
             locked={locked}
             onPick={handleChoice}
+            onNvrPick={handleNvrPick}
             onSubmit={() => submit()}
           />
         </div>
@@ -260,9 +282,11 @@ function ChoiceOrInput({
   setUserPairs,
   userOrder,
   setUserOrder,
+  pickedIndex,
   verdict,
   locked,
   onPick,
+  onNvrPick,
   onSubmit,
 }: {
   question: Question;
@@ -272,11 +296,26 @@ function ChoiceOrInput({
   setUserPairs: (next: Record<string, string>) => void;
   userOrder: string[];
   setUserOrder: (next: string[]) => void;
+  pickedIndex: number | null;
   verdict: Verdict;
   locked: boolean;
   onPick: (c: string) => void;
+  onNvrPick: (i: number) => void;
   onSubmit: () => void;
 }) {
+  if (question.type === 'nvr' && question.nvr) {
+    return (
+      <NvrAnswer
+        nvr={question.nvr}
+        answerIndex={Number(firstAnswer(question.answer))}
+        pickedIndex={pickedIndex}
+        locked={locked}
+        verdict={verdict}
+        onChoose={onNvrPick}
+      />
+    );
+  }
+
   if (question.type === 'match' && question.pairs) {
     return (
       <MatchAnswer

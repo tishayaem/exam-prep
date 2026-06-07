@@ -9,6 +9,7 @@ import {
 import type { Question } from '../data/types';
 import { MatchAnswer } from './MatchAnswer';
 import { SequenceAnswer } from './SequenceAnswer';
+import { NvrAnswer } from './NvrAnswer';
 
 type Verdict = 'correct' | 'wrong' | null;
 
@@ -38,6 +39,7 @@ export function QuestionRunner({
   const [input, setInput] = useState('');
   const [userPairs, setUserPairs] = useState<Record<string, string>>({});
   const [userOrder, setUserOrder] = useState<string[]>([]);
+  const [pickedIndex, setPickedIndex] = useState<number | null>(null);
   const [verdict, setVerdict] = useState<Verdict>(null);
   const [borderline, setBorderline] = useState(false);
 
@@ -80,6 +82,13 @@ export function QuestionRunner({
     finalise(choice.trim().toLowerCase() === canonical.trim().toLowerCase(), choice);
   }
 
+  function handleNvrChoice(index: number) {
+    if (locked) return;
+    setPickedIndex(index);
+    const answerIndex = Number(firstAnswer(question.answer));
+    finalise(index === answerIndex, `Shape ${String.fromCharCode(65 + index)}`);
+  }
+
   function finalise(correct: boolean, chosen?: string) {
     setVerdict(correct ? 'correct' : 'wrong');
     setBorderline(false);
@@ -100,9 +109,11 @@ export function QuestionRunner({
         setUserPairs={setUserPairs}
         userOrder={userOrder}
         setUserOrder={setUserOrder}
+        pickedIndex={pickedIndex}
         locked={locked}
         verdict={verdict}
         onChoice={handleChoice}
+        onNvrChoice={handleNvrChoice}
         onSubmit={submit}
       />
 
@@ -168,9 +179,11 @@ function AnswerArea({
   setUserPairs,
   userOrder,
   setUserOrder,
+  pickedIndex,
   locked,
   verdict,
   onChoice,
+  onNvrChoice,
   onSubmit,
 }: {
   question: Question;
@@ -180,11 +193,26 @@ function AnswerArea({
   setUserPairs: (next: Record<string, string>) => void;
   userOrder: string[];
   setUserOrder: (next: string[]) => void;
+  pickedIndex: number | null;
   locked: boolean;
   verdict: Verdict;
   onChoice: (c: string) => void;
+  onNvrChoice: (i: number) => void;
   onSubmit: () => void;
 }) {
+  if (question.type === 'nvr' && question.nvr) {
+    return (
+      <NvrAnswer
+        nvr={question.nvr}
+        answerIndex={Number(firstAnswer(question.answer))}
+        pickedIndex={pickedIndex}
+        locked={locked}
+        verdict={verdict}
+        onChoose={onNvrChoice}
+      />
+    );
+  }
+
   if (question.type === 'match' && question.pairs) {
     return (
       <MatchAnswer
@@ -362,6 +390,9 @@ export function formatAnswer(question: Question): string {
   }
   if (question.type === 'sequence' && question.sequence) {
     return question.sequence.join(' → ');
+  }
+  if (question.type === 'nvr') {
+    return `Shape ${String.fromCharCode(65 + Number(firstAnswer(question.answer)))}`;
   }
   return firstAnswer(question.answer);
 }
