@@ -98,6 +98,19 @@ describe('answerability (every question can actually be marked correct)', () => 
       if (!Number.isInteger(idx) || idx < 0 || idx >= choices.length) {
         bad.push(`${q.id}: answer index "${first(q.answer)}" out of range`);
       }
+      // Each kind needs the right stem shape for its layout.
+      if (nvr.kind === 'analogy' && nvr.stem.length !== 3) {
+        bad.push(`${q.id}: analogy needs exactly 3 stem figures (A, B, C)`);
+      }
+      if (nvr.kind === 'matrix' && nvr.stem.length !== 8) {
+        bad.push(`${q.id}: matrix needs exactly 8 stem figures`);
+      }
+      if (nvr.kind === 'series' && nvr.stem.length < 2) {
+        bad.push(`${q.id}: series needs at least 2 stem figures`);
+      }
+      if (nvr.kind !== 'odd-one-out' && !nvr.options?.length) {
+        bad.push(`${q.id}: ${nvr.kind} needs an options array`);
+      }
     }
     expect(bad).toEqual([]);
   });
