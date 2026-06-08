@@ -355,6 +355,7 @@ const SUBJECT_BTN = [
   'bg-neon-green text-ink',
   'bg-neon-yellow text-ink',
   'bg-neon-blue text-paper',
+  'bg-neon-pink text-paper',
 ];
 
 function SubjectChooser({ onPick }: { onPick: (s: Subject) => void }) {

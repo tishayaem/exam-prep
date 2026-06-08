@@ -25,6 +25,7 @@ export const SUBJECTS: SubjectDef[] = [
   { id: 'science', title: 'Science' },
   { id: 'maths', title: 'Maths' },
   { id: 'non-verbal', title: 'Non-Verbal Reasoning' },
+  { id: 'verbal', title: 'Verbal Reasoning' },
 ];
 
 export const PACKS: PackDef[] = [
@@ -41,6 +42,9 @@ export const PACKS: PackDef[] = [
 
   // Non-Verbal Reasoning
   { slug: 'nvr-core', subject: 'non-verbal', title: 'Figures & Patterns' },
+
+  // Verbal Reasoning
+  { slug: 'vr-core', subject: 'verbal', title: 'Words, Codes & Logic' },
 ];
 
 /** Human-readable pack title for a slug, falling back to the slug itself. */

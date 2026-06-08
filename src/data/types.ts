@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 
-export type Subject = 'science' | 'maths' | 'english' | 'non-verbal';
+export type Subject = 'science' | 'maths' | 'english' | 'non-verbal' | 'verbal';
 export type Pack = 'plants' | 'earth-space-forces' | string;
 export type QuestionType =
   | 'short'

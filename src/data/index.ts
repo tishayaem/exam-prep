@@ -2,16 +2,18 @@ import type { Question, Section, Subject } from './types';
 import { scienceSections } from './science';
 import { mathsSections } from './maths';
 import { nvrSections } from './nvr';
+import { vrSections } from './vr';
 
 /**
  * Subject-agnostic view of all content. Modes import from here, not from a
- * single subject's file, so adding a subject (maths, non-verbal, English) is a
- * one-line change in this file plus the pack registry.
+ * single subject's file, so adding a subject (maths, non-verbal, verbal,
+ * English) is a one-line change in this file plus the pack registry.
  */
 export const allSections: Section[] = [
   ...scienceSections,
   ...mathsSections,
   ...nvrSections,
+  ...vrSections,
 ];
 
 export const allQuestions: Question[] = allSections.flatMap((s) => s.questions);
