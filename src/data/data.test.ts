@@ -32,6 +32,22 @@ describe('content integrity (all sections)', () => {
     expect(orphans).toEqual([]);
   });
 
+  // Mistakes mode serves a variant twin for the second graduation answer, so
+  // a broken link would silently disable that for the whole family.
+  it('every variantOf points to a real question in the same section, not itself', () => {
+    const byId = new Map(allQuestions.map((q) => [q.id, q]));
+    const bad: string[] = [];
+    for (const q of allQuestions) {
+      if (!q.variantOf) continue;
+      const target = byId.get(q.variantOf);
+      if (!target) bad.push(`${q.id} → missing "${q.variantOf}"`);
+      else if (target.id === q.id) bad.push(`${q.id} → itself`);
+      else if (target.sectionId !== q.sectionId)
+        bad.push(`${q.id} → ${q.variantOf} (different section)`);
+    }
+    expect(bad).toEqual([]);
+  });
+
   it('every question has a prompt, explanation, source and valid difficulty', () => {
     const bad = allQuestions
       .filter(

@@ -73,7 +73,6 @@ The **flesh** is the soft, juicy part around the seed. It's there to tempt anima
         'A tomato has dozens of small seeds packed in jelly. Peaches, cherries and mangoes each have one big seed (a stone) in the middle.',
       difficulty: 1,
       source: 'Term 1 Section 1 Q2 (closed-form variant)',
-      variantOf: 'plants-01-q2-original',
     },
     {
       id: 'plants-01-q3',

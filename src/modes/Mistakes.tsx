@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { allQuestions, allSections } from '../data';
 import type { AttemptLog } from '../lib/storage';
 import { useProgress } from '../lib/storage';
-import { mistakesQueue } from '../lib/mistakes';
+import { mistakesQueue, variantTwins } from '../lib/mistakes';
+import { sample } from '../lib/shuffle';
 import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
 import { SectionHeader } from '../components/Editorial';
 import type { Question } from '../data/types';
@@ -23,8 +24,81 @@ export function Mistakes() {
     [queueIds],
   );
 
-  const [activeId, setActiveId] = useState<string | null>(null);
+  // queuedId is the question being graduated (the row in the list); servedId
+  // is what's actually on screen — a variant twin when this is the second
+  // confirmation, so the answer can't be passed by memorising it.
+  const [active, setActive] = useState<{
+    queuedId: string;
+    servedId: string;
+  } | null>(null);
   const [redoKey, setRedoKey] = useState(0);
+
+  const startRedo = (q: Question) => {
+    const twins = variantTwins(q, allQuestions);
+    const secondGo = correctStreak(q.id, state.attempts) === 1;
+    const served = secondGo && twins.length > 0 ? sample(twins, 1)[0] : q;
+    setActive({ queuedId: q.id, servedId: served.id });
+  };
+
+  // Looked up in allQuestions, not the queue: answering correctly graduates
+  // the row out of the queue immediately, and the child still needs to see
+  // the feedback before tapping back to the list.
+  const queued = active
+    ? allQuestions.find((q) => q.id === active.queuedId)
+    : null;
+  const served = active
+    ? allQuestions.find((q) => q.id === active.servedId)
+    : null;
+
+  if (queued && served) {
+    const isTwin = served.id !== queued.id;
+    const breadcrumb = sectionBreadcrumb(served);
+    return (
+      <div className="space-y-7">
+        <div className="flex items-center justify-between gap-3">
+          <button
+            onClick={() => setActive(null)}
+            className="text-[13px] font-semibold text-inkSoft hover:text-ink shrink-0"
+          >
+            ← Back to mistakes
+          </button>
+          <span className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] truncate text-right">
+            {isTwin ? 'Twin redo' : 'Redo'} {breadcrumb && <>· {breadcrumb}</>}
+          </span>
+        </div>
+        {isTwin && (
+          <div className="border border-rule rounded-[18px] px-5 py-4 text-[14px] text-inkSoft leading-relaxed">
+            <span className="font-bold text-neon-pink uppercase tracking-[0.1em] text-[11px] mr-2">
+              Twin question
+            </span>
+            Same skill, new numbers — show you can do it, not just remember it.
+          </div>
+        )}
+        <QuestionRunner
+          key={`${served.id}-${redoKey}`}
+          question={served}
+          onResolved={(correct, chosen) =>
+            // Logged against the queued question so its streak (and
+            // graduation) advances. When a twin is on screen, drop `chosen`:
+            // the list row shows the queued prompt, and pairing it with an
+            // answer given to a different question would mislead.
+            recordAttempt(
+              queued.id,
+              correct,
+              served.difficulty,
+              isTwin ? undefined : chosen,
+            )
+          }
+          onNext={() => {
+            // Re-mount so the user can answer it again to build the streak.
+            setRedoKey((k) => k + 1);
+            setActive(null);
+          }}
+          nextLabel="Back to list ›"
+        />
+      </div>
+    );
+  }
 
   if (queue.length === 0) {
     return (
@@ -57,42 +131,6 @@ export function Mistakes() {
     );
   }
 
-  const active = activeId
-    ? queue.find((q) => q.id === activeId)
-    : null;
-
-  if (active) {
-    const breadcrumb = sectionBreadcrumb(active);
-    return (
-      <div className="space-y-7">
-        <div className="flex items-center justify-between gap-3">
-          <button
-            onClick={() => setActiveId(null)}
-            className="text-[13px] font-semibold text-inkSoft hover:text-ink shrink-0"
-          >
-            ← Back to mistakes
-          </button>
-          <span className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em] truncate text-right">
-            Redo {breadcrumb && <>· {breadcrumb}</>}
-          </span>
-        </div>
-        <QuestionRunner
-          key={`${active.id}-${redoKey}`}
-          question={active}
-          onResolved={(correct, chosen) =>
-            recordAttempt(active.id, correct, active.difficulty, chosen)
-          }
-          onNext={() => {
-            // Re-mount so the user can answer it again to build the streak.
-            setRedoKey((k) => k + 1);
-            setActiveId(null);
-          }}
-          nextLabel="Back to list ›"
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-9">
       <header>
@@ -112,7 +150,8 @@ export function Mistakes() {
         </h1>
         <p className="text-[15px] text-inkSoft mt-4 max-w-xl leading-relaxed">
           Get a question right twice in a row and it leaves this list. Get it
-          wrong and the counter starts over.
+          wrong and the counter starts over. If a question has a twin, your
+          second go swaps in new numbers — no memorising answers!
         </p>
       </header>
 
@@ -129,7 +168,7 @@ export function Mistakes() {
               question={q}
               streak={correctStreak(q.id, state.attempts)}
               yourAnswer={lastWrongAnswer(q.id, state.attempts)}
-              onRedo={() => setActiveId(q.id)}
+              onRedo={() => startRedo(q)}
             />
           ))}
         </div>

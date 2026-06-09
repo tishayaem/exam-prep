@@ -26,7 +26,7 @@ check items off here as they land.
 
 ## 1. Maths quick wins (small, immediate)
 
-- [ ] **Variant-aware Mistakes loop** — Mistakes currently makes the child
+- [x] **Variant-aware Mistakes loop** — Mistakes currently makes the child
       redo the *same* question twice, which can be passed by memorising the
       answer. When a failed question has `variantOf` twins (or is itself the
       original of variants), serve a twin for the second confirmation instead.
