@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import type { Question } from './types';
 import { allSections, allQuestions } from './index';
 import { PACKS } from './packs';
 import { gradeNumeric } from '../lib/grading';
@@ -134,6 +135,81 @@ describe('answerability (every question can actually be marked correct)', () => 
   // leads to a drill with nothing worth drilling.
   it('the Number Sprint pool stays healthily stocked', () => {
     expect(numberSprintPool(allSections).length).toBeGreaterThanOrEqual(20);
+  });
+
+  it('every Codes question is a well-formed mcq with a parallel codes array', () => {
+    const bad: string[] = [];
+    for (const q of allQuestions.filter((q) => q.nvr?.kind === 'code')) {
+      const nvr = q.nvr!;
+      if (q.type !== 'mcq') bad.push(`${q.id}: code questions must be type mcq`);
+      if (nvr.stem.length < 3) bad.push(`${q.id}: needs ≥2 examples + 1 unknown`);
+      if (!nvr.codes || nvr.codes.length !== nvr.stem.length - 1)
+        bad.push(`${q.id}: codes must label every stem figure except the last`);
+      const lens = new Set([...(nvr.codes ?? []), first(q.answer)].map((c) => c.length));
+      if (lens.size > 1) bad.push(`${q.id}: codes and answer must share one length`);
+    }
+    // And the only mcq questions carrying an nvr payload are code stems.
+    for (const q of allQuestions.filter((q) => q.type === 'mcq' && q.nvr)) {
+      if (q.nvr!.kind !== 'code') bad.push(`${q.id}: mcq nvr payload must be kind code`);
+    }
+    expect(bad).toEqual([]);
+  });
+
+  // Re-derive every code answer from the example figures: for each letter
+  // position there must be a figure attribute that is constant within each
+  // letter-group and distinct across groups, and reading the unknown figure
+  // off that key must reproduce the stored answer. Catches both broken keys
+  // and unsolvable/ambiguous constructions.
+  it('every Codes question is mechanically solvable to its stored answer', () => {
+    const ATTRS = ['shape', 'fill', 'size', 'rotation', 'dots', 'mirrored'] as const;
+    const val = (f: NonNullable<Question['nvr']>['stem'][number], a: (typeof ATTRS)[number]) =>
+      String(
+        a === 'fill' ? f.fill ?? 'white'
+        : a === 'size' ? f.size ?? 'md'
+        : a === 'rotation' ? f.rotation ?? 0
+        : a === 'dots' ? f.dots ?? 0
+        : a === 'mirrored' ? f.mirrored ?? false
+        : f.shape,
+      );
+    const bad: string[] = [];
+    for (const q of allQuestions.filter((q) => q.nvr?.kind === 'code')) {
+      const { stem, codes } = q.nvr!;
+      if (!codes?.length) continue; // shape errors reported by the test above
+      const examples = stem.slice(0, -1);
+      const unknown = stem[stem.length - 1];
+      let derived = '';
+      for (let p = 0; p < codes[0].length; p++) {
+        const groups = new Map<string, typeof examples>();
+        examples.forEach((f, i) => {
+          const letter = codes[i][p];
+          groups.set(letter, [...(groups.get(letter) ?? []), f]);
+        });
+        const letters = new Set<string>();
+        for (const a of ATTRS) {
+          const byLetter = new Map<string, string>();
+          let consistent = true;
+          for (const [letter, figs] of groups) {
+            const vals = new Set(figs.map((f) => val(f, a)));
+            if (vals.size !== 1) { consistent = false; break; }
+            byLetter.set(letter, [...vals][0]);
+          }
+          if (!consistent || new Set(byLetter.values()).size !== groups.size) continue;
+          // `a` is a valid key for this position — read the unknown off it.
+          for (const [letter, v] of byLetter) {
+            if (v === val(unknown, a)) letters.add(letter);
+          }
+        }
+        if (letters.size !== 1) {
+          bad.push(`${q.id}: position ${p + 1} ${letters.size === 0 ? 'unsolvable' : 'ambiguous'}`);
+          break;
+        }
+        derived += [...letters][0];
+      }
+      if (derived.length === codes[0].length && derived !== first(q.answer)) {
+        bad.push(`${q.id}: derives to ${derived}, stored ${first(q.answer)}`);
+      }
+    }
+    expect(bad).toEqual([]);
   });
 
   it('every NVR question has figures and an in-range answer index', () => {

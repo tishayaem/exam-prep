@@ -2,7 +2,7 @@ import type { Question } from '../data/types';
 import { firstAnswer, type Verdict } from './answerFormat';
 import { MatchAnswer } from './MatchAnswer';
 import { SequenceAnswer } from './SequenceAnswer';
-import { NvrAnswer } from './NvrAnswer';
+import { NvrAnswer, NvrCodeStem } from './NvrAnswer';
 
 /**
  * The input surface for a question — picks the right control for the type
@@ -83,7 +83,11 @@ export function AnswerArea({
       question.choices ?? (question.type === 'truefalse' ? ['True', 'False'] : []);
     const canonical = firstAnswer(question.answer).trim().toLowerCase();
     return (
-      <div className="grid gap-3">
+      <div>
+        {/* Codes questions are MCQs with a figure stem rendered above the
+            letter-pair choices. */}
+        {question.nvr?.kind === 'code' && <NvrCodeStem nvr={question.nvr} />}
+        <div className="grid gap-3">
         {choices.map((c) => {
           const isPicked = input === c;
           const isAnswer = c.trim().toLowerCase() === canonical;
@@ -106,6 +110,7 @@ export function AnswerArea({
             </button>
           );
         })}
+        </div>
       </div>
     );
   }

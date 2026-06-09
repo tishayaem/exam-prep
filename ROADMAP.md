@@ -52,7 +52,7 @@ check items off here as they land.
 
 ## 3. Non-Verbal Reasoning — schema first, then depth
 
-- [ ] **Codes question kind** — GL's official NVR paper is ~half Codes
+- [x] **Codes question kind** — GL's official NVR paper is ~half Codes
       (shapes → letter pairs); the app has none. New `kind: 'code'` in
       `NvrQuestion` (`src/data/types.ts`) + layout in the NVR renderer.
 - [x] **Reflection support** — the #1 NVR trap (reflection distractor vs

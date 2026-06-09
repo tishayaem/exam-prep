@@ -14,6 +14,35 @@ function StemCell({ figure, box = 70 }: { figure: Figure; box?: number }) {
   );
 }
 
+/**
+ * The stem of a Codes question: example figures with their letter codes
+ * beneath, then the figure to encode above a "?". Rendered by AnswerArea
+ * above ordinary MCQ text choices (the code answers are plain strings).
+ */
+export function NvrCodeStem({ nvr }: { nvr: NvrQuestion }) {
+  const examples = nvr.stem.slice(0, -1);
+  const unknown = nvr.stem[nvr.stem.length - 1];
+  return (
+    <div className="rounded-[22px] border border-rule bg-off p-4 sm:p-6 overflow-x-auto mb-6">
+      <div className="flex items-end justify-center gap-3 sm:gap-4 min-w-max">
+        {examples.map((f, i) => (
+          <div key={i} className="flex flex-col items-center gap-1.5">
+            <StemCell figure={f} />
+            <span className="font-display font-bold text-[17px] tracking-wide">
+              {nvr.codes?.[i] ?? ''}
+            </span>
+          </div>
+        ))}
+        <span className="text-inkSoft text-2xl font-bold px-1 self-center pb-4">→</span>
+        <div className="flex flex-col items-center gap-1.5">
+          <StemCell figure={unknown} />
+          <span className="font-display font-bold text-[17px] text-neon-blue">?</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /** The dashed "?" cell marking what the child must find. */
 function MissingCell({ box = 70 }: { box?: number }) {
   return (

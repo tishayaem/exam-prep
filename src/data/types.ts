@@ -51,16 +51,24 @@ export interface NvrFigure {
 
 /**
  * Payload for a `type: 'nvr'` question. For `odd-one-out`, `stem` holds the
- * tappable figures and the answer index points into `stem`. For the others,
- * `stem` is the question prompt (the sequence / pair / grid) and `options`
- * holds the tappable choices that the answer index points into. The correct
- * index is stored in `Question.answer` (as a string) so grading and feedback
- * reuse the shared machinery.
+ * tappable figures and the answer index points into `stem`. For `series` /
+ * `analogy` / `matrix`, `stem` is the question prompt (the sequence / pair /
+ * grid) and `options` holds the tappable choices that the answer index points
+ * into. The correct index is stored in `Question.answer` (as a string) so
+ * grading and feedback reuse the shared machinery.
+ *
+ * `code` is the exception: it rides on a `type: 'mcq'` question (the choices
+ * are letter-pair strings, graded as ordinary text), and the nvr payload is
+ * render-only — `stem` holds the example figures with the LAST figure being
+ * the one to encode, and `codes` labels every stem figure except that last
+ * one.
  */
 export interface NvrQuestion {
-  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix';
+  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix' | 'code';
   stem: NvrFigure[];
   options?: NvrFigure[];
+  /** Only for `kind: 'code'`: codes[i] labels stem[i]; stem's last figure is the unknown. */
+  codes?: string[];
 }
 
 export interface Example {
