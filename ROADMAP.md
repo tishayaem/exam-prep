@@ -47,7 +47,7 @@ check items off here as they land.
       the maths one).
 - [x] **A–Z letter strip** rendered above letter-series/code questions (exam
       technique: children write out the alphabet; give them a tappable strip).
-- [ ] **Synonym/antonym word bank** — richer vocabulary content feeding
+- [x] **Synonym/antonym word bank** — richer vocabulary content feeding
       VocabSprint; word knowledge is the #1 VR lever at this age.
 
 ## 3. Non-Verbal Reasoning — schema first, then depth

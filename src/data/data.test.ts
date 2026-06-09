@@ -101,6 +101,21 @@ describe('answerability (every question can actually be marked correct)', () => 
     expect(bad).toEqual([]);
   });
 
+  // Vocab Sprint derives Leitner ids from the slugged term, so two terms in
+  // one section that slug identically would silently share progress.
+  it('has no duplicate vocabulary terms within a section', () => {
+    const slug = (t: string) =>
+      t.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-');
+    const dupes = allSections.flatMap((s) => {
+      const seen = new Set<string>();
+      return s.vocabulary
+        .map((v) => slug(v.term))
+        .filter((t) => (seen.has(t) ? true : (seen.add(t), false)))
+        .map((t) => `${s.id}: ${t}`);
+    });
+    expect(dupes).toEqual([]);
+  });
+
   // Convention behind the Smart Practice "Problem-solving only" toggle: the
   // maths difficulty-3 tier IS the multi-step ISEB tier, so every d3 maths
   // question must carry the reasoning flag or it silently drops out of the
