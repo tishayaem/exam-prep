@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { allSections, allQuestions } from './index';
 import { PACKS } from './packs';
 import { gradeNumeric } from '../lib/grading';
+import { numberSprintPool } from '../lib/numberSprint';
 
 const first = (a: string | string[]): string => (Array.isArray(a) ? a[0] : a);
 const packSlugs = new Set(PACKS.map((p) => p.slug));
@@ -98,6 +99,13 @@ describe('answerability (every question can actually be marked correct)', () => 
       )
       .map((q) => q.id);
     expect(bad).toEqual([]);
+  });
+
+  // Number Sprint draws difficulty-1 numeric maths questions with answers
+  // typeable on a decimal keypad. If edits drain this pool, the Home tile
+  // leads to a drill with nothing worth drilling.
+  it('the Number Sprint pool stays healthily stocked', () => {
+    expect(numberSprintPool(allSections).length).toBeGreaterThanOrEqual(20);
   });
 
   it('every NVR question has figures and an in-range answer index', () => {

@@ -31,7 +31,7 @@ check items off here as they land.
       answer. When a failed question has `variantOf` twins (or is itself the
       original of variants), serve a twin for the second confirmation instead.
       Touches `src/lib/mistakes.ts` + `src/modes/Mistakes.tsx`.
-- [ ] **Number Sprint** — timed mental-arithmetic drill (45–60 s of
+- [x] **Number Sprint** — timed mental-arithmetic drill (45–60 s of
       difficulty-1 `numeric` maths questions), mirroring `VocabSprint.tsx`.
       Trains the quick-numeracy opening of the ISEB paper. New route + Home tile.
 - [ ] **Wire the `reasoning` flag** — a "Problem-solving drill" (filter or

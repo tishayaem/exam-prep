@@ -300,7 +300,7 @@ function Practice({
         }
       />
       <SmartPracticeBanner focus={focus} />
-      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-4 [&>*]:min-w-0">
+      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-5 [&>*]:min-w-0">
         <PracticeCard
           to="/mock-test"
           big="Mock"
@@ -335,6 +335,20 @@ function Practice({
           chipBgClass="bg-neon-pink"
         />
         <PracticeCard
+          to="/number-sprint"
+          big="Number"
+          accent="Sprint"
+          meta="60 second drill"
+          desc="How many sums before the buzzer?"
+          bg="bg-neon-blue"
+          fg="text-ink"
+          chipClass="text-paper"
+          chipBgClass="bg-paper"
+          // "Number" is wider than the default clamp allows at tile widths
+          // and would break mid-word ("Numbe-r").
+          bigClass="text-[clamp(1.5rem,2.7vw,2.4rem)]"
+        />
+        <PracticeCard
           to="/mistakes"
           big="Fix"
           accent="ups"
@@ -349,6 +363,9 @@ function Practice({
           chipClass="text-neon-yellow"
           chipBgClass="bg-neon-yellow"
           badge={mistakesCount > 0 ? String(mistakesCount) : undefined}
+          // Five tiles in a 2-col phone grid would orphan the last one at
+          // half width; spanning the row keeps the "do first" tile loudest.
+          className="max-lg:col-span-2"
         />
       </div>
     </section>
@@ -408,6 +425,8 @@ function PracticeCard({
   chipClass,
   chipBgClass,
   badge,
+  className = '',
+  bigClass = 'text-[clamp(1.75rem,3.4vw,3rem)]',
 }: {
   to: string;
   big: string;
@@ -419,19 +438,24 @@ function PracticeCard({
   chipClass: string;
   chipBgClass: string;
   badge?: string;
+  className?: string;
+  /** Big-word size override for words too wide for the default clamp. */
+  bigClass?: string;
 }) {
   return (
     <Link
       to={to}
       viewTransition
       onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
-      className={`relative ${bg} ${fg} border-0 rounded-[28px] p-6 text-left cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[240px] hover:-translate-y-1 transition-transform overflow-hidden`}
+      className={`relative ${bg} ${fg} border-0 rounded-[28px] p-6 text-left cursor-pointer flex flex-col justify-between min-h-[200px] sm:min-h-[240px] hover:-translate-y-1 transition-transform overflow-hidden ${className}`}
     >
       <div className="text-[11px] font-semibold opacity-70 uppercase tracking-[0.12em] pr-10">
         {meta}
       </div>
       <div>
-        <div className="font-display font-bold leading-[0.95] tracking-[-0.035em] text-[clamp(1.75rem,3.4vw,3rem)] [overflow-wrap:anywhere]">
+        <div
+          className={`font-display font-bold leading-[0.95] tracking-[-0.035em] ${bigClass} [overflow-wrap:anywhere]`}
+        >
           {big}{' '}
           <span className={chipClass}>{accent}</span>
         </div>
