@@ -305,7 +305,7 @@ function Practice({
           to="/mock-test"
           big="Mock"
           accent="Test"
-          meta="20 questions · 15 min"
+          meta="Quick or full paper"
           desc="Random questions from every topic. Like the real thing."
           bg="bg-ink"
           fg="text-paper"

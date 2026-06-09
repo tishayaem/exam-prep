@@ -4,11 +4,18 @@ import { allSections, questionsBySubject } from '../data';
 import { SUBJECTS } from '../data/packs';
 import { useProgress } from '../lib/storage';
 import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
-import { sample } from '../lib/shuffle';
+import { buildMockPaper } from '../lib/mockPaper';
 import type { Question, Subject } from '../data/types';
 
-const TEST_QUESTIONS = 20;
-const TEST_MINUTES = 15;
+const PRESETS = {
+  quick: { title: 'Quick mock', questions: 20, minutes: 15, sub: 'A fast check-in' },
+  exam: { title: 'Full paper', questions: 40, minutes: 60, sub: 'Real ISEB length' },
+} as const;
+type PresetKey = keyof typeof PRESETS;
+
+// The real ISEB maths paper opens with ~8 one-mark quick numeracy questions
+// before the worded ones — the full-paper preset mirrors that for maths.
+const NUMERACY_OPENERS = 8;
 
 type Phase = 'pre' | 'running' | 'review';
 
@@ -23,8 +30,9 @@ export function MockTest() {
   const [paper, setPaper] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<AnswerLog[]>([]);
-  const [secondsLeft, setSecondsLeft] = useState(TEST_MINUTES * 60);
+  const [secondsLeft, setSecondsLeft] = useState(PRESETS.quick.minutes * 60);
   const [subject, setSubject] = useState<Subject | null>(null);
+  const [preset, setPreset] = useState<PresetKey>('quick');
 
   useEffect(() => {
     if (phase !== 'running') return;
@@ -71,16 +79,21 @@ export function MockTest() {
   }, [blocker, inProgress]);
 
   function start(subj: Subject) {
-    const picked = sample(questionsBySubject(subj), TEST_QUESTIONS);
+    const p = PRESETS[preset];
+    const picked = buildMockPaper(questionsBySubject(subj), p.questions, {
+      // Only the maths paper has the quick-numeracy opening section.
+      numeracyOpeners: preset === 'exam' && subj === 'maths' ? NUMERACY_OPENERS : 0,
+    });
     setSubject(subj);
     setPaper(picked);
     setIndex(0);
     setAnswers([]);
-    setSecondsLeft(TEST_MINUTES * 60);
+    setSecondsLeft(p.minutes * 60);
     setPhase('running');
   }
 
   if (phase === 'pre') {
+    const p = PRESETS[preset];
     return (
       <div className="space-y-9">
         <header>
@@ -103,14 +116,45 @@ export function MockTest() {
           </p>
         </header>
 
+        <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Test length">
+          {(Object.keys(PRESETS) as PresetKey[]).map((key) => {
+            const opt = PRESETS[key];
+            const selected = key === preset;
+            return (
+              <button
+                key={key}
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                onClick={() => setPreset(key)}
+                className={`rounded-[22px] p-5 sm:p-6 text-left border-[1.5px] transition-colors ${
+                  selected
+                    ? 'border-ink bg-ink text-paper'
+                    : 'border-rule hover:border-ink'
+                }`}
+              >
+                <div className="font-display text-xl sm:text-2xl font-bold tracking-tight">
+                  {opt.title}
+                </div>
+                <div className={`text-[13px] font-semibold mt-1 ${selected ? 'text-neon-green' : 'text-inkSoft'}`}>
+                  {opt.questions} questions · {opt.minutes} min
+                </div>
+                <div className={`text-[13px] mt-0.5 ${selected ? 'text-paper/70' : 'text-inkSoft'}`}>
+                  {opt.sub}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
         <div className="grid gap-3.5 sm:grid-cols-2">
-          <RuleCard label="Questions" value={String(TEST_QUESTIONS)} sub="random from one subject" color="bg-neon-green" />
-          <RuleCard label="Time limit" value={`${TEST_MINUTES} min`} sub="clock starts on tap" color="bg-neon-yellow" />
+          <RuleCard label="Questions" value={String(p.questions)} sub="random from one subject" color="bg-neon-green" />
+          <RuleCard label="Time limit" value={`${p.minutes} min`} sub="clock starts on tap" color="bg-neon-yellow" />
           <RuleCard label="Feedback" value="At the end" sub="not after each question" color="bg-neon-blue" />
           <RuleCard label="Going back" value="Locked" sub="can't change earlier answers" color="bg-neon-pink" />
         </div>
 
-        <SubjectChooser onPick={start} />
+        <SubjectChooser onPick={start} presetQuestions={p.questions} />
       </div>
     );
   }
@@ -358,7 +402,13 @@ const SUBJECT_BTN = [
   'bg-neon-pink text-paper',
 ];
 
-function SubjectChooser({ onPick }: { onPick: (s: Subject) => void }) {
+function SubjectChooser({
+  onPick,
+  presetQuestions,
+}: {
+  onPick: (s: Subject) => void;
+  presetQuestions: number;
+}) {
   // Only offer subjects that actually have questions, so an un-authored subject
   // never produces an empty paper.
   const available = SUBJECTS.filter((s) => questionsBySubject(s.id).length > 0);
@@ -374,7 +424,7 @@ function SubjectChooser({ onPick }: { onPick: (s: Subject) => void }) {
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
         {available.map((s, i) => {
-          const count = Math.min(questionsBySubject(s.id).length, TEST_QUESTIONS);
+          const count = Math.min(questionsBySubject(s.id).length, presetQuestions);
           return (
             <button
               key={s.id}
