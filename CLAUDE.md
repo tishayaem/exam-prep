@@ -1,8 +1,10 @@
 # Project notes for Claude
 
-A revision app for a Year 5 (age 10) child preparing for an 11+ written-format test at an independent UK school. Maths, English and Science. Built so a kid can drive it on an iPad.
+A revision app for a Year 5 (age 10) child preparing for an 11+ written-format test at an independent UK school — **ISEB written Common Entrance** (see the ISEB section of `materials/11plus-research/maths.md`). Maths, English and Science. Built so a kid can drive it on an iPad.
 
 The plan that gave rise to this repo lives at `~/.claude/plans/playful-inventing-lark.md` on the user's machine.
+
+**Agreed next steps live in `ROADMAP.md`** — pick up the next unchecked item there and tick items off as they land.
 
 ## Stack
 
