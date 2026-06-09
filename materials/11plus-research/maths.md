@@ -162,6 +162,32 @@ GL Maths is built on the **KS2 National Curriculum** but stretched (more multi-s
 
 ---
 
+## ISEB Common Entrance at 11+ (this child's exam — written format)
+
+The school sets the **written** ISEB format, which is materially different from the GL multiple-choice paper above. The **topic tables in this file still apply** — the maths content is the same KS2-plus syllabus — but the *exam style* differs, and the app's questions should reflect it.
+
+**Format (per ISEB):**
+- **One paper, 60 minutes, non-calculator.**
+- It opens with **~8 straightforward 1-mark numeracy questions** where the answer alone scores — no working needed.
+- Then come **worded questions that require working to be shown**. *If the working isn't shown, marks can be lost*, even when the final answer is right. Neat, clear working and good mental arithmetic are explicitly expected.
+- Syllabus spans **number, algebra, fractions, decimals, percentages, ratio, shape & space, measures, data handling, and problem-solving**.
+- Stated aims: **fluency, reasoning, investigative thinking, and applying knowledge to unfamiliar problems** — i.e. multi-step word problems, not single-step recall.
+
+**Not to be confused with the ISEB Pre-Test:** the *Pre-Test* is a separate online, adaptive, multiple-choice screen (English, Maths, VR, NVR) used by many senior schools earlier in the process. This child sits the **written** paper, so author **show-your-working, final-answer** items, not pure MCQ.
+
+**Implications for our content (how the maths sections are authored):**
+- Favour **multi-step worded `numeric` questions** with a single final answer; the `explanation` should *model the working line by line* (common denominator → multiply → simplify; "parts = …" → one part → answer), because in the real paper that working is where the marks live.
+- Keep a spread of **difficulty 1 entry items** (the "first 8" quick numeracy) through **difficulty 3 multi-step** problems.
+- Tag provenance: new ISEB-oriented items use `source: 'ISEB CE · …'`; quick numeracy variants use `'11+ Maths · …'`; the original GL-style items keep `'GL Maths · …'`.
+
+**ISEB practice sources (the school's actual papers aren't released):**
+- **Galore Park** — the publisher closest to ISEB; *So You Really Want to Learn Maths* + practice papers are the de-facto practice set.
+- **ISEB 2016 specimen 11+ maths paper** (free PDF, mirrors the format): <https://www.11plusguide.com/wp-content/uploads/2019/01/11-mathematics-iseb-2016.pdf>
+- **ISEB CE maths overview** (format, aims): <https://www.iseb.co.uk/assessments/common-entrance/mathematics/>
+- **Owl Tutors CE maths syllabus** (topic breakdown): <https://owltutors.co.uk/advice/13-plus/maths/syllabus/>
+- **Keystone 11+ maths guide**: <https://www.keystonetutors.com/news/11-plus-maths-guide>
+- Copyright: as elsewhere, use these to **author original questions in our own voice**, not to paste papers into the public repo.
+
 ## Format & timing (confirm locally)
 - **Multiple choice**, separate answer sheet; a minority of schools use a write-in "standard" format.
 - **No calculators.**
