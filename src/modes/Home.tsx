@@ -6,6 +6,7 @@ import { PACKS, SUBJECTS } from '../data/packs';
 import type { Section } from '../data/types';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
+import { weakestTopics } from '../lib/mastery';
 import { burstFromEvent } from '../lib/confetti';
 import { getSectionProgress, pickResume } from '../lib/sectionProgress';
 
@@ -17,6 +18,12 @@ const DAY_NAMES = [
 export function Home() {
   const { state } = useProgress();
   const mistakesCount = mistakesQueue(state.attempts).length;
+  const focus = weakestTopics(state.attempts.length ? allSections : [], state, Date.now(), {
+    includeUnseen: false,
+    limit: 3,
+  })
+    .filter((t) => t.band !== 'strong')
+    .map((t) => t.section.title);
 
   const resume = pickResume(state, allSections);
   const today = DAY_NAMES[new Date().getDay()];
@@ -40,7 +47,7 @@ export function Home() {
     <div className="space-y-14">
       <Hero today={today} resume={resume} />
 
-      <Practice mistakesCount={mistakesCount} />
+      <Practice mistakesCount={mistakesCount} focus={focus} />
 
       {groups.flatMap((group) => [
         <SubjectDivider key={`subject-${group.subject.id}`} title={group.subject.title} />,
@@ -274,10 +281,25 @@ function HeroShapes() {
 
 // ─── Practice ───────────────────────────────────────────────────────────────
 
-function Practice({ mistakesCount }: { mistakesCount: number }) {
+function Practice({
+  mistakesCount,
+  focus,
+}: {
+  mistakesCount: number;
+  focus: string[];
+}) {
   return (
     <section>
-      <SectionHeader number="01" title="Practice" trailing="Mix it up" />
+      <SectionHeader
+        number="01"
+        title="Practice"
+        trailing={
+          <Link to="/skills" viewTransition className="hover:text-ink transition-colors">
+            Your skills map ›
+          </Link>
+        }
+      />
+      <SmartPracticeBanner focus={focus} />
       <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-4 [&>*]:min-w-0">
         <PracticeCard
           to="/mock-test"
@@ -330,6 +352,48 @@ function Practice({ mistakesCount }: { mistakesCount: number }) {
         />
       </div>
     </section>
+  );
+}
+
+function SmartPracticeBanner({ focus }: { focus: string[] }) {
+  return (
+    <Link
+      to="/smart-practice"
+      viewTransition
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
+      className="block relative overflow-hidden rounded-[28px] border-[1.5px] border-ink p-6 sm:p-8 mb-4 sm:mb-[18px] hover:-translate-y-0.5 transition-transform group"
+    >
+      <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div>
+          <div className="text-[11px] font-bold text-neon-pink uppercase tracking-[0.14em]">
+            Adaptive · Aimed at your gaps
+          </div>
+          <div className="font-display font-bold tracking-[-0.03em] leading-[0.98] mt-1.5 text-[clamp(1.75rem,4vw,2.75rem)]">
+            Smart{' '}
+            <span className="relative inline-block">
+              Practice
+              <span
+                aria-hidden
+                className="absolute left-0 right-0 bottom-[6%] h-[16%] bg-neon-green -z-10 -skew-x-6"
+              />
+            </span>
+          </div>
+          <div className="text-[14px] text-inkSoft mt-2.5 max-w-lg leading-snug">
+            {focus.length ? (
+              <>
+                Right now it’d focus on{' '}
+                <span className="text-ink font-semibold">{focus.join(', ')}</span>.
+              </>
+            ) : (
+              'Answer a few questions and this targets the topics you find hardest.'
+            )}
+          </div>
+        </div>
+        <div className="bg-ink text-paper rounded-full px-6 py-3.5 font-bold text-[15px] shrink-0 justify-self-start sm:justify-self-end group-hover:bg-neon-pink transition-colors">
+          Start ›
+        </div>
+      </div>
+    </Link>
   );
 }
 

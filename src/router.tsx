@@ -6,6 +6,8 @@ import { Flashcards } from './modes/Flashcards';
 import { VocabSprint } from './modes/VocabSprint';
 import { MockTest } from './modes/MockTest';
 import { Mistakes } from './modes/Mistakes';
+import { SkillsMap } from './modes/SkillsMap';
+import { SmartPractice } from './modes/SmartPractice';
 import { AppShell } from './AppShell';
 
 export const router = createHashRouter([
@@ -22,6 +24,8 @@ export const router = createHashRouter([
       { path: 'vocab-sprint/:sectionId', element: <VocabSprint /> },
       { path: 'mock-test', element: <MockTest /> },
       { path: 'mistakes', element: <Mistakes /> },
+      { path: 'smart-practice', element: <SmartPractice /> },
+      { path: 'skills', element: <SkillsMap /> },
     ],
   },
 ]);
