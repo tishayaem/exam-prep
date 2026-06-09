@@ -97,6 +97,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       answer: '£60',
       explanation: '£48 is 80% of the original. So 1% is 48 ÷ 80 = £0.60, and 100% is £60. (Taking 20% of £48 is the trap.)',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Reverse percentage',
     },
     {
@@ -193,6 +194,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       acceptable: ['25%'],
       explanation: 'His profit is £100 − £80 = £20. As a percentage of the £80 cost: 20⁄80 = 1⁄4 = 25%.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Percentage profit',
     },
     {
@@ -216,6 +218,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       acceptable: ['£80'],
       explanation: '£68 is 85% of the original (100% − 15%). So 1% is 68 ÷ 85 = £0.80, and 100% is £80.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Reverse percentage',
       variantOf: 'maths-fractions-03-q6',
     },
@@ -228,6 +231,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       answer: 'Shop B (£20 off)',
       explanation: 'Shop A: 25% of £60 = £15 off → £45. Shop B: £20 off → £40. £40 is cheaper, so Shop B wins.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Comparing discounts',
     },
     {
@@ -249,6 +253,7 @@ A **reverse percentage** is the sneaky one. "After 20% off, a jacket costs £48 
       answer: '78',
       explanation: 'Saturday: 35% of 200 = 70 sold, leaving 130. Sunday: 40% of 130 = 52 sold, leaving 130 − 52 = 78.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step percentages',
     },
   ],

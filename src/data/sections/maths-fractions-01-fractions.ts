@@ -86,6 +86,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '7/24',
       explanation: 'Common denominator 24: 5⁄8 = 15⁄24 and 1⁄3 = 8⁄24, so 15⁄24 − 8⁄24 = 7⁄24.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Subtracting fractions',
     },
     {
@@ -97,6 +98,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '1⁄4',
       explanation: '"1⁄3 of 3⁄4" means multiply: 1⁄3 × 3⁄4 = 3⁄12 = 1⁄4 of the whole cake.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Fraction of a fraction',
     },
     {
@@ -170,6 +172,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '3/10',
       explanation: 'Dividing by 2 makes each piece half as big, so the denominator doubles: 3⁄5 ÷ 2 = 3⁄10.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Dividing a fraction',
     },
     {
@@ -201,6 +204,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '5/12',
       explanation: 'Common denominator 12: 2⁄3 = 8⁄12 and 1⁄4 = 3⁄12, so 8⁄12 − 3⁄12 = 5⁄12.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Worded subtraction',
     },
     {
@@ -211,6 +215,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '7/20',
       explanation: 'He has read 2⁄5 + 1⁄4 = 8⁄20 + 5⁄20 = 13⁄20. Left over: 1 − 13⁄20 = 7⁄20.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step fractions',
     },
     {
@@ -221,6 +226,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '30',
       explanation: 'If 3 parts are 18, then 1 part is 18 ÷ 3 = 6. The whole (5 parts) is 6 × 5 = 30.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Finding the whole',
     },
     {
@@ -243,6 +249,7 @@ To **add or subtract**, give the fractions the *same denominator* first. 2⁄3 +
       answer: '8',
       explanation: 'Walk: 2⁄5 of 30 = 12. Cycle: 1⁄3 of 30 = 10. That leaves 30 − 12 − 10 = 8.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step fractions',
     },
   ],

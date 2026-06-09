@@ -106,6 +106,7 @@ You can also work **backwards**: area 48 cm² with width 6 cm means the length i
       answer: '68',
       explanation: 'Whole rectangle = 80 cm²; cut-out = 4 × 3 = 12 cm². So 80 − 12 = 68 cm².',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Compound shapes',
     },
     {
@@ -116,6 +117,7 @@ You can also work **backwards**: area 48 cm² with width 6 cm means the length i
       answer: '28',
       explanation: 'Length = 48 ÷ 6 = 8 cm. Perimeter = 2 × (8 + 6) = 28 cm.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Area & perimeter combined',
     },
     {
@@ -210,6 +212,7 @@ You can also work **backwards**: area 48 cm² with width 6 cm means the length i
       answer: '88',
       explanation: 'Whole rectangle = 12 × 9 = 108 cm²; corner = 5 × 4 = 20 cm². So 108 − 20 = 88 cm².',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Compound shapes',
       variantOf: 'maths-geometry-03-q7',
     },
@@ -222,6 +225,7 @@ You can also work **backwards**: area 48 cm² with width 6 cm means the length i
       acceptable: ['£96'],
       explanation: 'Area = 4 × 3 = 12 m². Cost = 12 × £8 = £96.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Area (worded)',
     },
     {
@@ -232,6 +236,7 @@ You can also work **backwards**: area 48 cm² with width 6 cm means the length i
       answer: '26',
       explanation: 'Length = 36 ÷ 4 = 9 cm. Perimeter = 2 × (9 + 4) = 26 cm.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Area & perimeter combined',
       variantOf: 'maths-geometry-03-q8',
     },

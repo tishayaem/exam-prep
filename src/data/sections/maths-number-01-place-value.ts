@@ -107,6 +107,7 @@ export const mathsNumber01PlaceValue: Section = {
       answer: '6',
       explanation: 'They are −2, −1, 0, 1, 2 and 3 — six numbers. "Strictly between" means −3 and 4 themselves do not count.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Negative numbers',
     },
     {
@@ -216,6 +217,7 @@ export const mathsNumber01PlaceValue: Section = {
       acceptable: ['5,499'],
       explanation: 'Anything up to 5,499 rounds down to 5,000; 5,500 would round up to 6,000. So the largest is 5,499.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Rounding (reverse)',
     },
     {
@@ -226,6 +228,7 @@ export const mathsNumber01PlaceValue: Section = {
       answer: '2',
       explanation: 'Step by step: −6 + 11 = 5, then 5 − 3 = 2 °C.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Negative numbers',
     },
     {

@@ -95,6 +95,7 @@ The opposite of an operation *undoes* it. If a number ÷ 7 = 9, the **inverse** 
       answer: '32',
       explanation: 'Brackets: 8 − 2 = 6. Order: 6² = 36. Then 3 × 36 = 108, ÷ 4 = 27, and 5 + 27 = 32.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · BODMAS',
     },
     {
@@ -212,6 +213,7 @@ The opposite of an operation *undoes* it. If a number ÷ 7 = 9, the **inverse** 
       answer: '38',
       explanation: 'Total buns: 12 × 24 = 288. After selling: 288 − 250 = 38.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step',
     },
     {
@@ -222,6 +224,7 @@ The opposite of an operation *undoes* it. If a number ÷ 7 = 9, the **inverse** 
       answer: '43',
       explanation: 'Powers and bracket first: 4² = 16 and (10 − 7)³ = 3³ = 27. Then 16 + 27 = 43.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · BODMAS with powers',
     },
     {
@@ -233,6 +236,7 @@ The opposite of an operation *undoes* it. If a number ÷ 7 = 9, the **inverse** 
       answer: '(2 + 3) × 4',
       explanation: 'Working each out: 14, then (2 + 3) × 4 = 20, then 10, then 14. So 20 is the largest.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Order of operations',
     },
     {

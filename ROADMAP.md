@@ -34,7 +34,7 @@ check items off here as they land.
 - [x] **Number Sprint** — timed mental-arithmetic drill (45–60 s of
       difficulty-1 `numeric` maths questions), mirroring `VocabSprint.tsx`.
       Trains the quick-numeracy opening of the ISEB paper. New route + Home tile.
-- [ ] **Wire the `reasoning` flag** — a "Problem-solving drill" (filter or
+- [x] **Wire the `reasoning` flag** — a "Problem-solving drill" (filter or
       Smart Practice toggle) drawing only multi-step items.
 - [ ] **Exam-length mock option** — MockTest preset for a full 60-minute paper
       alongside the current 20 Q / 15 min quick mock.

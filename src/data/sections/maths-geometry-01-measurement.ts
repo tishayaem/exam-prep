@@ -221,6 +221,7 @@ export const mathsGeometry01Measurement: Section = {
       answer: '7',
       explanation: '1.5 litres = 1500 ml. 1500 ÷ 200 = 7.5, so only 7 full cups can be poured.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Capacity (multi-step)',
     },
     {
@@ -232,6 +233,7 @@ export const mathsGeometry01Measurement: Section = {
       acceptable: ['£2.60', '2.6'],
       explanation: '6 × 40p = 240p = £2.40. Change from £5 is 5 − 2.40 = £2.60.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Money (multi-step)',
     },
     {
@@ -242,6 +244,7 @@ export const mathsGeometry01Measurement: Section = {
       answer: '21:15',
       explanation: 'Add 1 hour: 20:20. Then add 55 minutes: 20:20 → 21:15.',
       difficulty: 3,
+      reasoning: true,
       source: '11+ Maths · Time',
       variantOf: 'maths-geometry-01-q6',
     },

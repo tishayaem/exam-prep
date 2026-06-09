@@ -91,6 +91,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '6.5',
       explanation: 'In order: 3, 5, 8, 10. With an even count, average the two middle numbers: (5 + 8) ÷ 2 = 6.5.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Median',
     },
     {
@@ -101,6 +102,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '13',
       explanation: 'The first five total 5 × 12 = 60. Adding 18 gives 78, shared between 6 numbers: 78 ÷ 6 = 13.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Mean (working backwards)',
     },
     {
@@ -111,6 +113,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '8',
       explanation: 'A mean of 7 over 4 numbers means they total 28. So x = 28 − (6 + 9 + 5) = 28 − 20 = 8.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Mean (working backwards)',
     },
     {
@@ -217,6 +220,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '120',
       explanation: '10 out of 30 is one third. One third of 360° is 120°.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Pie charts',
       variantOf: 'maths-data-01-q8',
     },
@@ -228,6 +232,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '11.2',
       explanation: 'The six total 6 × 10 = 60. Remove 4 to get 56, shared between 5: 56 ÷ 5 = 11.2.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Mean (working backwards)',
     },
     {
@@ -248,6 +253,7 @@ In a **pie chart** the whole circle is 360°, so a slice for 90 out of 360 stude
       answer: '7.2',
       explanation: 'Boys total 4 × 6 = 24; girls total 6 × 8 = 48. All together: 72 ÷ 10 = 7.2.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Combined mean',
     },
   ],

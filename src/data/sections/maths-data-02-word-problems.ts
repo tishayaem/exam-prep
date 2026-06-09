@@ -84,6 +84,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       answer: '25',
       explanation: 'The middle number is 72 ÷ 3 = 24, so the numbers are 23, 24, 25. The largest is 25.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Consecutive numbers',
     },
     {
@@ -146,6 +147,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       acceptable: ['£20'],
       explanation: 'Work backwards: before the £3 she had 7 + 3 = £10, and that was half her money, so she started with £20.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Working backwards',
     },
     {
@@ -167,6 +169,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       answer: '15',
       explanation: 'Total marbles: 5 × 12 = 60. Shared among 4: 60 ÷ 4 = 15 each.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step',
     },
     {
@@ -187,6 +190,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       answer: '26',
       explanation: 'Halfway is 50 ÷ 2 = 25, so the two even numbers either side are 24 and 26. The larger is 26.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Consecutive numbers',
     },
     {
@@ -208,6 +212,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       answer: 'Raj',
       explanation: 'Line them up tallest first: Tom, then Sam, then Raj. Raj is at the bottom, so the shortest.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Logic',
     },
     {
@@ -218,6 +223,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       answer: '70',
       explanation: 'Total seats: 30 × 24 = 720. Empty seats: 720 − 650 = 70.',
       difficulty: 3,
+      reasoning: true,
       source: '11+ Maths · Multi-step',
       variantOf: 'maths-data-02-q6',
     },
@@ -241,6 +247,7 @@ Watch for the **final question**. "Sam is 3 times Tom's age, together 32" → th
       acceptable: ['1,400'],
       explanation: 'One cake needs 600 ÷ 3 = 200 g. So 7 cakes need 200 × 7 = 1,400 g.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Proportion',
     },
   ],

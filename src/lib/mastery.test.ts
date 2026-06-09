@@ -188,6 +188,49 @@ describe('rankQuestionsByNeed + pickAdaptive', () => {
   });
 });
 
+// ─── pickAdaptive: reasoningOnly (the Problem-solving toggle) ────────────────
+
+describe('pickAdaptive — reasoningOnly', () => {
+  const a = mkSection('a', 1, 8);
+  const b = mkSection('b', 2, 8);
+  a.questions.slice(0, 2).forEach((q) => (q.reasoning = true));
+  b.questions.slice(0, 3).forEach((q) => (q.reasoning = true));
+
+  it('serves only reasoning-flagged questions', () => {
+    const picked = pickAdaptive([a, b], stateOf([]), 4, NOW, {
+      reasoningOnly: true,
+    });
+    expect(picked).toHaveLength(4);
+    expect(picked.every((q) => q.reasoning)).toBe(true);
+  });
+
+  it('returns the whole flagged pool (and no more) when it is thin', () => {
+    const picked = pickAdaptive([a, b], stateOf([]), 12, NOW, {
+      reasoningOnly: true,
+    });
+    expect(picked).toHaveLength(5); // only 5 flagged questions exist
+    expect(picked.every((q) => q.reasoning)).toBe(true);
+  });
+
+  it('combines with the subject filter', () => {
+    const c = mkSection('c', 3, 8);
+    c.subject = 'science';
+    c.questions.slice(0, 2).forEach((q) => (q.reasoning = true));
+    const picked = pickAdaptive([a, c], stateOf([]), 4, NOW, {
+      reasoningOnly: true,
+      subject: 'science',
+    });
+    expect(picked.length).toBe(2);
+    expect(picked.every((q) => q.reasoning && q.sectionId === 'c')).toBe(true);
+  });
+
+  it('changes nothing when the toggle is off', () => {
+    const all = pickAdaptive([a, b], stateOf([]), 6, NOW, {});
+    const off = pickAdaptive([a, b], stateOf([]), 6, NOW, { reasoningOnly: false });
+    expect(off.map((q) => q.id)).toEqual(all.map((q) => q.id));
+  });
+});
+
 // ─── overdue / staleness ─────────────────────────────────────────────────────
 
 describe('staleness', () => {

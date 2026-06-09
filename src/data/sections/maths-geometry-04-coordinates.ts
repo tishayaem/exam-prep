@@ -67,6 +67,7 @@ The **midpoint** of two points is the average of the x's and the average of the 
       answer: '(−5, 3)',
       explanation: 'Reflecting in the y-axis flips left-right, so the x value changes sign: (5, 3) → (−5, 3).',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Reflection',
     },
     {
@@ -200,6 +201,7 @@ The **midpoint** of two points is the average of the x's and the average of the 
       answer: '(6, 2)',
       explanation: 'The rectangle spans x from 1 to 6 and y from 2 to 5, so the missing corner is (6, 2).',
       difficulty: 3,
+      reasoning: true,
       source: '11+ Maths · Coordinates',
       variantOf: 'maths-geometry-04-q5',
     },
@@ -223,6 +225,7 @@ The **midpoint** of two points is the average of the x's and the average of the 
       answer: '4',
       explanation: 'The midpoint y is the average: (y + 10) ÷ 2 = 7, so y + 10 = 14 and y = 4.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Midpoint (reverse)',
     },
     {
@@ -233,6 +236,7 @@ The **midpoint** of two points is the average of the x's and the average of the 
       answer: '3',
       explanation: 'From (1, 1) to (4, 1) the x value goes 1 → 4, a gap of 3 units. So each side is 3.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Coordinates',
     },
     {
@@ -254,6 +258,7 @@ The **midpoint** of two points is the average of the x's and the average of the 
       answer: '5 right, 2 down',
       explanation: 'x goes 2 → 7, that is 5 right. y goes 3 → 1, that is 2 down.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Describing a translation',
     },
   ],

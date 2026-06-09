@@ -101,6 +101,19 @@ describe('answerability (every question can actually be marked correct)', () => 
     expect(bad).toEqual([]);
   });
 
+  // Convention behind the Smart Practice "Problem-solving only" toggle: the
+  // maths difficulty-3 tier IS the multi-step ISEB tier, so every d3 maths
+  // question must carry the reasoning flag or it silently drops out of the
+  // drill's pool.
+  it('every maths difficulty-3 question is flagged reasoning', () => {
+    const bad = allSections
+      .filter((s) => s.subject === 'maths')
+      .flatMap((s) => s.questions)
+      .filter((q) => q.difficulty === 3 && !q.reasoning)
+      .map((q) => q.id);
+    expect(bad).toEqual([]);
+  });
+
   // Number Sprint draws difficulty-1 numeric maths questions with answers
   // typeable on a decimal keypad. If edits drain this pool, the Home tile
   // leads to a drill with nothing worth drilling.

@@ -17,15 +17,13 @@ export function SmartPractice() {
   const [paper, setPaper] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
   const [correct, setCorrect] = useState(0);
+  const [reasoningOnly, setReasoningOnly] = useState(false);
 
   function start(subject?: Subject) {
-    const picked = pickAdaptive(
-      allSections,
-      state,
-      COUNT,
-      Date.now(),
-      subject ? { subject } : {},
-    );
+    const picked = pickAdaptive(allSections, state, COUNT, Date.now(), {
+      ...(subject ? { subject } : {}),
+      reasoningOnly,
+    });
     setPaper(picked);
     setIndex(0);
     setCorrect(0);
@@ -33,7 +31,15 @@ export function SmartPractice() {
   }
 
   if (phase === 'pre') {
-    return <PreScreen onStart={start} attempts={state.attempts.length} state={state} />;
+    return (
+      <PreScreen
+        onStart={start}
+        attempts={state.attempts.length}
+        state={state}
+        reasoningOnly={reasoningOnly}
+        onToggleReasoning={() => setReasoningOnly((v) => !v)}
+      />
+    );
   }
 
   if (phase === 'review') {
@@ -58,7 +64,7 @@ export function SmartPractice() {
     <div className="space-y-7">
       <div className="flex items-baseline justify-between">
         <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
-          Aimed at your gaps
+          {reasoningOnly ? 'Problem-solving · aimed at your gaps' : 'Aimed at your gaps'}
         </div>
         <div className="text-[13px] font-bold tabular-nums text-inkSoft">
           {index + 1} <span className="text-rule">/</span> {paper.length}
@@ -87,12 +93,20 @@ function PreScreen({
   onStart,
   attempts,
   state,
+  reasoningOnly,
+  onToggleReasoning,
 }: {
   onStart: (s?: Subject) => void;
   attempts: number;
   state: ReturnType<typeof useProgress>['state'];
+  reasoningOnly: boolean;
+  onToggleReasoning: () => void;
 }) {
-  const available = SUBJECTS.filter((s) => questionsBySubject(s.id).length > 0);
+  // With the problem-solving filter on, only offer subjects that actually
+  // have multi-step (reasoning-flagged) questions to draw from.
+  const available = SUBJECTS.filter((s) =>
+    questionsBySubject(s.id).some((q) => !reasoningOnly || q.reasoning),
+  );
   const weak = weakestTopics(allSections, state, Date.now(), {
     includeUnseen: false,
     limit: 3,
@@ -130,6 +144,39 @@ function PreScreen({
             )}
           </div>
         </div>
+
+        <button
+          type="button"
+          role="switch"
+          aria-checked={reasoningOnly}
+          onClick={onToggleReasoning}
+          className={`w-full flex items-center justify-between gap-4 rounded-2xl border-[1.5px] px-5 py-4 text-left transition-colors ${
+            reasoningOnly
+              ? 'border-neon-green bg-neon-green/15'
+              : 'border-paper/30 hover:border-paper/60'
+          }`}
+        >
+          <span>
+            <span className="block font-bold text-[15px]">
+              Problem-solving only
+            </span>
+            <span className="block text-[13px] text-paper/60 mt-0.5">
+              Multi-step questions that make you stop and think.
+            </span>
+          </span>
+          <span
+            aria-hidden
+            className={`shrink-0 w-12 h-7 rounded-full p-1 transition-colors ${
+              reasoningOnly ? 'bg-neon-green' : 'bg-paper/30'
+            }`}
+          >
+            <span
+              className={`block w-5 h-5 rounded-full bg-paper transition-transform ${
+                reasoningOnly ? 'translate-x-5' : ''
+              }`}
+            />
+          </span>
+        </button>
 
         <button
           onClick={() => onStart()}

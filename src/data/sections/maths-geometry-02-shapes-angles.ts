@@ -94,6 +94,7 @@ For **3D shapes**, count carefully: a triangular prism has 9 edges, 6 vertices a
       answer: '120',
       explanation: 'Interior angle = 180 × (6 − 2) ÷ 6 = 180 × 4 ÷ 6 = 120°.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Polygon angles',
     },
     {
@@ -211,6 +212,7 @@ For **3D shapes**, count carefully: a triangular prism has 9 edges, 6 vertices a
       answer: '108',
       explanation: 'Interior angle = 180 × (5 − 2) ÷ 5 = 540 ÷ 5 = 108°.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Polygon angles',
       variantOf: 'maths-geometry-02-q6',
     },
@@ -222,6 +224,7 @@ For **3D shapes**, count carefully: a triangular prism has 9 edges, 6 vertices a
       answer: '30',
       explanation: 'They add to 180°: x + 2x + 90 = 180, so 3x = 90 and x = 30°.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Angles in a triangle',
     },
     {
@@ -243,6 +246,7 @@ For **3D shapes**, count carefully: a triangular prism has 9 edges, 6 vertices a
       answer: '80',
       explanation: 'They add to 360°: 120 + x + 2x = 360, so 3x = 240 and x = 80°.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Angles around a point',
       variantOf: 'maths-geometry-02-q4',
     },

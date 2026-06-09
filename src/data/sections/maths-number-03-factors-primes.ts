@@ -105,6 +105,7 @@ When something happens "at the same time" again — bells ringing, lights flashi
       answer: '78',
       explanation: '√196 = 14 (because 14 × 14 = 196) and 4³ = 64, so 14 + 64 = 78.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Squares & cubes',
     },
     {
@@ -115,6 +116,7 @@ When something happens "at the same time" again — bells ringing, lights flashi
       answer: '120',
       explanation: 'This is the lowest common multiple of 6, 8 and 10, which is 120 seconds — the first number all three divide into.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · LCM',
     },
     {
@@ -225,6 +227,7 @@ When something happens "at the same time" again — bells ringing, lights flashi
       answer: '24',
       explanation: 'You need a number in both times-tables — the LCM of 6 and 8, which is 24 (four packs of dogs, three of buns).',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · LCM (worded)',
     },
     {
@@ -235,6 +238,7 @@ When something happens "at the same time" again — bells ringing, lights flashi
       answer: '6',
       explanation: 'The tile side must divide both 12 and 18 — the HCF, which is 6 cm.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · HCF (worded)',
     },
     {
@@ -246,6 +250,7 @@ When something happens "at the same time" again — bells ringing, lights flashi
       answer: '83',
       explanation: '83 has only the factors 1 and 83. The others hide one: 81 = 3 × 27, 87 = 3 × 29, 91 = 7 × 13.',
       difficulty: 3,
+      reasoning: true,
       source: '11+ Maths · Primes',
       variantOf: 'maths-number-03-q4',
     },

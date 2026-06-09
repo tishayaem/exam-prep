@@ -290,15 +290,22 @@ export function rankQuestionsByNeed(
  * Pick `count` questions for an adaptive session: the highest-need questions,
  * but capped per topic so a single weak area can't swallow the whole set. If the
  * cap leaves us short (thin content), top up ignoring it.
+ *
+ * `reasoningOnly` restricts the pool to multi-step problem-solving questions
+ * (the `reasoning` flag) — the Smart Practice "Problem-solving only" toggle.
+ * Topic priorities are still computed over whole sections, so the drill keeps
+ * targeting weak areas; only the questions served are filtered.
  */
 export function pickAdaptive(
   sections: readonly Section[],
   state: ProgressState,
   count: number,
   now: number = Date.now(),
-  opts: { subject?: Subject; perTopicCap?: number } = {},
+  opts: { subject?: Subject; perTopicCap?: number; reasoningOnly?: boolean } = {},
 ): Question[] {
-  const ranked = rankQuestionsByNeed(sections, state, now, opts.subject);
+  const ranked = rankQuestionsByNeed(sections, state, now, opts.subject).filter(
+    (s) => !opts.reasoningOnly || s.question.reasoning === true,
+  );
   const cap = opts.perTopicCap ?? Math.max(2, Math.ceil(count / 3));
 
   const perTopic = new Map<string, number>();

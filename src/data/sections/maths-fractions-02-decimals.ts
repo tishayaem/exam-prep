@@ -113,6 +113,7 @@ Decimals, fractions and percentages are three costumes for the same number: 0.12
       answer: '6',
       explanation: '2.5 ÷ 0.4 = 6.25, so only 6 whole pieces fit (with 0.1 m left over).',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Dividing decimals',
     },
     {
@@ -217,6 +218,7 @@ Decimals, fractions and percentages are three costumes for the same number: 0.12
       acceptable: ['£0.65'],
       explanation: '3 × £1.45 = £4.35. Change from £5 is 5 − 4.35 = £0.65.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Money (multi-step)',
     },
     {
@@ -227,6 +229,7 @@ Decimals, fractions and percentages are three costumes for the same number: 0.12
       answer: '0.75',
       explanation: 'Cut off 3 × 1.15 = 3.45 m. Left: 4.2 − 3.45 = 0.75 m.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Multi-step decimals',
     },
     {

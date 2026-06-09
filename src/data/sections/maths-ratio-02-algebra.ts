@@ -84,6 +84,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '3n + 1',
       explanation: 'It goes up 3 each time, so the rule starts 3n. Checking n = 1: 3 × 1 + 1 = 4. ✓',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · nth term',
     },
     {
@@ -104,6 +105,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '7',
       explanation: 'Take 3y from both sides: 2y − 4 = 10. Add 4: 2y = 14. Divide by 2: y = 7.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Equations with unknowns on both sides',
     },
     {
@@ -115,6 +117,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '47, 95',
       explanation: 'The rule is "× 2 then + 1": 23 × 2 + 1 = 47, then 47 × 2 + 1 = 95.',
       difficulty: 3,
+      reasoning: true,
       source: 'GL Maths · Sequences',
     },
     {
@@ -200,6 +203,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '11',
       explanation: 'Solve 4n − 1 = 43: add 1 (4n = 44), divide by 4 (n = 11). So it is the 11th term.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · nth term (reverse)',
     },
     {
@@ -210,6 +214,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '7',
       explanation: 'Work backwards: 35 − 7 = 28, then 28 ÷ 4 = 7.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Form and solve',
     },
     {
@@ -220,6 +225,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '5',
       explanation: 'Undo the last step first: 40 ÷ 5 = 8, then 8 − 3 = 5.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Function machines',
       variantOf: 'maths-ratio-02-q3',
     },
@@ -242,6 +248,7 @@ A **sequence** has a rule. For 4, 7, 10, 13, … it goes up 3 each time, and the
       answer: '36',
       explanation: 'These are the square numbers (1², 2², 3², …). The next is 6² = 36.',
       difficulty: 3,
+      reasoning: true,
       source: 'ISEB CE · Square numbers',
     },
   ],
