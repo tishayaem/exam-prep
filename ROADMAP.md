@@ -45,7 +45,7 @@ check items off here as they land.
       questions per named GL type, graded 1→3, `variantOf` links, and an
       independent answer-key suite (`src/data/vr-answers.test.ts`, modelled on
       the maths one).
-- [ ] **A–Z letter strip** rendered above letter-series/code questions (exam
+- [x] **A–Z letter strip** rendered above letter-series/code questions (exam
       technique: children write out the alphabet; give them a tappable strip).
 - [ ] **Synonym/antonym word bank** — richer vocabulary content feeding
       VocabSprint; word knowledge is the #1 VR lever at this age.

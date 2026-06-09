@@ -1,4 +1,5 @@
 import type { Question } from '../data/types';
+import { AlphabetStrip } from './AlphabetStrip';
 import { AnswerArea } from './AnswerArea';
 import { useAnswerState } from './useAnswerState';
 import { firstAnswer, formatAnswer, type Verdict } from './answerFormat';
@@ -37,6 +38,8 @@ export function QuestionRunner({
       <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.025em] leading-tight">
         {question.prompt}
       </h2>
+
+      {question.letterStrip && <AlphabetStrip />}
 
       <AnswerArea
         question={question}

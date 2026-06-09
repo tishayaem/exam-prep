@@ -73,6 +73,12 @@ export interface Question {
   explanation: string;
   difficulty: Difficulty;
   reasoning?: boolean;
+  /**
+   * Render a tappable A–Z strip above the answer area — the on-screen version
+   * of the exam technique of writing the alphabet out before counting steps.
+   * Set on letter-series/code questions.
+   */
+  letterStrip?: boolean;
   source: string;
   variantOf?: string;
   /** Present only for `type: 'nvr'` — the figures to render. */
