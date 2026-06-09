@@ -1,6 +1,7 @@
 import type { Question, Section, Subject } from './types';
 import { scienceSections } from './science';
 import { mathsSections } from './maths';
+import { englishSections } from './english';
 import { nvrSections } from './nvr';
 import { vrSections } from './vr';
 
@@ -12,6 +13,7 @@ import { vrSections } from './vr';
 export const allSections: Section[] = [
   ...scienceSections,
   ...mathsSections,
+  ...englishSections,
   ...nvrSections,
   ...vrSections,
 ];

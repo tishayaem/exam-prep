@@ -80,6 +80,12 @@ export interface Question {
   id: string;
   sectionId: string;
   type: QuestionType;
+  /**
+   * Optional reading passage rendered as a quote block between the prompt and
+   * the answer area — comprehension questions carry their text with them so
+   * they stay self-contained in every mode (Quiz, Mock Test, Mistakes…).
+   */
+  passage?: string;
   prompt: string;
   answer: string | string[];
   acceptable?: string[];

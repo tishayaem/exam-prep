@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findSection } from '../data';
 import { useProgress } from '../lib/storage';
-import { FeedbackPanel, firstAnswer, formatAnswer } from '../components/QuestionRunner';
+import { FeedbackPanel, PassageBlock, firstAnswer, formatAnswer } from '../components/QuestionRunner';
 import { AlphabetStrip } from '../components/AlphabetStrip';
 import { AnswerArea } from '../components/AnswerArea';
 import { useAnswerState } from '../components/useAnswerState';
@@ -106,6 +106,11 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
           <h2 className="font-display text-3xl sm:text-[44px] font-bold tracking-[-0.03em] leading-[1.05] mb-7">
             {current.prompt}
           </h2>
+          {current.passage && (
+            <div className="mb-7">
+              <PassageBlock text={current.passage} />
+            </div>
+          )}
           {current.letterStrip && (
             // Keyed per question so the marks reset with each new question.
             <div key={current.id} className="mb-7">

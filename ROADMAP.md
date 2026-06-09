@@ -67,8 +67,12 @@ check items off here as they land.
 - [ ] **Confirm with the school** whether reasoning papers are part of the
       assessment. English is a *confirmed* ISEB CE subject with **zero app
       content** — if reasoning isn't examined, English outranks items 2–3.
-- [ ] **English subject workstream** — comprehension, spelling/punctuation/
+- [x] **English subject workstream** — comprehension, spelling/punctuation/
       grammar, composition prompts. Follow "Adding a new subject" in CLAUDE.md.
+      *(Shipped with 64 questions across 4 sections — reading-01, spag-01/02,
+      writing-01 — plus a `passage` field for self-contained comprehension
+      questions. Deepen like maths/VR once the school confirms the assessment
+      shape.)*
 
 ## Established patterns to follow
 

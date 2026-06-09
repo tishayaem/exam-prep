@@ -39,6 +39,8 @@ export function QuestionRunner({
         {question.prompt}
       </h2>
 
+      {question.passage && <PassageBlock text={question.passage} />}
+
       {question.letterStrip && <AlphabetStrip />}
 
       <AnswerArea
@@ -107,6 +109,19 @@ export function QuestionRunner({
           {nextLabel}
         </button>
       )}
+    </div>
+  );
+}
+
+/**
+ * A reading passage in a quote block, sized for body reading rather than the
+ * display-face prompt. `whitespace-pre-line` keeps authored line breaks
+ * (poems, paragraphs).
+ */
+export function PassageBlock({ text }: { text: string }) {
+  return (
+    <div className="rounded-[22px] border border-rule bg-off p-5 sm:p-6 text-[15px] sm:text-[16px] leading-relaxed whitespace-pre-line">
+      {text}
     </div>
   );
 }

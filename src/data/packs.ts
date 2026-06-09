@@ -24,6 +24,7 @@ export interface SubjectDef {
 export const SUBJECTS: SubjectDef[] = [
   { id: 'science', title: 'Science' },
   { id: 'maths', title: 'Maths' },
+  { id: 'english', title: 'English' },
   { id: 'non-verbal', title: 'Non-Verbal Reasoning' },
   { id: 'verbal', title: 'Verbal Reasoning' },
 ];
@@ -39,6 +40,11 @@ export const PACKS: PackDef[] = [
   { slug: 'maths-ratio', subject: 'maths', title: 'Ratio, Proportion & Algebra' },
   { slug: 'maths-geometry', subject: 'maths', title: 'Measurement & Geometry' },
   { slug: 'maths-data', subject: 'maths', title: 'Data & Problem Solving' },
+
+  // English
+  { slug: 'english-reading', subject: 'english', title: 'Reading & Comprehension' },
+  { slug: 'english-spag', subject: 'english', title: 'Spelling, Punctuation & Grammar' },
+  { slug: 'english-writing', subject: 'english', title: 'Writing & Composition' },
 
   // Non-Verbal Reasoning
   { slug: 'nvr-core', subject: 'non-verbal', title: 'Figures & Patterns' },
