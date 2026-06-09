@@ -55,7 +55,7 @@ check items off here as they land.
 - [ ] **Codes question kind** — GL's official NVR paper is ~half Codes
       (shapes → letter pairs); the app has none. New `kind: 'code'` in
       `NvrQuestion` (`src/data/types.ts`) + layout in the NVR renderer.
-- [ ] **Reflection support** — the #1 NVR trap (reflection distractor vs
+- [x] **Reflection support** — the #1 NVR trap (reflection distractor vs
       rotation answer) is currently unauthorable: every `NvrFigure` shape is
       mirror-symmetric. Add `mirrored?: boolean` + 1–2 chiral shapes (flag,
       boot) to the figure schema and renderer.

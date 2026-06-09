@@ -86,6 +86,25 @@ function Shape({ shape, c, r }: { shape: Figure['shape']; c: number; r: number }
         />
       );
     }
+    case 'flag': {
+      // Pole on the left, pennant pointing right — chiral, so `mirrored`
+      // produces a genuinely different figure.
+      const pts = [
+        [-0.62, 1], [-0.62, -1], [0.85, -0.55], [-0.45, -0.1], [-0.45, 1],
+      ];
+      return (
+        <polygon points={pts.map(([x, y]) => `${c + x * r},${c + y * r}`).join(' ')} />
+      );
+    }
+    case 'boot': {
+      // L-shaped boot, toe pointing right — the second chiral shape.
+      const pts = [
+        [-0.55, -0.95], [0, -0.95], [0, 0.2], [0.85, 0.2], [0.85, 0.75], [-0.55, 0.75],
+      ];
+      return (
+        <polygon points={pts.map(([x, y]) => `${c + x * r},${c + y * r}`).join(' ')} />
+      );
+    }
   }
 }
 
@@ -102,6 +121,15 @@ export function NvrFigure({ figure, box = 78 }: { figure: Figure; box?: number }
   const rotation = figure.rotation ?? 0;
   const dots = figure.dots ?? 0;
 
+  // Mirror about the vertical axis through the centre, then rotate. SVG
+  // applies transforms right-to-left, so the flip sits last in the list.
+  const transforms = [
+    rotation ? `rotate(${rotation} ${c} ${c})` : '',
+    figure.mirrored ? `translate(${box} 0) scale(-1 1)` : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <svg viewBox={`0 0 ${box} ${box}`} width={box} height={box} role="img" aria-hidden>
       {fill === 'striped' && (
@@ -117,7 +145,7 @@ export function NvrFigure({ figure, box = 78 }: { figure: Figure; box?: number }
         stroke={INK}
         strokeWidth="2.5"
         strokeLinejoin="round"
-        transform={rotation ? `rotate(${rotation} ${c} ${c})` : undefined}
+        transform={transforms || undefined}
       >
         <Shape shape={figure.shape} c={c} r={r} />
       </g>

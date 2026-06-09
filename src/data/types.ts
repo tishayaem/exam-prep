@@ -32,12 +32,21 @@ export interface NvrFigure {
     | 'hexagon'
     | 'star'
     | 'arrow'
-    | 'diamond';
+    | 'diamond'
+    | 'flag'
+    | 'boot';
   fill?: 'white' | 'black' | 'grey' | 'striped';
   rotation?: 0 | 45 | 90 | 135 | 180 | 225 | 270 | 315;
   size?: 'sm' | 'md' | 'lg';
   /** Number of small dots drawn inside the shape (0 = none). */
   dots?: number;
+  /**
+   * Flip the shape left-to-right before rotating. Only meaningful on chiral
+   * shapes (flag, boot, arrow) — it lets reflection-vs-rotation traps, the
+   * #1 NVR distractor, be authored. Mirror-symmetric shapes ignore it
+   * visually.
+   */
+  mirrored?: boolean;
 }
 
 /**

@@ -12,6 +12,8 @@ The rule is almost always one of a few things examiners love to change: the **sh
 
 Two traps to remember. First, **turning a shape doesn't change what it is** — four triangles at different angles are still all triangles. Second, when the shapes are all different, the rule is usually a *feature they share* (all the same size, all the same shading), not the shapes themselves.
 
+The nastiest trap of all is the **reflection**: a mirror image looks like "just another turn" but it is NOT — no rotation ever turns a shape into its reflection. With flags and boots, track which way the pennant or toe points.
+
 Tip: don't stare at the whole picture. Check **one feature at a time** across all five — "are they all the same colour? … the same size? … the same number of dots?" — and the odd one jumps out.`,
   vocabulary: [
     { term: 'Odd one out', meaning: 'The figure that breaks the rule the other four all share.' },
@@ -145,6 +147,48 @@ Tip: don't stare at the whole picture. Check **one feature at a time** across al
         'Four of the shapes are triangles, just turned to different angles. One is a square — turning a shape never changes what it is, so the square is the odd one out.',
       difficulty: 2,
       source: 'GL NVR · Odd one out',
+    },
+    {
+      id: 'nvr-01-q7',
+      sectionId: 'nvr-01-odd-one-out',
+      type: 'nvr',
+      prompt: 'Which flag is the odd one out?',
+      answer: '3',
+      nvr: {
+        kind: 'odd-one-out',
+        stem: [
+          { shape: 'flag', fill: 'black', rotation: 0 },
+          { shape: 'flag', fill: 'black', rotation: 90 },
+          { shape: 'flag', fill: 'black', rotation: 180 },
+          { shape: 'flag', fill: 'black', mirrored: true },
+          { shape: 'flag', fill: 'black', rotation: 270 },
+        ],
+      },
+      explanation:
+        'Four flags are the SAME flag turned to different angles. One is a mirror image — no amount of turning will ever make a reflected flag match the others. Rotation keeps a shape the same; reflection does not.',
+      difficulty: 2,
+      source: 'GL NVR · Odd one out (reflection)',
+    },
+    {
+      id: 'nvr-01-q8',
+      sectionId: 'nvr-01-odd-one-out',
+      type: 'nvr',
+      prompt: 'Which boot is the odd one out?',
+      answer: '1',
+      nvr: {
+        kind: 'odd-one-out',
+        stem: [
+          { shape: 'boot', fill: 'striped', mirrored: true },
+          { shape: 'boot', fill: 'striped' },
+          { shape: 'boot', fill: 'striped', mirrored: true, rotation: 90 },
+          { shape: 'boot', fill: 'striped', mirrored: true, rotation: 180 },
+          { shape: 'boot', fill: 'striped', mirrored: true, rotation: 270 },
+        ],
+      },
+      explanation:
+        'Four boots are rotations of the same left-facing boot. The second boot faces the other way — it is the reflection, so it can never be turned to match. Check the toe direction as you rotate each one in your head.',
+      difficulty: 3,
+      source: 'GL NVR · Odd one out (reflection)',
     },
   ],
 };
