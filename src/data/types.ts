@@ -64,7 +64,7 @@ export interface NvrFigure {
  * one.
  */
 export interface NvrQuestion {
-  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix' | 'code';
+  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix' | 'code' | 'most-similar';
   stem: NvrFigure[];
   options?: NvrFigure[];
   /** Only for `kind: 'code'`: codes[i] labels stem[i]; stem's last figure is the unknown. */

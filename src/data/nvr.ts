@@ -5,6 +5,7 @@ import { nvr02Series } from './sections/nvr-02-series';
 import { nvr03Analogies } from './sections/nvr-03-analogies';
 import { nvr04Matrices } from './sections/nvr-04-matrices';
 import { nvr05Codes } from './sections/nvr-05-codes';
+import { nvr06MostSimilar } from './sections/nvr-06-most-similar';
 
 export const nvrSections: Section[] = [
   nvr01OddOneOut,
@@ -12,4 +13,5 @@ export const nvrSections: Section[] = [
   nvr03Analogies,
   nvr04Matrices,
   nvr05Codes,
+  nvr06MostSimilar,
 ];

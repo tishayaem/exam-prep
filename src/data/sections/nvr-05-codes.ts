@@ -296,6 +296,76 @@ Watch out: the features are not always in the "obvious" order — sometimes the 
       source: 'GL NVR · Codes',
       variantOf: 'nvr-05-q6',
     },
+    {
+      id: 'nvr-05-q13',
+      sectionId: 'nvr-05-codes',
+      type: 'mcq',
+      prompt: 'Crack the code, then pick the code for the last shape.',
+      choices: ['QX', 'QY', 'PX', 'PY'],
+      answer: 'QX',
+      nvr: {
+        kind: 'code',
+        codes: ['PX', 'QY', 'PY'],
+        stem: [
+          { shape: 'hexagon', fill: 'white' },
+          { shape: 'triangle', fill: 'grey' },
+          { shape: 'hexagon', fill: 'grey' },
+          { shape: 'triangle', fill: 'white' },
+        ],
+      },
+      explanation:
+        'P means hexagon and Q means triangle; X means white and Y means grey. A white triangle is Q + X = QX.',
+      difficulty: 1,
+      source: 'GL NVR · Codes',
+      variantOf: 'nvr-05-q1',
+    },
+    {
+      id: 'nvr-05-q14',
+      sectionId: 'nvr-05-codes',
+      type: 'mcq',
+      prompt: 'Crack the code, then pick the code for the last boot.',
+      choices: ['DR', 'DS', 'CR', 'CS'],
+      answer: 'DR',
+      nvr: {
+        kind: 'code',
+        codes: ['CR', 'DS', 'CS'],
+        stem: [
+          { shape: 'boot', fill: 'grey', rotation: 0 },
+          { shape: 'boot', fill: 'black', rotation: 90 },
+          { shape: 'boot', fill: 'grey', rotation: 90 },
+          { shape: 'boot', fill: 'black', rotation: 0 },
+        ],
+      },
+      explanation:
+        'All boots, so the letters track other features: C grey, D black; R upright, S quarter-turned. An upright black boot is D + R = DR.',
+      difficulty: 2,
+      source: 'GL NVR · Codes',
+      variantOf: 'nvr-05-q4',
+    },
+    {
+      id: 'nvr-05-q15',
+      sectionId: 'nvr-05-codes',
+      type: 'mcq',
+      prompt: 'THREE letters this time. Crack the code, then pick the code for the last shape.',
+      choices: ['TBM', 'TBL', 'SBM', 'TWM'],
+      answer: 'TBM',
+      nvr: {
+        kind: 'code',
+        codes: ['SBL', 'TWM', 'SWL', 'SBM'],
+        stem: [
+          { shape: 'star', fill: 'black', size: 'lg' },
+          { shape: 'diamond', fill: 'white', size: 'sm' },
+          { shape: 'star', fill: 'white', size: 'lg' },
+          { shape: 'star', fill: 'black', size: 'sm' },
+          { shape: 'diamond', fill: 'black', size: 'sm' },
+        ],
+      },
+      explanation:
+        'One letter per feature: S star / T diamond, B black / W white, L large / M small. The last shape is a small black diamond: T + B + M = TBM.',
+      difficulty: 3,
+      source: 'GL NVR · Codes',
+      variantOf: 'nvr-05-q1',
+    },
   ],
   examples: [
     {

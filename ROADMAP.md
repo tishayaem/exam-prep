@@ -59,7 +59,7 @@ check items off here as they land.
       rotation answer) is currently unauthorable: every `NvrFigure` shape is
       mirror-symmetric. Add `mirrored?: boolean` + 1–2 chiral shapes (flag,
       boot) to the figure schema and renderer.
-- [ ] **Deepen NVR sections to ~15–20 each**, including a "Most Similar"
+- [x] **Deepen NVR sections to ~15–20 each**, including a "Most Similar"
       section (inverse of odd-one-out; in the research, absent from the app).
 
 ## 4. English (pending one answer from admissions)

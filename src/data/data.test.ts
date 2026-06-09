@@ -236,6 +236,9 @@ describe('answerability (every question can actually be marked correct)', () => 
       if (nvr.kind === 'series' && nvr.stem.length < 2) {
         bad.push(`${q.id}: series needs at least 2 stem figures`);
       }
+      if (nvr.kind === 'most-similar' && nvr.stem.length !== 3) {
+        bad.push(`${q.id}: most-similar needs exactly 3 stem figures`);
+      }
       if (nvr.kind !== 'odd-one-out' && !nvr.options?.length) {
         bad.push(`${q.id}: ${nvr.kind} needs an options array`);
       }

@@ -139,7 +139,9 @@ export function NvrAnswer({
       </div>
       <div>
         <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-inkSoft mb-3">
-          Pick the missing shape
+          {nvr.kind === 'most-similar'
+            ? 'Pick the shape that belongs with these three'
+            : 'Pick the missing shape'}
         </div>
         {choiceBlock}
       </div>
@@ -149,6 +151,17 @@ export function NvrAnswer({
 
 /** The non-interactive question stem, laid out per kind. */
 function Stem({ nvr }: { nvr: NvrQuestion }) {
+  if (nvr.kind === 'most-similar') {
+    // Three figures that share a hidden rule; no gap to fill.
+    return (
+      <div className="flex items-center justify-center gap-2 sm:gap-3 min-w-max">
+        {nvr.stem.map((f, i) => (
+          <StemCell key={i} figure={f} />
+        ))}
+      </div>
+    );
+  }
+
   if (nvr.kind === 'series') {
     return (
       <div className="flex items-center justify-center gap-2 sm:gap-3 min-w-max">
