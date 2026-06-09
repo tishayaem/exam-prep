@@ -41,7 +41,7 @@ check items off here as they land.
 
 ## 2. Verbal Reasoning depth
 
-- [ ] **Deepen all 5 VR sections 6 → 20** (same treatment as maths): 3–4
+- [x] **Deepen all 5 VR sections 6 → 20** (same treatment as maths): 3–4
       questions per named GL type, graded 1→3, `variantOf` links, and an
       independent answer-key suite (`src/data/vr-answers.test.ts`, modelled on
       the maths one).
