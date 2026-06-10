@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { allSections } from '../data';
+import { interviewQuestions } from '../data/interview';
 import { PACKS, SUBJECTS } from '../data/packs';
 import type { Section } from '../data/types';
 import { useProgress } from '../lib/storage';
@@ -48,6 +49,8 @@ export function Home() {
       <Hero today={today} resume={resume} />
 
       <Practice mistakesCount={mistakesCount} focus={focus} />
+
+      <InterviewBanner />
 
       {groups.flatMap((group) => [
         <SubjectDivider key={`subject-${group.subject.id}`} title={group.subject.title} />,
@@ -408,6 +411,47 @@ function SmartPracticeBanner({ focus }: { focus: string[] }) {
         </div>
         <div className="bg-ink text-paper rounded-full px-6 py-3.5 font-bold text-[15px] shrink-0 justify-self-start sm:justify-self-end group-hover:bg-neon-pink transition-colors">
           Start ›
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// ─── InterviewBanner ────────────────────────────────────────────────────────
+
+// The interview is a different beast from the quiz subjects (it can't be
+// auto-graded), so it gets its own banner rather than a pack row — and links
+// off to the self-contained /interview area.
+function InterviewBanner() {
+  return (
+    <Link
+      to="/interview"
+      viewTransition
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
+      className="block relative overflow-hidden rounded-[28px] bg-ink text-paper p-6 sm:p-8 hover:-translate-y-0.5 transition-transform group"
+    >
+      <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div>
+          <div className="text-[11px] font-bold text-neon-yellow uppercase tracking-[0.14em]">
+            Brighton College · When the test is near
+          </div>
+          <div className="font-display font-bold tracking-[-0.03em] leading-[0.98] mt-1.5 text-[clamp(1.75rem,4vw,2.75rem)]">
+            Interview{' '}
+            <span className="relative inline-block">
+              prep
+              <span
+                aria-hidden
+                className="absolute left-0 right-0 bottom-[6%] h-[16%] bg-neon-blue -z-10 -skew-x-6"
+              />
+            </span>
+          </div>
+          <div className="text-[14px] text-[#A8A8B0] mt-2.5 max-w-lg leading-snug">
+            Get ready for the two short chats with teachers. Be curious, be kind,
+            be you — plus {interviewQuestions.length} questions to practise.
+          </div>
+        </div>
+        <div className="bg-neon-green text-ink rounded-full px-6 py-3.5 font-bold text-[15px] shrink-0 justify-self-start sm:justify-self-end group-hover:bg-neon-yellow transition-colors">
+          Get ready ›
         </div>
       </div>
     </Link>

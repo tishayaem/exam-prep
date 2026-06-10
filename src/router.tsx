@@ -9,6 +9,8 @@ import { MockTest } from './modes/MockTest';
 import { Mistakes } from './modes/Mistakes';
 import { SkillsMap } from './modes/SkillsMap';
 import { SmartPractice } from './modes/SmartPractice';
+import { Interview } from './modes/Interview';
+import { InterviewPractice } from './modes/InterviewPractice';
 import { AppShell } from './AppShell';
 
 export const router = createHashRouter([
@@ -28,6 +30,8 @@ export const router = createHashRouter([
       { path: 'mistakes', element: <Mistakes /> },
       { path: 'smart-practice', element: <SmartPractice /> },
       { path: 'skills', element: <SkillsMap /> },
+      { path: 'interview', element: <Interview /> },
+      { path: 'interview/practice', element: <InterviewPractice /> },
     ],
   },
 ]);
