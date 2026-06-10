@@ -167,6 +167,17 @@ export const interviewQuestions: InterviewQuestion[] = [
       'Wanting to improve matters more than already being the best.',
     ],
   },
+  {
+    id: 'int-hobbies-object',
+    category: 'hobbies',
+    question: 'If you could show me one thing that matters to you, what would it be?',
+    asking: 'Whether you can bring something you love to life with words.',
+    talkingPoints: [
+      'Pick something real — a medal, a model you built, a photo, a battered old book.',
+      'Tell its story: where it came from, and why it matters to you.',
+      'Some schools really do ask you to bring an object in — worth having one in mind.',
+    ],
+  },
 
   // ── Books & reading (the most common of all) ──────────────────────────────
   {
@@ -501,6 +512,7 @@ export const interviewGuide: GuideBand[] = [
     bullets: [
       'Have a **book on the go** that you can talk about.',
       'Read the **news for kids** (First News, The Week Junior, Newsround) and have an opinion.',
+      'Know **who the Prime Minister is**, and one big story in the news right now.',
       'Think of **one or two questions** to ask them at the end.',
       'Have **one practice chat** with a grown-up you don’t see very often.',
       'On the day: get a good sleep — and remember, they already like you, or you wouldn’t be there.',
