@@ -437,7 +437,9 @@ function InterviewBanner() {
           </div>
           <div className="font-display font-bold tracking-[-0.03em] leading-[0.98] mt-1.5 text-[clamp(1.75rem,4vw,2.75rem)]">
             Interview{' '}
-            <span className="relative inline-block">
+            {/* isolate: on this dark tile the -z-10 underline would otherwise
+                paint behind the banner's own bg-ink and vanish. */}
+            <span className="relative inline-block isolate">
               prep
               <span
                 aria-hidden
