@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useBlocker } from 'react-router-dom';
 import { allSections, questionsBySubject } from '../data';
-import { SUBJECTS } from '../data/packs';
+import { SUBJECTS, subjectTitle } from '../data/packs';
 import { useProgress } from '../lib/storage';
+import type { MockResult } from '../lib/storage';
 import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
 import { buildMockPaper } from '../lib/mockPaper';
 import type { Question, Subject } from '../data/types';
@@ -25,7 +26,7 @@ interface AnswerLog {
 }
 
 export function MockTest() {
-  const { recordAttempt } = useProgress();
+  const { state, recordAttempt, recordMockResult } = useProgress();
   const [phase, setPhase] = useState<Phase>('pre');
   const [paper, setPaper] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
@@ -33,6 +34,9 @@ export function MockTest() {
   const [secondsLeft, setSecondsLeft] = useState(PRESETS.quick.minutes * 60);
   const [subject, setSubject] = useState<Subject | null>(null);
   const [preset, setPreset] = useState<PresetKey>('quick');
+  // The review phase renders many times (and twice in StrictMode); the result
+  // must be logged exactly once per finished paper.
+  const resultLogged = useRef(false);
 
   useEffect(() => {
     if (phase !== 'running') return;
@@ -78,6 +82,19 @@ export function MockTest() {
     }
   }, [blocker, inProgress]);
 
+  // Reaching the review screen — by answering everything or by the clock
+  // running out — is what makes a paper count. Quitting early never logs.
+  useEffect(() => {
+    if (phase !== 'review' || resultLogged.current || !subject) return;
+    resultLogged.current = true;
+    recordMockResult({
+      subject,
+      preset,
+      score: answers.filter((a) => a.correct).length,
+      total: paper.length,
+    });
+  }, [phase, subject, preset, answers, paper.length, recordMockResult]);
+
   function start(subj: Subject) {
     const p = PRESETS[preset];
     const picked = buildMockPaper(questionsBySubject(subj), p.questions, {
@@ -89,6 +106,7 @@ export function MockTest() {
     setIndex(0);
     setAnswers([]);
     setSecondsLeft(p.minutes * 60);
+    resultLogged.current = false;
     setPhase('running');
   }
 
@@ -155,6 +173,8 @@ export function MockTest() {
         </div>
 
         <SubjectChooser onPick={start} presetQuestions={p.questions} />
+
+        <RecentPapers results={state.mockResults.slice(-3).reverse()} />
       </div>
     );
   }
@@ -442,6 +462,48 @@ function SubjectChooser({
         })}
       </div>
     </div>
+  );
+}
+
+function RecentPapers({ results }: { results: MockResult[] }) {
+  if (results.length === 0) return null;
+  return (
+    <section className="border border-rule rounded-[22px] p-5 sm:p-6">
+      <div className="text-[11px] font-bold text-inkSoft uppercase tracking-[0.14em] mb-2">
+        Your last papers
+      </div>
+      <div className="grid">
+        {results.map((r) => {
+          const pct = r.total === 0 ? 0 : r.score / r.total;
+          const tone =
+            pct >= 0.8 ? 'text-neon-green' : pct < 0.5 ? 'text-neon-pink' : 'text-ink';
+          const presetTitle =
+            (PRESETS as Record<string, { title: string }>)[r.preset]?.title ?? r.preset;
+          return (
+            <div
+              key={r.ts}
+              className="flex items-center justify-between gap-3 py-2.5 border-b border-rule last:border-b-0 last:pb-0"
+            >
+              <span className="truncate text-[15px]">
+                {subjectTitle(r.subject)}
+                <span className="text-inkSoft"> · {presetTitle}</span>
+              </span>
+              <span className="flex items-baseline gap-3 shrink-0">
+                <span className="text-[13px] text-inkSoft">
+                  {new Date(r.ts).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                  })}
+                </span>
+                <span className={`text-[15px] font-bold tabular-nums ${tone}`}>
+                  {r.score}/{r.total}
+                </span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 

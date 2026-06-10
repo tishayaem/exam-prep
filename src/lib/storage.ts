@@ -1,4 +1,5 @@
 import { useSyncExternalStore, useCallback } from 'react';
+import type { Subject } from '../data/types';
 
 const KEY = 'exam-prep-state-v1';
 
@@ -16,11 +17,27 @@ export interface AttemptLog {
   chosen?: string;
 }
 
+/**
+ * One finished Mock Test. Per-question attempts already land in `attempts`;
+ * this is the headline event — "32/40 on the full maths paper, 3rd June" —
+ * which would otherwise vanish with the review screen.
+ */
+export interface MockResult {
+  ts: number;
+  subject: Subject;
+  /** Preset key as MockTest defines it (e.g. 'quick' | 'exam'). Kept as a
+      plain string so old results survive preset renames. */
+  preset: string;
+  score: number;
+  total: number;
+}
+
 export interface ProgressState {
   box: Record<string, LeitnerLevel>;
   attempts: AttemptLog[];
   xp: number;
   streak: { count: number; lastDay: string | null };
+  mockResults: MockResult[];
   /** Whoever is using the app. Undefined until the child sets it. */
   childName?: string;
 }
@@ -30,6 +47,7 @@ const initial: ProgressState = {
   attempts: [],
   xp: 0,
   streak: { count: 0, lastDay: null },
+  mockResults: [],
 };
 
 function load(): ProgressState {
@@ -113,6 +131,13 @@ export function useProgress() {
     [],
   );
 
+  const recordMockResult = useCallback((result: Omit<MockResult, 'ts'>) => {
+    set((s) => ({
+      ...s,
+      mockResults: [...s.mockResults, { ...result, ts: Date.now() }].slice(-50),
+    }));
+  }, []);
+
   const resetAll = useCallback(() => {
     set(() => ({ ...initial }));
   }, []);
@@ -123,5 +148,5 @@ export function useProgress() {
     set((s) => ({ ...s, childName: trimmed }));
   }, []);
 
-  return { state, recordAttempt, resetAll, setChildName };
+  return { state, recordAttempt, recordMockResult, resetAll, setChildName };
 }

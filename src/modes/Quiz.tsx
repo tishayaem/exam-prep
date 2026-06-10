@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { findSection } from '../data';
+import { shuffle } from '../lib/shuffle';
 import { useProgress } from '../lib/storage';
 import { FeedbackPanel, PassageBlock, firstAnswer, formatAnswer } from '../components/QuestionRunner';
 import { AlphabetStrip } from '../components/AlphabetStrip';
@@ -27,7 +28,7 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
 
   const order = useMemo(() => {
     if (!section) return [];
-    return [...section.questions].sort(() => Math.random() - 0.5);
+    return shuffle(section.questions);
   }, [section]);
 
   const [index, setIndex] = useState(0);

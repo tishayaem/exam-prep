@@ -5,6 +5,21 @@ import { SequenceAnswer } from './SequenceAnswer';
 import { NvrAnswer, NvrCodeStem } from './NvrAnswer';
 
 /**
+ * True when every accepted answer can be typed on the iOS decimal keypad,
+ * which offers only digits and a decimal point. Symbols gradeNumeric strips
+ * (£ % ° commas, spaces) don't need typing, so they don't disqualify — but
+ * fractions ("7/24"), 24-hour times ("16:55") and negatives do, and those
+ * questions keep the full text keyboard.
+ */
+function decimalPadSafe(question: Question): boolean {
+  const candidates = [
+    ...(Array.isArray(question.answer) ? question.answer : [question.answer]),
+    ...(question.acceptable ?? []),
+  ];
+  return candidates.every((c) => /^[0-9.]+$/.test(c.replace(/[£$,%°\s]/g, '')));
+}
+
+/**
  * The input surface for a question — picks the right control for the type
  * (NVR figures, match, sequence, MCQ/true-false, or a typed text box). Shared
  * by QuestionRunner (Mock Test / Mistakes) and Quiz, so a new question type is
@@ -125,6 +140,11 @@ export function AnswerArea({
     >
       <input
         type="text"
+        inputMode={
+          question.type === 'numeric' && decimalPadSafe(question)
+            ? 'decimal'
+            : 'text'
+        }
         autoFocus
         autoComplete="off"
         autoCorrect="off"

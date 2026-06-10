@@ -44,7 +44,13 @@ function stateOf(
   attempts: AttemptLog[],
   box: Record<string, LeitnerLevel> = {},
 ): ProgressState {
-  return { box, attempts, xp: 0, streak: { count: 0, lastDay: null } };
+  return {
+    box,
+    attempts,
+    xp: 0,
+    streak: { count: 0, lastDay: null },
+    mockResults: [],
+  };
 }
 
 // ─── topicMastery: bands ─────────────────────────────────────────────────────
