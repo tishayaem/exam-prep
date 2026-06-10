@@ -7,6 +7,7 @@ import {
   questionsByCategory,
 } from '../data/interview';
 import type { InterviewCategory } from '../data/interview';
+import { shuffle } from '../lib/shuffle';
 
 type Filter = InterviewCategory | 'all';
 
@@ -15,17 +16,31 @@ type Filter = InterviewCategory | 'all';
  * the back is "what they’re really asking" plus talking-point prompts. There is
  * deliberately NO scoring or progress tracking — an interview answer has no
  * right answer, so this is about getting used to talking, not getting marked.
+ * Shuffle mixes the deck so questions stop arriving in tidy category order,
+ * which is closer to how a real chat jumps around.
  */
 export function InterviewPractice() {
   const [filter, setFilter] = useState<Filter>('all');
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  // 0 = file order; each increment deals a fresh shuffle of the current deck.
+  const [mixCount, setMixCount] = useState(0);
 
-  const deck = useMemo(() => questionsByCategory(filter), [filter]);
+  const deck = useMemo(() => {
+    const base = questionsByCategory(filter);
+    return mixCount === 0 ? base : shuffle(base);
+  }, [filter, mixCount]);
   const q = deck[index];
 
   function choose(next: Filter) {
     setFilter(next);
+    setMixCount(0);
+    setIndex(0);
+    setRevealed(false);
+  }
+
+  function mix() {
+    setMixCount((n) => n + 1);
     setIndex(0);
     setRevealed(false);
   }
@@ -66,8 +81,16 @@ export function InterviewPractice() {
 
       {/* Top bar */}
       <div className="flex items-baseline justify-between">
-        <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
-          Card {index + 1} <span className="text-inkSoft">/ {deck.length}</span>
+        <div className="flex items-baseline gap-3">
+          <div className="text-[13px] font-bold text-neon-pink uppercase tracking-[0.16em]">
+            Card {index + 1} <span className="text-inkSoft">/ {deck.length}</span>
+          </div>
+          <button
+            onClick={mix}
+            className="text-[12px] font-semibold text-inkSoft border border-rule rounded-full px-3 py-1 hover:text-ink hover:border-ink transition-colors"
+          >
+            Shuffle
+          </button>
         </div>
         {q.common && (
           <div className="text-[12px] font-bold text-ink bg-neon-yellow px-2.5 py-1 rounded-full">

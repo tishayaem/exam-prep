@@ -99,6 +99,17 @@ export const interviewQuestions: InterviewQuestion[] = [
     ],
   },
   {
+    id: 'int-about-challenge',
+    category: 'about-you',
+    question: 'What’s the biggest challenge you’ve faced?',
+    asking: 'How you keep going when something doesn’t come easily.',
+    talkingPoints: [
+      'Pick something real — a tricky topic, learning an instrument, a big race.',
+      'Say what made it hard, then what you tried.',
+      'It doesn’t need a perfect ending — what you learned is the interesting bit.',
+    ],
+  },
+  {
     id: 'int-about-family',
     category: 'about-you',
     question: 'Tell me about your family.',
@@ -107,6 +118,17 @@ export const interviewQuestions: InterviewQuestion[] = [
       'Say who’s at home — brothers, sisters, pets.',
       'One nice detail is plenty.',
       'This is a friendly opener, so settle in and enjoy it.',
+    ],
+  },
+  {
+    id: 'int-about-school',
+    category: 'about-you',
+    question: 'What do you like about your current school?',
+    asking: 'What you value in a school — and that you talk about people kindly.',
+    talkingPoints: [
+      'Pick one or two true things — a favourite subject, a club, your friends.',
+      'If they ask what you’d change, choose something small and say why.',
+      'Stay kind about your school and teachers — moaning never sounds good.',
     ],
   },
 
@@ -243,6 +265,17 @@ export const interviewQuestions: InterviewQuestion[] = [
     ],
   },
   {
+    id: 'int-thinking-meet',
+    category: 'thinking',
+    question: 'If you could meet anyone, living or dead, who would it be?',
+    asking: 'What sparks your imagination — and whether you can say why.',
+    talkingPoints: [
+      'Anyone counts — a scientist, an author, a sports star, someone from history.',
+      'The why is the best bit, so give a real reason.',
+      'Think of one question you’d love to ask them.',
+    ],
+  },
+  {
     id: 'int-thinking-future',
     category: 'thinking',
     question: 'What do you think you’ll be doing in twenty years?',
@@ -250,7 +283,7 @@ export const interviewQuestions: InterviewQuestion[] = [
     talkingPoints: [
       'You don’t need a real plan — dream a little.',
       'Link it to something you enjoy now.',
-      'It’s fine to say you’re not sure yet, then have a guess.',
+      'It’s fine to say you’re not sure yet — then share your best idea.',
     ],
   },
   {
@@ -260,7 +293,7 @@ export const interviewQuestions: InterviewQuestion[] = [
     asking: 'Practice for the big one: never freeze.',
     talkingPoints: [
       'Never just stop at "I don’t know".',
-      'Say "I’m not sure, but I’d guess…" and think out loud.',
+      'Say "I’m not sure, but I think it might be…" and talk your idea through.',
       'Having a go at a new idea is exactly what they want to see.',
     ],
   },
@@ -424,7 +457,7 @@ export const interviewGuide: GuideBand[] = [
     bullets: [
       '**Say more than one sentence.** Give your answer, then a *why* or a tiny example.',
       '**It’s okay to think first.** Taking a few seconds is better than rushing.',
-      '**Never freeze.** If you don’t know, say *"I’m not sure, but I’d guess…"* and have a go.',
+      '**Never freeze.** If you don’t know, say *"I’m not sure, but I think it might be…"* and have a go.',
       '**Have a chat, not a speech.** Listen, answer, and let them ask you more.',
     ],
   },
