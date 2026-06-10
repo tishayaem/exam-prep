@@ -74,6 +74,25 @@ check items off here as they land.
       questions. Deepen like maths/VR once the school confirms the assessment
       shape.)*
 
+## 5. App platform (from the June 2026 review)
+
+- [x] **Installable PWA** — manifest + icons (`public/icons/`, regenerate via
+      `scripts/make-icons.mjs`) + auto-updating service worker with offline
+      support. Besides the home-screen experience, this exempts the app from
+      iPad Safari's 7-day script-writable-storage eviction, which would
+      otherwise wipe localStorage progress after a fortnight away.
+- [x] **Numeric keypad on iPad** — `numeric` questions get `inputMode="decimal"`
+      unless an accepted answer needs characters the decimal pad lacks
+      (fractions `7/24`, times `16:55`, negatives), which keep the full keyboard.
+- [x] **Mock-test history** — finished papers persist to `state.mockResults`
+      (subject, preset, score, date); the Mock Test start screen shows the
+      last three.
+- [x] **Unbiased quiz shuffle** — Quiz now uses the Fisher-Yates `shuffle()`
+      instead of `sort(() => Math.random() - 0.5)`.
+- Review follow-ups *not yet agreed*: science research pass + deepening to the
+  maths pattern (weakest confirmed subject), progress export/import backup,
+  timed composition mode for English writing, print-a-worksheet mode.
+
 ## Established patterns to follow
 
 - Sections: 20 questions, difficulty ladder 1→3, explanations model the

@@ -1,0 +1,11 @@
+<!-- App icon: the BrandMark's four geometric markers (AppShell.tsx) in the
+     editorial palette on paper. Shapes stay inside the centre ~75% so the same
+     artwork survives Android's maskable crop; PNGs are generated from this via
+     scripts/make-icons.mjs. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#FFFFFF" />
+  <circle cx="186" cy="186" r="62" fill="#0cf35c" />
+  <rect x="280" y="134" width="104" height="104" fill="#f50aa2" transform="rotate(45 332 186)" />
+  <rect x="124" y="270" width="124" height="124" fill="#fff000" />
+  <circle cx="332" cy="332" r="62" fill="#0185fd" />
+</svg>
