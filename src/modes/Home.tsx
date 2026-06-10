@@ -3,8 +3,8 @@ import type { FormEvent, MouseEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { allSections } from '../data';
 import { interviewQuestions } from '../data/interview';
-import { PACKS, SUBJECTS } from '../data/packs';
-import type { Section } from '../data/types';
+import { SUBJECTS } from '../data/packs';
+import type { SubjectDef } from '../data/packs';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
 import { weakestTopics } from '../lib/mastery';
@@ -29,21 +29,6 @@ export function Home() {
   const resume = pickResume(state, allSections);
   const today = DAY_NAMES[new Date().getDay()];
 
-  // Build subject → packs from the registry. Packs are numbered sequentially
-  // after the Practice section (01); empty packs (a subject not authored yet)
-  // are skipped so they simply don't appear.
-  let packNumber = 1;
-  const groups = SUBJECTS.map((subject) => {
-    const packs = PACKS.filter((p) => p.subject === subject.id)
-      .map((pack) => ({
-        pack,
-        sections: allSections.filter((s) => s.pack === pack.slug),
-      }))
-      .filter((g) => g.sections.length > 0)
-      .map((g) => ({ ...g, number: String(++packNumber).padStart(2, '0') }));
-    return { subject, packs };
-  }).filter((g) => g.packs.length > 0);
-
   return (
     <div className="space-y-14">
       <Hero today={today} resume={resume} />
@@ -52,31 +37,7 @@ export function Home() {
 
       <InterviewBanner />
 
-      {groups.flatMap((group) => [
-        <SubjectDivider key={`subject-${group.subject.id}`} title={group.subject.title} />,
-        ...group.packs.map((g) => (
-          <Pack
-            key={g.pack.slug}
-            number={g.number}
-            title={g.pack.title}
-            trailing={`${g.sections.length} topic${g.sections.length === 1 ? '' : 's'}`}
-            sections={g.sections}
-          />
-        )),
-      ])}
-    </div>
-  );
-}
-
-// ─── SubjectDivider ─────────────────────────────────────────────────────────
-
-function SubjectDivider({ title }: { title: string }) {
-  return (
-    <div className="flex items-center gap-4 pt-2">
-      <span className="font-display text-[13px] font-bold uppercase tracking-[0.2em] text-neon-pink shrink-0">
-        {title}
-      </span>
-      <span className="flex-1 h-px bg-rule" />
+      <Subjects />
     </div>
   );
 }
@@ -521,28 +482,118 @@ function PracticeCard({
   );
 }
 
-// ─── Pack (a group of TopicRows) ────────────────────────────────────────────
+// ─── Subjects (cards linking to /subject/:id) ───────────────────────────────
 
-function Pack({
-  number,
-  title,
-  trailing,
-  sections,
-}: {
-  number: string;
-  title: string;
-  trailing: string;
-  sections: Section[];
-}) {
+const TONE_BG: Record<SubjectDef['tone'], string> = {
+  green: 'bg-neon-green',
+  blue: 'bg-neon-blue',
+  yellow: 'bg-neon-yellow',
+  pink: 'bg-neon-pink',
+};
+
+function Subjects() {
+  const { state } = useProgress();
+  const cards = SUBJECTS.map((subject) => {
+    const sections = allSections.filter((s) => s.subject === subject.id);
+    const progress = sections.map((s) => getSectionProgress(s, state.attempts));
+    return {
+      subject,
+      topicCount: sections.length,
+      packCount: new Set(sections.map((s) => s.pack)).size,
+      mastered: progress.filter((p) => p.mastered).length,
+      started: progress.some((p) => p.started),
+      answered: progress.reduce((n, p) => n + p.correct, 0),
+      totalQs: progress.reduce((n, p) => n + p.total, 0),
+    };
+  }).filter((c) => c.topicCount > 0);
+
   return (
     <section>
-      <SectionHeader number={number} title={title} trailing={trailing} />
-      <div className="flex flex-col">
-        {sections.map((s, i) => (
-          <TopicRow key={s.id} section={s} last={i === sections.length - 1} />
+      <SectionHeader number="02" title="Subjects" trailing="Pick one to explore" />
+      {/* An odd card out at the end spans the full row so the grid stays solid. */}
+      <div className="grid gap-4 sm:gap-[18px] sm:grid-cols-2 [&>*:nth-child(odd):last-child]:sm:col-span-2">
+        {cards.map((c) => (
+          <SubjectCard key={c.subject.id} {...c} />
         ))}
       </div>
     </section>
+  );
+}
+
+function SubjectCard({
+  subject,
+  topicCount,
+  packCount,
+  mastered,
+  started,
+  answered,
+  totalQs,
+}: {
+  subject: SubjectDef;
+  topicCount: number;
+  packCount: number;
+  mastered: number;
+  started: boolean;
+  answered: number;
+  totalQs: number;
+}) {
+  // The bar tracks questions (not topics) so it moves from the very first
+  // correct answer — instant feedback matters more than precision here.
+  const pct = totalQs === 0 ? 0 : Math.round((answered / totalQs) * 100);
+  const allDone = mastered === topicCount;
+  const status = allDone
+    ? `All ${topicCount} topics mastered`
+    : mastered > 0
+      ? `${mastered} of ${topicCount} topics mastered`
+      : started
+        ? `${answered} of ${totalQs} questions done`
+        : `${topicCount} topics · fresh start`;
+  const dot = allDone ? 'bg-neon-green' : started ? 'bg-neon-blue' : 'bg-rule';
+
+  // Underline the last word; one-word titles get the whole word.
+  const words = subject.title.split(' ');
+  const accentWord = words.pop()!;
+  const lead = words.join(' ');
+
+  return (
+    <Link
+      to={`/subject/${subject.id}`}
+      viewTransition
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
+      className="group relative block rounded-[28px] border-[1.5px] border-ink p-6 sm:p-7 hover:-translate-y-1 transition-transform"
+    >
+      <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-inkSoft pr-8">
+        {packCount} pack{packCount === 1 ? '' : 's'} · {topicCount} topic{topicCount === 1 ? '' : 's'}
+      </div>
+      <div className="font-display font-bold tracking-[-0.03em] leading-[0.98] mt-2 text-[clamp(1.6rem,3.2vw,2.5rem)]">
+        {lead && <>{lead} </>}
+        <span className="relative inline-block">
+          {accentWord}
+          <span
+            aria-hidden
+            className={`absolute left-0 right-0 bottom-[6%] h-[16%] ${TONE_BG[subject.tone]} -z-10 -skew-x-6`}
+          />
+        </span>
+      </div>
+      <div className="text-[13px] text-inkSoft mt-2 leading-snug">
+        {subject.blurb}
+      </div>
+      <div className="mt-5">
+        <div className="h-1.5 bg-off rounded-full overflow-hidden">
+          <div
+            className={`h-full rounded-full ${TONE_BG[subject.tone]} progress-fill`}
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        <div className="text-[13px] text-inkSoft mt-2 flex items-center gap-2">
+          <span className={`block w-1.5 h-1.5 rounded-full ${dot}`} />
+          {status}
+        </div>
+      </div>
+      <div className="absolute top-6 right-[22px] text-[22px] font-bold group-hover:text-neon-pink transition-colors">
+        ›
+      </div>
+    </Link>
   );
 }
 
@@ -572,72 +623,3 @@ function SectionHeader({
   );
 }
 
-function TopicRow({ section, last }: { section: Section; last: boolean }) {
-  const { state } = useProgress();
-  const p = getSectionProgress(section, state.attempts);
-  const stateClass = p.mastered
-    ? 'bg-neon-green'
-    : p.started
-      ? 'bg-neon-blue'
-      : 'bg-rule';
-  const numColor = p.started ? 'text-ink' : 'text-inkSoft';
-  const fillClass = p.mastered
-    ? 'bg-neon-green'
-    : p.started
-      ? 'bg-neon-blue'
-      : 'bg-transparent';
-  const ctaLabel = p.mastered ? 'Review' : p.started ? 'Continue' : 'Start';
-
-  return (
-    <div
-      className={`grid items-center gap-2 sm:gap-6 py-4 sm:py-5 px-2 group hover:bg-off transition-colors ${
-        last ? '' : 'border-b border-rule'
-      } grid-cols-[36px_1fr_auto_auto] sm:grid-cols-[64px_1fr_220px_auto_auto]`}
-    >
-      <div
-        className={`font-display text-2xl sm:text-[32px] font-bold tabular-nums tracking-[-0.04em] ${numColor} group-hover:text-neon-pink transition-colors`}
-      >
-        {String(section.number).padStart(2, '0')}
-      </div>
-
-      <div className="min-w-0">
-        <div className="text-base sm:text-[19px] font-semibold tracking-[-0.012em] truncate">
-          {section.title}
-        </div>
-        <div className="text-[13px] text-inkSoft mt-1 flex items-center gap-2">
-          <span className={`block w-1.5 h-1.5 rounded-full ${stateClass}`} />
-          {p.mastered
-            ? 'Mastered'
-            : p.started
-              ? `${p.correct}/${p.total} answered`
-              : 'Not started'}
-        </div>
-      </div>
-
-      {/* progress bar — desktop only */}
-      <div className="hidden sm:block">
-        <div className="h-1.5 bg-off rounded-full overflow-hidden">
-          <div
-            className={`h-full ${fillClass} rounded-full progress-fill`}
-            style={{ width: `${p.pct}%` }}
-          />
-        </div>
-      </div>
-
-      <Link
-        to={`/study/${section.id}`}
-        viewTransition
-        className="inline-flex items-center bg-transparent border border-ink text-ink px-3 sm:px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-ink hover:text-paper transition-colors"
-      >
-        Study
-      </Link>
-      <Link
-        to={`/quiz/${section.id}`}
-        viewTransition
-        className="inline-flex items-center bg-ink text-paper border border-ink px-3 sm:px-4 py-2 rounded-full font-semibold text-[13px] hover:bg-neon-pink hover:border-neon-pink transition-colors"
-      >
-        {ctaLabel} ›
-      </Link>
-    </div>
-  );
-}
