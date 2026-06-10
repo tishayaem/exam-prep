@@ -18,15 +18,48 @@ export interface PackDef {
 export interface SubjectDef {
   id: Subject;
   title: string;
+  /**
+   * Accent colour for the subject's Home card and subject-page underline.
+   * Keys map to bg-neon-* classes where they're rendered (Tailwind needs the
+   * full class name in a .tsx file, so the mapping lives with the components).
+   */
+  tone: 'green' | 'blue' | 'yellow' | 'pink';
+  /** Kid-facing one-liner on the Home subject card. */
+  blurb: string;
 }
 
 /** Subjects in the order they appear on Home. */
 export const SUBJECTS: SubjectDef[] = [
-  { id: 'science', title: 'Science' },
-  { id: 'maths', title: 'Maths' },
-  { id: 'english', title: 'English' },
-  { id: 'non-verbal', title: 'Non-Verbal Reasoning' },
-  { id: 'verbal', title: 'Verbal Reasoning' },
+  {
+    id: 'science',
+    title: 'Science',
+    tone: 'green',
+    blurb: 'Plants, space and forces — how the world works.',
+  },
+  {
+    id: 'maths',
+    title: 'Maths',
+    tone: 'blue',
+    blurb: 'Numbers, fractions, shapes and problem solving.',
+  },
+  {
+    id: 'english',
+    title: 'English',
+    tone: 'yellow',
+    blurb: 'Reading, writing and getting the grammar right.',
+  },
+  {
+    id: 'non-verbal',
+    title: 'Non-Verbal Reasoning',
+    tone: 'pink',
+    blurb: 'Spot the pattern hiding in the pictures.',
+  },
+  {
+    id: 'verbal',
+    title: 'Verbal Reasoning',
+    tone: 'green',
+    blurb: 'Crack codes and play detective with words.',
+  },
 ];
 
 export const PACKS: PackDef[] = [

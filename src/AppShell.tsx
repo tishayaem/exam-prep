@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import { Link, Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { useProgress } from './lib/storage';
 
 export function AppShell() {
@@ -20,7 +20,7 @@ export function AppShell() {
             Revision
           </span>
           <span className="hidden sm:inline text-[11px] text-inkSoft font-medium uppercase tracking-[0.12em]">
-            Year 5 · Science
+            Year 5 · 11+ prep
           </span>
         </Link>
         <div className="flex items-center gap-3 sm:gap-5 text-[13px] font-semibold">
@@ -30,6 +30,8 @@ export function AppShell() {
         </div>
       </header>
 
+      {/* New pages open at the top; back/forward restore where you were. */}
+      <ScrollRestoration />
       <main style={{ viewTransitionName: 'page-root' }}>
         <Outlet />
       </main>

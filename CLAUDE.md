@@ -43,7 +43,8 @@ src/
 │   └── sections/                      One file per section. Copy an existing file when adding new ones.
 ├── diagrams/                          One hand-coded SVG component per section (src/diagrams/<section-id>.tsx), wired via Section.diagram. Rendered in Study between lesson and examples. Optional — not every section has one.
 ├── modes/
-│   ├── Home.tsx                       Practice tiles + packs grouped by subject (driven by packs.ts)
+│   ├── Home.tsx                       Practice tiles + subject cards (driven by packs.ts)
+│   ├── Subject.tsx                    One subject's packs + topic rows (/subject/:id) — the level between Home and Study/Quiz
 │   ├── Study.tsx                      Lesson + optional diagram + vocab + "Want to know more?"
 │   ├── Quiz.tsx                       Per-section quiz with immediate feedback
 │   ├── Flashcards.tsx                 Tap-to-reveal cards with Leitner self-grade
@@ -76,10 +77,10 @@ public/                                Static assets (diagrams are inline React 
 
 ## Adding a new subject (e.g. english)
 
-1. Add the subject to `Subject` in `src/data/types.ts` and to `SUBJECTS` in `src/data/packs.ts`.
+1. Add the subject to `Subject` in `src/data/types.ts` and to `SUBJECTS` in `src/data/packs.ts` (needs `title`, a `tone` accent colour and a kid-facing `blurb` for its Home card).
 2. Register its packs in the `PACKS` array (`{ slug, subject, title }`).
 3. Create `src/data/<subject>.ts` exporting a `<subject>Sections` array, and concatenate it into `allSections` in `src/data/index.ts`.
-4. Home (subject-grouped), the Study overline, and the Mock Test subject chooser all derive from the registry — no per-subject UI branching.
+4. The Home subject card, the `/subject/:id` page, the Study overline, and the Mock Test subject chooser all derive from the registry — no per-subject UI branching.
 5. For new question types, extend `QuestionType` in `types.ts`, handle in `QuestionRunner.tsx` (and add a grader to `grading.ts` if needed — see how `numeric` uses `gradeNumeric`).
 
 ## Conventions / quirks
