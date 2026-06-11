@@ -7,17 +7,20 @@ check items off here as they land.
 
 ## Context — where things stand
 
-- **Exam (confirmed June 2026):** **Brighton College 11+** sets its **own
-  papers**, not ISEB — a December **Academic Assessment Day** in Year 6
-  examining **Maths, English, VR and NVR**, then a January **Interview &
-  Activities Day** (two short interviews with teaching staff). Offers by end
-  of January; registration closes 30 Nov (school recommends ~early Oct).
-  Full research: `materials/11plus-research/interview.md`. **Science is not
-  examined at 11+** — keep the science bank as school revision, but stop
-  admissions-driven work on it.
-- **Still unconfirmed (one email to admissions):** whether the maths/English
-  papers are multiple-choice or write-in. The app hedges by mixing MCQ with
-  numeric/short write-in question types.
+- **Exam (corrected 11 June 2026 after a direct call to admissions):**
+  **Brighton College 11+ is two-stage.** Stage 1: the **ISEB Common
+  Pre-Test** — online, adaptive, **multiple-choice** (English, Maths, VR,
+  NVR); Brighton accesses the results. Stage 2: the school's own December
+  **Academic Assessment Day** (written papers; English likely comprehension
+  + creative writing), then the January **Interview & Activities Day**.
+  Offers by end of January; registration closes 30 Nov. Research:
+  `materials/11plus-research/interview.md` (see its correction banner) and
+  `brighton-exam-intel.md`. **Science is not examined at 11+** — keep the
+  science bank as school revision, but stop admissions-driven work on it.
+- **Still unconfirmed (ask admissions):** what the December day's papers
+  consist of now that ISEB covers all four subjects at stage 1; the CPT
+  sitting window/venue; paper weightings. The app hedges by training both
+  formats — on-screen MCQ pacing AND write-in working/extended writing.
 - **Maths:** complete at 280 questions — all 14 sections at 20, graded 1→3,
   multi-step with method-modelling explanations, ~60 `variantOf` links, every
   answer double-checked in `src/data/maths-answers.test.ts`.
@@ -102,12 +105,37 @@ English was the thinnest confirmed paper, so it got the maths/VR treatment:
 - [ ] **A classic-prose long passage** — a public-domain extract (Dickens,
       Nesbit, Grahame…) with older vocabulary: the hardest comprehension
       flavour on independent-school papers, currently unrepresented.
-- [ ] **Write-in comprehension drill** — shift more questions to `short` type
-      once MCQ-vs-write-in is confirmed with admissions.
+- [ ] **Write-in comprehension drill** — stage 1 is confirmed MCQ, so the
+      December day is the write-in venue; shift more comprehension questions
+      to `short` type once the day's composition is confirmed.
 - [ ] **Third SPaG section** — clauses, apostrophe edge cases, direct-speech
       punctuation in context.
 - [ ] **Log writing-practice sessions to storage** so the streak and the Home
       resume tile know a session happened.
+
+## 6. ISEB Pre-Test stage (added 11 June 2026 after the admissions call)
+
+Stage 1 is an online, adaptive, multiple-choice test across all four
+subjects — a format the app mostly trains already, minus the pacing.
+Commonly circulated CPT timings (English ~25 min, Maths ~50, VR ~36,
+NVR ~32) should be **verified against ISEB's official familiarisation
+materials** before being hard-coded anywhere.
+
+- [ ] **ISEB-style mock preset** in MockTest: per-subject timed blocks at
+      CPT-like pacing, MCQ-only question pool, on-screen, no working —
+      trains the stage-1 format the December-day banks deliberately don't.
+- [ ] **Family calendar item (not an app feature):** book the official ISEB
+      familiarisation test (free, via iseb.co.uk) on the same iPad the child
+      will use, and consider one MCQ-format external mock (Eleven Plus Exams
+      mocks are MCQ — see `brighton-exam-intel.md` §5).
+- [ ] **Writing rubric → CSSE bands** — refine the writing-practice self-mark
+      rubric to the published CSSE domains (Ideas / Vocabulary+Spelling /
+      Grammar / Structure / Punctuation), the best public proxy for what
+      markers reward; fold the ranked mark-losers into the check phase.
+- [ ] **Classic-prose passages from the corpus** — build item 5's
+      classic-prose section from the vetted 20-extract public-domain list in
+      `brighton-exam-intel.md` §4 (Dickens / Stevenson / Nesbit tier +
+      poetry), which also names downloadable school sample papers to mirror.
 
 ## Established patterns to follow
 

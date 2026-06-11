@@ -4,13 +4,15 @@ Research to prepare a Year 5 child for the **interview stage** of Brighton Colle
 
 > **Method note.** Assembled by a five-angle fan-out web-research pass with confidence-flagging, then a verification pass on the load-bearing claims. **Caveat that colours everything below:** Brighton College's own website, the Good Schools Guide and the main tutoring sites all **block automated fetching (HTTP 403)** — so wording attributed to the school's pages comes via *search-engine extraction* of those exact pages, not a byte-for-byte read. The core *facts* (process, two interviews, the three values) are corroborated across five independent passes and many sources, so the **substance is High confidence even where the exact phrasing isn't byte-verified**. Where a "fact" is really tutoring-industry convention rather than something Brighton publishes, it's flagged — don't present those to a child as gospel.
 
+> **⚠️ CORRECTION — 11 June 2026, direct from Brighton College admissions.** This document's repeated claim that **"11+ ≠ ISEB"** is **wrong**. The 11+ route is **two-stage**: children **sit the ISEB Common Pre-Test first** (online, adaptive, multiple-choice — English, Maths, VR, NVR) and Brighton accesses the results; **then** candidates attend the December **Academic Assessment Day** and the January **Interview & Activities Day** described below. The interview/activities material in this file is unaffected; every "no ISEB at 11+" statement is corrected inline. Full correction, methodology lesson and what it changes for prep: `brighton-exam-intel.md`.
+
 ---
 
 ## ⚠️ Action item #0 — confirm three things with Admissions
 
 A five-minute email/call to Brighton College admissions resolves the genuine ambiguities the public sources can't:
 
-1. **11+ format: the school's own papers, or ISEB?** The school's own pages describe an **in-house Academic Assessment Day in December** (maths, English, verbal & non-verbal reasoning) — **not** the ISEB Common Pre-Test. Several tutoring sites say "ISEB at 11+", but that appears to be **the 13+ route bleeding in, or out of date.** This matters: the rest of *this* app is framed around "ISEB written Common Entrance", which looks like a **mismatch for Brighton 11+**. Confirm which papers your child actually sits.
+1. ~~**11+ format: the school's own papers, or ISEB?**~~ **RESOLVED (11 June 2026, admissions call): BOTH.** Children sit the **ISEB Common Pre-Test first** (stage 1 — online, adaptive, MCQ; Brighton accesses the results), **then** attend the in-house **Academic Assessment Day in December**. The tutoring sites saying "ISEB at 11+" (Atom) were right; the original conclusion here — "the 13+ route bleeding in" — was the error. *Remaining format question:* what the December day's papers consist of now that ISEB covers all four subjects at stage 1.
 2. **Are the maths/written papers multiple-choice or write-in (show your working)?** Sources conflict (the MCQ timings that circulate are the hallmark of the 13+ ISEB pre-test). An MCQ paper and a "show your working" paper are different beasts to prepare for.
 3. **The interview logistics** — confirmed as *two short interviews with teaching staff* in January, but length and one-to-one-vs-pair are **not published**. Ask if you want certainty.
 
@@ -26,14 +28,15 @@ This mirrors "Action item #0" in the GL research README: the single phone call c
 |-------|------|--------------|
 | Register | 1 Aug – **30 Nov** (register early; ~Oct recommended) | Apply for a place |
 | Taster Days | May / Sept / Nov | Optional; see the school |
+| **ISEB Common Pre-Test** *(stage added June 2026 — admissions call)* | autumn of Year 6, **before** the December day (exact window/venue: confirm) | **Stage 1:** online, adaptive, multiple-choice — English, Maths, VR, NVR. Brighton accesses the results. |
 | **Academic Assessment Day** | **early December** of Year 6 | Sit the school's papers: **Maths, English, Verbal Reasoning, Non-Verbal Reasoning** (all candidates auto-considered for academic scholarship) |
 | **Interview & Activities Day** | **January** | **Immersive activities with teachers + TWO short interviews with members of teaching staff** |
 | Offers | by **end of January** | — |
 
 **Key disambiguation. [High.]** Brighton has many entry points (3+, 7+, 8+, 10+, **11+**, **13+**, 16+) and sources blur them:
 
-- **11+ = the school's own December papers**, then the January interview/activities day. ~50–55 enter at 11+.
-- **13+ = the ISEB Common Pre-Test** (online, adaptive, sat at the child's own prep school Oct–Dec of Year 6), then a **February Orientation Day** (activities + interviews + **written English & Maths**). ~180 enter at 13+ (the main intake; boarding starts here).
+- **11+ = the ISEB Common Pre-Test (stage 1), THEN the school's own December papers**, then the January interview/activities day. ~50–55 enter at 11+. *(Corrected June 2026 — the original pass wrongly concluded ISEB played no part at 11+.)*
+- **13+ = the ISEB Common Pre-Test** (online, adaptive, sat at the child's own prep school Oct–Dec of Year 6), then a **February Orientation Day** (activities + interviews + **written English & Maths**). ~180 enter at 13+ (the main intake; boarding starts here). *(Both routes use the CPT; they differ in what follows it.)*
 - **"Brighton College interview" results on Glassdoor are STAFF job interviews** — irrelevant to a child applicant. Ignore them.
 
 **Selectivity. [High — Good Schools Guide.]** Competitive but not stratospheric: GSG reports a bar "just above 110" standardised, and the Head's line that he takes children "on the bright side of average" and it's "certainly easier to get into than a super-selective grammar." The school weighs the **whole picture** — papers + interview + fit — consistent with its character-first ethos (§7). Keystone's rule of thumb for selective schools generally: the written exam can be only **~one-third** of the decision, with interview and the current-school reference making up the rest — so **the interview genuinely matters.** [Medium — single reputable source.]
@@ -181,7 +184,7 @@ These sit on the **December Academic Assessment Day** (not the January interview
 - **English — comprehension + a creative-writing piece.** That the English paper includes creative writing is asserted by tutoring sites; the school's own pages say only "English". **[Medium — third-party; not confirmed verbatim by the school.]**
 - **What good writing is marked on** (verbatim wording, but tied to the **13+** Orientation-Day writing assessment — a reasonable proxy for 11+): marks for "imagination, creativity, form, purpose, organisation, cohesion and sentence structure", plus "spelling, vocabulary and punctuation". **[Medium; treat as indicative for 11+.]** Practical read: **imagination + structure + technical accuracy**, all three.
 - **Creative-writing prompt style:** **not published.** Generic 11+ tasks use a title, an opening line, a theme, or a picture stimulus — but there is **no Brighton-specific confirmation** of which. [Low / not documented.]
-- **Maths:** problem-solving + arithmetic; one tutoring source times it at ~50 minutes. Whether it's **multiple-choice or write-in is genuinely unclear** in public sources (MCQ timings online likely come from the 13+ ISEB pre-test). **Confirm with the school** (Action item #0) before optimising for MCQ-vs-working. [Low–Medium.]
+- **Maths:** problem-solving + arithmetic; one tutoring source times it at ~50 minutes. *(Partially resolved June 2026: stage 1 — the ISEB CPT — is definitively multiple-choice and on-screen, so MCQ pacing practice now matters. What remains unclear is the **December day's** format and composition; the circulating MCQ timings describe the CPT, not the day.)* **Confirm the day's papers with the school** (Action item #0). [Low–Medium on the day's format.]
 - *The app already covers maths and (lightly) creative writing under English — those banks serve this day. The **gap this research fills is the interview**.*
 
 Sources: [Exam Papers Plus — Brighton 11+](https://exampapersplus.co.uk/advice/11-plus-year-6/11-plus-exam-brighton-college-practice-papers/) · [Exam Papers Plus — Brighton 13+ (writing criteria)](https://exampapersplus.co.uk/advice/13-plus-year-8/brighton-college-13-plus-entrance-exam-information-key-details/)
@@ -202,7 +205,7 @@ Sources: [Exam Papers Plus — Brighton 11+](https://exampapersplus.co.uk/advice
 
 ## Source confidence summary
 
-- **High (school's own pages + triangulation + independent re-search):** the two-day 11+ structure; **two short interviews with teaching staff** in January; December assessment in maths/English/VR/NVR; the three values (curious/confident/kind) and culture of kindness; School-of-the-Decade; 11+≠ISEB (ISEB is the 13+ route); selectivity "just above 110".
+- **High (school's own pages + triangulation + independent re-search):** the December + January day structure; **two short interviews with teaching staff** in January; December assessment in maths/English/VR/NVR; the three values (curious/confident/kind) and culture of kindness; School-of-the-Decade; ~~11+≠ISEB (ISEB is the 13+ route)~~ **← corrected 11 June 2026: the ISEB CPT IS stage 1 of 11+ (direct from admissions — the one claim in this tier that proved wrong)**; selectivity "just above 110".
 - **Medium (reputable press / tutoring guides):** 11+ English includes creative writing; ~50-min maths; the writing-assessment criteria list (officially 13+ wording); interview is individual; "relaxed and friendly" tone; Cairns/Tatler quotes.
 - **Low / NOT publicly documented — confirm with the school:** exact 11+ paper format (MCQ vs write-in) and timings; the creative-writing prompt; interview length; and **any "real" Brighton 11+ interview question** (none exists publicly — the lists online are tutor-generated or for older entry).
 
@@ -211,5 +214,5 @@ Sources: [Exam Papers Plus — Brighton 11+](https://exampapersplus.co.uk/advice
 1. **No public bank of real Brighton 11+ interview questions exists.** Use §4 for practice, not prediction.
 2. **The school's site is WAF-blocked to automated tools**, so school-page quotes are search-snippet extractions — substance is solid, exact phrasing isn't byte-verified.
 3. **Most non-school sources are tutoring/publisher sites** with a commercial incentive; the school's own pages and the Good Schools Guide are the most authoritative.
-4. **11+ vs 13+ is constantly conflated online.** This child (Year 5 now → Year 7 entry ~2027) is on the **11+** route: own December papers + January interview day.
+4. **11+ vs 13+ is constantly conflated online.** This child (Year 5 now → Year 7 entry ~2027) is on the **11+** route: ISEB Common Pre-Test (stage 1), then the school's December papers + January interview day *(corrected June 2026)*.
 5. **Links live as of mid-2026.**
