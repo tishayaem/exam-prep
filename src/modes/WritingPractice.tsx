@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   writingPrompts,
@@ -45,19 +45,32 @@ export function WritingPractice() {
   const prompt = deck[deckIndex % deck.length];
   const timed = phase === 'plan' || phase === 'write' || phase === 'check';
 
+  // The phase deadline as a wall-clock timestamp. Phases run for many minutes
+  // while the child writes on PAPER — the iPad will lock or throttle JS, so a
+  // decrementing setTimeout chain (the NumberSprint pattern) would silently
+  // stall. Recomputing remaining time from the deadline means the clock is
+  // honest the moment the screen wakes, and a phase whose deadline passed
+  // while asleep advances immediately.
+  const endAtRef = useRef(0);
+
   useEffect(() => {
     if (!timed) return;
-    if (secondsLeft <= 0) {
-      advance();
-      return;
-    }
-    const id = window.setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
-    return () => window.clearTimeout(id);
+    const tick = () =>
+      setSecondsLeft(Math.max(0, Math.ceil((endAtRef.current - Date.now()) / 1000)));
+    tick();
+    const id = window.setInterval(tick, 500);
+    return () => window.clearInterval(id);
+  }, [timed, phase]);
+
+  // Auto-advance when the clock hits zero.
+  useEffect(() => {
+    if (timed && secondsLeft <= 0) advance();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, secondsLeft]);
+  }, [timed, secondsLeft]);
 
   function enter(next: Phase) {
     if (next === 'plan' || next === 'write' || next === 'check') {
+      endAtRef.current = Date.now() + PHASE_SECONDS[next] * 1000;
       setSecondsLeft(PHASE_SECONDS[next]);
     }
     if (next === 'review') {
