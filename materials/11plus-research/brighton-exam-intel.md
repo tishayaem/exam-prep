@@ -323,13 +323,18 @@ support portal, corroborated by multiple 2026 guides]:**
   NVR 32**) — quoted in both AI research passes above — describe the
   **pre-revision test**. Do not build pacing against them.
 
-**Still to pin down (familiarisation test / ISEB support, not deep
-research):** per-subtest question counts, the exact VR/NVR type taxonomy
-the current test uses (vs the GL 21-type convention the app's banks were
-built against), and whether navigation allows flag-and-return or is
-strictly forward-only — each changes pacing technique. The free official
-familiarisation test, done on the child's own iPad, answers the look-and-
-feel half of this directly.
+**Update (same day, from the stretch-problems passes — see
+`stretch-problems.md`):** navigation is **strictly forward-only** — no
+back button, no skipping, no flagging [High; multi-source] — so the
+technique to train is commit-and-move-on, never dwell. Per-subtest
+question counts are **not published** (adaptive; treat any fixed number
+as unreliable). **Still open:** the exact VR type taxonomy — one pass
+claims Century-era VR dropped all number/letter-code types and is purely
+linguistic, but a verification search found a current guide still listing
+"number codes", and the CENTURY/ISEB pages that would settle it are
+bot-blocked [Low–Medium; disputed]. Settle it with the free official
+familiarisation test on the child's own iPad — and note which VR types
+actually appear.
 
 Sources: ISEB Common Pre-Tests support portal ("How long are the tests?",
 pretests.support.iseb.co.uk) · iseb.co.uk/assessments/common-pre-tests ·

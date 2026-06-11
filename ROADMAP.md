@@ -126,8 +126,14 @@ allowed; all questions are marked (no unscored items); NVR gained a
 Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
 
 - [ ] **ISEB-style mock preset** in MockTest: per-subject timed blocks at
-      CPT-like pacing, MCQ-only question pool, on-screen, no working —
-      trains the stage-1 format the December-day banks deliberately don't.
+      current CPT pacing (Eng 40 / Maths 40 / NVR 30 / VR 25), MCQ-only
+      pool, **forward-only — the real test has no back button, no skipping,
+      no flagging** (confirmed June 2026, multi-source), so train
+      commit-and-move-on. Question counts are unpublished (adaptive):
+      calibrate by time, not count. Keep letter/number-code VR in the pool —
+      the claim that Century-era VR dropped codes is **disputed** (see
+      `stretch-problems.md`, Pass B verdict); settle it via the
+      familiarisation test before re-weighting.
 - [ ] **Family calendar item (not an app feature):** book the official ISEB
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
@@ -154,6 +160,42 @@ Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
       "coached alpha" vs silence failure modes, the baton-pass move): add a
       short guide section + a few practice scenarios to the interview deck.
       See `brighton-exam-intel.md`, Gemini section.
+
+## 7. Stretch tier — "interesting problems" (added 11 June 2026)
+
+Two parallel research passes (`materials/11plus-research/stretch-problems.md`,
+both cross-checked — read the verdict blocks before trusting an example)
+mapped the competition canon (PMC, JMC Q1–15, Kangaroo Benjamin, MOEMS E,
+NRICH, Parallel) into **~18 re-authorable problem families**. Rationale:
+the adaptive test's hard tail and the December day's multi-step written
+maths train on the same archetypes, and a 6-month runway needs curiosity,
+not just drill. Author originals only — never copy competition questions;
+re-derive every answer (Pass B's lift puzzle is provably wrong).
+
+- [ ] **Puzzle Lab pack (maths stretch)** — new `maths-puzzles` pack built
+      from the archetype library (working backwards, parity/invariants,
+      systematic listing, rate traps, river crossings, cryptarithms,
+      balance puzzles, Venn logic, pigeonhole, modular/clock…). Tag every
+      item with the hardness driver(s) it trains: multi-step / unfamiliar
+      context / distractor info / reading load / justify. Start with two
+      sections × 20, difficulty graded within the stretch tier.
+- [ ] **Verbal stretch pack** — word ladders (validate every rung is a real
+      word), anagram + hidden-word cryptic-lite clues, Greek/Latin roots &
+      word families. Text-only authoring; vocabulary terms feed
+      VocabSprint automatically.
+- [ ] **NVR stretch — ISEB-live types first** — "how many cubes"
+      (heightmap data model) + painted-cube counting + cube nets, then
+      symmetry/rotation. Declarative-text spatial prompts ("Imagine a
+      5×5×5 cube…" — odd-sided for centre prompts) work today as `numeric`
+      questions with zero new rendering. Nonograms/slitherlink parked
+      (UI cost vs return).
+- [ ] **Serving rule** — stretch items aim at ~80–85% success (both passes
+      converge on that band; tune by item selection, not by easing items),
+      low-floor/high-ceiling framing, no streak pressure. Simplest v1: a
+      weekly "Puzzle mix" set on Home drawing across the stretch packs.
+- [ ] **English candidate type: shuffled sentences** — reported in the
+      current CPT English subtest; assess as a `sequence`-type question
+      once the familiarisation test confirms what it looks like.
 
 ## Established patterns to follow
 
