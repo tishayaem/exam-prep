@@ -137,6 +137,20 @@ describe('answerability (every question can actually be marked correct)', () => 
     expect(numberSprintPool(allSections).length).toBeGreaterThanOrEqual(20);
   });
 
+  // The Puzzle Lab contract (ROADMAP §7): every stretch puzzle is
+  // reasoning-flagged (it feeds the problem-solving drill) and carries at
+  // least one hardness-driver tag for the future stretch serving rule.
+  it('every Puzzle Lab question is reasoning-flagged and driver-tagged', () => {
+    const puzzles = allSections
+      .filter((s) => s.pack === 'maths-puzzles')
+      .flatMap((s) => s.questions);
+    expect(puzzles.length).toBeGreaterThan(0);
+    const bad = puzzles
+      .filter((q) => !q.reasoning || !q.drivers?.length)
+      .map((q) => q.id);
+    expect(bad).toEqual([]);
+  });
+
   it('every Codes question is a well-formed mcq with a parallel codes array', () => {
     const bad: string[] = [];
     for (const q of allQuestions.filter((q) => q.nvr?.kind === 'code')) {

@@ -303,6 +303,52 @@ const EXPECTED: Record<string, string> = {
   'maths-data-02-q18': '70',
   'maths-data-02-q19': '4',
   'maths-data-02-q20': '1400',
+
+  // Puzzle Lab · Working Backwards (each chain re-derived and run forwards)
+  'maths-puzzles-01-q1': '13', // (30 − 4) ÷ 2; check 13×2+4 = 30
+  'maths-puzzles-01-q2': '7', // (16 + 5) ÷ 3; check 7×3−5 = 16
+  'maths-puzzles-01-q3': 'Subtract 2, then divide by 4', // last step (+2) undone first
+  'maths-puzzles-01-q4': '6', // (2.50 + 0.50) × 2; check 6→3→2.50
+  'maths-puzzles-01-q5': '33', // 12 × 2 + 9; check 33−9=24, halved 12
+  'maths-puzzles-01-q6': 'False', // last step first, not first step
+  'maths-puzzles-01-q7': '9', // (19 + 8) ÷ 3; check 9×3−8 = 19
+  'maths-puzzles-01-q8': '50', // (18 + 7) × 2; check 25 after voucher
+  'maths-puzzles-01-q9': '18', // 6×2 = 12 kept = 2⁄3 of start → 18; 18→12→6
+  'maths-puzzles-01-q10': '12', // one undo of the halving: 6 × 2
+  'maths-puzzles-01-q11': '10', // 9×2 = 18 before park; 18−8 = 10 set off
+  'maths-puzzles-01-q12': 'Day 11', // one doubling = one day before full
+  'maths-puzzles-01-q13': '3', // t2 = 11−7 = 4; t1 = 7−4 = 3; 3,4,7,11,18 ✓
+  'maths-puzzles-01-q14': '6.60', // paid 10−4.60 = 5.40; +1.20 reduction
+  'maths-puzzles-01-q15': '72', // kept ½×⅔×¾ = ¼ of start = 18 → 72
+  'maths-puzzles-01-q16': '12', // before moat 36 (= 24÷2×3); ⅓ of 36
+  'maths-puzzles-01-q17': '10', // J+6 = 2(J−2) → J = 10; 16 = 2×8 ✓
+  'maths-puzzles-01-q18': '£12 is 3⁄5 of her money: 12 ÷ 3 = 4, then 4 × 5 = £20', // kept fraction
+  'maths-puzzles-01-q19': '60', // 17+1 = 18; +12 = 30; ×2 = 60
+  'maths-puzzles-01-q20': '20', // 21−6 = 15 = ¾ of start → 20
+
+  // Puzzle Lab · Logic & Certainty (each deduction re-derived)
+  'maths-puzzles-02-q1': "No — if Maya is telling the truth, then Sam's statement is false.", // contradictory pair
+  'maths-puzzles-02-q2': 'Dev', // Ben/Cara contradiction uses the one truth → Dev's denial is a lie
+  'maths-puzzles-02-q3': "The tin labelled 'Mixed'", // wrong label → pure contents reveal all three
+  'maths-puzzles-02-q4': 'Zef is a Knave; his friend is a Knight', // Knight saying it self-contradicts
+  'maths-puzzles-02-q5': 'True', // false claim of truth → Rio's statement false
+  'maths-puzzles-02-q6': 'Priti', // not Nina (given), not Omar (fish)
+  'maths-puzzles-02-q7': 'Lena', // Kai < Jay and Jay ≠ last → Kai 1st, Jay 2nd
+  'maths-puzzles-02-q8': 'Locker 3', // odd and not 1; blue is noise
+  'maths-puzzles-02-q9': 'Flo: drums, Gus: harp, Hana: flute', // Flo banned from flute+harp → drums
+  'maths-puzzles-02-q10': '3', // worst case one of each (2) + 1
+  'maths-puzzles-02-q11': '4', // worst case one of each (3) + 1
+  'maths-puzzles-02-q12': '4', // three colours → 4; the 10/8/6 are noise
+  'maths-puzzles-02-q13': '10', // all 8 blue + 1 red + 1 = 10
+  'maths-puzzles-02-q14': 'At least two children share a birthday month', // 31 > 12 months
+  'maths-puzzles-02-q15':
+    'No — 5 × 3 = 15 hand-ends is odd, but every handshake uses exactly two hands', // parity
+  'maths-puzzles-02-q16':
+    'No — each cup needs an odd number of flips, so the total needed is odd, but every move adds an even number', // 3 odds = odd vs even moves
+  'maths-puzzles-02-q17': 'False', // same-colour corners removed → 32 vs 30
+  'maths-puzzles-02-q18': '45', // total is invariant: 1+2+…+9
+  'maths-puzzles-02-q19': '24', // rise of 1⁄12 of n equals 2 → n = 24; 6→8 heads ✓
+  'maths-puzzles-02-q20': '8', // mints ≤ 12 forces toffees ≥ 8; 7 toffees fails
 };
 
 const mathsQuestions = sectionsBySubject('maths').flatMap((s) => s.questions);

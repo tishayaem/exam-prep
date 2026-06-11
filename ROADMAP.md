@@ -172,13 +172,21 @@ maths train on the same archetypes, and a 6-month runway needs curiosity,
 not just drill. Author originals only — never copy competition questions;
 re-derive every answer (Pass B's lift puzzle is provably wrong).
 
-- [ ] **Puzzle Lab pack (maths stretch)** — new `maths-puzzles` pack built
-      from the archetype library (working backwards, parity/invariants,
-      systematic listing, rate traps, river crossings, cryptarithms,
-      balance puzzles, Venn logic, pigeonhole, modular/clock…). Tag every
-      item with the hardness driver(s) it trains: multi-step / unfamiliar
-      context / distractor info / reading load / justify. Start with two
-      sections × 20, difficulty graded within the stretch tier.
+- [x] **Puzzle Lab pack (maths stretch)** — new `maths-puzzles` pack built
+      from the archetype library. Tag every item with the hardness driver(s)
+      it trains: multi-step / unfamiliar context / distractor info / reading
+      load / justify. *(Shipped 11 June 2026: `maths-puzzles-01-working-
+      backwards` and `maths-puzzles-02-logic-and-certainty` — 2 × 20
+      original questions, all `reasoning`-flagged with typed `drivers` tags
+      (new `HardnessDriver` in types.ts, enforced by a data.test.ts
+      contract), keys in `maths-answers.test.ts`, and excluded from the
+      Number Sprint pool — riddles are the wrong tempo for a 60-second
+      drill.)*
+- [ ] **More Puzzle Lab sections** from the remaining archetype families:
+      rate/ratio traps + river crossings (constraint planning), cryptarithms
+      + digit properties, modular/clock + periodic patterns, spatial
+      counting ("how many cubes" as text prompts), balance puzzles + Venn
+      logic. Same contract: 20 Qs, reasoning + drivers, re-derived keys.
 - [ ] **Verbal stretch pack** — word ladders (validate every rung is a real
       word), anagram + hidden-word cryptic-lite clues, Greek/Latin roots &
       word families. Text-only authoring; vocabulary terms feed

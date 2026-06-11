@@ -19,6 +19,9 @@ import { mathsGeometry04Coordinates } from './sections/maths-geometry-04-coordin
 import { mathsData01Statistics } from './sections/maths-data-01-statistics';
 import { mathsData02WordProblems } from './sections/maths-data-02-word-problems';
 
+import { mathsPuzzles01WorkingBackwards } from './sections/maths-puzzles-01-working-backwards';
+import { mathsPuzzles02LogicAndCertainty } from './sections/maths-puzzles-02-logic-and-certainty';
+
 export const mathsSections: Section[] = [
   // Number & Calculation
   mathsNumber01PlaceValue,
@@ -43,4 +46,8 @@ export const mathsSections: Section[] = [
   // Data & Problem Solving
   mathsData01Statistics,
   mathsData02WordProblems,
+
+  // Puzzle Lab (stretch tier — competition-style archetypes)
+  mathsPuzzles01WorkingBackwards,
+  mathsPuzzles02LogicAndCertainty,
 ];
