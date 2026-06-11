@@ -40,7 +40,7 @@ interface HeadlineProps {
    * underline colour cycles by intent: blue=Study, pink=Mistakes, green=done.
    */
   accent?: string;
-  accentColor?: 'yellow' | 'blue' | 'pink' | 'green';
+  accentColor?: 'yellow' | 'blue' | 'pink' | 'green' | 'purple';
   /** Optional subtitle in inkSoft. */
   subtitle?: ReactNode;
   /** Optional follow-up content (CTAs, meta) under the subtitle. */
@@ -54,6 +54,7 @@ const ACCENT_BG: Record<NonNullable<HeadlineProps['accentColor']>, string> = {
   blue: 'bg-neon-blue',
   pink: 'bg-neon-pink',
   green: 'bg-neon-green',
+  purple: 'bg-neon-purple',
 };
 
 /**
