@@ -264,7 +264,7 @@ function Practice({
         }
       />
       <SmartPracticeBanner focus={focus} />
-      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-5 [&>*]:min-w-0">
+      <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
         <PracticeCard
           to="/mock-test"
           big="Mock"
@@ -313,6 +313,20 @@ function Practice({
           bigClass="text-[clamp(1.5rem,2.7vw,2.4rem)]"
         />
         <PracticeCard
+          to="/writing-practice"
+          big="Writing"
+          accent="practice"
+          meta="30 min · pen & paper"
+          desc="Plan, write, check — a real story against the clock."
+          bg="bg-ink"
+          fg="text-paper"
+          chipClass="text-neon-yellow"
+          chipBgClass="bg-neon-yellow"
+          // Same width problem as "Number": the default clamp breaks the
+          // word at tile widths ("Writin-g").
+          bigClass="text-[clamp(1.5rem,2.7vw,2.4rem)]"
+        />
+        <PracticeCard
           to="/mistakes"
           big="Fix"
           accent="ups"
@@ -327,9 +341,6 @@ function Practice({
           chipClass="text-neon-yellow"
           chipBgClass="bg-neon-yellow"
           badge={mistakesCount > 0 ? String(mistakesCount) : undefined}
-          // Five tiles in a 2-col phone grid would orphan the last one at
-          // half width; spanning the row keeps the "do first" tile loudest.
-          className="max-lg:col-span-2"
         />
       </div>
     </section>

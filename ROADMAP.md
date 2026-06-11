@@ -7,22 +7,30 @@ check items off here as they land.
 
 ## Context — where things stand
 
-- **Exam:** ISEB **written** Common Entrance at 11+ (60 min maths paper,
-  non-calculator, working must be shown). See the ISEB section in
-  `materials/11plus-research/maths.md`. The written CE examines
-  **English, Maths, Science** — VR/NVR only matter if the school also uses the
-  ISEB Pre-Test or its own reasoning paper (→ item 4).
+- **Exam (confirmed June 2026):** **Brighton College 11+** sets its **own
+  papers**, not ISEB — a December **Academic Assessment Day** in Year 6
+  examining **Maths, English, VR and NVR**, then a January **Interview &
+  Activities Day** (two short interviews with teaching staff). Offers by end
+  of January; registration closes 30 Nov (school recommends ~early Oct).
+  Full research: `materials/11plus-research/interview.md`. **Science is not
+  examined at 11+** — keep the science bank as school revision, but stop
+  admissions-driven work on it.
+- **Still unconfirmed (one email to admissions):** whether the maths/English
+  papers are multiple-choice or write-in. The app hedges by mixing MCQ with
+  numeric/short write-in question types.
 - **Maths:** complete at 280 questions — all 14 sections at 20, graded 1→3,
-  ISEB-style multi-step with method-modelling explanations, ~60 `variantOf`
-  links, every answer double-checked in `src/data/maths-answers.test.ts`.
-- **Verbal:** 30 questions across 5 sections. Breadth is good (~20 of the 21
-  GL types in `materials/11plus-research/verbal-reasoning.md` are touched) but
-  only 1–3 questions per type.
-- **Non-verbal:** 22 questions across 4 sections. Missing two real-exam
-  elements (see item 3).
+  multi-step with method-modelling explanations, ~60 `variantOf` links, every
+  answer double-checked in `src/data/maths-answers.test.ts`.
+- **Verbal:** 5 sections × 20, with the A–Z strip and the synonym/antonym
+  bank. **Non-verbal:** 6 sections (~89 Qs) incl. Codes, Most Similar and
+  reflection traps.
+- **English:** 6 sections × 20 = 120 questions — reading ×3 (short passages,
+  a long passage, non-fiction + poetry), SPaG ×2, composition — plus the
+  `/writing-practice` session runner. Keys in `english-answers.test.ts`.
+- **Interview:** `/interview` guide + practice deck, built from the research.
 - **Engine:** `src/lib/mastery.ts` powers `/skills` (Skills Map) and
-  `/smart-practice` (adaptive 12-question sessions). The Leitner box exists in
-  storage; the `reasoning` flag on sections is set but read by nothing.
+  `/smart-practice` (adaptive 12-question sessions); Mistakes serves
+  `variantOf` twins; Mock Test has quick and full-paper presets.
 
 ## 1. Maths quick wins (small, immediate)
 
@@ -62,17 +70,44 @@ check items off here as they land.
 - [x] **Deepen NVR sections to ~15–20 each**, including a "Most Similar"
       section (inverse of odd-one-out; in the research, absent from the app).
 
-## 4. English (pending one answer from admissions)
+## 4. English (was: pending one answer from admissions)
 
-- [ ] **Confirm with the school** whether reasoning papers are part of the
-      assessment. English is a *confirmed* ISEB CE subject with **zero app
-      content** — if reasoning isn't examined, English outranks items 2–3.
+- [x] **Confirm whether reasoning papers are part of the assessment** —
+      resolved by the Brighton College research (June 2026, see
+      `materials/11plus-research/interview.md`): the December day examines
+      **Maths, English, VR and NVR**; Science is not examined. The one
+      remaining admissions question is MCQ vs write-in (context above).
 - [x] **English subject workstream** — comprehension, spelling/punctuation/
-      grammar, composition prompts. Follow "Adding a new subject" in CLAUDE.md.
-      *(Shipped with 64 questions across 4 sections — reading-01, spag-01/02,
-      writing-01 — plus a `passage` field for self-contained comprehension
-      questions. Deepen like maths/VR once the school confirms the assessment
-      shape.)*
+      grammar, composition prompts. *(Shipped with 64 questions across 4
+      sections, then deepened to Brighton depth — item 5.)*
+
+## 5. English to Brighton depth (June 2026)
+
+English was the thinnest confirmed paper, so it got the maths/VR treatment:
+
+- [x] **Long-passage fiction section** (`english-reading-02`) — one ~440-word
+      story shared by all 20 questions, ordered the way real papers order them
+      (passage order), teaching the long-text method: read once, questions as
+      a map, scan back, swap test for word meanings.
+- [x] **Non-fiction + poetry section** (`english-reading-03`) — a true
+      WW2 carrier-pigeon text (fact vs opinion, purpose, structure) and an
+      original 16-line poem (rhyme scheme, extended metaphor, mood shift).
+- [x] **Top up `english-reading-01` and `english-writing-01`** from 12 to the
+      established 20-question pattern.
+- [x] **Writing practice mode** (`/writing-practice`) — 18-prompt bank
+      (title / opening line / theme / scene), the real paper's rhythm on
+      timers (5 min plan / 20 write / 5 check) with the story written on
+      paper, then a self-mark rubric (ideas / structure / style / accuracy)
+      to walk through with a grown-up.
+- [ ] **A classic-prose long passage** — a public-domain extract (Dickens,
+      Nesbit, Grahame…) with older vocabulary: the hardest comprehension
+      flavour on independent-school papers, currently unrepresented.
+- [ ] **Write-in comprehension drill** — shift more questions to `short` type
+      once MCQ-vs-write-in is confirmed with admissions.
+- [ ] **Third SPaG section** — clauses, apostrophe edge cases, direct-speech
+      punctuation in context.
+- [ ] **Log writing-practice sessions to storage** so the streak and the Home
+      resume tile know a session happened.
 
 ## Established patterns to follow
 

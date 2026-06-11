@@ -6,6 +6,7 @@ import { Quiz } from './modes/Quiz';
 import { Flashcards } from './modes/Flashcards';
 import { VocabSprint } from './modes/VocabSprint';
 import { NumberSprint } from './modes/NumberSprint';
+import { WritingPractice } from './modes/WritingPractice';
 import { MockTest } from './modes/MockTest';
 import { Mistakes } from './modes/Mistakes';
 import { SkillsMap } from './modes/SkillsMap';
@@ -28,6 +29,7 @@ export const router = createHashRouter([
       { path: 'vocab-sprint', element: <VocabSprint /> },
       { path: 'vocab-sprint/:sectionId', element: <VocabSprint /> },
       { path: 'number-sprint', element: <NumberSprint /> },
+      { path: 'writing-practice', element: <WritingPractice /> },
       { path: 'mock-test', element: <MockTest /> },
       { path: 'mistakes', element: <Mistakes /> },
       { path: 'smart-practice', element: <SmartPractice /> },
