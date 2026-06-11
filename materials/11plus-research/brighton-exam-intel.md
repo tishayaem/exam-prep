@@ -27,10 +27,9 @@ it failed.*
 - **Atom Learning was right, not an erroneous outlier.** Its "11+ candidates sit
   the ISEB Common Pre-Test" claim, dismissed below as route-conflation, matched
   what admissions confirmed.
-- **The circulating ISEB CPT timings are relevant after all** (commonly cited:
-  English ~25 min, Maths ~50, VR ~36, NVR ~32 — verify against ISEB's official
-  familiarisation materials before relying on them). They describe stage 1, not
-  a 13+ red herring.
+- **The circulating ISEB CPT timings are relevant after all** — but see the
+  format scout at the end of this file: the test was revised, and the
+  commonly circulated numbers describe the old version.
 - The report's Recommendation 1 ("immediately correct any ISEB/MCQ-timing
   content in the app's Brighton track") is void; its opposite applies — the app
   **needs** an on-screen, timed, MCQ-paced ISEB track.
@@ -292,3 +291,47 @@ question for admissions.
 - Its app recommendations assume a backend/AI product (auto-locking modules,
   AI tense-checkers, ambient exam-hall audio); they are recorded here as
   ideas, not adopted.
+
+---
+
+## ISEB CPT current format — direct scout (11 June 2026)
+
+A three-call check of primary sources, prompted by the roadmap's
+"verify the timings" note. It overturned them.
+
+**Current format (2025–26 cycle) [High — ISEB's own Common Pre-Tests
+support portal, corroborated by multiple 2026 guides]:**
+
+| Subtest | Time |
+|---------|------|
+| English (reading comprehension + grammar) | **40 min** |
+| Mathematics (NC-aligned, core + reasoning) | **40 min** |
+| Non-Verbal Reasoning | **30 min** |
+| Verbal Reasoning | **25 min** |
+
+- ~2h15 total (+25% extra time where eligible); the four subtests can be
+  sat together (short breaks between) or **split across sittings**.
+- Adaptive difficulty; **all questions are marked** — no unscored/sample
+  items in the live test.
+- Runs on the **Century Tech platform** for 2025–26; adjustable text size,
+  colour overlays and an **optional visible timer**.
+- **Pencil and paper for rough working is allowed throughout** — mental-
+  arithmetic prep should still practise jotting, not pure head-maths.
+- NVR added a **"how many cubes"** question type (count cubes in a 3-D
+  stack drawing) — worth adding to the app's NVR schema.
+- The previously circulating timings (**Eng 25 / Maths 50 / VR 36 /
+  NVR 32**) — quoted in both AI research passes above — describe the
+  **pre-revision test**. Do not build pacing against them.
+
+**Still to pin down (familiarisation test / ISEB support, not deep
+research):** per-subtest question counts, the exact VR/NVR type taxonomy
+the current test uses (vs the GL 21-type convention the app's banks were
+built against), and whether navigation allows flag-and-return or is
+strictly forward-only — each changes pacing technique. The free official
+familiarisation test, done on the child's own iPad, answers the look-and-
+feel half of this directly.
+
+Sources: ISEB Common Pre-Tests support portal ("How long are the tests?",
+pretests.support.iseb.co.uk) · iseb.co.uk/assessments/common-pre-tests ·
+Atom ISEB guide · Elite British Admissions 2026 guide ·
+schoolentrancetests.com (2025) · jobtestprep.co.uk ISEB page.

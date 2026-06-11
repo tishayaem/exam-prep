@@ -117,9 +117,13 @@ English was the thinnest confirmed paper, so it got the maths/VR treatment:
 
 Stage 1 is an online, adaptive, multiple-choice test across all four
 subjects — a format the app mostly trains already, minus the pacing.
-Commonly circulated CPT timings (English ~25 min, Maths ~50, VR ~36,
-NVR ~32) should be **verified against ISEB's official familiarisation
-materials** before being hard-coded anywhere.
+**Current format verified (June 2026, ISEB's own support portal):**
+English 40 min, Maths 40, NVR 30, VR 25 — ~2h15 total, splittable
+across sittings, +25% access time if eligible. The 2025–26 test runs
+on the **Century Tech platform**; pencil-and-paper rough working is
+allowed; all questions are marked (no unscored items); NVR gained a
+"how many cubes" type. **The old circulating timings (Eng 25 /
+Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
 
 - [ ] **ISEB-style mock preset** in MockTest: per-subject timed blocks at
       CPT-like pacing, MCQ-only question pool, on-screen, no working —
