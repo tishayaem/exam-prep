@@ -1,6 +1,6 @@
 # Project notes for Claude
 
-A revision app for a Year 5 (age 10) child preparing for an 11+ written-format test at an independent UK school — **ISEB written Common Entrance** (see the ISEB section of `materials/11plus-research/maths.md`). Maths, English and Science. Built so a kid can drive it on an iPad.
+A revision app for a Year 5 (age 10) child preparing for **Brighton College 11+ entry** (Year 7). **The assessment is two-stage (confirmed directly with admissions, June 2026):** first the **ISEB Common Pre-Test** — online, adaptive, **multiple-choice** (English, Maths, VR, NVR) — whose results Brighton accesses; then the school's own December **Academic Assessment Day** in Year 6 (written papers — per the school's page Maths, English incl. comprehension + creative writing, VR, NVR; exact composition unconfirmed), then a January **Interview & Activities Day** (two short interviews with teaching staff). **Science is not examined at 11+** — the science content here is general school revision, not admissions prep. Prep therefore needs BOTH formats: on-screen MCQ pacing (stage 1) and write-in working + extended writing (stage 2). Research lives in `materials/11plus-research/` — `interview.md` has the process (note its June 2026 correction banner); `brighton-exam-intel.md` has exam-format intel, the CSSE writing mark scheme and a classic-passage corpus; `maths.md` / `verbal-reasoning.md` / `non-verbal-reasoning.md` have the per-subject taxonomies. Built so a kid can drive it on an iPad.
 
 The plan that gave rise to this repo lives at `~/.claude/plans/playful-inventing-lark.md` on the user's machine.
 
@@ -34,30 +34,47 @@ npm run test:watch   # vitest in watch mode
 ```
 src/
 ├── data/
-│   ├── types.ts                       Section, Question (types incl. 'numeric'), VocabularyTerm
-│   ├── index.ts                       Subject-agnostic aggregator: allSections / allQuestions / findSection / questionsBySubject. MODES IMPORT FROM HERE, not from a subject file.
+│   ├── types.ts                       Section, Question (types incl. 'numeric' + 'nvr'), NvrFigure, VocabularyTerm
+│   ├── index.ts                       Subject-agnostic aggregator: allSections / allQuestions / findSection / sectionsBySubject / questionsBySubject. MODES IMPORT FROM HERE, not from a subject file.
 │   ├── packs.ts                       Pack→subject registry (PACKS, SUBJECTS). Drives Home grouping + the Study overline. Add a pack/subject here.
-│   ├── science.ts                     scienceSections array (18 sections)
-│   ├── maths.ts                       mathsSections array (14 sections across 5 packs)
-│   ├── data.test.ts                   Content-integrity suite (no dup ids, MCQ answers in choices, numeric self-grade…)
+│   ├── science.ts                     scienceSections (18 sections — school revision, not examined at Brighton 11+)
+│   ├── maths.ts                       mathsSections (14 sections × 20 Qs across 5 packs)
+│   ├── english.ts                     englishSections (6 sections × 20 Qs: reading ×3 incl. long-passage/non-fiction/poetry, SPaG ×2, composition)
+│   ├── vr.ts / nvr.ts                 Verbal (5 × 20) and non-verbal (6 × ~15) reasoning sections
+│   ├── interview.ts                   Interview-prep deck (not a quiz subject — feeds /interview)
+│   ├── writingPrompts.ts              Writing-practice prompt bank + plan beats + self-mark rubric
+│   ├── data.test.ts                   Content-integrity suite (no dup ids, MCQ answers in choices, numeric self-grade, variantOf same-section…)
+│   ├── maths-answers.test.ts          Independently re-derived golden answer keys. EVERY question in these
+│   ├── vr-answers.test.ts             subjects needs a key — adding a question without one fails the suite.
+│   ├── english-answers.test.ts        Derive keys from the passage/prompt, never copy from the section file.
 │   └── sections/                      One file per section. Copy an existing file when adding new ones.
 ├── diagrams/                          One hand-coded SVG component per section (src/diagrams/<section-id>.tsx), wired via Section.diagram. Rendered in Study between lesson and examples. Optional — not every section has one.
 ├── modes/
-│   ├── Home.tsx                       Practice tiles + subject cards (driven by packs.ts)
+│   ├── Home.tsx                       Practice tiles + Smart Practice + interview banner + subject cards (driven by packs.ts)
 │   ├── Subject.tsx                    One subject's packs + topic rows (/subject/:id) — the level between Home and Study/Quiz
 │   ├── Study.tsx                      Lesson + optional diagram + vocab + "Want to know more?"
 │   ├── Quiz.tsx                       Per-section quiz with immediate feedback
 │   ├── Flashcards.tsx                 Tap-to-reveal cards with Leitner self-grade
 │   ├── VocabSprint.tsx                45s timed vocabulary MCQ
-│   ├── MockTest.tsx                   Pick a subject → 20 random Qs / 15 min / no feedback until end
-│   └── Mistakes.tsx                   Wrong answers, graduate after 2 consecutive corrects
+│   ├── NumberSprint.tsx               60s mental-arithmetic drill (difficulty-1 numeric maths)
+│   ├── WritingPractice.tsx            Exam-style writing session: prompt + plan/write/check timers (5/20/5 min) + self-mark rubric. The story happens on paper.
+│   ├── MockTest.tsx                   Pick a subject → quick (20 Q / 15 min) or full-paper preset / no feedback until end
+│   ├── Mistakes.tsx                   Wrong answers, graduate after 2 consecutive corrects (the 2nd serves a variantOf twin when one exists)
+│   ├── SkillsMap.tsx                  Per-topic mastery heat-map (/skills), driven by lib/mastery.ts
+│   ├── SmartPractice.tsx              Adaptive 12-question session aimed at weakest topics
+│   └── Interview.tsx + InterviewPractice.tsx   Brighton interview guide + practice question deck
 ├── components/
-│   └── QuestionRunner.tsx             Shared question UI (short/mcq/cloze/truefalse/match/sequence/numeric)
+│   ├── QuestionRunner.tsx             Shared question UI (short/mcq/cloze/truefalse/match/sequence/numeric/nvr) + PassageBlock for comprehension passages
+│   └── AnswerArea / useAnswerState / answerFormat / AlphabetStrip / NvrFigure…   QuestionRunner's split-out internals
 ├── lib/
 │   ├── storage.ts                     localStorage progress + Leitner box + streak
-│   ├── grading.ts                     Fuzzy short-answer match + gradeNumeric (exact, unit-aware) + match/sequence
-│   ├── grading.test.ts                Unit tests for all four graders
-│   ├── mistakes.ts                    Build mistakes queue from attempt log
+│   ├── grading.ts                     Fuzzy short-answer match + gradeNumeric (exact, unit-aware) + match/sequence (tests in grading.test.ts)
+│   ├── mastery.ts                     Topic-mastery model behind /skills and /smart-practice
+│   ├── mistakes.ts                    Variant-aware mistakes queue from attempt log
+│   ├── mockPaper.ts                   Mock Test presets (quick / full exam-length paper)
+│   ├── numberSprint.ts                Question pool filter for Number Sprint
+│   ├── sectionProgress.ts             Per-section progress + the Home "resume" pick
+│   ├── confetti.ts                    Canvas confetti bursts (burstFromEvent / confettiBurst)
 │   └── shuffle.ts                     Fisher-Yates + sample
 ├── router.tsx                         HashRouter routes
 ├── AppShell.tsx                       Outer layout (header with streak/XP, content slot, back button)
@@ -70,10 +87,11 @@ public/                                Static assets (diagrams are inline React 
 
 1. (Science) Drop photo(s) under `materials/{subject}/{topic}/` and write a `section-NN.md` transcription. (Maths/reasoning content comes from `materials/11plus-research/`.)
 2. Create `src/data/sections/{pack}-NN-slug.ts` exporting a typed `Section`. Its `pack` must match a slug registered in `src/data/packs.ts`.
-3. Import + add it to that subject's array (`scienceSections` in `science.ts`, `mathsSections` in `maths.ts`).
+3. Import + add it to that subject's array (`scienceSections` in `science.ts`, `mathsSections` in `maths.ts`, `englishSections` in `english.ts`, …).
 4. Home, all routes, and all modes pick it up automatically — no mode changes needed.
 5. (Optional) Add a diagram: create `src/diagrams/<section-id>.tsx` and set `diagram:` on the section.
-6. Run `npm test` — the content-integrity suite checks ids, MCQ answers, and numeric self-grading for free.
+6. (Maths/VR/English) Add an independently re-derived key for every new question to that subject's `*-answers.test.ts` — the suite fails on any question without one.
+7. Run `npm test` — the content-integrity suite checks ids, MCQ answers, numeric self-grading and `variantOf` links for free.
 
 ## Adding a new subject (e.g. english)
 
