@@ -500,6 +500,7 @@ const TONE_BG: Record<SubjectDef['tone'], string> = {
   blue: 'bg-neon-blue',
   yellow: 'bg-neon-yellow',
   pink: 'bg-neon-pink',
+  purple: 'bg-neon-purple',
 };
 
 function Subjects() {

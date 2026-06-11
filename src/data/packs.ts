@@ -23,7 +23,7 @@ export interface SubjectDef {
    * Keys map to bg-neon-* classes where they're rendered (Tailwind needs the
    * full class name in a .tsx file, so the mapping lives with the components).
    */
-  tone: 'green' | 'blue' | 'yellow' | 'pink';
+  tone: 'green' | 'blue' | 'yellow' | 'pink' | 'purple';
   /** Kid-facing one-liner on the Home subject card. */
   blurb: string;
 }
@@ -57,7 +57,7 @@ export const SUBJECTS: SubjectDef[] = [
   {
     id: 'verbal',
     title: 'Verbal Reasoning',
-    tone: 'green',
+    tone: 'purple',
     blurb: 'Crack codes and play detective with words.',
   },
 ];
