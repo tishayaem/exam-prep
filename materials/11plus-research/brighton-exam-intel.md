@@ -156,3 +156,139 @@ Selective independent English papers favour **pre-1950 classic prose** (the Alle
 - **Scholarship corroboration:** an independent school-directory source confirms all candidates are automatically considered for an academic scholarship from the Academic Assessment Day papers — now multi-sourced.
 - **Forum caveat:** the Eleven Plus Exams forum is poorly indexed/crawl-blocked, and Mumsnet surfaced only 13+ threads. "No recent first-hand 11+ accounts found" is a **retrieval limitation, not proven absence** — 15 minutes of logged-in forum search (Independent Schools / Sussex boards, query "Brighton College") may find what automation can't.
 - **Mocks:** SGS PTA 2026 booking is open now (hall-based at Sutton Grammar + online, Year 5, access arrangements supported). Eleven Plus Exams mocks are MCQ-format — originally noted as a format mismatch for written papers, now repurposed: good pacing practice for CPT stage 1.
+
+---
+
+## The Gemini pass (11 June 2026) — cross-checked against ground truth
+
+A parallel deep-research pass (Gemini) was run on the same brief and received
+**after** the admissions call, so it can be scored against known truth.
+
+### Verdict
+
+**It makes the same central error as the Claude pass, with more confidence.**
+It declares the ISEB-at-11+ claims "systemic, commercial conflation",
+labels the publishers' format claims Low confidence because they "provably
+and directly contradict the school's own literature", and instructs parents
+to "disregard claims of a 25-minute online multiple-choice English paper" —
+the exact paper the child will sit at stage 1. Every "practical implication"
+built on that premise (warn parents off ISEB content, avoid MCQ-first
+architecture) should be **inverted for stage 1** and kept only for the
+December day.
+
+That two independent AI research passes converged on the same wrong answer is
+itself the finding: **the public-source record genuinely points the wrong
+way**, and only the admissions office settles it. The "ask admissions"
+doctrine is not a formality.
+
+### The source scoreboard, now that truth is known
+
+Under the two-stage reality, the supposed "conflation" largely dissolves —
+most publishers were describing **stage 1** correctly while the school's page
+describes **stage 2**:
+
+- **Right about ISEB at 11+:** Atom (explicit), Exam Papers Plus (sells
+  "Brighton College ISEB Pretest" packages *for 11+*), The Exam Coach (lists
+  CPT timings under its 11+ page), London-11plus (points 11+ candidates to
+  ISEB familiarisation mocks, per the Gemini pass).
+- **Wrong:** Owl Tutors ("No pre-assessment or pre-testing used by Brighton
+  College at 11+") — and both AI passes, which sided with Owl plus the
+  school page's silence.
+- The two passes even characterised London-11plus oppositely (omits 11+
+  entirely vs points 11+ at ISEB mocks) — snippet-reading cuts both ways.
+
+### A reconciliation hypothesis worth putting to admissions
+
+Gemini surfaces a school-page snippet with a precision the first pass missed:
+candidates sit "**the College's assessments in English and mathematics**"
+*alongside* verbal and non-verbal reasoning [school-published, snippet-derived].
+Read with the two-stage truth, a tidy hypothesis: **the December day's
+school-written papers are English + Maths (write-in), while VR/NVR are
+covered by the ISEB stage (or delivered as MCQ on the day)**. Unconfirmed —
+but it is now the sharpest version of the "what does the day consist of?"
+question for admissions.
+
+### New intel that survives the correction
+
+- **Writing genre evidence (the best new find):** an Eleven Plus Exams forum
+  post (user *curiousparrot*, 10 Feb 2022) on Brighton 11+ writing: "Looking
+  at the papers, it seems only the **Descriptive or Story** writing has come
+  in the past though!" [Medium; single dated anecdote]. Aligns with the
+  sector's drift away from persuasive writing at 10. *App check: the
+  writing-prompts bank is already 100% narrative/descriptive — no change
+  needed; keep persuasive prompts out.*
+- **Dulwich College 20-mark creative-writing rubric** (published, via
+  Examberry): top band (17–20) requires "excellent, evocative use of sensory
+  language, simile and metaphor", "wide variety of sentence structures", and
+  paragraphing used "**for effect**" (e.g. a one-line paragraph isolating a
+  sudden sound); competent band (8–12) is "competent… less expressive"
+  vocabulary and perfunctory paragraphs [High as published; proxy for
+  Brighton].
+- **KCS Wimbledon mark scheme**: rewards **psychological depth** — capturing
+  "a mix of excitement and nervous anticipation" against the setting — over
+  physical description alone [High as published; proxy].
+- **The "magnifying glass" technique** (the cleanest articulation yet of
+  top-vs-middle scripts): mid-band scripts summarise a whole adventure;
+  top-band scripts spend all ~300 words on **about three minutes of time**,
+  showing atmosphere. Pairs with the **TiToP-P paragraph rule** (new
+  paragraph on change of Time, Topic, Person, Place) [Medium; convention].
+  Word-count norm: ~250–350 words in 25–30 min; past ~400 quality degrades.
+- **Corpus additions** (11 extracts beyond the first pass's 20, notably
+  fixing its non-fiction gap; selective schools favour nature/survival/animal
+  narratives — Sevenoaks 2022 used a wild-brumby passage, Latymer 2020 a
+  badger-sett nature extract):
+  *Fiction:* Jack London *The Call of the Wild* ch.1; Conan Doyle *The Hound
+  of the Baskervilles* ch.6 (dread-building); J.M. Barrie *Peter Pan* ch.1
+  (non-literal narrator). *Exploration/period non-fiction:* Shackleton
+  *South!* ch.4; Isabella Bird *A Lady's Life in the Rocky Mountains*;
+  Scott's last journals (inference from diary syntax); Darwin (already
+  listed); Slocum *Sailing Alone Around the World*; Nightingale *Notes on
+  Nursing* (period persuasive). *Poetry:* **de la Mare "The Listeners"** (an
+  11+ staple — ambiguity + rhyme scheme), Masefield "Sea-Fever" (metre
+  mimicking subject). Each came with vocabulary-landmine lists — use the
+  landmines as pre-passage vocab drills.
+- **Further named sample papers:** Sevenoaks Y7 English 2022 and 2017
+  (sevenoaksschool.org `/wp-content/uploads/2023/08/ENGLISH_Y7_…pdf`),
+  Dulwich 11+ English Specimen A mark scheme (via examberrypapers.co.uk).
+  *(Links transcribed from the pass, not re-verified — expect some rot.)*
+- **Mock providers with prices** (autumn 2026, historic-schedule proxies):
+  Yellowbird (Fulham/Putney, ~£224, full profiling + percentiles), Examberry
+  (London/Surrey, ~£50–75), SGS PTA (Sutton, ~£55), Eleven Plus Exams mocks
+  (~£50, large-cohort standardised reports). In-person sits add the exam-hall
+  stress dose the iPad can't.
+- **Calibration arithmetic** (consistent with GL docs): SAS 110 ≈ 75th
+  percentile; 120 ≈ top 10%; age-standardisation means older children are
+  never penalised. Practical target on Atom-style platforms: **consistent
+  115+** for a 5-point buffer over the ~110 bar.
+- **Operational taper** (sharper than pass 1): Sept–mid-Oct stamina (one full
+  timed paper/week); late Oct–mid-Nov stress-test (two/week + the external
+  mock here); final fortnight volume −60%, nothing new, familiar material
+  only; **48 hours before the day: zero academic work** [Medium-High;
+  convention, consistent across passes].
+- **Activities-day proxy detail** (still not Brighton-specific): the
+  "desert island / survival shortlist" group format used by peer schools
+  (e.g. Sevenoaks); tasks deliberately unsolvable so behaviour is the data.
+  Observed-for: facilitative leadership (drawing quiet peers in), cognitive
+  flexibility (abandoning your idea for a better one), respectful dissent,
+  instruction retention. Failure modes: the **"coached alpha"** (dominating,
+  seizing materials) and **total silence** ("nothing to assess"). The
+  baton-pass move: state a reason, then hand over — "I think the rope,
+  because shelter. What would you pick, Thomas?" [Medium; reputable proxy
+  sources, downgraded from the pass's High].
+- Misc: no past papers published (policy stretching back to a 2008 forum
+  post); ~50 external 11+ places; calculators and dictionaries almost
+  certainly banned (peer-school proxy); the pass names a Lower School
+  admissions coordinator ("Laura Correa") — **unverified, possibly stale or
+  synthesised; the family already has a direct line anyway**.
+
+### Caveats on the Gemini pass itself
+
+- Confidence labels run hot: peer-school proxies (dictionary bans, activity
+  rubrics) are stamped High; treat proxies as Medium.
+- Internal inconsistencies (the 2008 post is "Eleven Plus Exams forum" in the
+  body, "Mumsnet" in its summary) and citation URLs of mixed provenance
+  (several Scribd/blog links look synthesised) — **no URL from this pass has
+  been re-verified**.
+- Its app recommendations assume a backend/AI product (auto-locking modules,
+  AI tense-checkers, ambient exam-hall audio); they are recorded here as
+  ideas, not adopted.

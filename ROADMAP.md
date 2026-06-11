@@ -128,14 +128,28 @@ materials** before being hard-coded anywhere.
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
       mocks are MCQ — see `brighton-exam-intel.md` §5).
-- [ ] **Writing rubric → CSSE bands** — refine the writing-practice self-mark
-      rubric to the published CSSE domains (Ideas / Vocabulary+Spelling /
-      Grammar / Structure / Punctuation), the best public proxy for what
-      markers reward; fold the ranked mark-losers into the check phase.
+- [ ] **Writing rubric → published mark schemes** — refine the
+      writing-practice self-mark rubric to the CSSE domains (Ideas /
+      Vocabulary+Spelling / Grammar / Structure / Punctuation), folding in
+      the Dulwich top-band descriptors (sensory language, sentence variety,
+      paragraphing *for effect*) and the KCS "psychological depth" criterion;
+      teach the **magnifying-glass technique** (describe three minutes, not a
+      whole plot) and the TiToP-P paragraph rule in the lesson/check phases.
+      All in `brighton-exam-intel.md` (Gemini section + §3).
+- [x] **Prompt-bank genre check** — 2022 forum evidence says Brighton 11+
+      writing has only ever been **descriptive/story**; the bank is already
+      100% narrative/descriptive with no persuasive prompts. No change
+      needed; keep persuasive out.
 - [ ] **Classic-prose passages from the corpus** — build item 5's
-      classic-prose section from the vetted 20-extract public-domain list in
-      `brighton-exam-intel.md` §4 (Dickens / Stevenson / Nesbit tier +
-      poetry), which also names downloadable school sample papers to mirror.
+      classic-prose section from the combined ~30-extract public-domain list
+      in `brighton-exam-intel.md` (§4 + Gemini additions: exploration
+      non-fiction like Shackleton/Scott, de la Mare's "The Listeners"), which
+      also names downloadable school sample papers to mirror.
+- [ ] **Activities-day group-task section in /interview** — proxy intel now
+      exists (desert-island format, the observed-behaviour rubric, the
+      "coached alpha" vs silence failure modes, the baton-pass move): add a
+      short guide section + a few practice scenarios to the interview deck.
+      See `brighton-exam-intel.md`, Gemini section.
 
 ## Established patterns to follow
 
