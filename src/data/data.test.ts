@@ -150,15 +150,15 @@ describe('answerability (every question can actually be marked correct)', () => 
     }
   });
 
-  // The Puzzle Lab contract (ROADMAP §7): every stretch puzzle is
-  // reasoning-flagged (it feeds the problem-solving drill) and carries at
-  // least one hardness-driver tag for the future stretch serving rule.
-  it('every Puzzle Lab question is reasoning-flagged and driver-tagged', () => {
-    const puzzles = allSections
-      .filter((s) => s.pack === 'maths-puzzles')
+  // The stretch-pack contract (ROADMAP §7): every Puzzle Lab and Word Lab
+  // question is reasoning-flagged (it feeds the problem-solving drill) and
+  // carries at least one hardness-driver tag for the future serving rule.
+  it('every stretch-pack question is reasoning-flagged and driver-tagged', () => {
+    const stretch = allSections
+      .filter((s) => s.pack === 'maths-puzzles' || s.pack === 'vr-wordlab')
       .flatMap((s) => s.questions);
-    expect(puzzles.length).toBeGreaterThan(0);
-    const bad = puzzles
+    expect(stretch.length).toBeGreaterThan(0);
+    const bad = stretch
       .filter((q) => !q.reasoning || !q.drivers?.length)
       .map((q) => q.id);
     expect(bad).toEqual([]);

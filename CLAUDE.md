@@ -38,9 +38,9 @@ src/
 │   ├── index.ts                       Subject-agnostic aggregator: allSections / allQuestions / findSection / sectionsBySubject / questionsBySubject. MODES IMPORT FROM HERE, not from a subject file.
 │   ├── packs.ts                       Pack→subject registry (PACKS, SUBJECTS). Drives Home grouping + the Study overline. Add a pack/subject here.
 │   ├── science.ts                     scienceSections (18 sections — school revision, not examined at Brighton 11+)
-│   ├── maths.ts                       mathsSections (14 sections × 20 Qs across 5 packs)
+│   ├── maths.ts                       mathsSections (21 sections × 20: 14 curriculum + 7 Puzzle Lab stretch)
 │   ├── english.ts                     englishSections (6 sections × 20 Qs: reading ×3 incl. long-passage/non-fiction/poetry, SPaG ×2, composition)
-│   ├── vr.ts / nvr.ts                 Verbal (5 × 20) and non-verbal (6 × ~15) reasoning sections
+│   ├── vr.ts / nvr.ts                 Verbal (8 × 20: 5 core + 3 Word Lab stretch) and non-verbal (6 × ~15) reasoning sections
 │   ├── interview.ts                   Interview-prep deck (not a quiz subject — feeds /interview)
 │   ├── writingPrompts.ts              Writing-practice prompt bank + plan beats + self-mark rubric
 │   ├── data.test.ts                   Content-integrity suite (no dup ids, MCQ answers in choices, numeric self-grade, variantOf same-section…)
@@ -91,7 +91,8 @@ public/                                Static assets (diagrams are inline React 
 4. Home, all routes, and all modes pick it up automatically — no mode changes needed.
 5. (Optional) Add a diagram: create `src/diagrams/<section-id>.tsx` and set `diagram:` on the section.
 6. (Maths/VR/English) Add an independently re-derived key for every new question to that subject's `*-answers.test.ts` — the suite fails on any question without one.
-7. Run `npm test` — the content-integrity suite checks ids, MCQ answers, numeric self-grading and `variantOf` links for free.
+7. (Stretch packs `maths-puzzles` / `vr-wordlab`) Every question also needs `reasoning: true` and ≥1 `drivers` hardness tag — `data.test.ts` enforces it.
+8. Run `npm test` — the content-integrity suite checks ids, MCQ answers, numeric self-grading and `variantOf` links for free.
 
 ## Adding a new subject (e.g. english)
 

@@ -13,6 +13,73 @@ import { gradeNumeric } from '../lib/grading';
  * test, forcing a re-review.
  */
 const EXPECTED: Record<string, string> = {
+  // Word Lab · Word Ladders (every rung re-checked: one letter, real word)
+  'vr-wordlab-01-q1': 'Exactly one letter changes, and the new word is a real word',
+  'vr-wordlab-01-q2': 'COG', // COT→COG→DOG; CUT/LOG/CAG all fail
+  'vr-wordlab-01-q3': 'WARM', // WARD → WARM (D→M)
+  'vr-wordlab-01-q4': 'Either CARD or WORD — both work', // CORD/WARD differ at 2 spots
+  'vr-wordlab-01-q5': 'WAG → SAY', // two letters change at once
+  'vr-wordlab-01-q6': 'WAY', // WAG→WAY→SAY (SAG also accepted)
+  'vr-wordlab-01-q7': '3', // 3 differing positions, 1 fix per step
+  'vr-wordlab-01-q8': 'LAME', // LIME→LAME (I→A); MILE is an anagram
+  'vr-wordlab-01-q9': 'SOON', // MOON→SOON→SOOT (MOOT also accepted)
+  'vr-wordlab-01-q10':
+    'Each step changes exactly one letter, so it can fix at most one of the four differences',
+  'vr-wordlab-01-q11': 'MAY', // BAY→MAY→MAN
+  'vr-wordlab-01-q12': 'WARD', // WARM with M→D
+  'vr-wordlab-01-q13': '4', // five words, four changes
+  'vr-wordlab-01-q14': 'WISH', // FISH→WISH→WISP; FISP isn't a word
+  'vr-wordlab-01-q15': 'HORSE', // 5 letters — length never changes
+  'vr-wordlab-01-q16': 'True', // every step reverses
+  'vr-wordlab-01-q17': 'DIRE', // anagram of RIDE, not a one-letter step
+  'vr-wordlab-01-q18': 'False', // 3 differences need ≥3 steps
+  'vr-wordlab-01-q19': 'PIG → WIG → WAG → WAY → SAY → STY', // all single changes
+  'vr-wordlab-01-q20': 'Work backwards from the end word too, and try to meet in the middle',
+
+  // Word Lab · Crack the Clue (anagram letters + hidden spellings re-verified)
+  'vr-wordlab-02-q1': 'Rearrange the letters of the word next to them (an anagram)',
+  'vr-wordlab-02-q2': 'MELON', // LEMON rearranged
+  'vr-wordlab-02-q3': 'SPEAR', // PEARS rearranged
+  'vr-wordlab-02-q4': 'SORE', // ROSE rearranged
+  'vr-wordlab-02-q5': 'CANOE', // OCEAN rearranged
+  'vr-wordlab-02-q6': 'RISEN', // SIREN rearranged
+  'vr-wordlab-02-q7': 'CAT', // picni(C AT)easter
+  'vr-wordlab-02-q8': 'TEN', // kit(TEN)s
+  'vr-wordlab-02-q9': 'PARIS', // sto(P A RIS)ky
+  'vr-wordlab-02-q10': 'TEA', // bandi(T EA)ts
+  'vr-wordlab-02-q11': 'RED', // sac(RED)
+  'vr-wordlab-02-q12': 'Double definition', // two meanings, no letter trick
+  'vr-wordlab-02-q13': 'BAT', // animal + cricket kit
+  'vr-wordlab-02-q14': 'SPRING', // season + coil
+  'vr-wordlab-02-q15': 'STEP', // PETS reversed
+  'vr-wordlab-02-q16': 'REWARD', // DRAWER reversed
+  'vr-wordlab-02-q17': 'Hidden word', // RAIN in ext(RA IN)doors
+  'vr-wordlab-02-q18': 'DANGER', // GARDEN rearranged
+  'vr-wordlab-02-q19': "'a fruit'", // the definition part
+  'vr-wordlab-02-q20': 'ENLIST', // LISTEN rearranged
+
+  // Word Lab · Word Roots (each etymology checked against standard root lists)
+  'vr-wordlab-03-q1': 'It lets you look at far-away things', // tele + scope
+  'vr-wordlab-03-q2': 'Aquarium', // true aqua; acorn/quack/equal are lookalikes
+  'vr-wordlab-03-q3': 'Carry across', // trans + port
+  'vr-wordlab-03-q4': 'Giraffe', // from Arabic, no graph brick
+  'vr-wordlab-03-q5': 'AUDIENCE', // the hearers
+  'vr-wordlab-03-q6': 'something working badly', // mal + function
+  'vr-wordlab-03-q7': 'to say beforehand', // pre + dict
+  'vr-wordlab-03-q8': 'GEOGRAPHY', // geo + graphy
+  'vr-wordlab-03-q9': 'sail all the way around it', // circum + navigate
+  'vr-wordlab-03-q10': 'small sound — it picks up quiet sounds and makes them carry', // micro + phone
+  'vr-wordlab-03-q11': "the written story of someone's life", // bio + graphy
+  'vr-wordlab-03-q12': 'under the sea', // sub + marine
+  'vr-wordlab-03-q13': 'MARINE', // sea soldier
+  'vr-wordlab-03-q14': 'Spectacles and inspect', // spect = look
+  'vr-wordlab-03-q15': 'LIGHT', // photo = light
+  'vr-wordlab-03-q16': 'able to be heard', // audi + ble
+  'vr-wordlab-03-q17': 'kind, and wishing others well', // bene + volent
+  'vr-wordlab-03-q18': 'True', // roots decode unseen words
+  'vr-wordlab-03-q19': 'EXPORT', // ex + port
+  'vr-wordlab-03-q20': 'far-writing', // tele + graph
+
   // Letters & Spelling
   'vr-01-q1': 'k', // book/kind, walk/keen
   'vr-01-q2': 'P', // LACE + SPOON
