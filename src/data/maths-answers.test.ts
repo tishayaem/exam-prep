@@ -349,6 +349,75 @@ const EXPECTED: Record<string, string> = {
   'maths-puzzles-02-q18': '45', // total is invariant: 1+2+…+9
   'maths-puzzles-02-q19': '24', // rise of 1⁄12 of n equals 2 → n = 24; 6→8 heads ✓
   'maths-puzzles-02-q20': '8', // mints ≤ 12 forces toffees ≥ 8; 7 toffees fails
+
+  // Puzzle Lab · Rate Traps & Journeys (each rate re-derived from the unit)
+  'maths-puzzles-03-q1': '3', // 3 robins = 1 worm/min as a team → 100 in 100 min
+  'maths-puzzles-03-q2': '5', // each machine filled its own bottle in those 5 s
+  'maths-puzzles-03-q3': '3', // 12 painter-hours ÷ 4 painters
+  'maths-puzzles-03-q4': '2 hours', // drying is parallel, not shared work
+  'maths-puzzles-03-q5': '60', // 12 buns per baker-hour × 5
+  'maths-puzzles-03-q6': '12', // 3 + 2 = 5 pools/hour → 60 ÷ 5
+  'maths-puzzles-03-q7': '5', // gap 20 m ÷ closing 4 m/s; 45 m = 25 + 20 ✓
+  'maths-puzzles-03-q8': '2', // 36 ÷ (10 + 8); 20 + 16 = 36 ✓
+  'maths-puzzles-03-q9': '16', // 1 present per elf per 4 min → 2 each × 8 elves
+  'maths-puzzles-03-q10': '15', // 60 pony-days ÷ 4 ponies
+  'maths-puzzles-03-q11':
+    'Each hen lays 1 egg every 6 days, so in 12 days each lays 2 — and 12 hens lay 24 eggs',
+  'maths-puzzles-03-q12': 'The hen', // only fox+corn is a safe leftover pair
+  'maths-puzzles-03-q13': '7', // hen, back, fox, hen back, corn, back, hen
+  'maths-puzzles-03-q14': '15', // 2+1+8+2+2 (slow pair share the 8)
+  'maths-puzzles-03-q15': '7', // three net-one cycles (6 trips) + final pair
+  'maths-puzzles-03-q16': 'The fox and the corn',
+  'maths-puzzles-03-q17': '5', // dad solo forces returns either side: 2+1+1+1 trips around him
+  'maths-puzzles-03-q18': '2', // 5 − 3
+  'maths-puzzles-03-q19':
+    'Fill the 5; fill the 3 from it (2 left); empty the 3; tip the 2 into the 3; refill the 5; top up the 3 from it — 4 remain', // 5−1 = 4 at the last pour
+  'maths-puzzles-03-q20': '17', // 2+1+10+2+2 beats 10+1+6+1+2 = 20
+
+  // Puzzle Lab · Number Detective (digits re-derived from the clues)
+  'maths-puzzles-04-q1': '63', // 3u = 9 → u = 3, tens 6
+  'maths-puzzles-04-q2': '119', // hundreds 1, tens can't be 0 (units would be 10)
+  'maths-puzzles-04-q3': '234', // digit sum 9; 9 × 26
+  'maths-puzzles-04-q4': '6', // Y=1 (limit 198), Z=2 (units), 20X+2=122
+  'maths-puzzles-04-q5': '4', // 14 + □ = 18; 648 = 9 × 72
+  'maths-puzzles-04-q6': '0', // ends 0/5 and even → 0
+  'maths-puzzles-04-q7': '825', // 5 forced to units; 8 then 2
+  'maths-puzzles-04-q8': '5', // 4 + A ends in 9; 54 + 45 = 99
+  'maths-puzzles-04-q9': '9', // AA ≥ 94 → 99; B = 4
+  'maths-puzzles-04-q10': '47', // digits 7,4; odd kills 74
+  'maths-puzzles-04-q11': '10', // 1□1 with middle 0–9
+  'maths-puzzles-04-q12': '38', // (3,8) is the product-24 pair summing 11; smaller leads
+  'maths-puzzles-04-q13': '15', // B=9 (carry), A=6; 66 + 79 = 145
+  'maths-puzzles-04-q14': 'True', // 9 = 3 × 3
+  'maths-puzzles-04-q15': '20', // ten in units (7,17…97) + ten in tens (70–79)
+  'maths-puzzles-04-q16': '88', // 35 + 53 = (3+5) × 11
+  'maths-puzzles-04-q17':
+    'Doubling a two-digit number cannot pass 198, so the three-digit answer has to start with 1',
+  'maths-puzzles-04-q18': '105', // first 3-digit multiple of 15
+  'maths-puzzles-04-q19': '73', // 9 × (digit gap) = 36 → gap 4; with sum 10 → 7 and 3
+  'maths-puzzles-04-q20': '923', // 4u + 2 = 14 → u = 3, hundreds 9
+
+  // Puzzle Lab · Seeing in 3D (censuses re-derived; totals checked)
+  'maths-puzzles-05-q1': '27', // 3 layers of 9
+  'maths-puzzles-05-q2': '1', // core of 3×3×3 = 1×1×1
+  'maths-puzzles-05-q3': '6', // one face-middle per face × 6
+  'maths-puzzles-05-q4': '12', // one per edge × 12; census 8+12+6+1 = 27 ✓
+  'maths-puzzles-05-q5': '8', // corners only, any size
+  'maths-puzzles-05-q6': '27', // (5−2)³
+  'maths-puzzles-05-q7': '54', // 6 × 3×3; census 8+36+54+27 = 125 ✓
+  'maths-puzzles-05-q8': '14', // 9 + 4 + 1
+  'maths-puzzles-05-q9': '15', // 6 + 3 + 6
+  'maths-puzzles-05-q10': '10', // columns 1+2+3+4
+  'maths-puzzles-05-q11': '30', // 10 per slice × 3
+  'maths-puzzles-05-q12': '120', // 125 − 5 (odd cube has a centre column)
+  'maths-puzzles-05-q13': '112', // removed 5+5+5 − 2 (centre triple-counted) = 13
+  'maths-puzzles-05-q14': 'The footprint has 4 columns — but their heights are unknown',
+  'maths-puzzles-05-q15': '12', // 4 columns × max 3
+  'maths-puzzles-05-q16': '6', // 3 + 1 + 1 + 1
+  'maths-puzzles-05-q17': '5', // 6 − 1 table face
+  'maths-puzzles-05-q18': '10', // 12 − 2 glued
+  'maths-puzzles-05-q19': '14', // 18 − 2 joins × 2 faces
+  'maths-puzzles-05-q20': '24', // 12 edges × (4−2); census 8+24+24+8 = 64 ✓
 };
 
 const mathsQuestions = sectionsBySubject('maths').flatMap((s) => s.questions);

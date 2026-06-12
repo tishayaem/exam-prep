@@ -182,11 +182,16 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       contract), keys in `maths-answers.test.ts`, and excluded from the
       Number Sprint pool — riddles are the wrong tempo for a 60-second
       drill.)*
-- [ ] **More Puzzle Lab sections** from the remaining archetype families:
-      rate/ratio traps + river crossings (constraint planning), cryptarithms
-      + digit properties, modular/clock + periodic patterns, spatial
-      counting ("how many cubes" as text prompts), balance puzzles + Venn
-      logic. Same contract: 20 Qs, reasoning + drivers, re-derived keys.
+- [ ] **More Puzzle Lab sections** from the remaining archetype families.
+      *(Shipped 12 June 2026: `maths-puzzles-03-rates-and-journeys` (rate
+      traps + crossings/constraint planning — incl. a correctly-derived
+      ferry-weight puzzle replacing Pass B's broken one),
+      `maths-puzzles-04-number-detective` (cryptarithms + digit properties)
+      and `maths-puzzles-05-seeing-in-3d` (spatial counting as text prompts
+      — the live ISEB "how many cubes" family, odd-sided cubes for centre
+      prompts). Pack now 5 × 20 = 100 Qs.)* **Remaining:** modular/clock +
+      periodic patterns; balance puzzles + Venn logic. Same contract:
+      20 Qs, reasoning + drivers, re-derived keys.
 - [ ] **Verbal stretch pack** — word ladders (validate every rung is a real
       word), anagram + hidden-word cryptic-lite clues, Greek/Latin roots &
       word families. Text-only authoring; vocabulary terms feed

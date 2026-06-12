@@ -21,6 +21,9 @@ import { mathsData02WordProblems } from './sections/maths-data-02-word-problems'
 
 import { mathsPuzzles01WorkingBackwards } from './sections/maths-puzzles-01-working-backwards';
 import { mathsPuzzles02LogicAndCertainty } from './sections/maths-puzzles-02-logic-and-certainty';
+import { mathsPuzzles03RatesAndJourneys } from './sections/maths-puzzles-03-rates-and-journeys';
+import { mathsPuzzles04NumberDetective } from './sections/maths-puzzles-04-number-detective';
+import { mathsPuzzles05SeeingIn3d } from './sections/maths-puzzles-05-seeing-in-3d';
 
 export const mathsSections: Section[] = [
   // Number & Calculation
@@ -50,4 +53,7 @@ export const mathsSections: Section[] = [
   // Puzzle Lab (stretch tier — competition-style archetypes)
   mathsPuzzles01WorkingBackwards,
   mathsPuzzles02LogicAndCertainty,
+  mathsPuzzles03RatesAndJourneys,
+  mathsPuzzles04NumberDetective,
+  mathsPuzzles05SeeingIn3d,
 ];
