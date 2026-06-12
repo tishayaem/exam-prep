@@ -21,12 +21,36 @@ check items off here as they land.
   consist of now that ISEB covers all four subjects at stage 1; the CPT
   sitting window/venue; paper weightings. The app hedges by training both
   formats — on-screen MCQ pacing AND write-in working/extended writing.
-- **Maths:** complete at 280 questions — all 14 sections at 20, graded 1→3,
-  multi-step with method-modelling explanations, ~60 `variantOf` links, every
-  answer double-checked in `src/data/maths-answers.test.ts`.
-- **Verbal:** 5 sections × 20, with the A–Z strip and the synonym/antonym
-  bank. **Non-verbal:** 6 sections (~89 Qs) incl. Codes, Most Similar and
-  reflection traps.
+- **Maths:** 420 questions — 14 curriculum sections × 20 plus the complete
+  7-section **Puzzle Lab** stretch pack (`maths-puzzles`, all archetype
+  families). Every answer double-checked in `src/data/maths-answers.test.ts`.
+- **Verbal:** 8 sections × 20 = 160 — `vr-core` (5) plus the **Word Lab**
+  stretch pack (ladders / cryptic-lite / roots). **Non-verbal:** 6 sections
+  (~89 Qs) incl. Codes, Most Similar and reflection traps.
+
+**Next session, start here (handoff, 12 Jun 2026):**
+
+1. **NVR stretch types** (§7) — the one item left with real engineering:
+   "how many cubes" (heightmap data model) and cube nets need `NvrFigure`
+   schema + renderer work in `src/components/NvrFigure.tsx`; text-prompt
+   versions already exist in `maths-puzzles-05`, so this is the figure-based
+   upgrade. Start with the heightmap (live ISEB type), nets second.
+2. **Stretch serving rule** (§7) — ~80–85% success targeting; simplest v1 is
+   a weekly "Puzzle mix" set on Home drawing from packs tagged with
+   `drivers` (the tags are already on all 200 stretch questions).
+3. **English §5 leftovers** — classic-prose long passage from the corpus in
+   `brighton-exam-intel.md` §4, and the writing rubric → CSSE/Dulwich bands.
+4. **Blocked on the familiarisation test:** shuffled-sentences English type;
+   the disputed "ISEB VR dropped codes" claim (don't re-weight until then).
+
+Ops notes for that session: this repo squash-merges PRs, so after a merge
+reset the session's `claude/*` work branch onto `origin/main`
+(`git reset --hard origin/main` + force-with-lease push) before new work.
+Fresh containers need `npm ci`. Stretch-pack questions must carry
+`reasoning: true` + ≥1 `drivers` tag and re-derived keys in the subject's
+`*-answers.test.ts` — data.test.ts enforces all of it. Any new long timer
+must use the wall-clock pattern (see `WritingPractice.tsx` / `MockTest.tsx`).
+The GitHub MCP `actions_list` result overflows — `jq` the saved file.
 - **English:** 6 sections × 20 = 120 questions — reading ×3 (short passages,
   a long passage, non-fiction + poetry), SPaG ×2, composition — plus the
   `/writing-practice` session runner. Keys in `english-answers.test.ts`.
