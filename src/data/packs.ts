@@ -85,6 +85,7 @@ export const PACKS: PackDef[] = [
 
   // Verbal Reasoning
   { slug: 'vr-core', subject: 'verbal', title: 'Words, Codes & Logic' },
+  { slug: 'vr-wordlab', subject: 'verbal', title: 'Word Lab' },
 ];
 
 /** Human-readable pack title for a slug, falling back to the slug itself. */

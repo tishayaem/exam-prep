@@ -195,10 +195,14 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       patterns, incl. the remainder-zero trap), `07-balance-and-overlap`
       (pre-algebra balance + Venn logic). Every archetype family from the
       stretch-problems research is now represented.)*
-- [ ] **Verbal stretch pack** — word ladders (validate every rung is a real
-      word), anagram + hidden-word cryptic-lite clues, Greek/Latin roots &
-      word families. Text-only authoring; vocabulary terms feed
-      VocabSprint automatically.
+- [x] **Verbal stretch pack** — *(Shipped 12 June 2026: new `vr-wordlab`
+      "Word Lab" pack, 3 × 20: `01-word-ladders` (Carroll doublets — every
+      rung hand-verified, forked ladders accept both rungs, difference-count
+      minimum proofs), `02-crack-the-clue` (anagram / hidden-word / double-
+      definition / reversal clue types, all letters verified), `03-word-roots`
+      (Greek/Latin decoding toolkit; root vocab feeds VocabSprint). Same
+      stretch contract — reasoning + drivers, enforced by the extended
+      data.test.ts check — and 60 re-derived keys in vr-answers.test.ts.)*
 - [ ] **NVR stretch — ISEB-live types first** — "how many cubes"
       (heightmap data model) + painted-cube counting + cube nets, then
       symmetry/rotation. Declarative-text spatial prompts ("Imagine a
