@@ -1,5 +1,5 @@
 import { sample } from './shuffle';
-import type { Question } from '../data/types';
+import type { Question, QuestionType, Subject } from '../data/types';
 
 /**
  * Assemble a mock-test paper from a subject's pool. Plain papers are a
@@ -27,4 +27,45 @@ export function buildMockPaper(
     Math.max(0, count - openers.length),
   );
   return [...openers, ...rest];
+}
+
+/**
+ * The four ISEB Common Pre-Test subjects with their verified 2025–26 subtest
+ * timings (see the format scout in materials/11plus-research/
+ * brighton-exam-intel.md). Subjects absent here (science) have no ISEB block.
+ */
+export const ISEB_MINUTES: Partial<Record<Subject, number>> = {
+  english: 40,
+  maths: 40,
+  'non-verbal': 30,
+  verbal: 25,
+};
+
+/** The CPT is answered by tapping — these are the app's tap-only types. */
+const TAP_TYPES: ReadonlySet<QuestionType> = new Set(['mcq', 'truefalse', 'nvr']);
+
+/** The slice of a subject pool that matches the on-screen CPT format. */
+export function isebPool(pool: readonly Question[]): Question[] {
+  return pool.filter((q) => TAP_TYPES.has(q.type));
+}
+
+/**
+ * Assemble an ISEB-style block: tap-only questions at roughly CPT pacing
+ * (~1.2 per minute — official per-subtest counts are unpublished, so the
+ * clock, not the count, is the real boundary), ordered as a gentle
+ * difficulty ramp (shuffled within bands, d1 → d2 → d3) to echo how the
+ * adaptive test escalates on a child who keeps answering correctly.
+ */
+export function buildIsebBlock(
+  pool: readonly Question[],
+  minutes: number,
+): Question[] {
+  const candidates = isebPool(pool);
+  const picked = sample(
+    candidates,
+    Math.min(candidates.length, Math.round(minutes * 1.2)),
+  );
+  const bands: Question[][] = [[], [], []];
+  for (const q of picked) bands[q.difficulty - 1].push(q);
+  return bands.flat();
 }

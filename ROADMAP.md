@@ -125,15 +125,18 @@ allowed; all questions are marked (no unscored items); NVR gained a
 "how many cubes" type. **The old circulating timings (Eng 25 /
 Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
 
-- [ ] **ISEB-style mock preset** in MockTest: per-subject timed blocks at
-      current CPT pacing (Eng 40 / Maths 40 / NVR 30 / VR 25), MCQ-only
-      pool, **forward-only — the real test has no back button, no skipping,
-      no flagging** (confirmed June 2026, multi-source), so train
-      commit-and-move-on. Question counts are unpublished (adaptive):
-      calibrate by time, not count. Keep letter/number-code VR in the pool —
-      the claim that Century-era VR dropped codes is **disputed** (see
-      `stretch-problems.md`, Pass B verdict); settle it via the
-      familiarisation test before re-weighting.
+- [x] **ISEB-style mock preset** in MockTest. *(Shipped 12 June 2026: third
+      preset "ISEB pre-test style" — per-subject blocks at the verified CPT
+      timings (Eng 40 / Maths 40 / NVR 30 / VR 25), tap-to-answer pool only
+      (mcq/truefalse/nvr — `isebPool` in lib/mockPaper.ts), ~1.2 Qs/min so
+      the clock ends the test (counts are unpublished), difficulty ramped
+      d1→d3 to echo the adaptive escalation, science excluded, and the mock
+      timer converted to wall-clock so screen-lock can't stall long papers.
+      Forward-only was already the mock's behaviour; the rule cards now say
+      so in CPT terms. Letter/number-code VR kept in the pool — the
+      "Century dropped codes" claim stays disputed (see
+      `stretch-problems.md`, Pass B verdict); re-weight only after the
+      familiarisation test settles it.)*
 - [ ] **Family calendar item (not an app feature):** book the official ISEB
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
