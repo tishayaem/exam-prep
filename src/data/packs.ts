@@ -73,6 +73,7 @@ export const PACKS: PackDef[] = [
   { slug: 'maths-ratio', subject: 'maths', title: 'Ratio, Proportion & Algebra' },
   { slug: 'maths-geometry', subject: 'maths', title: 'Measurement & Geometry' },
   { slug: 'maths-data', subject: 'maths', title: 'Data & Problem Solving' },
+  { slug: 'maths-puzzles', subject: 'maths', title: 'Puzzle Lab' },
 
   // English
   { slug: 'english-reading', subject: 'english', title: 'Reading & Comprehension' },

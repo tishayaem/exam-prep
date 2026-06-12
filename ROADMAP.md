@@ -125,15 +125,18 @@ allowed; all questions are marked (no unscored items); NVR gained a
 "how many cubes" type. **The old circulating timings (Eng 25 /
 Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
 
-- [ ] **ISEB-style mock preset** in MockTest: per-subject timed blocks at
-      current CPT pacing (Eng 40 / Maths 40 / NVR 30 / VR 25), MCQ-only
-      pool, **forward-only — the real test has no back button, no skipping,
-      no flagging** (confirmed June 2026, multi-source), so train
-      commit-and-move-on. Question counts are unpublished (adaptive):
-      calibrate by time, not count. Keep letter/number-code VR in the pool —
-      the claim that Century-era VR dropped codes is **disputed** (see
-      `stretch-problems.md`, Pass B verdict); settle it via the
-      familiarisation test before re-weighting.
+- [x] **ISEB-style mock preset** in MockTest. *(Shipped 12 June 2026: third
+      preset "ISEB pre-test style" — per-subject blocks at the verified CPT
+      timings (Eng 40 / Maths 40 / NVR 30 / VR 25), tap-to-answer pool only
+      (mcq/truefalse/nvr — `isebPool` in lib/mockPaper.ts), ~1.2 Qs/min so
+      the clock ends the test (counts are unpublished), difficulty ramped
+      d1→d3 to echo the adaptive escalation, science excluded, and the mock
+      timer converted to wall-clock so screen-lock can't stall long papers.
+      Forward-only was already the mock's behaviour; the rule cards now say
+      so in CPT terms. Letter/number-code VR kept in the pool — the
+      "Century dropped codes" claim stays disputed (see
+      `stretch-problems.md`, Pass B verdict); re-weight only after the
+      familiarisation test settles it.)*
 - [ ] **Family calendar item (not an app feature):** book the official ISEB
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
@@ -172,13 +175,26 @@ maths train on the same archetypes, and a 6-month runway needs curiosity,
 not just drill. Author originals only — never copy competition questions;
 re-derive every answer (Pass B's lift puzzle is provably wrong).
 
-- [ ] **Puzzle Lab pack (maths stretch)** — new `maths-puzzles` pack built
-      from the archetype library (working backwards, parity/invariants,
-      systematic listing, rate traps, river crossings, cryptarithms,
-      balance puzzles, Venn logic, pigeonhole, modular/clock…). Tag every
-      item with the hardness driver(s) it trains: multi-step / unfamiliar
-      context / distractor info / reading load / justify. Start with two
-      sections × 20, difficulty graded within the stretch tier.
+- [x] **Puzzle Lab pack (maths stretch)** — new `maths-puzzles` pack built
+      from the archetype library. Tag every item with the hardness driver(s)
+      it trains: multi-step / unfamiliar context / distractor info / reading
+      load / justify. *(Shipped 11 June 2026: `maths-puzzles-01-working-
+      backwards` and `maths-puzzles-02-logic-and-certainty` — 2 × 20
+      original questions, all `reasoning`-flagged with typed `drivers` tags
+      (new `HardnessDriver` in types.ts, enforced by a data.test.ts
+      contract), keys in `maths-answers.test.ts`, and excluded from the
+      Number Sprint pool — riddles are the wrong tempo for a 60-second
+      drill.)*
+- [x] **More Puzzle Lab sections — archetype library COMPLETE** at
+      7 × 20 = 140 questions. *(12 June 2026: `03-rates-and-journeys` (rate
+      traps + crossings — incl. a correctly-derived ferry-weight puzzle
+      replacing Pass B's broken one), `04-number-detective` (cryptarithms +
+      digit properties), `05-seeing-in-3d` (spatial counting as text
+      prompts — the live ISEB "how many cubes" family, odd-sided cubes for
+      centre prompts), `06-clocks-and-cycles` (modular/clock + periodic
+      patterns, incl. the remainder-zero trap), `07-balance-and-overlap`
+      (pre-algebra balance + Venn logic). Every archetype family from the
+      stretch-problems research is now represented.)*
 - [ ] **Verbal stretch pack** — word ladders (validate every rung is a real
       word), anagram + hidden-word cryptic-lite clues, Greek/Latin roots &
       word families. Text-only authoring; vocabulary terms feed

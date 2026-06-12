@@ -13,6 +13,20 @@ export type QuestionType =
   | 'nvr';
 export type Difficulty = 1 | 2 | 3;
 
+/**
+ * Stretch-tier tag: which hardness driver(s) a Puzzle Lab item trains, per
+ * the hard-tail analysis in materials/11plus-research/stretch-problems.md —
+ * multi-step depth, unfamiliar/invented context, planted distractor
+ * information, heavy reading load, or justify-the-method. Read by nothing
+ * yet; authored now so the stretch serving rule can filter on it later.
+ */
+export type HardnessDriver =
+  | 'multi-step'
+  | 'unfamiliar'
+  | 'distractor'
+  | 'reading-load'
+  | 'justify';
+
 export interface VocabularyTerm {
   term: string;
   meaning: string;
@@ -96,6 +110,8 @@ export interface Question {
   explanation: string;
   difficulty: Difficulty;
   reasoning?: boolean;
+  /** Stretch-tier only: the hardness driver(s) this puzzle trains. */
+  drivers?: HardnessDriver[];
   /**
    * Render a tappable A–Z strip above the answer area — the on-screen version
    * of the exam technique of writing the alphabet out before counting steps.

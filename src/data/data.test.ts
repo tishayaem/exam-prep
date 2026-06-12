@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import type { Question } from './types';
-import { allSections, allQuestions } from './index';
+import type { Question, Subject } from './types';
+import { allSections, allQuestions, questionsBySubject } from './index';
 import { PACKS } from './packs';
 import { gradeNumeric } from '../lib/grading';
 import { numberSprintPool } from '../lib/numberSprint';
+import { ISEB_MINUTES, isebPool } from '../lib/mockPaper';
 
 const first = (a: string | string[]): string => (Array.isArray(a) ? a[0] : a);
 const packSlugs = new Set(PACKS.map((p) => p.slug));
@@ -135,6 +136,32 @@ describe('answerability (every question can actually be marked correct)', () => 
   // leads to a drill with nothing worth drilling.
   it('the Number Sprint pool stays healthily stocked', () => {
     expect(numberSprintPool(allSections).length).toBeGreaterThanOrEqual(20);
+  });
+
+  // The ISEB mock preset serves only tap-to-answer questions at CPT pacing.
+  // Each pre-test subject needs a pool that comfortably outlasts its clock,
+  // or the "ISEB pre-test style" option leads to a paper that ends early.
+  it('every ISEB subject has a healthy tap-to-answer pool', () => {
+    for (const subject of Object.keys(ISEB_MINUTES) as Subject[]) {
+      expect(
+        isebPool(questionsBySubject(subject)).length,
+        subject,
+      ).toBeGreaterThanOrEqual(30);
+    }
+  });
+
+  // The Puzzle Lab contract (ROADMAP §7): every stretch puzzle is
+  // reasoning-flagged (it feeds the problem-solving drill) and carries at
+  // least one hardness-driver tag for the future stretch serving rule.
+  it('every Puzzle Lab question is reasoning-flagged and driver-tagged', () => {
+    const puzzles = allSections
+      .filter((s) => s.pack === 'maths-puzzles')
+      .flatMap((s) => s.questions);
+    expect(puzzles.length).toBeGreaterThan(0);
+    const bad = puzzles
+      .filter((q) => !q.reasoning || !q.drivers?.length)
+      .map((q) => q.id);
+    expect(bad).toEqual([]);
   });
 
   it('every Codes question is a well-formed mcq with a parallel codes array', () => {

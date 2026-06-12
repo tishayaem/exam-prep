@@ -7,10 +7,14 @@ import type { Question, Section } from '../data/types';
  * the iPad decimal keypad, which has digits, a decimal point and nothing
  * else — so answers needing a minus sign, slash or letters are excluded
  * rather than being untypeable under time pressure.
+ *
+ * Puzzle Lab is excluded outright: its difficulty-1 items are short riddles,
+ * not bare arithmetic, and reading a two-line puzzle is the wrong tempo for
+ * a 60-second sprint.
  */
 export function numberSprintPool(sections: readonly Section[]): Question[] {
   return sections
-    .filter((s) => s.subject === 'maths')
+    .filter((s) => s.subject === 'maths' && s.pack !== 'maths-puzzles')
     .flatMap((s) => s.questions)
     .filter(
       (q) =>

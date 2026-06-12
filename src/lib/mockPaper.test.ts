@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { Question } from '../data/types';
-import { buildMockPaper } from './mockPaper';
+import { buildMockPaper, buildIsebBlock, isebPool } from './mockPaper';
 
 function mkQuestion(
   id: string,
@@ -59,5 +59,51 @@ describe('buildMockPaper', () => {
     const tight = [...numerics, ...worded.slice(0, 12)];
     const paper = buildMockPaper(tight, 20, { numeracyOpeners: 8 });
     expect(new Set(paper.map((q) => q.id)).size).toBe(paper.length);
+  });
+});
+
+describe('buildIsebBlock', () => {
+  // A mixed pool: tap-answerable kinds across all difficulties + write-in
+  // kinds that the on-screen CPT format must never serve.
+  const mixed: Question[] = [
+    ...Array.from({ length: 20 }, (_, i) => mkQuestion(`m1-${i}`, 'mcq', 1)),
+    ...Array.from({ length: 20 }, (_, i) => mkQuestion(`m2-${i}`, 'mcq', 2)),
+    ...Array.from({ length: 20 }, (_, i) => mkQuestion(`m3-${i}`, 'mcq', 3)),
+    ...Array.from({ length: 5 }, (_, i) => mkQuestion(`tf-${i}`, 'truefalse', 1)),
+    ...Array.from({ length: 5 }, (_, i) => mkQuestion(`nv-${i}`, 'nvr', 2)),
+    ...Array.from({ length: 10 }, (_, i) => mkQuestion(`num-${i}`, 'numeric', 1)),
+    ...Array.from({ length: 10 }, (_, i) => mkQuestion(`sh-${i}`, 'short', 2)),
+  ];
+
+  it('serves only tap-to-answer types (the CPT is multiple-choice)', () => {
+    const block = buildIsebBlock(mixed, 40);
+    expect(block.length).toBeGreaterThan(0);
+    for (const q of block) {
+      expect(['mcq', 'truefalse', 'nvr']).toContain(q.type);
+    }
+  });
+
+  it('sizes the block at ~1.2 questions per minute, without duplicates', () => {
+    const block = buildIsebBlock(mixed, 40);
+    expect(block).toHaveLength(48); // 40 × 1.2, pool is big enough
+    expect(new Set(block.map((q) => q.id)).size).toBe(block.length);
+  });
+
+  it('caps at the tap-only pool when it is smaller than the pacing target', () => {
+    const thin = mixed.filter((q) => q.type === 'truefalse'); // 5 questions
+    expect(buildIsebBlock(thin, 40)).toHaveLength(5);
+  });
+
+  it('ramps difficulty like the adaptive test: never a step back down', () => {
+    const block = buildIsebBlock(mixed, 40);
+    for (let i = 1; i < block.length; i++) {
+      expect(block[i].difficulty).toBeGreaterThanOrEqual(block[i - 1].difficulty);
+    }
+  });
+
+  it('isebPool filters write-in kinds out and keeps tap kinds in', () => {
+    const pool = isebPool(mixed);
+    expect(pool).toHaveLength(70); // 60 mcq + 5 truefalse + 5 nvr
+    expect(pool.some((q) => q.type === 'numeric' || q.type === 'short')).toBe(false);
   });
 });

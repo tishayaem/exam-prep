@@ -1,17 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useBlocker } from 'react-router-dom';
 import { allSections, questionsBySubject } from '../data';
 import { SUBJECTS } from '../data/packs';
 import { useProgress } from '../lib/storage';
 import { QuestionRunner, formatAnswer } from '../components/QuestionRunner';
-import { buildMockPaper } from '../lib/mockPaper';
+import { buildMockPaper, buildIsebBlock, isebPool, ISEB_MINUTES } from '../lib/mockPaper';
 import type { Question, Subject } from '../data/types';
 
 const PRESETS = {
   quick: { title: 'Quick mock', questions: 20, minutes: 15, sub: 'A fast check-in' },
-  exam: { title: 'Full paper', questions: 40, minutes: 60, sub: 'Real ISEB length' },
+  exam: { title: 'Full paper', questions: 40, minutes: 60, sub: 'Written-paper length' },
+  iseb: {
+    title: 'ISEB pre-test style',
+    sub: 'On-screen · multiple-choice · no going back',
+  },
 } as const;
 type PresetKey = keyof typeof PRESETS;
+
+/** Kid-facing summary of the verified 2025–26 CPT subtest timings. */
+const ISEB_TIMING_LABEL = 'Eng 40 · Maths 40 · NVR 30 · VR 25 min';
 
 // The real ISEB maths paper opens with ~8 one-mark quick numeracy questions
 // before the worded ones — the full-paper preset mirrors that for maths.
@@ -34,14 +41,22 @@ export function MockTest() {
   const [subject, setSubject] = useState<Subject | null>(null);
   const [preset, setPreset] = useState<PresetKey>('quick');
 
+  // Wall-clock deadline rather than a decrementing chain: long papers must
+  // survive iPad screen-lock and background throttling without the clock
+  // quietly falling behind (same fix as Writing Practice).
+  const endAtRef = useRef(0);
+
   useEffect(() => {
     if (phase !== 'running') return;
-    if (secondsLeft <= 0) {
-      setPhase('review');
-      return;
-    }
-    const id = window.setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
-    return () => window.clearTimeout(id);
+    const tick = () =>
+      setSecondsLeft(Math.max(0, Math.ceil((endAtRef.current - Date.now()) / 1000)));
+    tick();
+    const id = window.setInterval(tick, 500);
+    return () => window.clearInterval(id);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase === 'running' && secondsLeft <= 0) setPhase('review');
   }, [phase, secondsLeft]);
 
   // Only block once she's actually invested an answer — losing a freshly
@@ -79,21 +94,31 @@ export function MockTest() {
   }, [blocker, inProgress]);
 
   function start(subj: Subject) {
-    const p = PRESETS[preset];
-    const picked = buildMockPaper(questionsBySubject(subj), p.questions, {
-      // Only the maths paper has the quick-numeracy opening section.
-      numeracyOpeners: preset === 'exam' && subj === 'maths' ? NUMERACY_OPENERS : 0,
-    });
+    let picked: Question[];
+    let minutes: number;
+    if (preset === 'iseb') {
+      minutes = ISEB_MINUTES[subj] ?? 30;
+      picked = buildIsebBlock(questionsBySubject(subj), minutes);
+    } else {
+      const p = PRESETS[preset];
+      minutes = p.minutes;
+      picked = buildMockPaper(questionsBySubject(subj), p.questions, {
+        // Only the maths paper has the quick-numeracy opening section.
+        numeracyOpeners: preset === 'exam' && subj === 'maths' ? NUMERACY_OPENERS : 0,
+      });
+    }
     setSubject(subj);
     setPaper(picked);
     setIndex(0);
     setAnswers([]);
-    setSecondsLeft(p.minutes * 60);
+    endAtRef.current = Date.now() + minutes * 60 * 1000;
+    setSecondsLeft(minutes * 60);
     setPhase('running');
   }
 
   if (phase === 'pre') {
-    const p = PRESETS[preset];
+    // null for the ISEB preset, whose count/timing vary by subject.
+    const p = preset === 'iseb' ? null : PRESETS[preset];
     return (
       <div className="space-y-9">
         <header>
@@ -116,7 +141,7 @@ export function MockTest() {
           </p>
         </header>
 
-        <div className="grid gap-3 sm:grid-cols-2" role="radiogroup" aria-label="Test length">
+        <div className="grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Test format">
           {(Object.keys(PRESETS) as PresetKey[]).map((key) => {
             const opt = PRESETS[key];
             const selected = key === preset;
@@ -137,7 +162,9 @@ export function MockTest() {
                   {opt.title}
                 </div>
                 <div className={`text-[13px] font-semibold mt-1 ${selected ? 'text-neon-green' : 'text-inkSoft'}`}>
-                  {opt.questions} questions · {opt.minutes} min
+                  {'questions' in opt
+                    ? `${opt.questions} questions · ${opt.minutes} min`
+                    : ISEB_TIMING_LABEL}
                 </div>
                 <div className={`text-[13px] mt-0.5 ${selected ? 'text-paper/70' : 'text-inkSoft'}`}>
                   {opt.sub}
@@ -147,14 +174,23 @@ export function MockTest() {
           })}
         </div>
 
-        <div className="grid gap-3.5 sm:grid-cols-2">
-          <RuleCard label="Questions" value={String(p.questions)} sub="random from one subject" color="bg-neon-green" />
-          <RuleCard label="Time limit" value={`${p.minutes} min`} sub="clock starts on tap" color="bg-neon-yellow" />
-          <RuleCard label="Feedback" value="At the end" sub="not after each question" color="bg-neon-blue" />
-          <RuleCard label="Going back" value="Locked" sub="can't change earlier answers" color="bg-neon-pink" />
-        </div>
+        {p ? (
+          <div className="grid gap-3.5 sm:grid-cols-2">
+            <RuleCard label="Questions" value={String(p.questions)} sub="random from one subject" color="bg-neon-green" />
+            <RuleCard label="Time limit" value={`${p.minutes} min`} sub="clock starts on tap" color="bg-neon-yellow" />
+            <RuleCard label="Feedback" value="At the end" sub="not after each question" color="bg-neon-blue" />
+            <RuleCard label="Going back" value="Locked" sub="can't change earlier answers" color="bg-neon-pink" />
+          </div>
+        ) : (
+          <div className="grid gap-3.5 sm:grid-cols-2">
+            <RuleCard label="Format" value="Tap only" sub="multiple-choice, like the real screen" color="bg-neon-green" />
+            <RuleCard label="Time limit" value="By subject" sub={ISEB_TIMING_LABEL} color="bg-neon-yellow" />
+            <RuleCard label="Pacing" value="~1 a minute" sub="the clock, not the count, ends the test" color="bg-neon-blue" />
+            <RuleCard label="Going back" value="Locked" sub="no back button on the real pre-test — commit and move on" color="bg-neon-pink" />
+          </div>
+        )}
 
-        <SubjectChooser onPick={start} presetQuestions={p.questions} />
+        <SubjectChooser onPick={start} preset={preset} />
       </div>
     );
   }
@@ -404,14 +440,19 @@ const SUBJECT_BTN = [
 
 function SubjectChooser({
   onPick,
-  presetQuestions,
+  preset,
 }: {
   onPick: (s: Subject) => void;
-  presetQuestions: number;
+  preset: PresetKey;
 }) {
-  // Only offer subjects that actually have questions, so an un-authored subject
-  // never produces an empty paper.
-  const available = SUBJECTS.filter((s) => questionsBySubject(s.id).length > 0);
+  // Only offer subjects that can actually fill a paper: any authored subject
+  // for the plain presets; for ISEB, only the four CPT subjects with a
+  // healthy tap-to-answer pool (science isn't a pre-test subject).
+  const available = SUBJECTS.filter((s) =>
+    preset === 'iseb'
+      ? ISEB_MINUTES[s.id] != null && isebPool(questionsBySubject(s.id)).length >= 20
+      : questionsBySubject(s.id).length > 0,
+  );
   return (
     <div className="bg-ink text-paper rounded-[28px] p-7 sm:p-9 space-y-5">
       <div>
@@ -424,7 +465,13 @@ function SubjectChooser({
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
         {available.map((s, i) => {
-          const count = Math.min(questionsBySubject(s.id).length, presetQuestions);
+          const meta =
+            preset === 'iseb'
+              ? `${ISEB_MINUTES[s.id]} min · multiple-choice`
+              : `${Math.min(
+                  questionsBySubject(s.id).length,
+                  PRESETS[preset].questions,
+                )} questions`;
           return (
             <button
               key={s.id}
@@ -435,7 +482,7 @@ function SubjectChooser({
                 {s.title}
               </div>
               <div className="text-[12px] font-semibold opacity-70 mt-1">
-                {count} questions · go ›
+                {meta} · go ›
               </div>
             </button>
           );

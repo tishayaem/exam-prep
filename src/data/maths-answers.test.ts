@@ -303,6 +303,167 @@ const EXPECTED: Record<string, string> = {
   'maths-data-02-q18': '70',
   'maths-data-02-q19': '4',
   'maths-data-02-q20': '1400',
+
+  // Puzzle Lab · Working Backwards (each chain re-derived and run forwards)
+  'maths-puzzles-01-q1': '13', // (30 − 4) ÷ 2; check 13×2+4 = 30
+  'maths-puzzles-01-q2': '7', // (16 + 5) ÷ 3; check 7×3−5 = 16
+  'maths-puzzles-01-q3': 'Subtract 2, then divide by 4', // last step (+2) undone first
+  'maths-puzzles-01-q4': '6', // (2.50 + 0.50) × 2; check 6→3→2.50
+  'maths-puzzles-01-q5': '33', // 12 × 2 + 9; check 33−9=24, halved 12
+  'maths-puzzles-01-q6': 'False', // last step first, not first step
+  'maths-puzzles-01-q7': '9', // (19 + 8) ÷ 3; check 9×3−8 = 19
+  'maths-puzzles-01-q8': '50', // (18 + 7) × 2; check 25 after voucher
+  'maths-puzzles-01-q9': '18', // 6×2 = 12 kept = 2⁄3 of start → 18; 18→12→6
+  'maths-puzzles-01-q10': '12', // one undo of the halving: 6 × 2
+  'maths-puzzles-01-q11': '10', // 9×2 = 18 before park; 18−8 = 10 set off
+  'maths-puzzles-01-q12': 'Day 11', // one doubling = one day before full
+  'maths-puzzles-01-q13': '3', // t2 = 11−7 = 4; t1 = 7−4 = 3; 3,4,7,11,18 ✓
+  'maths-puzzles-01-q14': '6.60', // paid 10−4.60 = 5.40; +1.20 reduction
+  'maths-puzzles-01-q15': '72', // kept ½×⅔×¾ = ¼ of start = 18 → 72
+  'maths-puzzles-01-q16': '12', // before moat 36 (= 24÷2×3); ⅓ of 36
+  'maths-puzzles-01-q17': '10', // J+6 = 2(J−2) → J = 10; 16 = 2×8 ✓
+  'maths-puzzles-01-q18': '£12 is 3⁄5 of her money: 12 ÷ 3 = 4, then 4 × 5 = £20', // kept fraction
+  'maths-puzzles-01-q19': '60', // 17+1 = 18; +12 = 30; ×2 = 60
+  'maths-puzzles-01-q20': '20', // 21−6 = 15 = ¾ of start → 20
+
+  // Puzzle Lab · Logic & Certainty (each deduction re-derived)
+  'maths-puzzles-02-q1': "No — if Maya is telling the truth, then Sam's statement is false.", // contradictory pair
+  'maths-puzzles-02-q2': 'Dev', // Ben/Cara contradiction uses the one truth → Dev's denial is a lie
+  'maths-puzzles-02-q3': "The tin labelled 'Mixed'", // wrong label → pure contents reveal all three
+  'maths-puzzles-02-q4': 'Zef is a Knave; his friend is a Knight', // Knight saying it self-contradicts
+  'maths-puzzles-02-q5': 'True', // false claim of truth → Rio's statement false
+  'maths-puzzles-02-q6': 'Priti', // not Nina (given), not Omar (fish)
+  'maths-puzzles-02-q7': 'Lena', // Kai < Jay and Jay ≠ last → Kai 1st, Jay 2nd
+  'maths-puzzles-02-q8': 'Locker 3', // odd and not 1; blue is noise
+  'maths-puzzles-02-q9': 'Flo: drums, Gus: harp, Hana: flute', // Flo banned from flute+harp → drums
+  'maths-puzzles-02-q10': '3', // worst case one of each (2) + 1
+  'maths-puzzles-02-q11': '4', // worst case one of each (3) + 1
+  'maths-puzzles-02-q12': '4', // three colours → 4; the 10/8/6 are noise
+  'maths-puzzles-02-q13': '10', // all 8 blue + 1 red + 1 = 10
+  'maths-puzzles-02-q14': 'At least two children share a birthday month', // 31 > 12 months
+  'maths-puzzles-02-q15':
+    'No — 5 × 3 = 15 hand-ends is odd, but every handshake uses exactly two hands', // parity
+  'maths-puzzles-02-q16':
+    'No — each cup needs an odd number of flips, so the total needed is odd, but every move adds an even number', // 3 odds = odd vs even moves
+  'maths-puzzles-02-q17': 'False', // same-colour corners removed → 32 vs 30
+  'maths-puzzles-02-q18': '45', // total is invariant: 1+2+…+9
+  'maths-puzzles-02-q19': '24', // rise of 1⁄12 of n equals 2 → n = 24; 6→8 heads ✓
+  'maths-puzzles-02-q20': '8', // mints ≤ 12 forces toffees ≥ 8; 7 toffees fails
+
+  // Puzzle Lab · Rate Traps & Journeys (each rate re-derived from the unit)
+  'maths-puzzles-03-q1': '3', // 3 robins = 1 worm/min as a team → 100 in 100 min
+  'maths-puzzles-03-q2': '5', // each machine filled its own bottle in those 5 s
+  'maths-puzzles-03-q3': '3', // 12 painter-hours ÷ 4 painters
+  'maths-puzzles-03-q4': '2 hours', // drying is parallel, not shared work
+  'maths-puzzles-03-q5': '60', // 12 buns per baker-hour × 5
+  'maths-puzzles-03-q6': '12', // 3 + 2 = 5 pools/hour → 60 ÷ 5
+  'maths-puzzles-03-q7': '5', // gap 20 m ÷ closing 4 m/s; 45 m = 25 + 20 ✓
+  'maths-puzzles-03-q8': '2', // 36 ÷ (10 + 8); 20 + 16 = 36 ✓
+  'maths-puzzles-03-q9': '16', // 1 present per elf per 4 min → 2 each × 8 elves
+  'maths-puzzles-03-q10': '15', // 60 pony-days ÷ 4 ponies
+  'maths-puzzles-03-q11':
+    'Each hen lays 1 egg every 6 days, so in 12 days each lays 2 — and 12 hens lay 24 eggs',
+  'maths-puzzles-03-q12': 'The hen', // only fox+corn is a safe leftover pair
+  'maths-puzzles-03-q13': '7', // hen, back, fox, hen back, corn, back, hen
+  'maths-puzzles-03-q14': '15', // 2+1+8+2+2 (slow pair share the 8)
+  'maths-puzzles-03-q15': '7', // three net-one cycles (6 trips) + final pair
+  'maths-puzzles-03-q16': 'The fox and the corn',
+  'maths-puzzles-03-q17': '5', // dad solo forces returns either side: 2+1+1+1 trips around him
+  'maths-puzzles-03-q18': '2', // 5 − 3
+  'maths-puzzles-03-q19':
+    'Fill the 5; fill the 3 from it (2 left); empty the 3; tip the 2 into the 3; refill the 5; top up the 3 from it — 4 remain', // 5−1 = 4 at the last pour
+  'maths-puzzles-03-q20': '17', // 2+1+10+2+2 beats 10+1+6+1+2 = 20
+
+  // Puzzle Lab · Number Detective (digits re-derived from the clues)
+  'maths-puzzles-04-q1': '63', // 3u = 9 → u = 3, tens 6
+  'maths-puzzles-04-q2': '119', // hundreds 1, tens can't be 0 (units would be 10)
+  'maths-puzzles-04-q3': '234', // digit sum 9; 9 × 26
+  'maths-puzzles-04-q4': '6', // Y=1 (limit 198), Z=2 (units), 20X+2=122
+  'maths-puzzles-04-q5': '4', // 14 + □ = 18; 648 = 9 × 72
+  'maths-puzzles-04-q6': '0', // ends 0/5 and even → 0
+  'maths-puzzles-04-q7': '825', // 5 forced to units; 8 then 2
+  'maths-puzzles-04-q8': '5', // 4 + A ends in 9; 54 + 45 = 99
+  'maths-puzzles-04-q9': '9', // AA ≥ 94 → 99; B = 4
+  'maths-puzzles-04-q10': '47', // digits 7,4; odd kills 74
+  'maths-puzzles-04-q11': '10', // 1□1 with middle 0–9
+  'maths-puzzles-04-q12': '38', // (3,8) is the product-24 pair summing 11; smaller leads
+  'maths-puzzles-04-q13': '15', // B=9 (carry), A=6; 66 + 79 = 145
+  'maths-puzzles-04-q14': 'True', // 9 = 3 × 3
+  'maths-puzzles-04-q15': '20', // ten in units (7,17…97) + ten in tens (70–79)
+  'maths-puzzles-04-q16': '88', // 35 + 53 = (3+5) × 11
+  'maths-puzzles-04-q17':
+    'Doubling a two-digit number cannot pass 198, so the three-digit answer has to start with 1',
+  'maths-puzzles-04-q18': '105', // first 3-digit multiple of 15
+  'maths-puzzles-04-q19': '73', // 9 × (digit gap) = 36 → gap 4; with sum 10 → 7 and 3
+  'maths-puzzles-04-q20': '923', // 4u + 2 = 14 → u = 3, hundreds 9
+
+  // Puzzle Lab · Seeing in 3D (censuses re-derived; totals checked)
+  'maths-puzzles-05-q1': '27', // 3 layers of 9
+  'maths-puzzles-05-q2': '1', // core of 3×3×3 = 1×1×1
+  'maths-puzzles-05-q3': '6', // one face-middle per face × 6
+  'maths-puzzles-05-q4': '12', // one per edge × 12; census 8+12+6+1 = 27 ✓
+  'maths-puzzles-05-q5': '8', // corners only, any size
+  'maths-puzzles-05-q6': '27', // (5−2)³
+  'maths-puzzles-05-q7': '54', // 6 × 3×3; census 8+36+54+27 = 125 ✓
+  'maths-puzzles-05-q8': '14', // 9 + 4 + 1
+  'maths-puzzles-05-q9': '15', // 6 + 3 + 6
+  'maths-puzzles-05-q10': '10', // columns 1+2+3+4
+  'maths-puzzles-05-q11': '30', // 10 per slice × 3
+  'maths-puzzles-05-q12': '120', // 125 − 5 (odd cube has a centre column)
+  'maths-puzzles-05-q13': '112', // removed 5+5+5 − 2 (centre triple-counted) = 13
+  'maths-puzzles-05-q14': 'The footprint has 4 columns — but their heights are unknown',
+  'maths-puzzles-05-q15': '12', // 4 columns × max 3
+  'maths-puzzles-05-q16': '6', // 3 + 1 + 1 + 1
+  'maths-puzzles-05-q17': '5', // 6 − 1 table face
+  'maths-puzzles-05-q18': '10', // 12 − 2 glued
+  'maths-puzzles-05-q19': '14', // 18 − 2 joins × 2 faces
+  'maths-puzzles-05-q20': '24', // 12 edges × (4−2); census 8+24+24+8 = 64 ✓
+
+  // Puzzle Lab · Clocks & Cycles (each remainder re-derived)
+  'maths-puzzles-06-q1': 'Blue', // 14 mod 3 = 2 → position 2
+  'maths-puzzles-06-q2': '1', // 49 = 7×7, one short
+  'maths-puzzles-06-q3': '2', // 14 − 12
+  'maths-puzzles-06-q4': '9', // 50 mod 12 = 2 → 7 + 2
+  'maths-puzzles-06-q5': 'Thursday', // 30 mod 7 = 2 → Tue + 2
+  'maths-puzzles-06-q6': 'R', // 24 mod 4 = 0 → LAST letter
+  'maths-puzzles-06-q7': 'G', // 100 mod 8 = 4 → B,R,I,G
+  'maths-puzzles-06-q8': '1', // units cycle 7,9,3,1; 7⁴ = 2401
+  'maths-puzzles-06-q9': 'Red', // 45 falls in the 40–60 red stretch
+  'maths-puzzles-06-q10': '5', // 75 mod 10 = 5
+  'maths-puzzles-06-q11': '24', // LCM(6,8)
+  'maths-puzzles-06-q12': '60', // LCM(10,12,15) = 2²·3·5
+  'maths-puzzles-06-q13': '5', // Fridays 1,8,15,22,29 → 36 − 31 = Apr 5
+  'maths-puzzles-06-q14': 'False', // 100 mod 7 = 2 → Wednesday
+  'maths-puzzles-06-q15': '4', // 16 − 12
+  'maths-puzzles-06-q16': '11', // 35 mod 12
+  'maths-puzzles-06-q17': '1', // 6k+4: sixes split into threes; 4 mod 3 = 1 (try 10)
+  'maths-puzzles-06-q18': 'Saturday', // 14 = two whole weeks, remainder 0
+  'maths-puzzles-06-q19': 'Blue', // block of 5; 38 mod 5 = 3 → first blue
+  'maths-puzzles-06-q20':
+    'Whole cycles of 8 always land you back at the start of the word, so only the remainder decides how far in you finish',
+
+  // Puzzle Lab · Balance & Overlap (each re-derived; totals cross-checked)
+  'maths-puzzles-07-q1': '100', // 150 − 50 off both sides
+  'maths-puzzles-07-q2': '120', // 240 ÷ 2
+  'maths-puzzles-07-q3': '10', // (65 − 45) ÷ 2 pencils
+  'maths-puzzles-07-q4': '15', // 65 − 5×10
+  'maths-puzzles-07-q5': '7', // 2×2 plums + 3 plums
+  'maths-puzzles-07-q6': '400', // jug+mug = 3 mugs = 600 → mug 200
+  'maths-puzzles-07-q7': '12', // all three sum 22; 22 − 10 (cat+rabbit)
+  'maths-puzzles-07-q8': '4', // 28 − 20 baseline = 8 spare legs ÷ 2
+  'maths-puzzles-07-q9': 'Taking the same weight off both sides',
+  'maths-puzzles-07-q10': '60', // strip half a brick: half = 30 g
+  'maths-puzzles-07-q11': '26', // 30 − 4 neither
+  'maths-puzzles-07-q12': '10', // 17+15 − (28−6); parts re-total 28 ✓
+  'maths-puzzles-07-q13': '7', // 17 − 10 both
+  'maths-puzzles-07-q14': '12', // (17−10) + (15−10)
+  'maths-puzzles-07-q15': '3', // 25 − (11+6+5)
+  'maths-puzzles-07-q16': '23', // 18+12−7
+  'maths-puzzles-07-q17': '24', // (14+9−4) + 5
+  'maths-puzzles-07-q18': 'In the overlap, where the two circles cross',
+  'maths-puzzles-07-q19': '7', // 27 likes into 20 children → ≥7 doubled
+  'maths-puzzles-07-q20':
+    'Because 20 + 15 = 35 counts the both-group twice, and 35 − 30 = 5 — the overlap is forced to be exactly 5',
 };
 
 const mathsQuestions = sectionsBySubject('maths').flatMap((s) => s.questions);
