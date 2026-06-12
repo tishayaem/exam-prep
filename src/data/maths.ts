@@ -24,6 +24,8 @@ import { mathsPuzzles02LogicAndCertainty } from './sections/maths-puzzles-02-log
 import { mathsPuzzles03RatesAndJourneys } from './sections/maths-puzzles-03-rates-and-journeys';
 import { mathsPuzzles04NumberDetective } from './sections/maths-puzzles-04-number-detective';
 import { mathsPuzzles05SeeingIn3d } from './sections/maths-puzzles-05-seeing-in-3d';
+import { mathsPuzzles06ClocksAndCycles } from './sections/maths-puzzles-06-clocks-and-cycles';
+import { mathsPuzzles07BalanceAndOverlap } from './sections/maths-puzzles-07-balance-and-overlap';
 
 export const mathsSections: Section[] = [
   // Number & Calculation
@@ -56,4 +58,6 @@ export const mathsSections: Section[] = [
   mathsPuzzles03RatesAndJourneys,
   mathsPuzzles04NumberDetective,
   mathsPuzzles05SeeingIn3d,
+  mathsPuzzles06ClocksAndCycles,
+  mathsPuzzles07BalanceAndOverlap,
 ];

@@ -418,6 +418,52 @@ const EXPECTED: Record<string, string> = {
   'maths-puzzles-05-q18': '10', // 12 − 2 glued
   'maths-puzzles-05-q19': '14', // 18 − 2 joins × 2 faces
   'maths-puzzles-05-q20': '24', // 12 edges × (4−2); census 8+24+24+8 = 64 ✓
+
+  // Puzzle Lab · Clocks & Cycles (each remainder re-derived)
+  'maths-puzzles-06-q1': 'Blue', // 14 mod 3 = 2 → position 2
+  'maths-puzzles-06-q2': '1', // 49 = 7×7, one short
+  'maths-puzzles-06-q3': '2', // 14 − 12
+  'maths-puzzles-06-q4': '9', // 50 mod 12 = 2 → 7 + 2
+  'maths-puzzles-06-q5': 'Thursday', // 30 mod 7 = 2 → Tue + 2
+  'maths-puzzles-06-q6': 'R', // 24 mod 4 = 0 → LAST letter
+  'maths-puzzles-06-q7': 'G', // 100 mod 8 = 4 → B,R,I,G
+  'maths-puzzles-06-q8': '1', // units cycle 7,9,3,1; 7⁴ = 2401
+  'maths-puzzles-06-q9': 'Red', // 45 falls in the 40–60 red stretch
+  'maths-puzzles-06-q10': '5', // 75 mod 10 = 5
+  'maths-puzzles-06-q11': '24', // LCM(6,8)
+  'maths-puzzles-06-q12': '60', // LCM(10,12,15) = 2²·3·5
+  'maths-puzzles-06-q13': '5', // Fridays 1,8,15,22,29 → 36 − 31 = Apr 5
+  'maths-puzzles-06-q14': 'False', // 100 mod 7 = 2 → Wednesday
+  'maths-puzzles-06-q15': '4', // 16 − 12
+  'maths-puzzles-06-q16': '11', // 35 mod 12
+  'maths-puzzles-06-q17': '1', // 6k+4: sixes split into threes; 4 mod 3 = 1 (try 10)
+  'maths-puzzles-06-q18': 'Saturday', // 14 = two whole weeks, remainder 0
+  'maths-puzzles-06-q19': 'Blue', // block of 5; 38 mod 5 = 3 → first blue
+  'maths-puzzles-06-q20':
+    'Whole cycles of 8 always land you back at the start of the word, so only the remainder decides how far in you finish',
+
+  // Puzzle Lab · Balance & Overlap (each re-derived; totals cross-checked)
+  'maths-puzzles-07-q1': '100', // 150 − 50 off both sides
+  'maths-puzzles-07-q2': '120', // 240 ÷ 2
+  'maths-puzzles-07-q3': '10', // (65 − 45) ÷ 2 pencils
+  'maths-puzzles-07-q4': '15', // 65 − 5×10
+  'maths-puzzles-07-q5': '7', // 2×2 plums + 3 plums
+  'maths-puzzles-07-q6': '400', // jug+mug = 3 mugs = 600 → mug 200
+  'maths-puzzles-07-q7': '12', // all three sum 22; 22 − 10 (cat+rabbit)
+  'maths-puzzles-07-q8': '4', // 28 − 20 baseline = 8 spare legs ÷ 2
+  'maths-puzzles-07-q9': 'Taking the same weight off both sides',
+  'maths-puzzles-07-q10': '60', // strip half a brick: half = 30 g
+  'maths-puzzles-07-q11': '26', // 30 − 4 neither
+  'maths-puzzles-07-q12': '10', // 17+15 − (28−6); parts re-total 28 ✓
+  'maths-puzzles-07-q13': '7', // 17 − 10 both
+  'maths-puzzles-07-q14': '12', // (17−10) + (15−10)
+  'maths-puzzles-07-q15': '3', // 25 − (11+6+5)
+  'maths-puzzles-07-q16': '23', // 18+12−7
+  'maths-puzzles-07-q17': '24', // (14+9−4) + 5
+  'maths-puzzles-07-q18': 'In the overlap, where the two circles cross',
+  'maths-puzzles-07-q19': '7', // 27 likes into 20 children → ≥7 doubled
+  'maths-puzzles-07-q20':
+    'Because 20 + 15 = 35 counts the both-group twice, and 35 − 30 = 5 — the overlap is forced to be exactly 5',
 };
 
 const mathsQuestions = sectionsBySubject('maths').flatMap((s) => s.questions);
