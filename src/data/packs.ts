@@ -13,6 +13,12 @@ export interface PackDef {
   slug: Pack;
   subject: Subject;
   title: string;
+  /**
+   * Marks a stretch-tier "Lab" pack (Puzzle Lab, Word Lab, Cube Lab…).
+   * Stretch questions must carry `reasoning: true` + ≥1 `drivers` tag
+   * (enforced by data.test.ts) and feed the weekly Puzzle mix.
+   */
+  stretch?: boolean;
 }
 
 export interface SubjectDef {
@@ -73,7 +79,7 @@ export const PACKS: PackDef[] = [
   { slug: 'maths-ratio', subject: 'maths', title: 'Ratio, Proportion & Algebra' },
   { slug: 'maths-geometry', subject: 'maths', title: 'Measurement & Geometry' },
   { slug: 'maths-data', subject: 'maths', title: 'Data & Problem Solving' },
-  { slug: 'maths-puzzles', subject: 'maths', title: 'Puzzle Lab' },
+  { slug: 'maths-puzzles', subject: 'maths', title: 'Puzzle Lab', stretch: true },
 
   // English
   { slug: 'english-reading', subject: 'english', title: 'Reading & Comprehension' },
@@ -82,11 +88,17 @@ export const PACKS: PackDef[] = [
 
   // Non-Verbal Reasoning
   { slug: 'nvr-core', subject: 'non-verbal', title: 'Figures & Patterns' },
+  { slug: 'nvr-cubelab', subject: 'non-verbal', title: 'Cube Lab', stretch: true },
 
   // Verbal Reasoning
   { slug: 'vr-core', subject: 'verbal', title: 'Words, Codes & Logic' },
-  { slug: 'vr-wordlab', subject: 'verbal', title: 'Word Lab' },
+  { slug: 'vr-wordlab', subject: 'verbal', title: 'Word Lab', stretch: true },
 ];
+
+/** Slugs of every stretch-tier pack — the Puzzle-mix pool and test contracts key off this. */
+export const STRETCH_PACK_SLUGS: ReadonlySet<Pack> = new Set(
+  PACKS.filter((p) => p.stretch).map((p) => p.slug),
+);
 
 /** Human-readable pack title for a slug, falling back to the slug itself. */
 export function packTitle(slug: Pack): string {

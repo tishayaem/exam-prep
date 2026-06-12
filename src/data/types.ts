@@ -33,11 +33,11 @@ export interface VocabularyTerm {
 }
 
 /**
- * A single non-verbal-reasoning figure, described declaratively so one
+ * A flat 2-D non-verbal-reasoning figure, described declaratively so one
  * `<NvrFigure>` renderer can draw any of them. The attributes are exactly the
  * axes GL examiners vary: shape, shading, rotation, size and count.
  */
-export interface NvrFigure {
+export interface NvrShapeFigure {
   shape:
     | 'circle'
     | 'square'
@@ -64,6 +64,36 @@ export interface NvrFigure {
 }
 
 /**
+ * A structure of stacked unit cubes drawn isometrically — the CPT's live
+ * "how many cubes" type. `solid[row][col]` is the column height at that grid
+ * cell (0 = gap); row 0 is the BACK row as drawn. The fair-figure contract
+ * in data.test.ts guarantees every column's top stays visible, so the count
+ * is always deducible from the picture.
+ */
+export interface NvrSolidFigure {
+  solid: number[][];
+}
+
+/** A symbol drawn on one face of an unfolded cube net. */
+export type NetMark = 'dot' | 'ring' | 'cross' | 'star' | 'stripes' | 'triangle';
+
+/**
+ * An unfolded-cube net (or a trap that only looks like one): squares placed
+ * on a grid as [row, col] cells, with an optional parallel `marks` array
+ * putting a symbol on each face. Validity is never implied by the schema —
+ * non-folding impostors are deliberately authorable.
+ */
+export interface NvrNetFigure {
+  net: {
+    cells: [number, number][];
+    /** marks[i] decorates cells[i]; null leaves that face blank. */
+    marks?: (NetMark | null)[];
+  };
+}
+
+export type NvrFigure = NvrShapeFigure | NvrSolidFigure | NvrNetFigure;
+
+/**
  * Payload for a `type: 'nvr'` question. For `odd-one-out`, `stem` holds the
  * tappable figures and the answer index points into `stem`. For `series` /
  * `analogy` / `matrix`, `stem` is the question prompt (the sequence / pair /
@@ -76,9 +106,23 @@ export interface NvrFigure {
  * render-only — `stem` holds the example figures with the LAST figure being
  * the one to encode, and `codes` labels every stem figure except that last
  * one.
+ *
+ * `solid` rides on `type: 'mcq'` the same way: the stem (a cube structure)
+ * is render-only above plain numeric choices. `net` goes both ways — on an
+ * `mcq` it's a render-only marked net above text choices ("which mark is
+ * opposite…"), and on a `type: 'nvr'` question the `options` are tappable
+ * net figures ("which one folds into a cube?") with an empty stem.
  */
 export interface NvrQuestion {
-  kind: 'odd-one-out' | 'series' | 'analogy' | 'matrix' | 'code' | 'most-similar';
+  kind:
+    | 'odd-one-out'
+    | 'series'
+    | 'analogy'
+    | 'matrix'
+    | 'code'
+    | 'most-similar'
+    | 'solid'
+    | 'net';
   stem: NvrFigure[];
   options?: NvrFigure[];
   /** Only for `kind: 'code'`: codes[i] labels stem[i]; stem's last figure is the unknown. */

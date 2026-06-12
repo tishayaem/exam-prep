@@ -15,6 +15,26 @@ function StemCell({ figure, box = 70 }: { figure: Figure; box?: number }) {
 }
 
 /**
+ * The stem of an mcq-riding `solid` or `net` question: the figure(s) the
+ * child reasons about, rendered large above ordinary text choices. The
+ * cube-count and opposite-face questions are ALL about the picture, so it
+ * gets more room than a code stem cell.
+ */
+export function NvrStemStrip({ nvr }: { nvr: NvrQuestion }) {
+  return (
+    <div className="rounded-[22px] border border-rule bg-off p-4 sm:p-6 overflow-x-auto mb-6">
+      <div className="flex items-center justify-center gap-4 min-w-max">
+        {nvr.stem.map((f, i) => (
+          <div key={i} className="rounded-xl bg-paper border border-rule p-2 grid place-items-center">
+            <NvrFigure figure={f} box={148} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
  * The stem of a Codes question: example figures with their letter codes
  * beneath, then the figure to encode above a "?". Rendered by AnswerArea
  * above ordinary MCQ text choices (the code answers are plain strings).
@@ -71,8 +91,12 @@ function Choices({
   verdict: Verdict;
   onChoose: (i: number) => void;
 }) {
+  // Net figures are wide multi-square drawings; four-up keeps them legible.
+  const grid = figures.some((f) => 'net' in f)
+    ? 'grid-cols-2 sm:grid-cols-4'
+    : 'grid-cols-3 sm:grid-cols-5';
   return (
-    <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 sm:gap-3">
+    <div className={`grid ${grid} gap-2.5 sm:gap-3`}>
       {figures.map((f, i) => {
         const isAnswer = i === answerIndex;
         const isPicked = i === pickedIndex;
@@ -92,7 +116,8 @@ function Choices({
             onClick={() => onChoose(i)}
             className={`rounded-2xl p-2 flex flex-col items-center gap-1 transition-colors ${cls}`}
           >
-            <NvrFigure figure={f} />
+            {/* Nets pack up to 4×3 squares into the cell, so they get more pixels. */}
+            <NvrFigure figure={f} box={'net' in f ? 104 : 78} />
             <span className="text-[12px] font-bold text-inkSoft">{LETTERS[i]}</span>
           </button>
         );
@@ -128,7 +153,9 @@ export function NvrAnswer({
     />
   );
 
-  if (nvr.kind === 'odd-one-out') {
+  // Odd-one-out and pick-a-net questions have no separate stem — the
+  // tappable figures ARE the question.
+  if (nvr.kind === 'odd-one-out' || nvr.kind === 'net') {
     return choiceBlock;
   }
 

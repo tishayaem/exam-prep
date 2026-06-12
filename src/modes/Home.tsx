@@ -8,6 +8,7 @@ import type { SubjectDef } from '../data/packs';
 import { useProgress } from '../lib/storage';
 import { mistakesQueue } from '../lib/mistakes';
 import { weakestTopics } from '../lib/mastery';
+import { weekKey } from '../lib/puzzleMix';
 import { burstFromEvent } from '../lib/confetti';
 import { getSectionProgress, pickResume } from '../lib/sectionProgress';
 
@@ -264,6 +265,7 @@ function Practice({
         }
       />
       <SmartPracticeBanner focus={focus} />
+      <PuzzleMixBanner />
       <div className="grid gap-4 sm:gap-[18px] grid-cols-2 lg:grid-cols-3 [&>*]:min-w-0">
         <PracticeCard
           to="/mock-test"
@@ -383,6 +385,45 @@ function SmartPracticeBanner({ focus }: { focus: string[] }) {
         </div>
         <div className="bg-ink text-paper rounded-full px-6 py-3.5 font-bold text-[15px] shrink-0 justify-self-start sm:justify-self-end group-hover:bg-neon-pink transition-colors">
           Start ›
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+// The weekly stretch set — a fixed ten that re-rolls every Monday, framed as
+// this week's puzzle page rather than an endless drill. Sits under Smart
+// Practice as the second banner: adaptive drill above, weekly treat below.
+function PuzzleMixBanner() {
+  return (
+    <Link
+      to="/puzzle-mix"
+      viewTransition
+      onClick={(e: MouseEvent<HTMLAnchorElement>) => burstFromEvent(e)}
+      className="block relative overflow-hidden rounded-[28px] border-[1.5px] border-ink p-6 sm:p-8 mb-4 sm:mb-[18px] hover:-translate-y-0.5 transition-transform group"
+    >
+      <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div>
+          <div className="text-[11px] font-bold text-neon-purple uppercase tracking-[0.14em]">
+            Weekly · Week {weekKey().split('-W')[1]} · Fresh mix every Monday
+          </div>
+          <div className="font-display font-bold tracking-[-0.03em] leading-[0.98] mt-1.5 text-[clamp(1.75rem,4vw,2.75rem)]">
+            Puzzle{' '}
+            <span className="relative inline-block">
+              mix
+              <span
+                aria-hidden
+                className="absolute left-0 right-0 bottom-[6%] h-[16%] bg-neon-purple -z-10 -skew-x-6"
+              />
+            </span>
+          </div>
+          <div className="text-[14px] text-inkSoft mt-2.5 max-w-lg leading-snug">
+            Ten head-scratchers from the Puzzle, Word and Cube Labs. No clock —
+            stop, think, enjoy the fight.
+          </div>
+        </div>
+        <div className="bg-ink text-paper rounded-full px-6 py-3.5 font-bold text-[15px] shrink-0 justify-self-start sm:justify-self-end group-hover:bg-neon-purple transition-colors">
+          This week's ten ›
         </div>
       </div>
     </Link>

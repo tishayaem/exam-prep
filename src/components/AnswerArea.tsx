@@ -2,7 +2,7 @@ import type { Question } from '../data/types';
 import { firstAnswer, type Verdict } from './answerFormat';
 import { MatchAnswer } from './MatchAnswer';
 import { SequenceAnswer } from './SequenceAnswer';
-import { NvrAnswer, NvrCodeStem } from './NvrAnswer';
+import { NvrAnswer, NvrCodeStem, NvrStemStrip } from './NvrAnswer';
 
 /**
  * The input surface for a question — picks the right control for the type
@@ -85,8 +85,12 @@ export function AnswerArea({
     return (
       <div>
         {/* Codes questions are MCQs with a figure stem rendered above the
-            letter-pair choices. */}
+            letter-pair choices; cube solids and marked nets ride MCQs the
+            same way, above plain text choices. */}
         {question.nvr?.kind === 'code' && <NvrCodeStem nvr={question.nvr} />}
+        {(question.nvr?.kind === 'solid' || question.nvr?.kind === 'net') && (
+          <NvrStemStrip nvr={question.nvr} />
+        )}
         <div className="grid gap-3">
         {choices.map((c) => {
           const isPicked = input === c;

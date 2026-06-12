@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import type { Question, Subject } from './types';
+import type { NvrShapeFigure, Subject } from './types';
 import { allSections, allQuestions, questionsBySubject } from './index';
-import { PACKS } from './packs';
+import { PACKS, STRETCH_PACK_SLUGS } from './packs';
 import { gradeNumeric } from '../lib/grading';
 import { numberSprintPool } from '../lib/numberSprint';
 import { ISEB_MINUTES, isebPool } from '../lib/mockPaper';
@@ -150,12 +150,13 @@ describe('answerability (every question can actually be marked correct)', () => 
     }
   });
 
-  // The stretch-pack contract (ROADMAP §7): every Puzzle Lab and Word Lab
-  // question is reasoning-flagged (it feeds the problem-solving drill) and
-  // carries at least one hardness-driver tag for the future serving rule.
+  // The stretch-pack contract (ROADMAP §7): every question in a pack flagged
+  // `stretch` in the registry (Puzzle Lab, Word Lab, Cube Lab…) is
+  // reasoning-flagged (it feeds the problem-solving drill) and carries at
+  // least one hardness-driver tag for the Puzzle-mix serving rule.
   it('every stretch-pack question is reasoning-flagged and driver-tagged', () => {
     const stretch = allSections
-      .filter((s) => s.pack === 'maths-puzzles' || s.pack === 'vr-wordlab')
+      .filter((s) => STRETCH_PACK_SLUGS.has(s.pack))
       .flatMap((s) => s.questions);
     expect(stretch.length).toBeGreaterThan(0);
     const bad = stretch
@@ -175,9 +176,15 @@ describe('answerability (every question can actually be marked correct)', () => 
       const lens = new Set([...(nvr.codes ?? []), first(q.answer)].map((c) => c.length));
       if (lens.size > 1) bad.push(`${q.id}: codes and answer must share one length`);
     }
-    // And the only mcq questions carrying an nvr payload are code stems.
-    for (const q of allQuestions.filter((q) => q.type === 'mcq' && q.nvr)) {
-      if (q.nvr!.kind !== 'code') bad.push(`${q.id}: mcq nvr payload must be kind code`);
+    // Non-nvr-type questions may carry an nvr payload only as a render-only
+    // stem: codes, cube solids and marked nets, on tap-to-answer types.
+    for (const q of allQuestions.filter((q) => q.type !== 'nvr' && q.nvr)) {
+      if (!['code', 'solid', 'net'].includes(q.nvr!.kind))
+        bad.push(`${q.id}: ${q.type} nvr payload must be kind code, solid or net`);
+      if (q.type !== 'mcq' && q.type !== 'truefalse')
+        bad.push(`${q.id}: nvr stems only ride mcq/truefalse questions`);
+      if ((q.nvr!.kind === 'solid' || q.nvr!.kind === 'net') && q.nvr!.stem.length === 0)
+        bad.push(`${q.id}: render-only ${q.nvr!.kind} stem needs at least one figure`);
     }
     expect(bad).toEqual([]);
   });
@@ -189,7 +196,7 @@ describe('answerability (every question can actually be marked correct)', () => 
   // and unsolvable/ambiguous constructions.
   it('every Codes question is mechanically solvable to its stored answer', () => {
     const ATTRS = ['shape', 'fill', 'size', 'rotation', 'dots', 'mirrored'] as const;
-    const val = (f: NonNullable<Question['nvr']>['stem'][number], a: (typeof ATTRS)[number]) =>
+    const val = (f: NvrShapeFigure, a: (typeof ATTRS)[number]) =>
       String(
         a === 'fill' ? f.fill ?? 'white'
         : a === 'size' ? f.size ?? 'md'
@@ -202,8 +209,12 @@ describe('answerability (every question can actually be marked correct)', () => 
     for (const q of allQuestions.filter((q) => q.nvr?.kind === 'code')) {
       const { stem, codes } = q.nvr!;
       if (!codes?.length) continue; // shape errors reported by the test above
-      const examples = stem.slice(0, -1);
-      const unknown = stem[stem.length - 1];
+      if (stem.some((f) => !('shape' in f))) {
+        bad.push(`${q.id}: code stems must be flat shape figures`);
+        continue;
+      }
+      const examples = stem.slice(0, -1) as NvrShapeFigure[];
+      const unknown = stem[stem.length - 1] as NvrShapeFigure;
       let derived = '';
       for (let p = 0; p < codes[0].length; p++) {
         const groups = new Map<string, typeof examples>();
@@ -266,8 +277,96 @@ describe('answerability (every question can actually be marked correct)', () => 
       if (nvr.kind === 'most-similar' && nvr.stem.length !== 3) {
         bad.push(`${q.id}: most-similar needs exactly 3 stem figures`);
       }
-      if (nvr.kind !== 'odd-one-out' && !nvr.options?.length) {
+      if (nvr.kind !== 'odd-one-out' && nvr.kind !== 'net' && !nvr.options?.length) {
         bad.push(`${q.id}: ${nvr.kind} needs an options array`);
+      }
+      // Tappable net questions: every option is a net; solids never tap.
+      if (nvr.kind === 'net' && !nvr.options?.every((f) => 'net' in f)) {
+        bad.push(`${q.id}: net options must all be net figures`);
+      }
+      if (nvr.kind === 'solid') {
+        bad.push(`${q.id}: solid stems ride mcq questions, not type nvr`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  // Cube-solid figures must be honest: rectangular height grids in a sane
+  // range, and — the fair-figure contract — no column's top face may be
+  // fully hidden in the isometric drawing, or the count stops being
+  // deducible from the picture. Under the renderer's projection a column at
+  // (r, c) of height h keeps its top visible iff (1) no column k steps down
+  // the front diagonal reaches height h + k, and (2) its east and south
+  // neighbours aren't BOTH taller (which would bury it in a valley).
+  it('every cube-solid figure is well-formed and fairly drawn', () => {
+    const bad: string[] = [];
+    for (const q of allQuestions) {
+      for (const f of [...(q.nvr?.stem ?? []), ...(q.nvr?.options ?? [])]) {
+        if (!('solid' in f)) continue;
+        const g = f.solid;
+        const cols = g[0]?.length ?? 0;
+        if (cols === 0 || g.some((row) => row.length !== cols)) {
+          bad.push(`${q.id}: solid grid must be rectangular`);
+          continue;
+        }
+        if (g.flat().some((h) => !Number.isInteger(h) || h < 0 || h > 4)) {
+          bad.push(`${q.id}: heights must be integers 0–4`);
+        }
+        if (g.flat().every((h) => h === 0)) bad.push(`${q.id}: solid is empty`);
+        for (let r = 0; r < g.length; r++) {
+          for (let c = 0; c < cols; c++) {
+            const h = g[r][c];
+            if (h === 0) continue;
+            for (let k = 1; r + k < g.length && c + k < cols; k++) {
+              if (g[r + k][c + k] >= h + k) {
+                bad.push(`${q.id}: column (${r},${c}) hidden by front diagonal`);
+              }
+            }
+            const east = g[r][c + 1] ?? 0;
+            const south = g[r + 1]?.[c] ?? 0;
+            if (east > h && south > h) {
+              bad.push(`${q.id}: column (${r},${c}) buried in a valley`);
+            }
+          }
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
+  // Net figures: exactly six distinct, edge-connected cells (impostor nets
+  // are still six squares — that's what makes them traps), and marks, when
+  // present, label every cell with no symbol used twice.
+  it('every net figure is six connected squares with well-formed marks', () => {
+    const bad: string[] = [];
+    for (const q of allQuestions) {
+      for (const f of [...(q.nvr?.stem ?? []), ...(q.nvr?.options ?? [])]) {
+        if (!('net' in f)) continue;
+        const { cells, marks } = f.net;
+        if (cells.length !== 6) bad.push(`${q.id}: net needs exactly 6 cells`);
+        const keys = new Set(cells.map(([r, c]) => `${r},${c}`));
+        if (keys.size !== cells.length) bad.push(`${q.id}: duplicate net cells`);
+        // Flood-fill connectivity over edge-adjacent cells.
+        const seen = new Set<string>([`${cells[0][0]},${cells[0][1]}`]);
+        const queue = [cells[0]];
+        while (queue.length) {
+          const [r, c] = queue.pop()!;
+          for (const [nr, nc] of [[r - 1, c], [r + 1, c], [r, c - 1], [r, c + 1]]) {
+            const k = `${nr},${nc}`;
+            if (keys.has(k) && !seen.has(k)) {
+              seen.add(k);
+              queue.push([nr, nc]);
+            }
+          }
+        }
+        if (seen.size !== keys.size) bad.push(`${q.id}: net cells not connected`);
+        if (marks) {
+          if (marks.length !== cells.length)
+            bad.push(`${q.id}: marks must parallel cells`);
+          const used = marks.filter((m) => m !== null);
+          if (new Set(used).size !== used.length)
+            bad.push(`${q.id}: marks must not repeat`);
+        }
       }
     }
     expect(bad).toEqual([]);
