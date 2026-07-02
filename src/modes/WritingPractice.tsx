@@ -151,7 +151,10 @@ export function WritingPractice() {
         <PromptCard prompt={prompt} compact />
         <p className="text-[15px] text-inkSoft leading-relaxed">
           One line per beat, on your paper. Decide the <strong className="text-ink">ending</strong>{' '}
-          now — endings invented in the last minute read like it.
+          now — endings invented in the last minute read like it. And plan{' '}
+          <strong className="text-ink">small</strong>: top stories spend all their words on about{' '}
+          <strong className="text-ink">three minutes of action</strong>, described through a
+          magnifying glass — not a whole adventure at a sprint.
         </p>
         <ol className="space-y-3">
           {PLAN_BEATS.map((b, i) => (
@@ -192,7 +195,13 @@ export function WritingPractice() {
             Glance at your plan — the next beat tells you what happens.
           </p>
           <p>
-            Spend a simile somewhere deliberate. Let one short sentence land after a long one. And
+            <strong className="text-ink">Ti-To-P-P:</strong> new paragraph when the Time, Topic,
+            Person or Place changes. One single-line paragraph is allowed — save it for a moment
+            that deserves the spotlight.
+          </p>
+          <p>
+            Spend a simile somewhere deliberate; let a short sentence land after a long one. Show
+            the feeling through what your character does — two feelings at once is real life. And
             keep your tense steady — past stays past.
           </p>
         </div>
@@ -234,8 +243,9 @@ export function WritingPractice() {
     );
   }
 
-  // review
-  const groups: RubricGroup[] = ['Ideas', 'Structure', 'Style', 'Accuracy'];
+  // review — the five headings are the CSSE mark-scheme domains (the best
+  // published proxy for what Brighton's markers score).
+  const groups: RubricGroup[] = ['Ideas', 'Vocabulary', 'Grammar', 'Structure', 'Punctuation'];
   const toggle = (id: string) =>
     setTicked((prev) => {
       const next = new Set(prev);
@@ -254,7 +264,8 @@ export function WritingPractice() {
           Read it aloud to a grown-up, then tick together.
         </h1>
         <p className="text-[15px] text-inkSoft mt-3 max-w-xl leading-relaxed">
-          Be honest — an unticked box isn't a fail, it's the plan for next time.{' '}
+          These five headings are the same ones real 11+ markers score. Be honest — an unticked
+          box isn't a fail, it's the plan for next time.{' '}
           <strong className="text-ink tabular-nums">
             {ticked.size}/{RUBRIC.length}
           </strong>{' '}

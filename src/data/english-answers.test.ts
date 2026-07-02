@@ -88,6 +88,35 @@ const EXPECTED: Record<string, string> = {
   'english-reading-03-q20':
     'It suggests an easy, unhurried, animal stride — matching both the dog picture and the slow, steady waves.',
 
+  // Classic prose — The Wind in the Willows ch. 1 (each key re-derived
+  // against the printed extract; vocabulary checked against period usage)
+  'english-reading-04-q1': 'spring-cleaning his little home', // first sentence
+  'english-reading-04-q2': 'black', // "whitewash all over his black fur"
+  'english-reading-04-q3': 'a bucket', // pail = bucket
+  'english-reading-04-q4':
+    'The spirit of spring reached even his dark underground home, and he longed to be out in it.', // "penetrating even his dark and lowly little house… small wonder, then"
+  'english-reading-04-q5': 'in a commanding way that simply had to be obeyed', // imperiously ← imperial
+  'english-reading-04-q6': 'alliteration', // scr- scr- scr- scr-
+  'english-reading-04-q7': 'rolling in the warm grass of a great meadow', // "pop! his snout came out"
+  'english-reading-04-q8': 'being shut away from everyone and everything', // seclusion
+  'english-reading-04-q9':
+    'A simile — after the silent underground, ordinary birdsong feels deafening to him.', // "almost like a shout"
+  'english-reading-04-q10': 'sixpence for the privilege of passing by the private road', // rabbit's speech
+  'english-reading-04-q11':
+    'He is bubbling over with such high spirits that he feels cheeky and unstoppable.', // chaffing + jeering, no anger
+  'english-reading-04-q12': 'spring', // "Spring was moving in the air"
+  'english-reading-04-q13': 'seeing all the other fellows busy working while you rest', // "not so much to be resting yourself, as…"
+  'english-reading-04-q14': 'wandered slowly, with no particular destination', // meandered + "aimlessly"
+  'english-reading-04-q15': 'personification — the river is written as a living creature', // no like/as; river chases, chuckles, laughs
+  'english-reading-04-q16': 'a grown-up storyteller who has a small child spell-bound', // "as one trots, when very small, by the side of a man"
+  'english-reading-04-q17':
+    'It can never be satisfied — it swallows every river and always wants more.', // in- + satiable
+  'english-reading-04-q18': 'He had spent his life underground, in his "dark and lowly little house".', // tunnel + cellarage clues
+  'english-reading-04-q19':
+    'cleaning underground — tunnelling up to the meadow — the rabbit\'s toll — rambling the meadows — reaching the river', // hedge gap precedes the rambling
+  'english-reading-04-q20':
+    'An animal abandons his chores when spring calls, and falls under the spell of the river he sees for the first time.', // never finishes, never swims, never regrets
+
   // Spelling (UK conventions)
   'english-spag-01-q1': 'necessary',
   'english-spag-01-q2': 'separate',

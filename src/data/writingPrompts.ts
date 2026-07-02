@@ -156,17 +156,30 @@ export const PLAN_BEATS: { beat: string; hint: string }[] = [
 /** The five-minute polish, in priority order. */
 export const CHECK_STEPS: string[] = [
   'Capitals and full stops — every sentence, no exceptions.',
+  'Paragraph patrol: every change of Time, Topic, Person or Place gets a new paragraph. Missed one? Mark it with // — markers accept it.',
   'Hunt down your three trickiest spellings and check each one.',
   'Upgrade one boring verb (said → muttered? walked → trudged?).',
-  'Read it in your head. Does every sentence actually finish?',
+  'Read it in your head. Does every sentence finish — and does the tense stay put?',
 ];
 
 /**
- * Self-mark rubric, ticked with a grown-up after writing. Groups mirror the
- * published marking criteria: imagination, structure/cohesion, sentence
- * craft, and technical accuracy.
+ * Self-mark rubric, ticked with a grown-up after writing. The five groups
+ * ARE the five domains of the published CSSE continuous-writing mark scheme
+ * (Ideas / Vocabulary / Grammar / Structure / Punctuation — the best public
+ * proxy for Brighton's unpublished rubric), and the individual ticks are the
+ * top-band descriptors translated into kid: CSSE Band 4 ("ambitious
+ * vocabulary used appropriately", "clear sense of direction", "punctuation
+ * varied and used creatively"), the Dulwich 17–20 band (sensory language,
+ * sentence variety, paragraphing FOR EFFECT), the KCS "psychological depth"
+ * criterion, and the magnifying-glass technique. See
+ * materials/11plus-research/brighton-exam-intel.md §3 + the Gemini section.
  */
-export type RubricGroup = 'Ideas' | 'Structure' | 'Style' | 'Accuracy';
+export type RubricGroup =
+  | 'Ideas'
+  | 'Vocabulary'
+  | 'Grammar'
+  | 'Structure'
+  | 'Punctuation';
 
 export interface RubricItem {
   id: string;
@@ -175,14 +188,24 @@ export interface RubricItem {
 }
 
 export const RUBRIC: RubricItem[] = [
-  { id: 'r-hook', group: 'Ideas', label: 'My opening would make a stranger want to read on.' },
-  { id: 'r-original', group: 'Ideas', label: 'There is one idea in here only I would have thought of.' },
-  { id: 'r-mountain', group: 'Structure', label: 'It has the mountain shape: build-up, problem, resolution, ending.' },
-  { id: 'r-paragraphs', group: 'Structure', label: 'Paragraphs change when the time, place or speaker changes.' },
-  { id: 'r-ending', group: 'Structure', label: 'The ending lands on purpose — it doesn\'t just stop.' },
-  { id: 'r-show', group: 'Style', label: 'I showed a feeling through actions instead of naming it.' },
-  { id: 'r-technique', group: 'Style', label: 'I used one simile or metaphor on purpose.' },
-  { id: 'r-variety', group: 'Style', label: 'My sentences vary — a short one lands between long ones.' },
-  { id: 'r-accuracy', group: 'Accuracy', label: 'Capitals, full stops and my trickiest spellings are checked.' },
-  { id: 'r-aloud', group: 'Accuracy', label: 'I read it aloud and it sounds like me.' },
+  // Ideas — CSSE "clear and original"; KCS psychological depth; the
+  // magnifying glass (top scripts describe ~three minutes, not a plot tour).
+  { id: 'r-magnify', group: 'Ideas', label: 'I zoomed in on about three minutes of story, instead of racing through a whole adventure.' },
+  { id: 'r-feelings', group: 'Ideas', label: 'My character\'s feelings are in there — and they\'re mixed, like real ones (excited AND nervous).' },
+  { id: 'r-original', group: 'Ideas', label: 'There\'s one detail only I would have noticed — not a line learned off by heart.' },
+  // Vocabulary — CSSE Band 4 "ambitious vocabulary used appropriately"
+  // (Band 2 is "ambitious words misapplied"); Dulwich sensory language.
+  { id: 'r-ambitious', group: 'Vocabulary', label: 'Every ambitious word is there because it FITS — none are showing off.' },
+  { id: 'r-senses', group: 'Vocabulary', label: 'I used at least two senses that aren\'t seeing: sound, touch, smell or taste.' },
+  // Grammar — Dulwich "wide variety of sentence structures".
+  { id: 'r-variety', group: 'Grammar', label: 'My sentences change shape and length — a short one lands hard after a long one.' },
+  { id: 'r-openers', group: 'Grammar', label: 'My sentences don\'t all start the same way — some open with where, when or how.' },
+  // Structure — CSSE "securely structured, clear sense of direction";
+  // TiToP-P; Dulwich paragraphing for effect.
+  { id: 'r-direction', group: 'Structure', label: 'The story knows where it\'s going — I decided the ending before I wrote the opening.' },
+  { id: 'r-titopp', group: 'Structure', label: 'New paragraph at every change of Time, Topic, Person or Place (Ti-To-P-P).' },
+  { id: 'r-effect', group: 'Structure', label: 'One paragraph works FOR EFFECT — like a single short line that makes a moment land.' },
+  // Punctuation — CSSE "varied and used creatively" (accuracy first).
+  { id: 'r-stops', group: 'Punctuation', label: 'Capitals and full stops in every single sentence — checked, not hoped.' },
+  { id: 'r-punct-range', group: 'Punctuation', label: 'I used more than full stops: a question mark, dash, colon or ellipsis — each on purpose.' },
 ];

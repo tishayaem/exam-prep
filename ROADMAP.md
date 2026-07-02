@@ -25,22 +25,32 @@ check items off here as they land.
   7-section **Puzzle Lab** stretch pack (`maths-puzzles`, all archetype
   families). Every answer double-checked in `src/data/maths-answers.test.ts`.
 - **Verbal:** 8 sections × 20 = 160 — `vr-core` (5) plus the **Word Lab**
-  stretch pack (ladders / cryptic-lite / roots). **Non-verbal:** 6 sections
-  (~89 Qs) incl. Codes, Most Similar and reflection traps.
+  stretch pack (ladders / cryptic-lite / roots). **Non-verbal:** 8 sections
+  (~119 Qs) — `nvr-core` (6, incl. Codes, Most Similar and reflection
+  traps) plus the **Cube Lab** stretch pack (figure-based "how many cubes"
+  heightmaps + cube nets, answers machine-verified by a fold simulator).
 
-**Next session, start here (handoff, 12 Jun 2026):**
+**Next session, start here (handoff, 12 Jun 2026, evening — after the
+Cube Lab / Puzzle mix / classic-prose session):**
 
-1. **NVR stretch types** (§7) — the one item left with real engineering:
-   "how many cubes" (heightmap data model) and cube nets need `NvrFigure`
-   schema + renderer work in `src/components/NvrFigure.tsx`; text-prompt
-   versions already exist in `maths-puzzles-05`, so this is the figure-based
-   upgrade. Start with the heightmap (live ISEB type), nets second.
-2. **Stretch serving rule** (§7) — ~80–85% success targeting; simplest v1 is
-   a weekly "Puzzle mix" set on Home drawing from packs tagged with
-   `drivers` (the tags are already on all 200 stretch questions).
-3. **English §5 leftovers** — classic-prose long passage from the corpus in
-   `brighton-exam-intel.md` §4, and the writing rubric → CSSE/Dulwich bands.
-4. **Blocked on the familiarisation test:** shuffled-sentences English type;
+1. **Activities-day group-task section in /interview** (§6) — the last
+   unticked item with all its research in hand (desert-island format,
+   observed-behaviour rubric, "coached alpha" vs silence failure modes,
+   the baton-pass move — `brighton-exam-intel.md`, Gemini section).
+2. **English §5 leftovers** — third SPaG section (clauses, apostrophe edge
+   cases, direct speech); log writing-practice sessions to storage so the
+   streak/resume tile see them. (Write-in comprehension drill stays parked
+   until admissions confirm the December day's composition.)
+3. **More classic prose** — `english-reading-04` (Grahame) established the
+   pattern; the §4 corpus has ~30 more extracts (Dickens, Stevenson,
+   exploration non-fiction, de la Mare). A second section or variantOf
+   twins both work. Passage sourcing trick: gutenberg.org 403s from the
+   sandbox, but the GITenberg GitHub mirrors serve the same files raw.
+4. **NVR stretch round 2** (§7) — symmetry/rotation figures, and a
+   figure-based painted-cube type if wanted (text version lives in
+   maths-puzzles-05). The heightmap fair-figure contract in data.test.ts
+   is the template for any new figure kind's honesty rules.
+5. **Blocked on the familiarisation test:** shuffled-sentences English type;
    the disputed "ISEB VR dropped codes" claim (don't re-weight until then).
 
 Ops notes for that session: this repo squash-merges PRs, so after a merge
@@ -48,12 +58,14 @@ reset the session's `claude/*` work branch onto `origin/main`
 (`git reset --hard origin/main` + force-with-lease push) before new work.
 Fresh containers need `npm ci`. Stretch-pack questions must carry
 `reasoning: true` + ≥1 `drivers` tag and re-derived keys in the subject's
-`*-answers.test.ts` — data.test.ts enforces all of it. Any new long timer
-must use the wall-clock pattern (see `WritingPractice.tsx` / `MockTest.tsx`).
-The GitHub MCP `actions_list` result overflows — `jq` the saved file.
-- **English:** 6 sections × 20 = 120 questions — reading ×3 (short passages,
-  a long passage, non-fiction + poetry), SPaG ×2, composition — plus the
-  `/writing-practice` session runner. Keys in `english-answers.test.ts`.
+`*-answers.test.ts` — data.test.ts enforces all of it (stretch packs are
+now flagged in `packs.ts`, not hardcoded). Any new long timer must use the
+wall-clock pattern (see `WritingPractice.tsx` / `MockTest.tsx`). The GitHub
+MCP `actions_list` result overflows — `jq` the saved file.
+- **English:** 7 sections × 20 = 140 questions — reading ×4 (short passages,
+  a long passage, non-fiction + poetry, classic prose), SPaG ×2, composition
+  — plus the `/writing-practice` session runner with the CSSE-domain
+  self-mark rubric. Keys in `english-answers.test.ts`.
 - **Interview:** `/interview` guide + practice deck, built from the research.
 - **Engine:** `src/lib/mastery.ts` powers `/skills` (Skills Map) and
   `/smart-practice` (adaptive 12-question sessions); Mistakes serves
@@ -126,9 +138,14 @@ English was the thinnest confirmed paper, so it got the maths/VR treatment:
       timers (5 min plan / 20 write / 5 check) with the story written on
       paper, then a self-mark rubric (ideas / structure / style / accuracy)
       to walk through with a grown-up.
-- [ ] **A classic-prose long passage** — a public-domain extract (Dickens,
-      Nesbit, Grahame…) with older vocabulary: the hardest comprehension
-      flavour on independent-school papers, currently unrepresented.
+- [x] **A classic-prose long passage** — *(Shipped 12 June 2026:
+      `english-reading-04-classic-prose` — The Wind in the Willows ch. 1,
+      verbatim 1908 text from the corpus (§4 entry 5), 20 questions in
+      passage order: old-word swap-test vocabulary (pail / imperiously /
+      seclusion / insatiable), the famous river personification, invented-
+      word alliteration, mood inference. Lesson teaches the three
+      classic-prose obstacles: old words, long sentences, dense technique.
+      Keys re-derived in english-answers.test.ts.)*
 - [ ] **Write-in comprehension drill** — stage 1 is confirmed MCQ, so the
       December day is the write-in venue; shift more comprehension questions
       to `short` type once the day's composition is confirmed.
@@ -165,23 +182,25 @@ Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
       mocks are MCQ — see `brighton-exam-intel.md` §5).
-- [ ] **Writing rubric → published mark schemes** — refine the
-      writing-practice self-mark rubric to the CSSE domains (Ideas /
-      Vocabulary+Spelling / Grammar / Structure / Punctuation), folding in
-      the Dulwich top-band descriptors (sensory language, sentence variety,
-      paragraphing *for effect*) and the KCS "psychological depth" criterion;
-      teach the **magnifying-glass technique** (describe three minutes, not a
-      whole plot) and the TiToP-P paragraph rule in the lesson/check phases.
-      All in `brighton-exam-intel.md` (Gemini section + §3).
+- [x] **Writing rubric → published mark schemes** — *(Shipped 12 June 2026:
+      the self-mark rubric's groups are now the five CSSE domains (Ideas /
+      Vocabulary / Grammar / Structure / Punctuation), with 12 ticks built
+      from the CSSE Band-4 descriptors, the Dulwich top band (sensory
+      language, sentence variety, paragraphing FOR EFFECT) and the KCS
+      psychological-depth criterion. The plan phase teaches the
+      magnifying-glass technique, the write phase teaches Ti-To-P-P + the
+      one-line-paragraph move, and the check phase gained the paragraph
+      patrol with the // exam fix-up mark.)*
 - [x] **Prompt-bank genre check** — 2022 forum evidence says Brighton 11+
       writing has only ever been **descriptive/story**; the bank is already
       100% narrative/descriptive with no persuasive prompts. No change
       needed; keep persuasive out.
-- [ ] **Classic-prose passages from the corpus** — build item 5's
-      classic-prose section from the combined ~30-extract public-domain list
-      in `brighton-exam-intel.md` (§4 + Gemini additions: exploration
-      non-fiction like Shackleton/Scott, de la Mare's "The Listeners"), which
-      also names downloadable school sample papers to mirror.
+- [x] **Classic-prose passages from the corpus** — *(First section shipped
+      12 June 2026 — see item 5's classic-prose entry. The corpus still
+      holds ~30 unused extracts (Dickens, Stevenson, Shackleton/Scott
+      exploration non-fiction, de la Mare); further sections or variantOf
+      twins are next-session material, sourced via the GITenberg GitHub
+      mirrors since gutenberg.org blocks the sandbox.)*
 - [ ] **Activities-day group-task section in /interview** — proxy intel now
       exists (desert-island format, the observed-behaviour rubric, the
       "coached alpha" vs silence failure modes, the baton-pass move): add a
@@ -227,16 +246,28 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       (Greek/Latin decoding toolkit; root vocab feeds VocabSprint). Same
       stretch contract — reasoning + drivers, enforced by the extended
       data.test.ts check — and 60 re-derived keys in vr-answers.test.ts.)*
-- [ ] **NVR stretch — ISEB-live types first** — "how many cubes"
-      (heightmap data model) + painted-cube counting + cube nets, then
-      symmetry/rotation. Declarative-text spatial prompts ("Imagine a
-      5×5×5 cube…" — odd-sided for centre prompts) work today as `numeric`
-      questions with zero new rendering. Nonograms/slitherlink parked
-      (UI cost vs return).
-- [ ] **Serving rule** — stretch items aim at ~80–85% success (both passes
-      converge on that band; tune by item selection, not by easing items),
-      low-floor/high-ceiling framing, no streak pressure. Simplest v1: a
-      weekly "Puzzle mix" set on Home drawing across the stretch packs.
+- [x] **NVR stretch — ISEB-live types first** — *(Shipped 12 June 2026:
+      new `nvr-cubelab` "Cube Lab" pack, 2 × 15. `NvrFigure` is now a union
+      (flat shapes / isometric heightmap solids / cube nets) with one
+      renderer. `01-how-many-cubes` draws the live CPT type as real
+      figures — counts, floor-contact, fill-the-box — under a data.test.ts
+      fair-figure contract (no column's top may be fully occluded; diagonal
+      + valley rules derived from the projection). `02-cube-nets` covers
+      valid-net picking, impostor spotting (2×2-block poison, same-side
+      flaps), opposite faces and the skip-one rule. nvr-answers.test.ts
+      re-derives every answer mechanically: heightmap sums and a cube-fold
+      simulator (BFS face normals) for net validity + opposite pairs.
+      Painted-cube counting stays text-only in maths-puzzles-05;
+      symmetry/rotation figures are round 2. Nonograms/slitherlink parked.)*
+- [x] **Serving rule** — *(Shipped 12 June 2026: `/puzzle-mix` + Home
+      banner — ten puzzles re-rolled every ISO week from a seeded shuffle,
+      stable all week like a newspaper puzzle page. Aims at the 80–85%
+      band by tuning the d1/d2/d3 quota from recent stretch accuracy
+      (selection, never easing): gentle ramp with no history, harder when
+      cruising ≥85%, softer below 70%. Rotates across the stretch packs
+      (now `stretch: true` in packs.ts), caps sections at 2, rests puzzles
+      beaten in the last fortnight, serves easiest-first, no timer or
+      streak pressure. Engine + tests in lib/puzzleMix.ts.)*
 - [ ] **English candidate type: shuffled sentences** — reported in the
       current CPT English subtest; assess as a `sequence`-type question
       once the familiarisation test confirms what it looks like.
