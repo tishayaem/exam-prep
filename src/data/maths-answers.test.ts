@@ -261,6 +261,29 @@ const EXPECTED: Record<string, string> = {
   'maths-geometry-04-q18': '3',
   'maths-geometry-04-q19': '16',
   'maths-geometry-04-q20': '5 right, 2 down',
+  // Symmetry & Rotation (shape facts re-derived from first principles:
+  // regular n-gon → n lines and order n; rectangle 2/2; parallelogram 0 lines
+  // but order 2; smallest turn = 360/order; 180° about origin flips both signs)
+  'maths-geometry-05-q1': '4', // square: vertical, horizontal, 2 diagonals
+  'maths-geometry-05-q2': '2', // rectangle: vertical + horizontal only
+  'maths-geometry-05-q3': '3', // equilateral triangle: one per vertex
+  'maths-geometry-05-q4': 'A', // A folds vertically; F/J/P don't
+  'maths-geometry-05-q5': 'Infinitely many', // every diameter is a mirror
+  'maths-geometry-05-q6': '3', // 12 + quarter-turn clockwise → 3
+  'maths-geometry-05-q7': '6', // regular hexagon: 6 sides → 6 lines
+  'maths-geometry-05-q8': '5', // regular pentagon: 5 sides → 5 lines
+  'maths-geometry-05-q9': '0', // leaning parallelogram: no fold matches
+  'maths-geometry-05-q10': '1', // isosceles: the apex fold only
+  'maths-geometry-05-q11': '4', // square rotational order
+  'maths-geometry-05-q12': '2', // rectangle rotational order
+  'maths-geometry-05-q13': '3', // equilateral triangle rotational order
+  'maths-geometry-05-q14': '9', // 3 + half-turn → opposite side, 9
+  'maths-geometry-05-q15': '60', // 360 ÷ 6
+  'maths-geometry-05-q16': '2', // parallelogram order 2 (no mirror lines)
+  'maths-geometry-05-q17': '90', // 360 ÷ 4
+  'maths-geometry-05-q18': 'East', // North + quarter-turn clockwise → East
+  'maths-geometry-05-q19': '(-3, -2)', // 180° about origin: (x,y)→(−x,−y)
+  'maths-geometry-05-q20': 'Parallelogram', // rotation without reflection
 
   // Data & Problem Solving
   'maths-data-01-q1': '6',

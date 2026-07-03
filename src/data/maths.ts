@@ -15,6 +15,7 @@ import { mathsGeometry01Measurement } from './sections/maths-geometry-01-measure
 import { mathsGeometry02ShapesAngles } from './sections/maths-geometry-02-shapes-angles';
 import { mathsGeometry03AreaVolume } from './sections/maths-geometry-03-area-volume';
 import { mathsGeometry04Coordinates } from './sections/maths-geometry-04-coordinates';
+import { mathsGeometry05SymmetryRotation } from './sections/maths-geometry-05-symmetry-rotation';
 
 import { mathsData01Statistics } from './sections/maths-data-01-statistics';
 import { mathsData02WordProblems } from './sections/maths-data-02-word-problems';
@@ -47,6 +48,7 @@ export const mathsSections: Section[] = [
   mathsGeometry02ShapesAngles,
   mathsGeometry03AreaVolume,
   mathsGeometry04Coordinates,
+  mathsGeometry05SymmetryRotation,
 
   // Data & Problem Solving
   mathsData01Statistics,

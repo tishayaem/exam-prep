@@ -38,7 +38,7 @@ src/
 │   ├── index.ts                       Subject-agnostic aggregator: allSections / allQuestions / findSection / sectionsBySubject / questionsBySubject. MODES IMPORT FROM HERE, not from a subject file.
 │   ├── packs.ts                       Pack→subject registry (PACKS, SUBJECTS). Drives Home grouping + the Study overline. Add a pack/subject here.
 │   ├── science.ts                     scienceSections (18 sections — school revision, not examined at Brighton 11+)
-│   ├── maths.ts                       mathsSections (21 sections × 20: 14 curriculum + 7 Puzzle Lab stretch)
+│   ├── maths.ts                       mathsSections (22 sections × 20: 15 curriculum + 7 Puzzle Lab stretch)
 │   ├── english.ts                     englishSections (6 sections × 20 Qs: reading ×3 incl. long-passage/non-fiction/poetry, SPaG ×2, composition)
 │   ├── vr.ts / nvr.ts                 Verbal (8 × 20: 5 core + 3 Word Lab stretch) and non-verbal (7 sections: 6 figure sections ~15 + nvr-07 rendered cube-counting × 20) reasoning sections
 │   ├── interview.ts                   Interview-prep deck (not a quiz subject — feeds /interview)

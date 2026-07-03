@@ -21,7 +21,8 @@ check items off here as they land.
   consist of now that ISEB covers all four subjects at stage 1; the CPT
   sitting window/venue; paper weightings. The app hedges by training both
   formats — on-screen MCQ pacing AND write-in working/extended writing.
-- **Maths:** 420 questions — 14 curriculum sections × 20 plus the complete
+- **Maths:** 440 questions — 15 curriculum sections × 20 (incl. Symmetry &
+  Rotation) plus the complete
   7-section **Puzzle Lab** stretch pack (`maths-puzzles`, all archetype
   families). Every answer double-checked in `src/data/maths-answers.test.ts`.
 - **Verbal:** 8 sections × 20 = 160 — `vr-core` (5) plus the **Word Lab**
