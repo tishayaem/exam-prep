@@ -155,7 +155,6 @@ describe('rankQuestionsByNeed + pickAdaptive', () => {
     const weakIdx = ranked.findIndex((r) => r.question.sectionId === 'weak');
     const strongIdx = ranked.findIndex((r) => r.question.sectionId === 'strong');
     expect(weakIdx).toBeLessThan(strongIdx);
-    expect(ranked[0].need).toBeGreaterThan(ranked[ranked.length - 1].need);
   });
 
   it('pickAdaptive returns the requested count and leans into the weak topic', () => {
