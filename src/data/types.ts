@@ -99,6 +99,24 @@ export interface CubeStackFigure {
   heights: number[][];
 }
 
+/** The face symbols a cube-net question can carry — one per face, all distinct. */
+export type NetSymbol = 'star' | 'moon' | 'circle' | 'square' | 'triangle' | 'heart';
+
+/**
+ * A flat cube net (or an impostor that only looks like one), described as a
+ * grid. `cells[r][c]` is a face carrying a symbol, `'blank'` for a face with
+ * no symbol (validity questions), or `null` where the grid is empty. One
+ * `<CubeNet>` renderer draws it as outlined squares with the symbols inside.
+ * Render-only, like `cubes`: the question itself stays mcq/truefalse/numeric
+ * and grading is unchanged. The answer to every opposite-face and
+ * does-it-fold question is derivable from the grid alone by folding it, which
+ * is exactly what nvr-answers.test.ts does to re-check the stored answers.
+ */
+export interface CubeNetFigure {
+  /** Row-major grid of faces; rows may differ in length. */
+  cells: (NetSymbol | 'blank' | null)[][];
+}
+
 export interface Example {
   title: string;
   body: string;
@@ -142,6 +160,11 @@ export interface Question {
    * unchanged; `cubes` is render-only.
    */
   cubes?: CubeStackFigure;
+  /**
+   * A flat cube net rendered above the answer area (fold-a-net questions).
+   * Render-only, same contract as `cubes`.
+   */
+  net?: CubeNetFigure;
 }
 
 export interface Section {

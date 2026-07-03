@@ -36,11 +36,11 @@ check items off here as they land.
    Dickens/Nesbit/Grahame extract with older vocabulary) from the corpus in
    `brighton-exam-intel.md` §4, plus refining the writing rubric →
    CSSE/Dulwich bands. This is the biggest confirmed-paper gap left.
-2. **NVR stretch, remaining** (§7) — cube NETS next (needs a net renderer;
-   the "how many cubes" heightmap renderer + `nvr-07` section shipped
-   3 Jul 2026 — copy that pattern: `CubeStack.tsx` shows how a render-only
-   figure hangs off a question via a new payload field + a place-in-both-
-   Quiz-and-QuestionRunner wire-up).
+2. **NVR stretch, remaining** (§7) — cube nets shipped 3 Jul 2026
+   (`CubeNet.tsx` + `nvr-08-cube-nets` + a fold simulator in the answer
+   suite). Next up: painted-cube counting as rendered figures, then
+   symmetry/rotation — copy the render-only-payload pattern (`cubes` /
+   `net` fields, wired in both Quiz and QuestionRunner).
 3. **Log writing-practice sessions to storage** (§5) so the streak + Home
    resume tile know a session happened — small, self-contained.
 4. **Blocked on the familiarisation test:** shuffled-sentences English type;
@@ -243,8 +243,22 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       count answer is always the sum of the rendered heightmap, so picture and
       answer can't drift; `nvr-answers.test.ts` re-derives each sum
       independently. Figures verified by screenshot.)*
-- [ ] **NVR stretch — remaining spatial types** — cube nets (fold-a-net,
-      opposite-face pairs — needs a net renderer), painted-cube counting as
+- [x] **NVR stretch — cube nets** — *(Shipped 3 Jul 2026: `CubeNetFigure`
+      grid schema in types.ts + a flat `<CubeNet>` SVG renderer
+      (`src/components/CubeNet.tsx`, outlined face squares with filled-ink
+      symbol glyphs), wired above the answer area in Quiz + QuestionRunner
+      like `cubes`. New `nvr-08-cube-nets` section — 20 questions over four
+      symbol nets (cross / T / staircase / 1-4-1) and six blank validity
+      figures, covering the three research flavours: does-it-fold (count
+      traps + the 2×3-block/strip overlap traps), opposite-face (two-apart
+      rule, leftover-pair trick, staircase folding) and can-they-touch
+      (opposite faces never share an edge). `nvr-answers.test.ts` gained a
+      3D fold simulator that re-folds every rendered grid and re-derives
+      each validity/opposite answer independently, so a mis-authored net or
+      wrong key fails the suite. Flashcards now skips ALL figure-bearing
+      questions — also fixes nvr-07 cube cards that dealt without their
+      picture. Figures verified by screenshot.)*
+- [ ] **NVR stretch — remaining spatial types** — painted-cube counting as
       figures (currently text-only in `maths-puzzles-05`), then
       symmetry/rotation. Declarative-text spatial prompts still work today as
       `numeric` questions with zero new rendering. Nonograms/slitherlink parked
