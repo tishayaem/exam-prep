@@ -105,10 +105,11 @@ describe('variantTwins', () => {
     expect(variantTwins(dangling, [...all, dangling])).toEqual([]);
   });
 
-  it('terminates on a cyclic variantOf link instead of hanging', () => {
+  it('degrades a cyclic variantOf link to no twins instead of hanging', () => {
     const x = mkQuestion('x', 'y');
     const y = mkQuestion('y', 'x');
-    // A cycle is a data error; we only require a sane, finite result.
-    expect(Array.isArray(variantTwins(x, [x, y]))).toBe(true);
+    // A cycle is a data error: the walk breaks on revisit, so x and y resolve
+    // to different roots and neither is served as the other's twin.
+    expect(variantTwins(x, [x, y])).toEqual([]);
   });
 });

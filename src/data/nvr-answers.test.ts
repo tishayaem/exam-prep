@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { sectionsBySubject } from './index';
-import { gradeNumeric } from '../lib/grading';
 
 /**
  * Golden answer keys for the "How Many Cubes?" figures, re-derived here by
@@ -55,17 +54,14 @@ describe('cube-counting answer keys (independently re-derived)', () => {
     expect(bad).toEqual([]);
   });
 
+  // Note: a "stored answer self-grades against its own figure" check would be
+  // redundant here — it follows from (answer === key) ∧ (key === figure sum)
+  // above, and gradeNumeric only loosens the comparison. data.test.ts already
+  // covers numeric self-grading across every section.
   it('the key equals the sum of the figure the child sees', () => {
     const bad = cubeQuestions
       .filter((q) => EXPECTED[q.id] !== sumHeights(q.cubes!.heights))
       .map((q) => `${q.id}: key ${EXPECTED[q.id]} vs figure ${sumHeights(q.cubes!.heights)}`);
-    expect(bad).toEqual([]);
-  });
-
-  it('every stored answer self-grades against its own figure', () => {
-    const bad = cubeQuestions
-      .filter((q) => !gradeNumeric(String(sumHeights(q.cubes!.heights)), q.answer, q.acceptable))
-      .map((q) => q.id);
     expect(bad).toEqual([]);
   });
 });

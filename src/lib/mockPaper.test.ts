@@ -83,10 +83,16 @@ describe('buildIsebBlock', () => {
     }
   });
 
-  it('sizes the block at ~1.2 questions per minute, without duplicates', () => {
+  it('fills the clock (over one per minute), scales with time, no duplicates', () => {
+    // The contract is "let the clock end the paper", not an exact count — so
+    // assert the guarantees, not the tunable 1.2-per-minute pacing constant.
     const block = buildIsebBlock(mixed, 40);
-    expect(block).toHaveLength(48); // 40 × 1.2, pool is big enough
-    expect(new Set(block.map((q) => q.id)).size).toBe(block.length);
+    const pool = isebPool(mixed).length;
+    expect(block.length).toBeGreaterThan(40); // more than one per minute
+    expect(block.length).toBeLessThanOrEqual(pool); // never beyond the tap-only pool
+    expect(new Set(block.map((q) => q.id)).size).toBe(block.length); // no repeats
+    // A bigger time budget yields a bigger block (until the pool caps it).
+    expect(buildIsebBlock(mixed, 80).length).toBeGreaterThan(block.length);
   });
 
   it('caps at the tap-only pool when it is smaller than the pacing target', () => {
