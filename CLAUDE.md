@@ -40,7 +40,7 @@ src/
 │   ├── science.ts                     scienceSections (18 sections — school revision, not examined at Brighton 11+)
 │   ├── maths.ts                       mathsSections (21 sections × 20: 14 curriculum + 7 Puzzle Lab stretch)
 │   ├── english.ts                     englishSections (6 sections × 20 Qs: reading ×3 incl. long-passage/non-fiction/poetry, SPaG ×2, composition)
-│   ├── vr.ts / nvr.ts                 Verbal (8 × 20: 5 core + 3 Word Lab stretch) and non-verbal (6 × ~15) reasoning sections
+│   ├── vr.ts / nvr.ts                 Verbal (8 × 20: 5 core + 3 Word Lab stretch) and non-verbal (7 sections: 6 figure sections ~15 + nvr-07 rendered cube-counting × 20) reasoning sections
 │   ├── interview.ts                   Interview-prep deck (not a quiz subject — feeds /interview)
 │   ├── writingPrompts.ts              Writing-practice prompt bank + plan beats + self-mark rubric
 │   ├── data.test.ts                   Content-integrity suite (no dup ids, MCQ answers in choices, numeric self-grade, variantOf same-section…)

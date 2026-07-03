@@ -25,21 +25,24 @@ check items off here as they land.
   7-section **Puzzle Lab** stretch pack (`maths-puzzles`, all archetype
   families). Every answer double-checked in `src/data/maths-answers.test.ts`.
 - **Verbal:** 8 sections × 20 = 160 — `vr-core` (5) plus the **Word Lab**
-  stretch pack (ladders / cryptic-lite / roots). **Non-verbal:** 6 sections
-  (~89 Qs) incl. Codes, Most Similar and reflection traps.
+  stretch pack (ladders / cryptic-lite / roots). **Non-verbal:** 7 sections
+  (~109 Qs) incl. Codes, Most Similar, reflection traps and the new
+  rendered "how many cubes" cube-counting section (`nvr-spatial`).
 
-**Next session, start here (handoff, 12 Jun 2026):**
+**Next session, start here (handoff, 3 Jul 2026):**
 
-1. **NVR stretch types** (§7) — the one item left with real engineering:
-   "how many cubes" (heightmap data model) and cube nets need `NvrFigure`
-   schema + renderer work in `src/components/NvrFigure.tsx`; text-prompt
-   versions already exist in `maths-puzzles-05`, so this is the figure-based
-   upgrade. Start with the heightmap (live ISEB type), nets second.
-2. **Stretch serving rule** (§7) — ~80–85% success targeting; simplest v1 is
+1. **Stretch serving rule** (§7) — ~80–85% success targeting; simplest v1 is
    a weekly "Puzzle mix" set on Home drawing from packs tagged with
-   `drivers` (the tags are already on all 200 stretch questions).
-3. **English §5 leftovers** — classic-prose long passage from the corpus in
+   `drivers` (the tags are already on all 200 stretch questions; the new
+   `nvr-07` cube questions are `reasoning`-flagged + driver-tagged too, so
+   they qualify for the mix). This is the highest-value item left.
+2. **English §5 leftovers** — classic-prose long passage from the corpus in
    `brighton-exam-intel.md` §4, and the writing rubric → CSSE/Dulwich bands.
+3. **NVR stretch, remaining** (§7) — cube NETS next (needs a net renderer;
+   the "how many cubes" heightmap renderer + `nvr-07` section shipped
+   3 Jul 2026 — copy that pattern: `CubeStack.tsx` shows how a render-only
+   figure hangs off a question via a new payload field + a place-in-both-
+   Quiz-and-QuestionRunner wire-up).
 4. **Blocked on the familiarisation test:** shuffled-sentences English type;
    the disputed "ISEB VR dropped codes" claim (don't re-weight until then).
 
@@ -227,11 +230,21 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       (Greek/Latin decoding toolkit; root vocab feeds VocabSprint). Same
       stretch contract — reasoning + drivers, enforced by the extended
       data.test.ts check — and 60 re-derived keys in vr-answers.test.ts.)*
-- [ ] **NVR stretch — ISEB-live types first** — "how many cubes"
-      (heightmap data model) + painted-cube counting + cube nets, then
-      symmetry/rotation. Declarative-text spatial prompts ("Imagine a
-      5×5×5 cube…" — odd-sided for centre prompts) work today as `numeric`
-      questions with zero new rendering. Nonograms/slitherlink parked
+- [x] **NVR stretch — "how many cubes" heightmap renderer** — *(Shipped
+      3 Jul 2026: `CubeStackFigure` heightmap schema (`heights[r][c]`) in
+      types.ts + an isometric `<CubeStack>` SVG renderer
+      (`src/components/CubeStack.tsx`, painter's-algorithm cube stacking,
+      editorial palette), wired above the answer area in Quiz + QuestionRunner
+      like `letterStrip`. New `nvr-spatial` pack + `nvr-07-how-many-cubes`
+      section (20 `numeric` questions, difficulty 1→3, `variantOf` links). The
+      count answer is always the sum of the rendered heightmap, so picture and
+      answer can't drift; `nvr-answers.test.ts` re-derives each sum
+      independently. Figures verified by screenshot.)*
+- [ ] **NVR stretch — remaining spatial types** — cube nets (fold-a-net,
+      opposite-face pairs — needs a net renderer), painted-cube counting as
+      figures (currently text-only in `maths-puzzles-05`), then
+      symmetry/rotation. Declarative-text spatial prompts still work today as
+      `numeric` questions with zero new rendering. Nonograms/slitherlink parked
       (UI cost vs return).
 - [ ] **Serving rule** — stretch items aim at ~80–85% success (both passes
       converge on that band; tune by item selection, not by easing items),

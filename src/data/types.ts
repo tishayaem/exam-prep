@@ -85,6 +85,20 @@ export interface NvrQuestion {
   codes?: string[];
 }
 
+/**
+ * An isometric stack of unit cubes, described as a heightmap. `heights[r][c]`
+ * is the number of cubes stacked on floor cell (row `r`, counted from the back,
+ * column `c`, counted from the left); `0` is an empty column. One `<CubeStack>`
+ * renderer draws it as a single isometric picture — the live on-screen ISEB
+ * "how many cubes" NVR type. The stack always sits on the floor (no floating
+ * cubes), so the total count is simply the sum of every height, hidden support
+ * cubes included — which is exactly the skill the picture trains.
+ */
+export interface CubeStackFigure {
+  /** Row-major grid of column heights, back row first. Rows may differ in length. */
+  heights: number[][];
+}
+
 export interface Example {
   title: string;
   body: string;
@@ -122,6 +136,12 @@ export interface Question {
   variantOf?: string;
   /** Present only for `type: 'nvr'` — the figures to render. */
   nvr?: NvrQuestion;
+  /**
+   * A "how many cubes" isometric stack rendered above the answer area. The
+   * question itself stays `numeric` (type the count) or `mcq` — grading is
+   * unchanged; `cubes` is render-only.
+   */
+  cubes?: CubeStackFigure;
 }
 
 export interface Section {
