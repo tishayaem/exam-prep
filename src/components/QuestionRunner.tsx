@@ -1,5 +1,6 @@
 import type { Question } from '../data/types';
 import { AlphabetStrip } from './AlphabetStrip';
+import { CubeStack } from './CubeStack';
 import { AnswerArea } from './AnswerArea';
 import { useAnswerState } from './useAnswerState';
 import { firstAnswer, formatAnswer, type Verdict } from './answerFormat';
@@ -40,6 +41,12 @@ export function QuestionRunner({
       </h2>
 
       {question.passage && <PassageBlock text={question.passage} />}
+
+      {question.cubes && (
+        <div className="rounded-[22px] border border-rule bg-off p-4 sm:p-6 grid place-items-center">
+          <CubeStack heights={question.cubes.heights} />
+        </div>
+      )}
 
       {question.letterStrip && <AlphabetStrip />}
 

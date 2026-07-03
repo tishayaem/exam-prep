@@ -82,6 +82,7 @@ export const PACKS: PackDef[] = [
 
   // Non-Verbal Reasoning
   { slug: 'nvr-core', subject: 'non-verbal', title: 'Figures & Patterns' },
+  { slug: 'nvr-spatial', subject: 'non-verbal', title: 'Cubes & Space' },
 
   // Verbal Reasoning
   { slug: 'vr-core', subject: 'verbal', title: 'Words, Codes & Logic' },
