@@ -21,7 +21,8 @@ check items off here as they land.
   consist of now that ISEB covers all four subjects at stage 1; the CPT
   sitting window/venue; paper weightings. The app hedges by training both
   formats — on-screen MCQ pacing AND write-in working/extended writing.
-- **Maths:** 420 questions — 14 curriculum sections × 20 plus the complete
+- **Maths:** 440 questions — 15 curriculum sections × 20 (incl. Symmetry &
+  Rotation) plus the complete
   7-section **Puzzle Lab** stretch pack (`maths-puzzles`, all archetype
   families). Every answer double-checked in `src/data/maths-answers.test.ts`.
 - **Verbal:** 8 sections × 20 = 160 — `vr-core` (5) plus the **Word Lab**
@@ -31,20 +32,22 @@ check items off here as they land.
 
 **Next session, start here (handoff, 3 Jul 2026):**
 
-1. **Stretch serving rule** (§7) — ~80–85% success targeting; simplest v1 is
-   a weekly "Puzzle mix" set on Home drawing from packs tagged with
-   `drivers` (the tags are already on all 200 stretch questions; the new
-   `nvr-07` cube questions are `reasoning`-flagged + driver-tagged too, so
-   they qualify for the mix). This is the highest-value item left.
-2. **English §5 leftovers** — classic-prose long passage from the corpus in
-   `brighton-exam-intel.md` §4, and the writing rubric → CSSE/Dulwich bands.
-3. **NVR stretch, remaining** (§7) — cube NETS next (needs a net renderer;
+1. **English §5 leftovers** — the classic-prose long passage (a public-domain
+   Dickens/Nesbit/Grahame extract with older vocabulary) from the corpus in
+   `brighton-exam-intel.md` §4, plus refining the writing rubric →
+   CSSE/Dulwich bands. This is the biggest confirmed-paper gap left.
+2. **NVR stretch, remaining** (§7) — cube NETS next (needs a net renderer;
    the "how many cubes" heightmap renderer + `nvr-07` section shipped
    3 Jul 2026 — copy that pattern: `CubeStack.tsx` shows how a render-only
    figure hangs off a question via a new payload field + a place-in-both-
    Quiz-and-QuestionRunner wire-up).
+3. **Log writing-practice sessions to storage** (§5) so the streak + Home
+   resume tile know a session happened — small, self-contained.
 4. **Blocked on the familiarisation test:** shuffled-sentences English type;
    the disputed "ISEB VR dropped codes" claim (don't re-weight until then).
+
+Recently shipped: the weekly **Puzzle Mix** (`/puzzle-mix`, serving rule §7)
+and the rendered **"how many cubes"** NVR section — both this session.
 
 Ops notes for that session: this repo squash-merges PRs, so after a merge
 reset the session's `claude/*` work branch onto `origin/main`
@@ -246,10 +249,19 @@ re-derive every answer (Pass B's lift puzzle is provably wrong).
       symmetry/rotation. Declarative-text spatial prompts still work today as
       `numeric` questions with zero new rendering. Nonograms/slitherlink parked
       (UI cost vs return).
-- [ ] **Serving rule** — stretch items aim at ~80–85% success (both passes
-      converge on that band; tune by item selection, not by easing items),
-      low-floor/high-ceiling framing, no streak pressure. Simplest v1: a
-      weekly "Puzzle mix" set on Home drawing across the stretch packs.
+- [x] **Serving rule** — *(Shipped 3 Jul 2026: the weekly **Puzzle Mix** —
+      `src/lib/puzzleMix.ts` picks 9 stretch questions (any `drivers`-tagged
+      item, so Puzzle Lab + Word Lab + the new `nvr-spatial` cubes all feed
+      it), week-seeded (mulberry32 keyed on the week number) so the set is
+      stable all week and rotates on its own with no stored state. Difficulty
+      is biased 3×d1 / 4×d2 / 2×d3 to hold ~80% success by *selection* not by
+      easing items, spread across packs, one-per-`variantOf`-family, ordered
+      easy→hard (low-floor/high-ceiling). New `/puzzle-mix` mode + a calm
+      Home banner; framing is curiosity-first with no percentage/streak
+      pressure (wrong ones still flow to Fix-ups). `puzzleMix.test.ts` covers
+      determinism, weekly rotation, the easy-lean and the family rule.
+      Verified end-to-end by screenshot — a cube question surfaced in the
+      mix.)*
 - [ ] **English candidate type: shuffled sentences** — reported in the
       current CPT English subtest; assess as a `sequence`-type question
       once the familiarisation test confirms what it looks like.
