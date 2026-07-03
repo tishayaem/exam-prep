@@ -33,24 +33,40 @@ check items off here as they land.
 **Next session, start here (handoff, 12 Jun 2026, evening — after the
 Cube Lab / Puzzle mix / classic-prose session):**
 
-1. **Activities-day group-task section in /interview** (§6) — the last
+1. **FIRST: verify the 12 June work in a browser** (`npm run dev`, or the
+   Pages deploy if merged) — that session's container had no renderer, so
+   nothing below has been SEEN, only tested. Walk, on the dev server:
+   - `/quiz/nvr-cubelab-01-how-many-cubes` — the isometric cube drawings:
+     legible at stem size (148px), hidden-support steps read correctly,
+     answer highlight/verdict flow works on the mcq-with-figure layout;
+   - `/quiz/nvr-cubelab-02-cube-nets` — marked nets in stems (marks
+     distinct at size), the tappable 4-up net options grid on both phone
+     and iPad widths, and the truefalse-with-figure question (q3);
+   - `/puzzle-mix` — Home banner renders, pre screen shows the week and
+     the pack list, a full 10-question run reaches the review screen,
+     confetti fires once at the end;
+   - `/study/english-reading-04-classic-prose` + one quiz question — the
+     long passage block scrolls sanely on iPad; and one
+     `/writing-practice` run through to the new five-domain rubric.
+   Fix what looks wrong before building anything new.
+2. **Activities-day group-task section in /interview** (§6) — the last
    unticked item with all its research in hand (desert-island format,
    observed-behaviour rubric, "coached alpha" vs silence failure modes,
    the baton-pass move — `brighton-exam-intel.md`, Gemini section).
-2. **English §5 leftovers** — third SPaG section (clauses, apostrophe edge
+3. **English §5 leftovers** — third SPaG section (clauses, apostrophe edge
    cases, direct speech); log writing-practice sessions to storage so the
    streak/resume tile see them. (Write-in comprehension drill stays parked
    until admissions confirm the December day's composition.)
-3. **More classic prose** — `english-reading-04` (Grahame) established the
+4. **More classic prose** — `english-reading-04` (Grahame) established the
    pattern; the §4 corpus has ~30 more extracts (Dickens, Stevenson,
    exploration non-fiction, de la Mare). A second section or variantOf
    twins both work. Passage sourcing trick: gutenberg.org 403s from the
    sandbox, but the GITenberg GitHub mirrors serve the same files raw.
-4. **NVR stretch round 2** (§7) — symmetry/rotation figures, and a
+5. **NVR stretch round 2** (§7) — symmetry/rotation figures, and a
    figure-based painted-cube type if wanted (text version lives in
    maths-puzzles-05). The heightmap fair-figure contract in data.test.ts
    is the template for any new figure kind's honesty rules.
-5. **Blocked on the familiarisation test:** shuffled-sentences English type;
+6. **Blocked on the familiarisation test:** shuffled-sentences English type;
    the disputed "ISEB VR dropped codes" claim (don't re-weight until then).
 
 Ops notes for that session: this repo squash-merges PRs, so after a merge
