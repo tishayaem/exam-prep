@@ -4,6 +4,7 @@ import { findSection } from '../data';
 import { useProgress } from '../lib/storage';
 import { FeedbackPanel, PassageBlock, firstAnswer, formatAnswer } from '../components/QuestionRunner';
 import { AlphabetStrip } from '../components/AlphabetStrip';
+import { CubeNet } from '../components/CubeNet';
 import { CubeStack } from '../components/CubeStack';
 import { AnswerArea } from '../components/AnswerArea';
 import { useAnswerState } from '../components/useAnswerState';
@@ -115,6 +116,11 @@ function QuizBody({ sectionId }: { sectionId: string | undefined }) {
           {current.cubes && (
             <div className="mb-7 rounded-[22px] border border-rule bg-off p-4 sm:p-6 grid place-items-center">
               <CubeStack heights={current.cubes.heights} />
+            </div>
+          )}
+          {current.net && (
+            <div className="mb-7 rounded-[22px] border border-rule bg-off p-4 sm:p-6 grid place-items-center">
+              <CubeNet cells={current.net.cells} />
             </div>
           )}
           {current.letterStrip && (

@@ -25,7 +25,9 @@ function FlashcardsBody({ sectionId }: { sectionId: string | undefined }) {
       sectionId
         ? findSection(sectionId)?.questions ?? []
         : allSections.flatMap((s) => s.questions)
-    ).filter((q) => q.type !== 'nvr'); // NVR needs rendered figures; flip-cards can't show them
+      // Figure-bearing questions (NVR layouts, cube stacks, nets) need their
+      // rendered picture to make sense; flip-cards can't show them.
+    ).filter((q) => q.type !== 'nvr' && !q.cubes && !q.net);
     return prioritise(all, state.box);
   }, [sectionId, state.box]);
 
