@@ -32,10 +32,12 @@ check items off here as they land.
 
 **Next session, start here (handoff, 3 Jul 2026):**
 
-1. **English §5 leftovers** — the classic-prose long passage (a public-domain
-   Dickens/Nesbit/Grahame extract with older vocabulary) from the corpus in
-   `brighton-exam-intel.md` §4, plus refining the writing rubric →
-   CSSE/Dulwich bands. This is the biggest confirmed-paper gap left.
+1. **English §5 leftovers** — shipped 5 Jul 2026: the classic-prose long
+   passage (`english-reading-04-classic-prose`, Great Expectations ch.1) and
+   the writing rubric → CSSE/Dulwich bands (see §5/§6 notes). Still open in
+   §5: the write-in comprehension drill (blocked on the December-day format
+   answer), the third SPaG section, and logging writing-practice sessions
+   (item 3 below).
 2. **NVR stretch, remaining** (§7) — cube nets shipped 3 Jul 2026
    (`CubeNet.tsx` + `nvr-08-cube-nets` + a fold simulator in the answer
    suite). Next up: painted-cube counting as rendered figures, then
@@ -132,9 +134,17 @@ English was the thinnest confirmed paper, so it got the maths/VR treatment:
       timers (5 min plan / 20 write / 5 check) with the story written on
       paper, then a self-mark rubric (ideas / structure / style / accuracy)
       to walk through with a grown-up.
-- [ ] **A classic-prose long passage** — a public-domain extract (Dickens,
-      Nesbit, Grahame…) with older vocabulary: the hardest comprehension
-      flavour on independent-school papers, currently unrepresented.
+- [x] **A classic-prose long passage** — *(Shipped 5 Jul 2026:
+      `english-reading-04-classic-prose` — Great Expectations ch.1 (Pip meets
+      the convict), abridged, with the signature paragraphs verbatim (verified
+      against the published text via search; Gutenberg/Wikisource are blocked
+      by this environment's network policy). 20 questions in passage order:
+      vocabulary landmines (coarse/lamed/briars/ravenously/leaden) drilled by
+      swap-test and context-clue questions, dialect spelling ("Pint out the
+      place!"), the mirrored power sentence, list-effect and fear-AND-pity
+      evaluation. Lesson teaches the classic-prose method (don't stop at a
+      strange word / swap test / semicolon chunks). Keys re-derived in
+      `english-answers.test.ts`. Rendering verified by screenshot.)*
 - [ ] **Write-in comprehension drill** — stage 1 is confirmed MCQ, so the
       December day is the write-in venue; shift more comprehension questions
       to `short` type once the day's composition is confirmed.
@@ -171,23 +181,29 @@ Maths 50 / VR 36 / NVR 32) are the pre-revision test — do not use.**
       familiarisation test (free, via iseb.co.uk) on the same iPad the child
       will use, and consider one MCQ-format external mock (Eleven Plus Exams
       mocks are MCQ — see `brighton-exam-intel.md` §5).
-- [ ] **Writing rubric → published mark schemes** — refine the
-      writing-practice self-mark rubric to the CSSE domains (Ideas /
-      Vocabulary+Spelling / Grammar / Structure / Punctuation), folding in
-      the Dulwich top-band descriptors (sensory language, sentence variety,
-      paragraphing *for effect*) and the KCS "psychological depth" criterion;
-      teach the **magnifying-glass technique** (describe three minutes, not a
-      whole plot) and the TiToP-P paragraph rule in the lesson/check phases.
-      All in `brighton-exam-intel.md` (Gemini section + §3).
+- [x] **Writing rubric → published mark schemes** — *(Shipped 5 Jul 2026: the
+      self-mark rubric in `writingPrompts.ts` now uses the five CSSE domains
+      (Ideas / Vocabulary / Grammar / Structure / Punctuation) with 15
+      descriptors folding in Dulwich top-band (sensory language, sentence
+      variety, paragraphing FOR EFFECT), KCS psychological depth (a MIX of
+      feelings shown through action) and CSSE Band 4 (ambitious-vocab-that-
+      fits, punctuation used creatively). The magnifying-glass technique is
+      now the first plan beat ("pick about three minutes of story") and in the
+      plan-phase copy; TiToP-P is in the write-phase tips and the check list.
+      CHECK_STEPS reordered to the ranked mark-loser list (endings,
+      homophones, paragraphs, rambling sentences). Verified by screenshot.)*
 - [x] **Prompt-bank genre check** — 2022 forum evidence says Brighton 11+
       writing has only ever been **descriptive/story**; the bank is already
       100% narrative/descriptive with no persuasive prompts. No change
       needed; keep persuasive out.
-- [ ] **Classic-prose passages from the corpus** — build item 5's
-      classic-prose section from the combined ~30-extract public-domain list
-      in `brighton-exam-intel.md` (§4 + Gemini additions: exploration
-      non-fiction like Shackleton/Scott, de la Mare's "The Listeners"), which
-      also names downloadable school sample papers to mirror.
+- [x] **Classic-prose passages from the corpus** — item 5's section is built
+      (see §5, shipped 5 Jul 2026) from corpus extract #1 (Great Expectations,
+      the one Alleyn's actually used). The remaining ~29 corpus extracts
+      (Shackleton/Scott exploration non-fiction, de la Mare's "The
+      Listeners"…) can follow the same pattern as further sections if more
+      classic-prose depth is wanted — note the network policy blocks
+      Gutenberg/Wikisource from this environment, so extracts must be
+      assembled from search-verified quotes or pasted in by hand.
 - [ ] **Activities-day group-task section in /interview** — proxy intel now
       exists (desert-island format, the observed-behaviour rubric, the
       "coached alpha" vs silence failure modes, the baton-pass move): add a

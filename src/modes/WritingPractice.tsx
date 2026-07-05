@@ -150,8 +150,10 @@ export function WritingPractice() {
         <TimerHeader label="Plan · 5 minutes" secondsLeft={secondsLeft} total={PHASE_SECONDS.plan} />
         <PromptCard prompt={prompt} compact />
         <p className="text-[15px] text-inkSoft leading-relaxed">
-          One line per beat, on your paper. Decide the <strong className="text-ink">ending</strong>{' '}
-          now — endings invented in the last minute read like it.
+          One line per beat, on your paper. <strong className="text-ink">Zoom in</strong> — a top
+          story covers about three minutes of time in close-up, not a whole adventure. And decide
+          the <strong className="text-ink">ending</strong> now — endings invented in the last
+          minute read like it.
         </p>
         <ol className="space-y-3">
           {PLAN_BEATS.map((b, i) => (
@@ -192,8 +194,9 @@ export function WritingPractice() {
             Glance at your plan — the next beat tells you what happens.
           </p>
           <p>
-            Spend a simile somewhere deliberate. Let one short sentence land after a long one. And
-            keep your tense steady — past stays past.
+            Spend a simile somewhere deliberate, and give the reader a sound or a smell, not just
+            sights. Let one short sentence land after a long one. Keep your tense steady — past
+            stays past — and start a new paragraph at every change of Time, Topic, Person or Place.
           </p>
         </div>
         <button
@@ -234,8 +237,8 @@ export function WritingPractice() {
     );
   }
 
-  // review
-  const groups: RubricGroup[] = ['Ideas', 'Structure', 'Style', 'Accuracy'];
+  // review — the five domains of the published CSSE writing mark scheme.
+  const groups: RubricGroup[] = ['Ideas', 'Vocabulary', 'Grammar', 'Structure', 'Punctuation'];
   const toggle = (id: string) =>
     setTicked((prev) => {
       const next = new Set(prev);

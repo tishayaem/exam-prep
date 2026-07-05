@@ -88,6 +88,29 @@ const EXPECTED: Record<string, string> = {
   'english-reading-03-q20':
     'It suggests an easy, unhurried, animal stride — matching both the dog picture and the slow, steady waves.',
 
+  // Classic prose — Great Expectations ch.1 (each re-read against the extract;
+  // vocabulary keys checked against the dictionary sense that fits the context)
+  'english-reading-04-q1': 'As a small child he could not pronounce his real name properly', // "infant tongue could make... nothing longer"
+  'english-reading-04-q2': 'a churchyard in the marsh country, near the river', // "this bleak place... was the churchyard"
+  'english-reading-04-q3': 'cold and damp', // raw weather = bitingly cold; swap test kills "uncooked"
+  'english-reading-04-q4': 'nettles', // "overgrown with nettles"
+  'english-reading-04-q5': 'It makes the river look dull grey and heavy, like the metal lead', // leaden = lead-coloured
+  'english-reading-04-q6': 'a metaphor', // sea IS a savage lair — no like/as
+  'english-reading-04-q7': 'He is small, freezing cold and terrified', // "small bundle of shivers... beginning to cry"
+  'english-reading-04-q8': 'from among the graves beside the church porch', // "started up from among the graves"
+  'english-reading-04-q9': 'He is an escaped prisoner, still wearing his leg-iron', // great iron + prison grey + hiding
+  'english-reading-04-q10': 'rough and scratchy', // coarse = opposite of fine cloth
+  'english-reading-04-q11': 'The stones have injured his feet and legs so that he limps', // lamed → "who limped"
+  'english-reading-04-q12': 'thorny bushes', // briars tear you → brambles
+  'english-reading-04-q13': 'It piles up his injuries one after another, showing how brutal his escape has been', // the and-list of six hurts
+  'english-reading-04-q14': 'The man ordered him to say it again more clearly', // "Once more... Give it mouth!"
+  'english-reading-04-q15': "To let us hear the man's rough, uneducated way of speaking", // dialect spelling
+  'english-reading-04-q16': 'a piece of bread', // "nothing in them but a piece of bread"
+  'english-reading-04-q17': 'extremely hungrily', // ravenous = starving
+  'english-reading-04-q18': 'The two halves mirror each other, showing the man has all the power and Pip has none', // powerfully down / helplessly up
+  'english-reading-04-q19': "man springs up — demands Pip's name — empties his pockets — tilts him back over the tombstone", // passage order
+  'english-reading-04-q20': 'A desperate escaped convict — terrifying to Pip, yet suffering badly himself', // fear AND pity
+
   // Spelling (UK conventions)
   'english-spag-01-q1': 'necessary',
   'english-spag-01-q2': 'separate',

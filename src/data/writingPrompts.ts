@@ -144,29 +144,43 @@ export const writingPrompts: WritingPrompt[] = [
   },
 ];
 
-/** The five-minute plan: the story mountain, one line per beat. */
+/**
+ * The five-minute plan: the story mountain, one line per beat — plus the
+ * magnifying-glass rule from the mark-scheme research: mid-band scripts race
+ * through a whole adventure; top-band scripts spend all their words on about
+ * three minutes of time, shown in close-up.
+ */
 export const PLAN_BEATS: { beat: string; hint: string }[] = [
+  { beat: 'Zoom in', hint: 'Pick about THREE MINUTES of story and put them under a magnifying glass. A whole adventure summarised scores in the middle; three minutes shown in close-up scores at the top.' },
   { beat: 'Opening', hint: 'Drop us in — an action, a sound or a question. Never the alarm clock.' },
   { beat: 'Build-up', hint: 'Life as usual… with one wobble the reader can feel coming.' },
   { beat: 'Problem', hint: 'The peak of the mountain. The bridge snaps; the secret gets out.' },
-  { beat: 'Resolution', hint: 'How it is faced and fixed — or bravely not fixed.' },
-  { beat: 'Ending', hint: 'Land it on purpose. An echo of the opening always works.' },
-];
-
-/** The five-minute polish, in priority order. */
-export const CHECK_STEPS: string[] = [
-  'Capitals and full stops — every sentence, no exceptions.',
-  'Hunt down your three trickiest spellings and check each one.',
-  'Upgrade one boring verb (said → muttered? walked → trudged?).',
-  'Read it in your head. Does every sentence actually finish?',
+  { beat: 'Ending', hint: 'Decide it NOW, before you write a word. Never "it was all a dream" — markers rank weak endings as the #1 mark-loser.' },
 ];
 
 /**
- * Self-mark rubric, ticked with a grown-up after writing. Groups mirror the
- * published marking criteria: imagination, structure/cohesion, sentence
- * craft, and technical accuracy.
+ * The five-minute polish, in priority order — built from the ranked
+ * mark-loser list in the research (endings, paragraphs, homophones,
+ * rambling sentences, misapplied vocabulary).
  */
-export type RubricGroup = 'Ideas' | 'Structure' | 'Style' | 'Accuracy';
+export const CHECK_STEPS: string[] = [
+  'Capitals and full stops — every sentence, no exceptions.',
+  'Homophone hunt: there/their, to/too/two, your/you\'re — then your three trickiest spellings.',
+  'Paragraph check — TiToP-P: new paragraph at every change of Time, Topic, Person or Place.',
+  'Chop your longest rambling sentence in two, and upgrade one boring verb (said → muttered?).',
+  'Re-read the ending. Does it land on purpose — no fizzle, no waking up from a dream?',
+];
+
+/**
+ * Self-mark rubric, ticked with a grown-up after writing. The five groups ARE
+ * the five domains of the published CSSE Continuous Writing mark scheme
+ * (Ideas / Vocabulary incl. spelling / Grammar / Structure / Punctuation),
+ * with the top-band descriptors folded in from Dulwich's 20-mark rubric
+ * (sensory language, sentence variety, paragraphing FOR EFFECT) and KCS
+ * Wimbledon's (psychological depth over physical description). See
+ * materials/11plus-research/brighton-exam-intel.md §3 + Gemini section.
+ */
+export type RubricGroup = 'Ideas' | 'Vocabulary' | 'Grammar' | 'Structure' | 'Punctuation';
 
 export interface RubricItem {
   id: string;
@@ -175,14 +189,28 @@ export interface RubricItem {
 }
 
 export const RUBRIC: RubricItem[] = [
-  { id: 'r-hook', group: 'Ideas', label: 'My opening would make a stranger want to read on.' },
-  { id: 'r-original', group: 'Ideas', label: 'There is one idea in here only I would have thought of.' },
-  { id: 'r-mountain', group: 'Structure', label: 'It has the mountain shape: build-up, problem, resolution, ending.' },
-  { id: 'r-paragraphs', group: 'Structure', label: 'Paragraphs change when the time, place or speaker changes.' },
-  { id: 'r-ending', group: 'Structure', label: 'The ending lands on purpose — it doesn\'t just stop.' },
-  { id: 'r-show', group: 'Style', label: 'I showed a feeling through actions instead of naming it.' },
-  { id: 'r-technique', group: 'Style', label: 'I used one simile or metaphor on purpose.' },
-  { id: 'r-variety', group: 'Style', label: 'My sentences vary — a short one lands between long ones.' },
-  { id: 'r-accuracy', group: 'Accuracy', label: 'Capitals, full stops and my trickiest spellings are checked.' },
-  { id: 'r-aloud', group: 'Accuracy', label: 'I read it aloud and it sounds like me.' },
+  // Ideas — CSSE Band 4: "clear and original writing"; KCS: psychological depth;
+  // the magnifying-glass rule separates top from middle.
+  { id: 'r-hook', group: 'Ideas', label: 'My opening line is crafted — it would make a stranger read on.' },
+  { id: 'r-original', group: 'Ideas', label: 'There is one idea or image in here only I would have thought of.' },
+  { id: 'r-magnify', group: 'Ideas', label: 'I zoomed in on a few minutes of story — I didn\'t race through a whole adventure.' },
+  { id: 'r-depth', group: 'Ideas', label: 'My character feels a MIX of feelings (excited AND nervous), shown through what they do.' },
+  // Vocabulary — CSSE: "ambitious vocabulary used appropriately"; the trap is
+  // thesaurus-stuffing, which markers are actively alert to.
+  { id: 'r-ambitious', group: 'Vocabulary', label: 'My ambitious words genuinely fit — nothing stuffed in from a thesaurus.' },
+  { id: 'r-senses', group: 'Vocabulary', label: 'I gave the reader more than sights — a sound, a smell or a texture too.' },
+  { id: 'r-spelling', group: 'Vocabulary', label: 'Homophones (there/their, to/too) and my trickiest spellings are checked.' },
+  // Grammar — steady tense and controlled sentences; rambling run-ons are a
+  // top-five mark-loser.
+  { id: 'r-tense', group: 'Grammar', label: 'My tense stays steady — past stays past, all the way through.' },
+  { id: 'r-variety', group: 'Grammar', label: 'My sentences vary on purpose — a short one lands between long ones.' },
+  // Structure — CSSE: "securely structured, with a clear sense of direction";
+  // Dulwich top band: paragraphing used FOR EFFECT.
+  { id: 'r-arc', group: 'Structure', label: 'It has a controlled arc: build-up, problem, resolution — not a list of events.' },
+  { id: 'r-titopp', group: 'Structure', label: 'New paragraph at every change of Time, Topic, Person or Place (TiToP-P).' },
+  { id: 'r-effect', group: 'Structure', label: 'One paragraph works FOR EFFECT — like a one-line paragraph landing a shock.' },
+  { id: 'r-ending', group: 'Structure', label: 'The ending was planned, and lands on purpose — no fizzle, no "all a dream".' },
+  // Punctuation — CSSE Band 4: "punctuation varied and used creatively".
+  { id: 'r-basics', group: 'Punctuation', label: 'Capitals and full stops — every sentence, no exceptions.' },
+  { id: 'r-punch', group: 'Punctuation', label: 'I used one piece of punctuation for effect — a dash, a colon, or a well-placed question.' },
 ];
