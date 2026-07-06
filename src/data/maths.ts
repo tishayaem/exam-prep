@@ -19,6 +19,8 @@ import { mathsGeometry05SymmetryRotation } from './sections/maths-geometry-05-sy
 
 import { mathsData01Statistics } from './sections/maths-data-01-statistics';
 import { mathsData02WordProblems } from './sections/maths-data-02-word-problems';
+import { mathsData03Probability } from './sections/maths-data-03-probability';
+import { mathsData04Outcomes } from './sections/maths-data-04-outcomes';
 
 import { mathsPuzzles01WorkingBackwards } from './sections/maths-puzzles-01-working-backwards';
 import { mathsPuzzles02LogicAndCertainty } from './sections/maths-puzzles-02-logic-and-certainty';
@@ -53,6 +55,8 @@ export const mathsSections: Section[] = [
   // Data & Problem Solving
   mathsData01Statistics,
   mathsData02WordProblems,
+  mathsData03Probability,
+  mathsData04Outcomes,
 
   // Puzzle Lab (stretch tier — competition-style archetypes)
   mathsPuzzles01WorkingBackwards,

@@ -327,6 +327,50 @@ const EXPECTED: Record<string, string> = {
   'maths-data-02-q19': '4',
   'maths-data-02-q20': '1400',
 
+  // Probability Basics (each fraction re-derived as favourable/total, then simplified)
+  'maths-data-03-q1': '0', // impossible sits at the bottom of the scale
+  'maths-data-03-q2': '1/2', // 1 head out of {H, T}
+  'maths-data-03-q3': 'Evens', // 1/2 = 50/50
+  'maths-data-03-q4': '1/6', // one face of six
+  'maths-data-03-q5': 'True', // certain = 1
+  'maths-data-03-q6': '1/2', // odds {1,3,5}: 3/6
+  'maths-data-03-q7': '1/6', // 3 red / 18 = 1/6
+  'maths-data-03-q8': 'Blue', // 9 blue > 6 green > 3 red
+  'maths-data-03-q9': '3/20', // 15/100 ÷5
+  'maths-data-03-q10': '1/4', // 13 diamonds / 52
+  'maths-data-03-q11': '1/13', // 4 kings / 52
+  'maths-data-03-q12': '1/2', // 26 black / 52
+  'maths-data-03-q13': '3/13', // 4 suits × 3 = 12/52
+  'maths-data-03-q14': '1', // sum of all outcomes
+  'maths-data-03-q15': '5/6', // 1 − 1/6
+  'maths-data-03-q16': '4/9', // 1 − 5/9; evens {2,4,6,8} = 4 of 9 ✓
+  'maths-data-03-q17': '3/4', // 1 − 13/52 = 39/52
+  'maths-data-03-q18': '13/21', // (7 blue + 6 green)/21
+  'maths-data-03-q19': '60', // 15/25 = 3/5 = 60%
+  'maths-data-03-q20': '0.8', // (15 + 5)/25 = 20/25
+
+  // Outcomes & Combined Events (counts re-multiplied; frequencies re-divided)
+  'maths-data-04-q1': '2', // {H, T}
+  'maths-data-04-q2': '6', // {1..6}
+  'maths-data-04-q3': 'Independent', // no effect on each other
+  'maths-data-04-q4': 'Dependent', // no replacement changes the bag
+  'maths-data-04-q5': '4', // HH HT TH TT
+  'maths-data-04-q6': '8', // 2 × 2 × 2
+  'maths-data-04-q7': '9', // 3 × 3
+  'maths-data-04-q8': '9', // 3 × 3 with replacement
+  'maths-data-04-q9': '12', // 6 × 2
+  'maths-data-04-q10': '48', // 6 × 8
+  'maths-data-04-q11': '36', // 6 × 6
+  'maths-data-04-q12': '1/6', // 6 doubles / 36
+  'maths-data-04-q13': '1/36', // only 6+6 makes 12
+  'maths-data-04-q14': '1/6', // 6 ways to make 7 / 36
+  'maths-data-04-q15': '0.4', // 30/75 = 2/5
+  'maths-data-04-q16': '0.16', // 80/500 = 16/100
+  'maths-data-04-q17': '0.2', // 40/200 = 1/5
+  'maths-data-04-q18': '25', // 150 ÷ 6
+  'maths-data-04-q19': '18', // 0.6 × 30
+  'maths-data-04-q20': '120', // 0.3 × 400
+
   // Puzzle Lab · Working Backwards (each chain re-derived and run forwards)
   'maths-puzzles-01-q1': '13', // (30 − 4) ÷ 2; check 13×2+4 = 30
   'maths-puzzles-01-q2': '7', // (16 + 5) ÷ 3; check 7×3−5 = 16
